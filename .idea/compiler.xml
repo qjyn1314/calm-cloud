@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="calm-parent" />
+        <module name="calm-provider" />
+        <module name="calm-auth" />
+        <module name="calm-call" />
+        <module name="calm-web" />
+        <module name="calm-cat" />
+        <module name="calm-gateway" />
+        <module name="calm-common" />
+        <module name="calm-order" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="calm-auth" target="1.8" />
+      <module name="calm-call" target="1.8" />
+      <module name="calm-cat" target="1.8" />
+      <module name="calm-cloud" target="1.8" />
+      <module name="calm-common" target="1.8" />
+      <module name="calm-eureka" target="1.8" />
+      <module name="calm-gateway" target="1.8" />
+      <module name="calm-nacos" target="1.8" />
+      <module name="calm-order" target="1.8" />
+      <module name="calm-parent" target="1.8" />
+      <module name="calm-payment" target="1.8" />
+      <module name="calm-provider" target="1.8" />
+      <module name="calm-system" target="1.8" />
+      <module name="calm-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="calm-auth" options="" />
+      <module name="calm-call" options="" />
+      <module name="calm-cat" options="" />
+      <module name="calm-cloud" options="" />
+      <module name="calm-common" options="" />
+      <module name="calm-eureka" options="" />
+      <module name="calm-gateway" options="" />
+      <module name="calm-nacos" options="" />
+      <module name="calm-order" options="" />
+      <module name="calm-parent" options="" />
+      <module name="calm-provider" options="" />
+      <module name="calm-system" options="" />
+      <module name="calm-web" options="" />
+    </option>
+  </component>
+</project>

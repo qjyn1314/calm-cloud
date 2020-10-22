@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d6c4f2b9-05c8-4922-bb88-3f196ea617f4" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+    <option name="PARALLEL_COMPILATION" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="ProjectId" id="1hAGSfsUL45pxm1NMQBi26ExnyY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last.edited.regexp" value="Sample Text" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/calm-nacos/src/main/resources" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="spring" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.calm.web.controller" />
+      <recent name="com.calm.parent" />
+      <recent name="com.calm.parent.config" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\IDEA\calm-cloud\calm-nacos\src\main\resources" />
+      <recent name="F:\IDEA\calm-cloud\calm-auth\src\main\resources" />
+      <recent name="F:\IDEA\calm-cloud\calm-auth\src\main\java\com\calm\auth\config" />
+      <recent name="F:\IDEA\calm-cloud\calm-gateway\src\main\resources" />
+      <recent name="F:\IDEA\calm-cloud\calm-cat\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.CalmOrderApplication">
+    <configuration name="CalmCatApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="calm-cat" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.calm.cat.CalmCatApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalmGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="calm-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.calm.gateway.CalmGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalmNacosApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="calm-nacos" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.calm.nacos.CalmNacosApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalmOrderApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="calm-order" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.calm.order.CalmOrderApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalmWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="calm-web" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.calm.web.CalmWebApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.CalmOrderApplication" />
+      <item itemvalue="Spring Boot.CalmWebApplication" />
+      <item itemvalue="Spring Boot.CalmGatewayApplication" />
+      <item itemvalue="Spring Boot.CalmNacosApplication" />
+      <item itemvalue="Spring Boot.CalmCatApplication" />
+    </list>
+  </component>
+  <component name="SpringBootOptions">
+    <option name="showAdditionalConfigNotification" value="false" />
+  </component>
+  <component name="SpringGeneralSettings">
+    <option name="showMultipleContextsPanel" value="false" />
+    <option name="showProfilesPanel" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d6c4f2b9-05c8-4922-bb88-3f196ea617f4" name="Default Changelist" comment="" />
+      <created>1599446484102</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599446484102</updated>
+      <workItem from="1599446490104" duration="5968000" />
+      <workItem from="1599459923104" duration="6793000" />
+      <workItem from="1599472710765" duration="94000" />
+      <workItem from="1599535436713" duration="1453000" />
+      <workItem from="1599539463609" duration="438000" />
+      <workItem from="1599561187501" duration="346000" />
+      <workItem from="1599811298510" duration="62000" />
+      <workItem from="1599811922657" duration="10839000" />
+      <workItem from="1599880532980" duration="111000" />
+      <workItem from="1600073787866" duration="2657000" />
+      <workItem from="1600144075104" duration="3522000" />
+      <workItem from="1600157424978" duration="958000" />
+      <workItem from="1600218530776" duration="1122000" />
+      <workItem from="1602228029844" duration="3430000" />
+      <workItem from="1602292050435" duration="5206000" />
+      <workItem from="1602301180014" duration="8909000" />
+      <workItem from="1602320676860" duration="713000" />
+      <workItem from="1602464818282" duration="15270000" />
+      <workItem from="1602750737985" duration="4250000" />
+      <workItem from="1602813393273" duration="2932000" />
+      <workItem from="1602912022042" duration="7378000" />
+      <workItem from="1603072213830" duration="7264000" />
+      <workItem from="1603088262382" duration="3000" />
+      <workItem from="1603088526660" duration="10879000" />
+      <workItem from="1603156240057" duration="12983000" />
+      <workItem from="1603177787455" duration="1333000" />
+      <workItem from="1603186125608" duration="1754000" />
+      <workItem from="1603243287058" duration="13148000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="403" y="6" key="#CalmCommonApplication_(1)" timestamp="1599449401374">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="403" y="6" key="#CalmCommonApplication_(1)/0.0.1536.824@0.0.1536.824" timestamp="1599449401374" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603090874937">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1603090874937" />
+    <state x="473" y="212" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599463410429">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="473" y="212" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1599463410429" />
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1603162635002">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1603162635002" />
+    <state x="416" y="324" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1603095207660">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="416" y="324" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1603095207660" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1603097576567">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603097576567" />
+    <state width="1144" height="316" key="GridCell.Tab.0.bottom" timestamp="1603346486858">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1144" height="316" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603346486858" />
+    <state width="1144" height="316" key="GridCell.Tab.0.center" timestamp="1603346486858">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1144" height="316" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603346486858" />
+    <state width="1144" height="316" key="GridCell.Tab.0.left" timestamp="1603346486858">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1144" height="316" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603346486858" />
+    <state width="1144" height="316" key="GridCell.Tab.0.right" timestamp="1603346486858">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1144" height="316" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603346486858" />
+    <state width="1144" height="316" key="GridCell.Tab.1.bottom" timestamp="1603346486859">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1144" height="316" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603346486859" />
+    <state width="1144" height="316" key="GridCell.Tab.1.center" timestamp="1603346486859">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1144" height="316" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1603346486859" />
+    <state width="1144" height="316" key="GridCell.Tab.1.left" timestamp="1603346486859">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1144" height="316" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1603346486859" />
+    <state width="1144" height="316" key="GridCell.Tab.1.right" timestamp="1603346486859">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1144" height="316" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1603346486859" />
+    <state width="1159" height="410" key="GridCell.Tab.2.bottom" timestamp="1603168248441">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1159" height="410" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603168248441" />
+    <state width="1159" height="410" key="GridCell.Tab.2.center" timestamp="1603168248441">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1159" height="410" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1603168248441" />
+    <state width="1159" height="410" key="GridCell.Tab.2.left" timestamp="1603168248441">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1159" height="410" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1603168248441" />
+    <state width="1159" height="410" key="GridCell.Tab.2.right" timestamp="1603168248441">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1159" height="410" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1603168248441" />
+    <state x="349" y="227" width="837" height="483" key="Registry" timestamp="1602300529208">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="349" y="227" width="837" height="483" key="Registry/0.0.1536.824@0.0.1536.824" timestamp="1602300529208" />
+    <state x="270" y="56" key="SettingsEditor" timestamp="1602490719218">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="270" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1602490719218" />
+    <state x="467" y="146" width="602" height="554" key="find.popup" timestamp="1602815184510">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="467" y="146" width="602" height="554" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1602815184510" />
+    <state x="401" y="72" key="new project wizard" timestamp="1603159992932">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="401" y="72" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1603159992932" />
+    <state x="425" y="66" width="670" height="676" key="search.everywhere.popup" timestamp="1599817523759">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="66" width="670" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1599817523759" />
+    <state x="382" y="95" key="spring file set editor" timestamp="1599818734561">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="382" y="95" key="spring file set editor/0.0.1536.824@0.0.1536.824" timestamp="1599818734561" />
+  </component>
+</project>
