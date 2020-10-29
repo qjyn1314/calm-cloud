@@ -58,10 +58,12 @@ public class HulunbuirUserServiceImpl implements IHulunbuirUserService {
     * @since 2020-10-12 13:48:42
     */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean save(HulunbuirUser hulunbuirUser) {
         //--TODO 做一些初始化动作
-        return hulunbuirUserMapper.insert(hulunbuirUser)>0;
+        final boolean b = hulunbuirUserMapper.insert(hulunbuirUser) > 0;
+        int i = 12/0;
+        return b;
     }
 
    /**
@@ -72,7 +74,7 @@ public class HulunbuirUserServiceImpl implements IHulunbuirUserService {
     * @since 2020-10-12 13:48:42
     */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean update(HulunbuirUser hulunbuirUser) {
         //--TODO 做一些效验动作
         return hulunbuirUserMapper.updateById(hulunbuirUser)>0;

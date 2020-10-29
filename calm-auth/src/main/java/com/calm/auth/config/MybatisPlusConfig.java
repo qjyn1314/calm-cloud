@@ -2,6 +2,7 @@ package com.calm.auth.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -16,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @MapperScan(basePackages = {
         "com.calm.*.persistence.mapper",
-})
+}, annotationClass = Repository.class)
 public class MybatisPlusConfig {
 
 }

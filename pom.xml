@@ -21,7 +21,9 @@
         <p6spy.version>3.8.5</p6spy.version>
         <mybatis-plus.version>3.4.0</mybatis-plus.version>
         <dynamic-datasource.version>3.2.0</dynamic-datasource.version>
-        <swagger.version>2.9.2</swagger.version>
+        <druid.version>1.1.24</druid.version>
+        <swagger.version>3.0.0</swagger.version>
+        <jasypt.version>3.0.3</jasypt.version>
     </properties>
 
     <modules>
