@@ -9,5 +9,5 @@ ________/\\\\\\\\\_________________/\\\\\\________________________
        ____\////\\\\\\\\\_\//\\\\\\\\/\\__/\\\\\\\\\_\/\\\__\/\\\__\/\\\_
         _______\/////////___\////////\//__\/////////__\///___\///___\///__
 ${AnsiColor.BRIGHT_GREEN}
-  ::: Project (version:${application.version}) :::        Spring-Boot ${spring-boot.version}
+  ::: :::        Spring-Boot ${spring-boot.version}
 ${AnsiColor.BRIGHT_BLACK}

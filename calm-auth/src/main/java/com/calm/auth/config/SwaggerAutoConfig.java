@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * <p>
- * explain:工程中的swagger文档配置
+ * explain:工程中单个服务的swagger文档配置
  * </p >
  *
  * @author wangjunming
@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Configuration
 @EnableOpenApi
-public class SwaggerConfig {
+public class SwaggerAutoConfig {
     private static final String ADDRESS = "127.0.0.1";
 
     @Bean

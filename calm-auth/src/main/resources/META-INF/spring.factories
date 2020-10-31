@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.calm.auth.config.SwaggerAutoConfig,\
+    com.calm.auth.config.MybatisPlusAutoConfig
