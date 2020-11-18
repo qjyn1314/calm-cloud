@@ -17,14 +17,14 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <calm-auth.version>1.0.0</calm-auth.version>
+        <calm-core.version>1.0.0</calm-core.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.calm.auth</groupId>
-            <artifactId>calm-auth</artifactId>
-            <version>${calm-auth.version}</version>
+            <groupId>com.calm.core</groupId>
+            <artifactId>calm-core</artifactId>
+            <version>${calm-core.version}</version>
         </dependency>
     </dependencies>
 

@@ -29,15 +29,21 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/calm-common/pom.xml" />
         <option value="$PROJECT_DIR$/calm-parent/pom.xml" />
         <option value="$PROJECT_DIR$/calm-auth/pom.xml" />
         <option value="$PROJECT_DIR$/calm-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/calm-web/pom.xml" />
         <option value="$PROJECT_DIR$/calm-order/pom.xml" />
         <option value="$PROJECT_DIR$/calm-provider/pom.xml" />
-        <option value="$PROJECT_DIR$/calm-cat/pom.xml" />
+        <option value="$PROJECT_DIR$/calm-pay/pom.xml" />
+        <option value="$PROJECT_DIR$/calm-core/pom.xml" />
+        <option value="$PROJECT_DIR$/calm-nacos/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/calm-common/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">

@@ -1,7 +1,10 @@
 package com.calm.provider.service;
 
+import com.calm.parent.base.JsonResult;
 import com.calm.provider.constant.FeignInterfaceConstant;
+import com.calm.provider.entitys.OrderFeignEntity;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,5 +21,8 @@ public interface OrderFeignService {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     String testFeignInterface();
+
+    @RequestMapping(value = "/testDistributedTransaction", method = RequestMethod.POST)
+    JsonResult testDistributedTransaction(@RequestBody OrderFeignEntity orderFeignEntity);
 
 }

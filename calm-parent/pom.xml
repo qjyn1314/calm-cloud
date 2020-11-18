@@ -35,13 +35,11 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
-        <!--swagger-start-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
             <version>${swagger.version}</version>
         </dependency>
-        <!--swagger-end-->
         <!--nacos-start-->
         <!--服务注册-->
         <dependency>
@@ -54,12 +52,10 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
         <!--nacos-end-->
-        <!--openfeign-start-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!--openfeign-end-->
     </dependencies>
 
 </project>
