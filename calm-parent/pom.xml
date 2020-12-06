@@ -40,22 +40,6 @@
             <artifactId>springfox-boot-starter</artifactId>
             <version>${swagger.version}</version>
         </dependency>
-        <!--nacos-start-->
-        <!--服务注册-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <!--服务配置-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-        <!--nacos-end-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

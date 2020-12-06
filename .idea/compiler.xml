@@ -12,10 +12,9 @@
         <module name="calm-core" />
         <module name="calm-call" />
         <module name="calm-web" />
+        <module name="calm-order" />
         <module name="calm-parent" />
         <module name="calm-gateway" />
-        <module name="calm-nacos" />
-        <module name="calm-order" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

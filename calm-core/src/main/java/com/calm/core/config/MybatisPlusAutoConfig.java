@@ -24,11 +24,14 @@ import javax.sql.DataSource;
  * @author wangjunming
  * @since 2020-01-17 11:50
  */
+//开启密文密码
 @EnableEncryptableProperties
 @Configuration
+//扫描项目中的mapper接口类
 @MapperScan(basePackages = {
         "com.calm.*.persistence.mapper",
 }, annotationClass = Repository.class)
+//开启数据库事物
 @EnableTransactionManagement
 public class MybatisPlusAutoConfig {
 
@@ -43,34 +46,33 @@ public class MybatisPlusAutoConfig {
         return new PaginationInnerInterceptor();
     }
 
-
-    /**
-     * 在classpath后面的 * 必不可少，缺少型号的话后面的通配符不起作用。**表示可以表示任意多级目录。
-     * 用于寻找mapper类所对应的xml文件，
-     *
-     * @since 2020/10/28 17:38
-     */
-    private static final String COMMON_MAPPER_LOCATION = "classpath*:com/calm/**/*/mapper/xml/*Mapper.xml";
-
-    /**
-     * 手动配置mybatis-plus的数据源事务管理配置
-     *
-     * @author wangjunming
-     * @since 2020/10/28 15:47
-     */
-    @Bean
-    public MybatisSqlSessionFactoryBean mysqlSessionFactory(DataSource dataSource) throws Exception {
-        MybatisSqlSessionFactoryBean sqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource);
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = resolver.getResources(COMMON_MAPPER_LOCATION);
-        sqlSessionFactoryBean.setMapperLocations(resources);
-        // 解决此异常：org.springframework.dao.TransientDataAccessResourceException: SqlSessionFactory must be using a SpringManagedTransactionFactory in order to use Spring transaction synchronization
-        //必须使用  SpringManagedTransactionFactory 事务管理器
-        sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
-        sqlSessionFactoryBean.setPlugins(plusInterceptor());
-        return sqlSessionFactoryBean;
-    }
+//    /**
+//     * 在classpath后面的 * 必不可少，缺少型号的话后面的通配符不起作用。**表示可以表示任意多级目录。
+//     * 用于寻找mapper类所对应的xml文件，
+//     *
+//     * @since 2020/10/28 17:38
+//     */
+//    private static final String COMMON_MAPPER_LOCATION = "classpath*:com/calm/**/*/mapper/xml/*Mapper.xml";
+//
+//    /**
+//     * 手动配置mybatis-plus的数据源事务管理配置
+//     *
+//     * @author wangjunming
+//     * @since 2020/10/28 15:47
+//     */
+//    @Bean
+//    public MybatisSqlSessionFactoryBean mysqlSessionFactory(DataSource dataSource) throws Exception {
+//        MybatisSqlSessionFactoryBean sqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
+//        sqlSessionFactoryBean.setDataSource(dataSource);
+//        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+//        Resource[] resources = resolver.getResources(COMMON_MAPPER_LOCATION);
+//        sqlSessionFactoryBean.setMapperLocations(resources);
+//        // 解决此异常：org.springframework.dao.TransientDataAccessResourceException: SqlSessionFactory must be using a SpringManagedTransactionFactory in order to use Spring transaction synchronization
+//        //必须使用  SpringManagedTransactionFactory 事务管理器
+//        sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
+//        sqlSessionFactoryBean.setPlugins(plusInterceptor());
+//        return sqlSessionFactoryBean;
+//    }
 
     /**
      * 配置mybatis插件

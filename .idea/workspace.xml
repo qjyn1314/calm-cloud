@@ -20,7 +20,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6c4f2b9-05c8-4922-bb88-3f196ea617f4" name="Default Changelist" comment="修改配置">
+      <change afterPath="$PROJECT_DIR$/calm-gateway/src/main/resources/application-test.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/calm-order/src/main/resources/application-test.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/calm-parent/src/main/java/com/calm/parent/config/SmsProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/calm-pay/src/main/resources/application-test.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/calm-web/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_cloud_spring_cloud_starter_alibaba_nacos_config_2_2_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_archaius_2_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/calm-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-core/src/main/java/com/calm/core/config/MybatisPlusAutoConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-core/src/main/java/com/calm/core/config/MybatisPlusAutoConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-core/src/main/resources/initdatasource.sql" beforeDir="false" afterPath="$PROJECT_DIR$/calm-core/src/main/resources/init_datasource_conf.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-core/src/main/resources/initseata.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/calm-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-gateway/src/main/java/com/calm/gateway/CalmGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-gateway/src/main/java/com/calm/gateway/CalmGatewayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/java/com/calm/nacos/CalmNacosApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/resources/application-common.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/calm-web/src/main/resources/application-test.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/resources/banner.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/resources/logback-spring.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-nacos/src/test/java/com/calm/nacos/CalmNacosApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-order/src/main/java/com/calm/order/CalmOrderApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-order/src/main/java/com/calm/order/CalmOrderApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-order/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/calm-order/src/main/resources/application-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-parent/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/calm-parent/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-parent/src/main/java/com/calm/parent/config/FeignLogConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-core/src/main/java/com/calm/core/config/FeignLogConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-pay/src/main/java/com/calm/pay/CalmPayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-pay/src/main/java/com/calm/pay/CalmPayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-pay/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/calm-pay/src/main/resources/application-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-provider/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/calm-provider/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-web/src/main/java/com/calm/web/CalmWebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-web/src/main/java/com/calm/web/CalmWebApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-web/src/main/java/com/calm/web/controller/WebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-web/src/main/java/com/calm/web/controller/WebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calm-web/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/calm-web/src/main/resources/application-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +124,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last.edited.regexp" value="Sample Text" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/calm-nacos/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/calm-web/src/main/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -93,7 +134,8 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="GrepConsole" />
+    <property name="settings.editor.splitter.proportion" value="0.1539002" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -107,11 +149,11 @@
       <recent name="com.calm.auth.config" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\IDEA\calm-cloud\calm-web\src\main\resources" />
       <recent name="F:\IDEA\calm-cloud\calm-nacos\src\main\resources" />
-      <recent name="F:\IDEA\calm-cloud\calm-pay\src\main" />
-      <recent name="F:\IDEA\calm-cloud\calm-storage\src\main" />
-      <recent name="F:\IDEA\calm-cloud\calm-order\src\main\java" />
-      <recent name="F:\IDEA\calm-cloud\calm-storage\src\main\resources" />
+      <recent name="F:\IDEA\calm-cloud\calm-pay\src\main\resources" />
+      <recent name="F:\IDEA\calm-cloud\calm-order\src\main\resources" />
+      <recent name="F:\IDEA\calm-cloud\calm-gateway\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -121,68 +163,45 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.CalmWebApplication">
-    <configuration name="JasyptUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.calm.auth.util.JasyptUtil" />
-      <module name="calm-core-commom" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.calm.auth.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalmGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <component name="RunManager" selected="Spring Boot.Gateway">
+    <configuration name="Gateway" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="calm-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.calm.gateway.CalmGatewayApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalmNacosApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="calm-nacos" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.calm.nacos.CalmNacosApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalmOrderApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <configuration name="Order" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="calm-order" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.calm.order.CalmOrderApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalmPayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <configuration name="Pay" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="calm-pay" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.calm.pay.CalmPayApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalmWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <configuration name="Web" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="calm-web" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.calm.web.CalmWebApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.JasyptUtil" />
-      <item itemvalue="Spring Boot.CalmOrderApplication" />
-      <item itemvalue="Spring Boot.CalmWebApplication" />
-      <item itemvalue="Spring Boot.CalmGatewayApplication" />
-      <item itemvalue="Spring Boot.CalmPayApplication" />
-      <item itemvalue="Spring Boot.CalmNacosApplication" />
+      <item itemvalue="Spring Boot.Order" />
+      <item itemvalue="Spring Boot.Web" />
+      <item itemvalue="Spring Boot.Gateway" />
+      <item itemvalue="Spring Boot.Pay" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.JasyptUtil" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SQLPlugin.ProjectConfiguration">
     <queries />
@@ -282,7 +301,8 @@
       <workItem from="1607161348494" duration="65000" />
       <workItem from="1607161438289" duration="1234000" />
       <workItem from="1607179947689" duration="35000" />
-      <workItem from="1607230235491" duration="928000" />
+      <workItem from="1607230235491" duration="5147000" />
+      <workItem from="1607238064357" duration="7204000" />
     </task>
     <task id="LOCAL-00001" summary="手动配置mybatis-plus动态数据源从数据库进行读取">
       <created>1604154288126</created>
@@ -341,18 +361,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1605321732492" />
-    <state x="223" y="67" width="1164" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607159304142">
+    <state x="223" y="67" width="1164" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607241041660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="223" y="67" width="1164" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1607159304142" />
+    <state x="223" y="67" width="1164" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1607241041660" />
     <state x="473" y="212" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604154177859">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="473" y="212" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1604154177859" />
-    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1604734293631">
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1607243311769">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1604734293631" />
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1607243311769" />
     <state x="416" y="324" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1604717223043">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -365,62 +385,62 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603777430331" />
-    <state width="1258" height="202" key="GridCell.Tab.0.bottom" timestamp="1607160753389">
+    <state width="1288" height="569" key="GridCell.Tab.0.bottom" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607160753389" />
-    <state width="1258" height="202" key="GridCell.Tab.0.center" timestamp="1607160753389">
+    <state width="1288" height="569" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1288" height="569" key="GridCell.Tab.0.center" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607160753389" />
-    <state width="1258" height="202" key="GridCell.Tab.0.left" timestamp="1607160753389">
+    <state width="1288" height="569" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1288" height="569" key="GridCell.Tab.0.left" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607160753389" />
-    <state width="1258" height="202" key="GridCell.Tab.0.right" timestamp="1607160753389">
+    <state width="1288" height="569" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1288" height="569" key="GridCell.Tab.0.right" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607160753389" />
-    <state width="1258" height="202" key="GridCell.Tab.1.bottom" timestamp="1607160753390">
+    <state width="1288" height="569" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1288" height="569" key="GridCell.Tab.1.bottom" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607160753390" />
-    <state width="1258" height="202" key="GridCell.Tab.1.center" timestamp="1607160753389">
+    <state width="1288" height="569" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1288" height="569" key="GridCell.Tab.1.center" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607160753389" />
-    <state width="1258" height="202" key="GridCell.Tab.1.left" timestamp="1607160753389">
+    <state width="1288" height="569" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1288" height="569" key="GridCell.Tab.1.left" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607160753389" />
-    <state width="1258" height="202" key="GridCell.Tab.1.right" timestamp="1607160753390">
+    <state width="1288" height="569" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1288" height="569" key="GridCell.Tab.1.right" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607160753390" />
-    <state width="1258" height="202" key="GridCell.Tab.2.bottom" timestamp="1607160753390">
+    <state width="1288" height="569" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1288" height="569" key="GridCell.Tab.2.bottom" timestamp="1607245197977">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607160753390" />
-    <state width="1258" height="202" key="GridCell.Tab.2.center" timestamp="1607160753390">
+    <state width="1288" height="569" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607245197977" />
+    <state width="1288" height="569" key="GridCell.Tab.2.center" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1607160753390" />
-    <state width="1258" height="202" key="GridCell.Tab.2.left" timestamp="1607160753390">
+    <state width="1288" height="569" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1288" height="569" key="GridCell.Tab.2.left" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1607160753390" />
-    <state width="1258" height="202" key="GridCell.Tab.2.right" timestamp="1607160753390">
+    <state width="1288" height="569" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1288" height="569" key="GridCell.Tab.2.right" timestamp="1607245197976">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1258" height="202" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1607160753390" />
+    <state width="1288" height="569" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
     <state x="349" y="227" width="837" height="483" key="Registry" timestamp="1602300529208">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="349" y="227" width="837" height="483" key="Registry/0.0.1536.824@0.0.1536.824" timestamp="1602300529208" />
-    <state x="270" y="0" key="SettingsEditor" timestamp="1607231164311">
+    <state x="94" y="70" width="1438" height="711" key="SettingsEditor" timestamp="1607243442760">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="270" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1607231164311" />
+    <state x="94" y="70" width="1438" height="711" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1607243442760" />
     <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605695777139">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -429,6 +449,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="564" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1605695641294" />
+    <state x="540" y="200" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1607244913256">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="540" y="200" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.824@0.0.1536.824" timestamp="1607244913256" />
     <state x="467" y="146" width="604" height="554" key="find.popup" timestamp="1604717612133">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -441,10 +465,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1605331487076" />
-    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup" timestamp="1604733374839">
+    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup" timestamp="1607232124410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1604733374839" />
+    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1607232124410" />
     <state x="382" y="95" key="spring file set editor" timestamp="1599818734561">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

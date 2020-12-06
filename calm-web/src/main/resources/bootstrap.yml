@@ -1,0 +1,17 @@
+server:
+    port: 81
+spring:
+    application:
+        name: calm-web
+    profiles:
+        include: common
+        active: dev
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848
+            config:
+                server-addr: 127.0.0.1:8848
+                file-extension: properties
+# 启动项目之前必须先配置其配置文件
+# 添加配置时其DataID的公式：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension} ，即：项目名称-当前环境.文件后缀

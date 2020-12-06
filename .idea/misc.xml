@@ -37,7 +37,6 @@
         <option value="$PROJECT_DIR$/calm-provider/pom.xml" />
         <option value="$PROJECT_DIR$/calm-pay/pom.xml" />
         <option value="$PROJECT_DIR$/calm-core/pom.xml" />
-        <option value="$PROJECT_DIR$/calm-nacos/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

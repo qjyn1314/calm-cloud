@@ -11,7 +11,7 @@
     <artifactId>calm-gateway</artifactId>
     <version>1.0.0</version>
     <name>calm-gateway</name>
-    <description>Calm project for Spring Boot</description>
+    <description>Calm project for Spring Boot > 服务网关 </description>
 
     <properties>
         <java.version>1.8</java.version>
