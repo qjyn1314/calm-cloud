@@ -19,48 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6c4f2b9-05c8-4922-bb88-3f196ea617f4" name="Default Changelist" comment="修改配置">
-      <change afterPath="$PROJECT_DIR$/calm-gateway/src/main/resources/application-test.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/calm-order/src/main/resources/application-test.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/calm-parent/src/main/java/com/calm/parent/config/SmsProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/calm-pay/src/main/resources/application-test.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/calm-web/src/main/resources/bootstrap.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_cloud_spring_cloud_starter_alibaba_nacos_config_2_2_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_archaius_2_2_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/calm-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-core/src/main/java/com/calm/core/config/MybatisPlusAutoConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-core/src/main/java/com/calm/core/config/MybatisPlusAutoConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-core/src/main/resources/initdatasource.sql" beforeDir="false" afterPath="$PROJECT_DIR$/calm-core/src/main/resources/init_datasource_conf.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-core/src/main/resources/initseata.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/calm-gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-gateway/src/main/java/com/calm/gateway/CalmGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-gateway/src/main/java/com/calm/gateway/CalmGatewayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/java/com/calm/nacos/CalmNacosApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/resources/application-common.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/calm-web/src/main/resources/application-test.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/resources/banner.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/src/main/resources/logback-spring.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-nacos/src/test/java/com/calm/nacos/CalmNacosApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-order/src/main/java/com/calm/order/CalmOrderApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-order/src/main/java/com/calm/order/CalmOrderApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-order/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/calm-order/src/main/resources/application-dev.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-parent/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/calm-parent/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-parent/src/main/java/com/calm/parent/config/FeignLogConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-core/src/main/java/com/calm/core/config/FeignLogConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-pay/src/main/java/com/calm/pay/CalmPayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-pay/src/main/java/com/calm/pay/CalmPayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-pay/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/calm-pay/src/main/resources/application-dev.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-provider/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/calm-provider/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-web/src/main/java/com/calm/web/CalmWebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-web/src/main/java/com/calm/web/CalmWebApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-web/src/main/java/com/calm/web/controller/WebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/calm-web/src/main/java/com/calm/web/controller/WebController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calm-web/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/calm-web/src/main/resources/application-dev.properties" afterDir="false" />
+    <list default="true" id="d6c4f2b9-05c8-4922-bb88-3f196ea617f4" name="Default Changelist" comment="调整nacos依赖的位置，去掉nacos项目">
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,6 +43,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="qjyn1314 &lt;qjyn1314@163.com&gt;" />
+      </list>
+    </option>
     <option name="PUSH_TAGS">
       <GitPushTagMode>
         <option name="argument" value="--follow-tags" />
@@ -91,6 +55,7 @@
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="2" />
@@ -302,7 +267,7 @@
       <workItem from="1607161438289" duration="1234000" />
       <workItem from="1607179947689" duration="35000" />
       <workItem from="1607230235491" duration="5147000" />
-      <workItem from="1607238064357" duration="7204000" />
+      <workItem from="1607238064357" duration="7442000" />
     </task>
     <task id="LOCAL-00001" summary="手动配置mybatis-plus动态数据源从数据库进行读取">
       <created>1604154288126</created>
@@ -325,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605695772451</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="调整nacos依赖的位置，去掉nacos项目">
+      <created>1607245466750</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1607245466750</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,7 +322,8 @@
     <MESSAGE value="手动配置mybatis-plus动态数据源从数据库进行读取" />
     <MESSAGE value="添加nacos公共配置，待实现" />
     <MESSAGE value="修改配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改配置" />
+    <MESSAGE value="调整nacos依赖的位置，去掉nacos项目" />
+    <option name="LAST_COMMIT_MESSAGE" value="调整nacos依赖的位置，去掉nacos项目" />
   </component>
   <component name="WindowStateProjectService">
     <state x="403" y="6" key="#CalmCommonApplication_(1)" timestamp="1599449401374">
@@ -385,66 +358,66 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603777430331" />
-    <state width="1288" height="569" key="GridCell.Tab.0.bottom" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.0.bottom" timestamp="1607245359999">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
-    <state width="1288" height="569" key="GridCell.Tab.0.center" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607245359999" />
+    <state width="1308" height="300" key="GridCell.Tab.0.center" timestamp="1607245359999">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
-    <state width="1288" height="569" key="GridCell.Tab.0.left" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607245359999" />
+    <state width="1308" height="300" key="GridCell.Tab.0.left" timestamp="1607245359999">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
-    <state width="1288" height="569" key="GridCell.Tab.0.right" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607245359999" />
+    <state width="1308" height="300" key="GridCell.Tab.0.right" timestamp="1607245359999">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
-    <state width="1288" height="569" key="GridCell.Tab.1.bottom" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607245359999" />
+    <state width="1308" height="300" key="GridCell.Tab.1.bottom" timestamp="1607245360000">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
-    <state width="1288" height="569" key="GridCell.Tab.1.center" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607245360000" />
+    <state width="1308" height="300" key="GridCell.Tab.1.center" timestamp="1607245360000">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
-    <state width="1288" height="569" key="GridCell.Tab.1.left" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607245360000" />
+    <state width="1308" height="300" key="GridCell.Tab.1.left" timestamp="1607245360000">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
-    <state width="1288" height="569" key="GridCell.Tab.1.right" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607245360000" />
+    <state width="1308" height="300" key="GridCell.Tab.1.right" timestamp="1607245360000">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
-    <state width="1288" height="569" key="GridCell.Tab.2.bottom" timestamp="1607245197977">
+    <state width="1308" height="300" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607245360000" />
+    <state width="1308" height="300" key="GridCell.Tab.2.bottom" timestamp="1607245360002">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607245197977" />
-    <state width="1288" height="569" key="GridCell.Tab.2.center" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607245360002" />
+    <state width="1308" height="300" key="GridCell.Tab.2.center" timestamp="1607245360001">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
-    <state width="1288" height="569" key="GridCell.Tab.2.left" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1607245360001" />
+    <state width="1308" height="300" key="GridCell.Tab.2.left" timestamp="1607245360001">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
-    <state width="1288" height="569" key="GridCell.Tab.2.right" timestamp="1607245197976">
+    <state width="1308" height="300" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1607245360001" />
+    <state width="1308" height="300" key="GridCell.Tab.2.right" timestamp="1607245360001">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1288" height="569" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1607245197976" />
+    <state width="1308" height="300" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1607245360001" />
     <state x="349" y="227" width="837" height="483" key="Registry" timestamp="1602300529208">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="349" y="227" width="837" height="483" key="Registry/0.0.1536.824@0.0.1536.824" timestamp="1602300529208" />
-    <state x="94" y="70" width="1438" height="711" key="SettingsEditor" timestamp="1607243442760">
+    <state x="94" y="70" width="1289" height="711" key="SettingsEditor" timestamp="1607245517760">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="94" y="70" width="1438" height="711" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1607243442760" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605695777139">
+    <state x="94" y="70" width="1289" height="711" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1607245517760" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607245477266">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605695777139" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607245477266" />
     <state x="564" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605695641294">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
