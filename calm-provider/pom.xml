@@ -40,6 +40,10 @@
                     <artifactId>spring-cloud-netflix-archaius</artifactId>
                     <groupId>org.springframework.cloud</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>fastjson</artifactId>
+                    <groupId>com.alibaba</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!--服务配置中心-->

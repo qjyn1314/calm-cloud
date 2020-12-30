@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,9 +22,11 @@ import java.util.Date;
 @Slf4j
 @RestController
 public class OrderController {
-
+    static String usersessionId = "user_id";
     @GetMapping("/test")
-    public String testFeignInterface() {
+    public String testFeignInterface(HttpServletRequest request) {
+        log.info("request 中的sessionID->{}",request.getSession().getId());
+        log.info("request 中的sessionIDS->{}",request.getSession().getAttribute(usersessionId));
         log.info("-端口号：" + CalmProperties.getPort());
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "-端口号：" + CalmProperties.getPort();
     }

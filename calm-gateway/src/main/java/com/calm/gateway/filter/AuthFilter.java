@@ -16,8 +16,8 @@ import reactor.core.publisher.Mono;
  * @author wangjunming
  * @since 2020/10/20 10:56
  */
-@Component
 @Slf4j
+@Component
 public class AuthFilter implements GlobalFilter, Ordered {
 
     @Override

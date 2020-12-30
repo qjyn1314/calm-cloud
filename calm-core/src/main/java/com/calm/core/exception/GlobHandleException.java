@@ -21,7 +21,6 @@ public class GlobHandleException {
     @ExceptionHandler(value = CalmException.class)
     public JsonResult handleHulunBuirException(CalmException e) {
         log.error("业务异常，请检查代码", e);
-        
         return JsonResult.fail(e.getMessage());
     }
 
