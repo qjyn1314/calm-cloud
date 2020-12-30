@@ -1,8 +1,8 @@
 server:
-    port: 81
+    port: 84
 spring:
     application:
-        name: calm-web
+        name: calm-order
     profiles:
         include: common
         active: dev

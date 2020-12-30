@@ -35,17 +35,6 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class MybatisPlusAutoConfig {
 
-    /**
-     * mybatis-plus分页插件
-     *
-     * @author wangjunming
-     * @since 2020/10/31 22:10
-     */
-    @Bean
-    public PaginationInnerInterceptor paginationInnerInterceptor() {
-        return new PaginationInnerInterceptor();
-    }
-
 //    /**
 //     * 在classpath后面的 * 必不可少，缺少型号的话后面的通配符不起作用。**表示可以表示任意多级目录。
 //     * 用于寻找mapper类所对应的xml文件，
@@ -86,8 +75,19 @@ public class MybatisPlusAutoConfig {
         //乐观锁
         mybatisPlusInterceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
         //分页配置
-        mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+        mybatisPlusInterceptor.addInnerInterceptor(paginationInnerInterceptor());
         return mybatisPlusInterceptor;
+    }
+
+    /**
+     * mybatis-plus分页插件
+     *
+     * @author wangjunming
+     * @since 2020/10/31 22:10
+     */
+    @Bean
+    public PaginationInnerInterceptor paginationInnerInterceptor() {
+        return new PaginationInnerInterceptor();
     }
 
 }

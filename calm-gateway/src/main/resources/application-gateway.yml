@@ -4,11 +4,6 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            # \u5141\u8BB8\u643A\u5E26\u8BA4\u8BC1\u4FE1\u606F
-            # \u5141\u8BB8\u8DE8\u57DF\u7684\u6E90(\u7F51\u7AD9\u57DF\u540D/ip)\uFF0C\u8BBE\u7F6E*\u4E3A\u5168\u90E8
-            # \u5141\u8BB8\u8DE8\u57DF\u8BF7\u6C42\u91CC\u7684head\u5B57\u6BB5\uFF0C\u8BBE\u7F6E*\u4E3A\u5168\u90E8
-            # \u5141\u8BB8\u8DE8\u57DF\u7684method\uFF0C \u9ED8\u8BA4\u4E3AGET\u548COPTIONS\uFF0C\u8BBE\u7F6E*\u4E3A\u5168\u90E8
-            # \u8DE8\u57DF\u5141\u8BB8\u7684\u6709\u6548\u671F
             allow-credentials: true
             allowed-origins: "*"
             allowed-headers: "*"
@@ -19,15 +14,15 @@ spring:
             max-age: 3600
       discovery:
         locator:
-          enabled: true  #\u5F53\u8BBF\u95EEhttp://\u7F51\u5173\u5730\u5740/\u670D\u52A1\u540D\u79F0\uFF08\u5927\u5199\uFF09/**\u5730\u5740\u4F1A\u81EA\u52A8\u8F6C\u53D1\u5230http://\u670D\u52A1\u540D\u79F0\uFF08\u5927\u5199\uFF09/**\u5730\u5740\uFF0C\u5982\u679C\u4E3Afalse\u5C31\u4E0D\u4F1A\u81EA\u52A8\u8F6C\u53D1
+          enabled: true
       routes:
-        - id: calm_order  #\u8BA2\u5355\u7CFB\u7EDF\u8D1F\u8F7D\u5747\u8861
+        - id: calm_order
           uri: lb://calm-order
           predicates:
             - Path=/order/**
           filters:
             - StripPrefix=1
-        - id: calm_web  #\u5BA2\u6237\u7AEF
+        - id: calm_web
           uri: lb://calm-web
           predicates:
             - Path=/web/**

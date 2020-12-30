@@ -51,7 +51,7 @@ public class SwaggerAutoConfig {
         String licenseUrl = "http://%s:%s/swagger-ui/index.html";
         final String port = CalmProperties.getPort();
         return new ApiInfoBuilder()
-                .title("DAYS~--RESTFUL APIS")
+                .title("CALM~--RESTFUL APIS")
                 .description("Mr.Wang~~搭建!!")
                 .licenseUrl(String.format(licenseUrl, ADDRESS, port))
                 .version("1.0")

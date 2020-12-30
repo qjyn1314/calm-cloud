@@ -24,7 +24,7 @@ public class JsonResult<R> implements Serializable {
     private R data;
 
     private static <R> JsonResult<R> defaultSuccess() {
-        return new JsonResult<R>().setSuccess(true).setCode(200);
+        return new JsonResult<R>().setSuccess(true).setCode(0);
     }
 
     public static JsonResult<Object> success() {
@@ -43,12 +43,8 @@ public class JsonResult<R> implements Serializable {
         return defaultSuccess().setData(data).setMsg(msg);
     }
 
-    public static <R> JsonResult<R> ofFail(int code, String msg) {
-        JsonResult<R> jsonResult = new JsonResult<>();
-        jsonResult.setSuccess(false);
-        jsonResult.setCode(code);
-        jsonResult.setMsg(msg);
-        return jsonResult;
+    public static <R> JsonResult<R> fail(String msg) {
+        return new JsonResult<R>().setCode(-1).setMsg(msg);
     }
 
     public boolean isSuccess() {
