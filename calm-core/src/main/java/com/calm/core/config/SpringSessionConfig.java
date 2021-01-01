@@ -26,6 +26,7 @@ public class SpringSessionConfig {
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
         cookieSerializer.setCookieName("clam");
+        cookieSerializer.setCookiePath("/");
         cookieSerializer.setCookieMaxAge(300);
         cookieSerializer.setDomainName("hulunbuir.com");
         return cookieSerializer;

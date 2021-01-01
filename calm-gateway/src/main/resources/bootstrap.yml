@@ -1,17 +1,64 @@
+# nacos的配置，在项目初始化的时候，要保证先从配置中心进行配置的拉取，拉取配置之后，才能保证项目的正常启动
+# springboot的的配置文件加载是存在优先顺序的，bootstrap.yml优先级高于application.properties
+# 在nacos中配置的的dataid规则，参考： https://nacos.io/zh-cn/docs/quick-start-spring-cloud.html
+#在 Nacos Spring Cloud 中，dataId 的完整格式如下：${prefix}-${spring.profiles.active}.${file-extension}
+#prefix 默认为 spring.application.name 的值，也可以通过配置项 spring.cloud.nacos.config.prefix来配置。
+#spring.profiles.active 即为当前环境对应的 profile，详情可以参考 Spring Boot文档。
+#    注意：当 spring.profiles.active 为空时，对应的连接符 - 也将不存在，dataId 的拼接格式变成 ${prefix}.${file-extension}
+#file-exetension 为配置内容的数据格式，可以通过配置项 spring.cloud.nacos.config.file-extension 来配置。目前只支持 properties 和 yaml 类型。
+#    通过 Spring Cloud 原生注解 @RefreshScope 实现配置自动更新：
+# 启动项目之前必须先配置其配置文件
+# 添加配置时其DataID的公式：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension} ，
+#即：项目名称-当前环境.文件后缀
 server:
     port: 80
 spring:
     application:
         name: calm-gateway
-    profiles:
-        include: common
-        active: dev
     cloud:
         nacos:
-            discovery:
-                server-addr: 47.105.33.140:8848
             config:
-                server-addr: 47.105.33.140:8848
-                file-extension: properties
-# 启动项目之前必须先配置其配置文件
-# 添加配置时其DataID的公式：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension} ，即：项目名称-当前环境.文件后缀
+                # 配置文件的后缀
+                file-extension: yml
+        gateway:
+            globalcors:
+                cors-configurations:
+                    '[/**]':
+                        allow-credentials: true
+                        allowed-origins: "*"
+                        allowed-headers: "*"
+                        allowed-methods:
+                            - OPTIONS
+                            - GET
+                            - POST
+                        max-age: 3600
+            discovery:
+                locator:
+                    enabled: true
+            routes:
+                - id: calm_order
+                  uri: lb://calm-order
+                  predicates:
+                      - Path=/order/**
+                  filters:
+                      - StripPrefix=1
+                - id: calm_web
+                  uri: lb://calm-web
+                  predicates:
+                      - Path=/web/**
+                  filters:
+                      - StripPrefix=1
+
+# 日志配置
+logging:
+    config: classpath:logback-spring.xml
+    level:
+        com.calm.provider.service: debug
+
+#feign配置参考：http://c.biancheng.net/view/5362.html
+feign:
+    client:
+        config:
+            feignName:
+                connectTimeout: 5000
+                readTimeout: 5000

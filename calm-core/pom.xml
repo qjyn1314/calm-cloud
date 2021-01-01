@@ -84,6 +84,12 @@
             <artifactId>spring-session-data-redis</artifactId>
         </dependency>
 
+        <!--springcloud中stream消息解耦rabbitmq和kafka的方案-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        </dependency>
+
     </dependencies>
 
 
