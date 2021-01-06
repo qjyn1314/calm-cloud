@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev
+#\u5BC6\u6587\u5BC6\u7801\u914D\u7F6E
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    provider-name: SunJCE
+    password: MdQRVDiKXf4sS0lXp61SH5cvVdmn8FJw++ODKj0ojhY=
+    property:
+      prefix: 'ENC@['
+      suffix: ']'

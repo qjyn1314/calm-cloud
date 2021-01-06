@@ -1,17 +1,35 @@
 server:
-    port: 84
+    port: 82
 spring:
     application:
         name: calm-order
-    profiles:
-        include: common
-        active: dev
     cloud:
         nacos:
-            discovery:
-                server-addr: 127.0.0.1:8848
             config:
-                server-addr: 127.0.0.1:8848
-                file-extension: properties
-# 启动项目之前必须先配置其配置文件
-# 添加配置时其DataID的公式：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension} ，即：项目名称-当前环境.文件后缀
+                file-extension: yml
+#密文密码配置
+jasypt:
+    encryptor:
+        algorithm: PBEWithMD5AndDES
+        provider-name: SunJCE
+        password: MdQRVDiKXf4sS0lXp61SH5cvVdmn8FJw++ODKj0ojhY=
+        property:
+            prefix: 'ENC@['
+            suffix: ']'
+#mybatis-plus配置
+mybatis-plus:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations: classpath*:com/calm/**/*/mapper/xml/*Mapper.xml
+#日志配置
+logging:
+    config: classpath:logback-spring.xml
+    level:
+        com.calm.provider.service: debug
+#feign配置参考：http://c.biancheng.net/view/5362.html
+feign:
+    client:
+        config:
+            feignName:
+                connectTimeout: 5000
+                readTimeout: 5000

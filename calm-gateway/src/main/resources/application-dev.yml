@@ -9,6 +9,17 @@ spring:
         server-addr: 127.0.0.1:8848
 #        group: DEV_GROUP  #默认是  DEFAULT_GROUP
 #        namespace: 2f942653-3980-418d-95ed-f36cd44ac984   #默认是public 如果需要使用，则需要将nacos中所创建出来的命名空间中命名空间ID
-
-
+#redis配置
+  redis:
+    database: 1
+    host: 127.0.0.1
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 5
+        max-wait: 10000
+        min-idle: 3
+    password: 123456
+    port: 6379
+    timeout: 50000
 

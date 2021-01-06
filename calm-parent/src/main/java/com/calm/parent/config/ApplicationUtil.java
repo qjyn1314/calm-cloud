@@ -3,7 +3,7 @@ package com.calm.parent.config;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @author wangjunming
  * @since 2020/8/27 10:39
  */
-@Configuration
+@Component
 public class ApplicationUtil implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;

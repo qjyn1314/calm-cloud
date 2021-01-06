@@ -35,20 +35,17 @@ spring:
             discovery:
                 locator:
                     enabled: true
+            default-filters:
+                - StripPrefix=1
             routes:
-                - id: calm_order
+                - id: calm-order
                   uri: lb://calm-order
                   predicates:
                       - Path=/order/**
-                  filters:
-                      - StripPrefix=1
-                - id: calm_web
+                - id: calm-web
                   uri: lb://calm-web
                   predicates:
                       - Path=/web/**
-                  filters:
-                      - StripPrefix=1
-
 # 日志配置
 logging:
     config: classpath:logback-spring.xml
