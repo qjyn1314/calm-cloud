@@ -2,7 +2,6 @@ package com.calm.core.exception;
 
 import com.calm.parent.base.JsonResult;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -17,6 +16,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @RestControllerAdvice
 public class GlobHandleException {
+
+    @ExceptionHandler(value = Exception.class)
+    public JsonResult handleGlobleException(Exception e) {
+        log.error("系统异常，请检查代码", e);
+        return JsonResult.fail(e.getMessage());
+    }
 
     @ExceptionHandler(value = CalmException.class)
     public JsonResult handleHulunBuirException(CalmException e) {

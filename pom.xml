@@ -31,7 +31,6 @@
         <module>calm-core</module>
         <module>calm-gateway</module>
         <module>calm-order</module>
-        <module>calm-ordertwo</module>
         <module>calm-web</module>
     </modules>
 

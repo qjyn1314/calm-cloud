@@ -21,7 +21,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-            log.info("每个服务中的请求路径是：{}",request.getRequestURI());
+        log.info("请求路径是：{}",request.getRequestURI());
         return true;
     }
 

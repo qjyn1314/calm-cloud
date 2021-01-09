@@ -2,6 +2,8 @@ package com.calm.parent.base;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -11,6 +13,8 @@ import java.io.Serializable;
  * @author wangjunming
  * @since 2020/10/12 13:24
  */
+@Data
+@AllArgsConstructor
 @ApiModel(description = "通用返回值对象")
 public class JsonResult<R> implements Serializable {
 
@@ -22,6 +26,9 @@ public class JsonResult<R> implements Serializable {
     private String msg;
     @ApiModelProperty(value = "返回的数据", example = "")
     private R data;
+
+    public JsonResult() {
+    }
 
     private static <R> JsonResult<R> defaultSuccess() {
         return new JsonResult<R>().setSuccess(true).setCode(0);

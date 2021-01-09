@@ -20,11 +20,11 @@ public class GateWayController {
     @Autowired
     private GateProperties gateProperties;
 
-    @ApiOperation("请求测试动态的配置信息接口")
-    @GetMapping("/getGateInfo")
-    public String getNowDate() {
-        return gateProperties.toString();
-    }
+//    @ApiOperation("请求测试动态的配置信息接口")
+//    @GetMapping("/getGateInfo")
+//    public String getNowDate() {
+//        return gateProperties.toString();
+//    }
 
 
 }
