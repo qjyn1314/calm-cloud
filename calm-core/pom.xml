@@ -69,11 +69,6 @@
             <groupId>io.seata</groupId>
             <artifactId>seata-spring-boot-starter</artifactId>
         </dependency>-->
-        <!-- springboot+springSession+redis登录 已实现session共享 -->
-        <!--<dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
-        </dependency>-->
         <!--springcloud中stream消息解耦rabbitmq和kafka的方案-->
         <!--<dependency>
             <groupId>org.springframework.cloud</groupId>

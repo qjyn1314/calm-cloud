@@ -18,6 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <calm-core.version>1.0.0</calm-core.version>
+        <calm-auth.version>1.0.0</calm-auth.version>
     </properties>
 
     <dependencies>
@@ -26,6 +27,21 @@
             <artifactId>calm-core</artifactId>
             <version>${calm-core.version}</version>
         </dependency>
+        <!--集成thymeleaf:参考：-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <!-- html无需严格校验-->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>com.calm.auth</groupId>
+            <artifactId>calm-auth</artifactId>
+            <version>${calm-auth.version}</version>
+        </dependency>-->
     </dependencies>
 
     <build>

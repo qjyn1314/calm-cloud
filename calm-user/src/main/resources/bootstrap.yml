@@ -1,0 +1,43 @@
+server:
+    port: 83
+spring:
+    application:
+        name: calm-web
+    cloud:
+        nacos:
+            config:
+                file-extension: yml
+    mvc:
+        static-path-pattern: '/static/**'
+    thymeleaf:
+        cache: false
+        encoding: UTF-8
+        prefix: 'classpath:/templates/'
+        servlet:
+            content-type: 'text/html'
+        enabled: true
+#密文密码配置
+jasypt:
+    encryptor:
+        algorithm: PBEWithMD5AndDES
+        provider-name: SunJCE
+        password: MdQRVDiKXf4sS0lXp61SH5cvVdmn8FJw++ODKj0ojhY=
+        property:
+            prefix: 'ENC@['
+            suffix: ']'
+#mybatis-plus配置
+mybatis-plus:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#日志配置
+logging:
+    config: classpath:logback-spring.xml
+    level:
+        com.calm.provider.service: debug
+#feign配置参考：http://c.biancheng.net/view/5362.html
+feign:
+    client:
+        config:
+            feignName:
+                connectTimeout: 5000
+                readTimeout: 5000

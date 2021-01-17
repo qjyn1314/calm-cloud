@@ -1,7 +1,12 @@
 package com.calm.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -14,9 +19,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ViewController {
 
-    @RequestMapping({"/index","/"})
-    public String view() {
-        return "";
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = {"/"})
+    public String index() {
+        return "index";
     }
+
+    @GetMapping({"/page/**.html", "/page/*/**.html", "/main"})
+    public String initView() {
+        return handleView();
+    }
+
+    private final static String HTML_SUFFIX = ".html";
+    @Autowired
+    private HttpServletRequest request;
+
+    public String handleView() {
+        return request.getRequestURI().substring(1).replace(HTML_SUFFIX, "");
+    }
+
 
 }

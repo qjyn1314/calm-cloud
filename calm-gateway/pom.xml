@@ -18,6 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <calm-provider.version>1.0.0</calm-provider.version>
+        <calm-auth.version>1.0.0</calm-auth.version>
     </properties>
 
     <dependencies>
@@ -26,6 +27,11 @@
             <artifactId>calm-provider</artifactId>
             <version>${calm-provider.version}</version>
         </dependency>
+       <!-- <dependency>
+            <groupId>com.calm.auth</groupId>
+            <artifactId>calm-auth</artifactId>
+            <version>${calm-auth.version}</version>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>

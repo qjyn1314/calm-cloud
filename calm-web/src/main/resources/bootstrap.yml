@@ -7,6 +7,15 @@ spring:
         nacos:
             config:
                 file-extension: yml
+    mvc:
+        static-path-pattern: '/static/**'
+    thymeleaf:
+        cache: false
+        encoding: UTF-8
+        prefix: 'classpath:/templates/'
+        servlet:
+            content-type: 'text/html'
+        enabled: true
 #密文密码配置
 jasypt:
     encryptor:
