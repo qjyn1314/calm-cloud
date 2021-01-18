@@ -2,7 +2,7 @@ server:
     port: 82
 spring:
     application:
-        name: calm-web
+        name: calm-auth
     cloud:
         nacos:
             config:
