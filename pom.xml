@@ -12,8 +12,7 @@
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+        <spring-boot.version>2.3.8.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
         <slf4j-api.version>1.2.73</slf4j-api.version>
@@ -23,8 +22,17 @@
         <swagger.version>3.0.0</swagger.version>
         <jasypt.version>3.0.3</jasypt.version>
         <seata.version>1.4.0</seata.version>
+        <!--此工程中的子工程-->
+        <calm-parent.version>1.0.0</calm-parent.version>
+        <calm-provider.version>1.0.0</calm-provider.version>
+        <calm-core.version>1.0.0</calm-core.version>
+        <calm-gateway.version>1.0.0</calm-gateway.version>
+        <calm-auth.version>1.0.0</calm-auth.version>
+        <calm-user.version>1.0.0</calm-user.version>
+        <calm-web.version>1.0.0</calm-web.version>
     </properties>
 
+    <!--为了在打包的时候可以使用父工程可直接对子工程进行打包-->
     <modules>
         <module>calm-parent</module>
         <module>calm-provider</module>
@@ -88,6 +96,44 @@
     -->
     <dependencyManagement>
         <dependencies>
+            <!--此工程中的子工程-->
+            <dependency>
+                <groupId>com.calm.parent</groupId>
+                <artifactId>calm-parent</artifactId>
+                <version>${calm-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.calm.provider</groupId>
+                <artifactId>calm-provider</artifactId>
+                <version>${calm-provider.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.calm.core</groupId>
+                <artifactId>calm-core</artifactId>
+                <version>${calm-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.calm.gateway</groupId>
+                <artifactId>calm-gateway</artifactId>
+                <version>${calm-gateway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.calm.auth</groupId>
+                <artifactId>calm-auth</artifactId>
+                <version>${calm-auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.calm.user</groupId>
+                <artifactId>calm-user</artifactId>
+                <version>${calm-user.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.calm.web</groupId>
+                <artifactId>calm-web</artifactId>
+                <version>${calm-web.version}</version>
+            </dependency>
+
+            <!--导入了springboot、springcloud、springcloudalibaba-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -123,56 +169,28 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-            </resource>
-        </resources>
+        <!--
+            打包参考：https://docs.spring.io/spring-boot/docs/2.3.8.RELEASE/maven-plugin/reference/html/#goals-repackage
+        -->
         <plugins>
-            <!-- 资源文件拷贝插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <!--为解决  OTS parsing error: incorrect file size in WOFF header  而添加的打包配置-->
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
-                </configuration>
-            </plugin>
-            <!-- java编译插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                        <fork>true</fork>
-                        <addResources>true</addResources>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>
