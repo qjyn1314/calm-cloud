@@ -21,8 +21,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2020/10/31 20:08
  */
 @Slf4j
-@RequiredArgsConstructor
-@Configuration(proxyBeanMethods = false)
+@Configuration
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 @EnableConfigurationProperties(DynamicDataSourceProperties.class)
 public class DynamicDataSourceAutoConfiguration {
