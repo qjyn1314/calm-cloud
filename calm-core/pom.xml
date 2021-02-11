@@ -21,7 +21,6 @@
         <dependency>
             <groupId>com.calm.provider</groupId>
             <artifactId>calm-provider</artifactId>
-            <version>${calm-provider.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -36,12 +35,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
-        <!--密文密码-->
-        <dependency>
-            <groupId>com.github.ulisesbocchio</groupId>
-            <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>${jasypt.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -66,11 +59,10 @@
             <artifactId>seata-spring-boot-starter</artifactId>
         </dependency>-->
         <!--springcloud中stream消息解耦rabbitmq和kafka的方案-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
-        </dependency>
-
+        </dependency>-->
     </dependencies>
 
     <build>

@@ -7,23 +7,18 @@
         <artifactId>calm-cloud</artifactId>
         <version>1.0.0</version>
     </parent>
-    <groupId>com.calm.user</groupId>
-    <artifactId>calm-user</artifactId>
+    <groupId>com.calm.admin</groupId>
+    <artifactId>calm-admin</artifactId>
     <version>1.0.0</version>
-    <name>calm-user</name>
-    <description>Demo project for Spring Boot</description>
-
+    <name>calm-admin</name>
+    <description>CalmAdmin project for Spring Boot</description>
     <properties>
-    </properties>
 
+    </properties>
     <dependencies>
         <dependency>
-            <groupId>com.calm.core</groupId>
-            <artifactId>calm-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.calm.auth</groupId>
-            <artifactId>calm-auth</artifactId>
+            <groupId>com.calm.provider</groupId>
+            <artifactId>calm-provider</artifactId>
         </dependency>
     </dependencies>
 
@@ -62,6 +57,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

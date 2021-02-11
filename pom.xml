@@ -15,6 +15,7 @@
         <spring-boot.version>2.3.8.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
+        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
         <slf4j-api.version>1.2.73</slf4j-api.version>
         <fastjson.version>1.2.73</fastjson.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
@@ -26,6 +27,7 @@
         <calm-parent.version>1.0.0</calm-parent.version>
         <calm-provider.version>1.0.0</calm-provider.version>
         <calm-core.version>1.0.0</calm-core.version>
+        <calm-admin.version>1.0.0</calm-admin.version>
         <calm-gateway.version>1.0.0</calm-gateway.version>
         <calm-auth.version>1.0.0</calm-auth.version>
         <calm-user.version>1.0.0</calm-user.version>
@@ -37,6 +39,7 @@
         <module>calm-parent</module>
         <module>calm-provider</module>
         <module>calm-core</module>
+        <module>calm-admin</module>
         <module>calm-gateway</module>
         <module>calm-auth</module>
         <module>calm-user</module>
@@ -113,6 +116,11 @@
                 <version>${calm-core.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.calm.admin</groupId>
+                <artifactId>calm-admin</artifactId>
+                <version>${calm-admin.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.calm.gateway</groupId>
                 <artifactId>calm-gateway</artifactId>
                 <version>${calm-gateway.version}</version>
@@ -138,6 +146,16 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--spring-boot-admin
+                参考：https://codecentric.github.io/spring-boot-admin/2.3.1/#getting-started
+            -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-dependencies</artifactId>
+                <version>${spring-boot-admin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

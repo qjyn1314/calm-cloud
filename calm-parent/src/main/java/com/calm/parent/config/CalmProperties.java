@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.lang.Nullable;
@@ -22,6 +23,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Configuration
+@EnableAspectJAutoProxy
 @DependsOn({"applicationUtil"})
 @ConfigurationProperties(prefix = "calm")
 public class CalmProperties {

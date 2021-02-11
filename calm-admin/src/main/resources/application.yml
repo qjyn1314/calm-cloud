@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  boot:
+    admin:
+      ui:
+        brand: <img src="assets/img/icon-spring-boot-admin.svg"><span>Calm-Admin</span>
+        title: Calm-Admin
+      notify:
+        mail:
+          from: qjyn1314@163.com
+          to: qjyn1314@foxmail.com
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"

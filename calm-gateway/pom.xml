@@ -20,7 +20,16 @@
         <dependency>
             <groupId>com.calm.provider</groupId>
             <artifactId>calm-provider</artifactId>
-            <version>${calm-provider.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.calm.auth</groupId>
+            <artifactId>calm-auth</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

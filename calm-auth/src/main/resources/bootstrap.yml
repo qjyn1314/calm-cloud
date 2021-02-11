@@ -25,6 +25,14 @@ jasypt:
         property:
             prefix: 'ENC@['
             suffix: ']'
+management:
+    endpoint:
+        health:
+            show-details: always
+    endpoints:
+        web:
+            exposure:
+                include: "*"
 #mybatis-plus配置
 mybatis-plus:
     configuration:

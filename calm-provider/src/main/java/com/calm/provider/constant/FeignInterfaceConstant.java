@@ -10,6 +10,7 @@ package com.calm.provider.constant;
  */
 public interface FeignInterfaceConstant {
 
-    String ORDER_SERVER = "calm-order";
+    String ORDER_SERVER = "calm-web";
+    String ORDER_SERVER_CONTEXT_ID = "calm-web-context-id";
 
 }

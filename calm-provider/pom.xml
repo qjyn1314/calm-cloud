@@ -21,7 +21,6 @@
         <dependency>
             <groupId>com.calm.parent</groupId>
             <artifactId>calm-parent</artifactId>
-            <version>${calm-parent.version}</version>
         </dependency>
         <!--nacos-start-->
         <!--服务注册中心-->
@@ -52,6 +51,15 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--springboot-admin-->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
         </dependency>
     </dependencies>
 

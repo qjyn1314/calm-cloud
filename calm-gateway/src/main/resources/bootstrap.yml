@@ -46,6 +46,14 @@ spring:
                   uri: lb://calm-web
                   predicates:
                       - Path=/web/**
+management:
+    endpoint:
+        health:
+            show-details: always
+    endpoints:
+        web:
+            exposure:
+                include: "*"
 # 日志配置
 logging:
     config: classpath:logback-spring.xml

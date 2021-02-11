@@ -20,7 +20,10 @@
         <dependency>
             <groupId>com.calm.core</groupId>
             <artifactId>calm-core</artifactId>
-            <version>${calm-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.calm.auth</groupId>
+            <artifactId>calm-auth</artifactId>
         </dependency>
         <!--集成thymeleaf:参考：-->
         <dependency>
