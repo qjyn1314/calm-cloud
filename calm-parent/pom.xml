@@ -11,7 +11,7 @@
     <artifactId>calm-parent</artifactId>
     <version>1.0.0</version>
     <name>calm-parent</name>
-    <description>Calm 父工程-公共包，以及公共处理异常和类 for Spring Boot</description>
+    <description>Calm 父工程-工具类、redis、swagger、spring工具类</description>
 
     <properties>
     </properties>

@@ -18,7 +18,6 @@ public class CalmWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CalmWebApplication.class, args);
-        log.info("CalmWebApplication-->启动成功。");
     }
 
 }

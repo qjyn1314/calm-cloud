@@ -7,7 +7,7 @@
     <version>1.0.0</version>
     <name>calm-cloud</name>
     <packaging>pom</packaging>
-    <description>Calm project for Spring Boot</description>
+    <description>Calm-springboot、springCloud、springCloudAlibaba、mybatis-plus</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -26,6 +26,7 @@
         <!--此工程中的子工程-->
         <calm-parent.version>1.0.0</calm-parent.version>
         <calm-provider.version>1.0.0</calm-provider.version>
+        <calm-common.version>1.0.0</calm-common.version>
         <calm-core.version>1.0.0</calm-core.version>
         <calm-admin.version>1.0.0</calm-admin.version>
         <calm-gateway.version>1.0.0</calm-gateway.version>
@@ -38,9 +39,10 @@
     <modules>
         <module>calm-parent</module>
         <module>calm-provider</module>
+        <module>calm-common</module>
         <module>calm-core</module>
-        <module>calm-admin</module>
         <module>calm-gateway</module>
+        <module>calm-admin</module>
         <module>calm-auth</module>
         <module>calm-user</module>
         <module>calm-web</module>
@@ -109,6 +111,11 @@
                 <groupId>com.calm.provider</groupId>
                 <artifactId>calm-provider</artifactId>
                 <version>${calm-provider.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.calm.common</groupId>
+                <artifactId>calm-common</artifactId>
+                <version>${calm-common.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.calm.core</groupId>

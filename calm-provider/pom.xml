@@ -11,7 +11,7 @@
     <artifactId>calm-provider</artifactId>
     <version>1.0.0</version>
     <name>calm-provider</name>
-    <description>Calm project for Spring Boot</description>
+    <description>CalmProvider-nacos注册中心、nacos配置中心、springbootAdmin监控</description>
 
     <properties>
 

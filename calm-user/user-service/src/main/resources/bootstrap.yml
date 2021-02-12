@@ -1,8 +1,8 @@
 server:
-  port: 84
+  port: 83
 spring:
   application:
-    name: calm-admin
+    name: calm-user
   cloud:
     nacos:
       config:
@@ -25,6 +25,19 @@ jasypt:
     property:
       prefix: 'ENC@['
       suffix: ']'
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#mybatis-plus配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mappers/*.xml
 #日志配置
 logging:
   config: classpath:logback-spring.xml

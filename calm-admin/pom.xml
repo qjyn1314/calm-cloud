@@ -11,7 +11,7 @@
     <artifactId>calm-admin</artifactId>
     <version>1.0.0</version>
     <name>calm-admin</name>
-    <description>CalmAdmin project for Spring Boot</description>
+    <description>CalmAdmin-springbootAdminServer服务端</description>
     <properties>
 
     </properties>
@@ -19,6 +19,10 @@
         <dependency>
             <groupId>com.calm.provider</groupId>
             <artifactId>calm-provider</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.calm.common</groupId>
+            <artifactId>calm-common</artifactId>
         </dependency>
     </dependencies>
 

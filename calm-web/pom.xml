@@ -11,7 +11,7 @@
     <artifactId>calm-web</artifactId>
     <version>1.0.0</version>
     <name>calm-web</name>
-    <description>Calm project for Spring Boot</description>
+    <description>CalmWeb-layui前端页面、跳转页面配置</description>
 
     <properties>
     </properties>

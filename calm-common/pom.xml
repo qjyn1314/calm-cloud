@@ -7,33 +7,32 @@
         <artifactId>calm-cloud</artifactId>
         <version>1.0.0</version>
     </parent>
-    <groupId>com.calm.gateway</groupId>
-    <artifactId>calm-gateway</artifactId>
+    <groupId>com.calm.common</groupId>
+    <artifactId>calm-common</artifactId>
     <version>1.0.0</version>
-    <name>calm-gateway</name>
-    <description>CalmGateWay-gateway</description>
-
+    <name>calm-common</name>
+    <description>CalmCommon-undertow容器、拦截器、全局异常处理类</description>
     <properties>
-    </properties>
 
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.calm.provider</groupId>
             <artifactId>calm-provider</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.calm.auth</groupId>
-            <artifactId>calm-auth</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
                 <exclusion>
-                    <groupId>com.calm.common</groupId>
-                    <artifactId>calm-common</artifactId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <groupId>org.springframework.boot</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
     </dependencies>
 
@@ -52,13 +51,6 @@
                         <enabled>true</enabled>
                     </layers>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -72,6 +64,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

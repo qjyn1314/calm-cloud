@@ -3,39 +3,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.calm</groupId>
-        <artifactId>calm-cloud</artifactId>
+        <groupId>com.calm.user</groupId>
+        <artifactId>calm-user</artifactId>
         <version>1.0.0</version>
     </parent>
-    <groupId>com.calm.gateway</groupId>
-    <artifactId>calm-gateway</artifactId>
+    <groupId>com.calm.user.service</groupId>
+    <artifactId>user-service</artifactId>
     <version>1.0.0</version>
-    <name>calm-gateway</name>
-    <description>CalmGateWay-gateway</description>
-
+    <name>user-service</name>
+    <description>UserService-用户服务的具体实现</description>
     <properties>
+
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.calm.provider</groupId>
-            <artifactId>calm-provider</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.calm.auth</groupId>
-            <artifactId>calm-auth</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.calm.common</groupId>
-                    <artifactId>calm-common</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <groupId>com.calm.user.api</groupId>
+            <artifactId>user-api</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
+
 
     <build>
         <finalName>${project.artifactId}</finalName>

@@ -10,11 +10,18 @@
     <groupId>com.calm.user</groupId>
     <artifactId>calm-user</artifactId>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
     <name>calm-user</name>
-    <description>Demo project for Spring Boot</description>
+    <description>CalmUser-用户服务</description>
 
     <properties>
+        <calm.user.version>1.0.0</calm.user.version>
     </properties>
+
+    <modules>
+        <module>user-api</module>
+        <module>user-service</module>
+    </modules>
 
     <dependencies>
         <dependency>
@@ -42,13 +49,6 @@
                         <enabled>true</enabled>
                     </layers>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
