@@ -11,7 +11,7 @@
     <artifactId>user-api</artifactId>
     <version>1.0.0</version>
     <name>user-api</name>
-    <description>UserApi-用户服务暴露的接口</description>
+    <description>UserApi-用是实体类、暴露的feign服务</description>
     <properties>
 
     </properties>
@@ -30,6 +30,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
                     <layers>
                         <enabled>true</enabled>
                     </layers>

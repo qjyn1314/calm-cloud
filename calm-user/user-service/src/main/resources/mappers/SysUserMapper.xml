@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calm.user.persistence.mapper.SysUserMapper">
+
+    <resultMap id="BaseResultMap" type="com.calm.user.api.entity.SysUser">
+        <!--@Table sys_user-->
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="account" column="account" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="salt" column="salt" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
+        <result property="sex" column="sex" jdbcType="INTEGER"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="updateUser" column="update_user" jdbcType="INTEGER"/>
+        <result property="version" column="version" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--列表-->
+    <sql id="Base_All_column" >
+          user_id, avatar, account, password, salt, name, birthday, sex, email, phone, status, create_time, create_user, update_time, update_user, version
+    </sql>
+    <!--查询条件-->
+    <sql id="query_where" >
+        <if test="account != null and account != ''">
+            account = #{account}
+        </if>
+    </sql>
+    <select id="queryByAccount" resultType="com.calm.user.api.vo.SysUserVo">
+        select <include refid="Base_All_column"/> from sys_user
+        <where>
+            <include refid="query_where"/>
+        </where>
+    </select>
+
+</mapper>

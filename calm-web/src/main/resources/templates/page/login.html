@@ -68,7 +68,7 @@
             form.on("submit(login)", function (data) {
                 okUtils.ajax("/login", "post", data.field, true).done(function (response) {
                     okLayer.greenTickMsg(response.msg, function () {
-                        window.location = "../index.html";
+                        window.location = "../login.html";
                     })
                 }).fail(function (error) {
                     console.log(error)

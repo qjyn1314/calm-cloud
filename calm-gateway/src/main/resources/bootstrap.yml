@@ -11,59 +11,59 @@
 # 添加配置时其DataID的公式：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension} ，
 #即：项目名称-当前环境.文件后缀
 server:
-    port: 80
+  port: 80
 spring:
-    application:
-        name: calm-gateway
-    cloud:
-        nacos:
-            config:
-                # 配置文件的后缀
-                file-extension: yml
-        gateway:
-            globalcors:
-                cors-configurations:
-                    '[/**]':
-                        allow-credentials: true
-                        allowed-origins: "*"
-                        allowed-headers: "*"
-                        allowed-methods:
-                            - OPTIONS
-                            - GET
-                            - POST
-                        max-age: 3600
-            discovery:
-                locator:
-                    enabled: true
-            default-filters:
-                - StripPrefix=1
-            routes:
-                - id: calm-order
-                  uri: lb://calm-order
-                  predicates:
-                      - Path=/order/**
-                - id: calm-web
-                  uri: lb://calm-web
-                  predicates:
-                      - Path=/web/**
+  application:
+    name: calm-gateway
+  cloud:
+    nacos:
+      config:
+        # 配置文件的后缀
+        file-extension: yml
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allow-credentials: true
+            allowed-origins: "*"
+            allowed-headers: "*"
+            allowed-methods:
+              - OPTIONS
+              - GET
+              - POST
+            max-age: 3600
+      discovery:
+        locator:
+          enabled: true
+      default-filters:
+        - StripPrefix=1
+      routes:
+        - id: calm-user
+          uri: lb://calm-user
+          predicates:
+            - Path=/user/**
+        - id: calm-web
+          uri: lb://calm-web
+          predicates:
+            - Path=/web/**
 management:
-    endpoint:
-        health:
-            show-details: always
-    endpoints:
-        web:
-            exposure:
-                include: "*"
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 # 日志配置
 logging:
-    config: classpath:logback-spring.xml
-    level:
-        com.calm.provider.service: debug
+  config: classpath:logback-spring.xml
+  level:
+    com.calm.provider.service: debug
 
 #feign配置参考：http://c.biancheng.net/view/5362.html
 feign:
-    client:
-        config:
-            feignName:
-                connectTimeout: 5000
-                readTimeout: 5000
+  client:
+    config:
+      feignName:
+        connectTimeout: 5000
+        readTimeout: 5000

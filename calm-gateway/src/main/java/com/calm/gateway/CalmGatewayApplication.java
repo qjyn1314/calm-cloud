@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 //开启nacos服务注册
 @EnableDiscoveryClient
 //开启feign服务之间的调用，进行扫描包
-@EnableFeignClients("com.calm.provider")
+@EnableFeignClients({"com.calm.user.api.feign"})
 public class CalmGatewayApplication {
 
     public static void main(String[] args) {

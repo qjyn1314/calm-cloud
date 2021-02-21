@@ -22,6 +22,7 @@
         <dynamic-datasource.version>3.3.1</dynamic-datasource.version>
         <swagger.version>3.0.0</swagger.version>
         <jasypt.version>3.0.3</jasypt.version>
+        <hutool.version>5.5.8</hutool.version>
         <seata.version>1.4.0</seata.version>
         <!--此工程中的子工程-->
         <calm-parent.version>1.0.0</calm-parent.version>
@@ -75,9 +76,13 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -203,6 +208,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
                     <layers>
                         <enabled>true</enabled>
                     </layers>

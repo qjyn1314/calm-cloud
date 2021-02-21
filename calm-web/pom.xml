@@ -14,6 +14,8 @@
     <description>CalmWeb-layui前端页面、跳转页面配置</description>
 
     <properties>
+        <user-api.version>1.0.0</user-api.version>
+
     </properties>
 
     <dependencies>
@@ -22,8 +24,9 @@
             <artifactId>calm-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.calm.auth</groupId>
-            <artifactId>calm-auth</artifactId>
+            <groupId>com.calm.user.api</groupId>
+            <artifactId>user-api</artifactId>
+            <version>${user-api.version}</version>
         </dependency>
         <!--集成thymeleaf:参考：-->
         <dependency>
@@ -48,6 +51,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
                     <layers>
                         <enabled>true</enabled>
                     </layers>

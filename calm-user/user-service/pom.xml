@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.calm.user.api</groupId>
             <artifactId>user-api</artifactId>
-            <version>1.0.0</version>
+            <version>${calm.user.version}</version>
         </dependency>
     </dependencies>
 
@@ -36,6 +36,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
                     <layers>
                         <enabled>true</enabled>
                     </layers>

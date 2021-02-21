@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -14,24 +15,23 @@ import java.io.Serializable;
  * @since 2020/10/12 13:24
  */
 @Data
+@ToString
 @AllArgsConstructor
 @ApiModel(description = "通用返回值对象")
 public class JsonResult<R> implements Serializable {
 
-    @ApiModelProperty(value = "是否成功", example = "")
-    private boolean success;
-    @ApiModelProperty(value = "是否成功的编码", example = "")
-    private int code;
-    @ApiModelProperty(value = "返回的错误信息", example = "")
+    @ApiModelProperty(value = "是否成功的编码")
+    private int code = 0;
+    @ApiModelProperty(value = "返回的错误信息")
     private String msg;
-    @ApiModelProperty(value = "返回的数据", example = "")
+    @ApiModelProperty(value = "返回的数据")
     private R data;
 
     public JsonResult() {
     }
 
     private static <R> JsonResult<R> defaultSuccess() {
-        return new JsonResult<R>().setSuccess(true).setCode(0);
+        return new JsonResult<R>().setCode(0);
     }
 
     public static JsonResult<Object> success() {
@@ -52,15 +52,6 @@ public class JsonResult<R> implements Serializable {
 
     public static <R> JsonResult<R> fail(String msg) {
         return new JsonResult<R>().setCode(-1).setMsg(msg);
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public JsonResult<R> setSuccess(boolean success) {
-        this.success = success;
-        return this;
     }
 
     public int getCode() {
@@ -90,9 +81,5 @@ public class JsonResult<R> implements Serializable {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "JsonResult{" + "success=" + success + ", code=" + code + ", msg='" + msg + '\'' + ", data=" + data + '}';
-    }
 
 }

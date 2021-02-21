@@ -28,10 +28,6 @@
             <groupId>com.calm.core</groupId>
             <artifactId>calm-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.calm.auth</groupId>
-            <artifactId>calm-auth</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
@@ -45,6 +41,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
                     <layers>
                         <enabled>true</enabled>
                     </layers>

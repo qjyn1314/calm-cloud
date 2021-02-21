@@ -14,6 +14,7 @@
     <description>CalmGateWay-gateway</description>
 
     <properties>
+        <user-api.version>1.0.0</user-api.version>
     </properties>
 
     <dependencies>
@@ -21,20 +22,27 @@
             <groupId>com.calm.provider</groupId>
             <artifactId>calm-provider</artifactId>
         </dependency>
+        <!--security -->
         <dependency>
-            <groupId>com.calm.auth</groupId>
-            <artifactId>calm-auth</artifactId>
+            <groupId>com.calm.user.api</groupId>
+            <artifactId>user-api</artifactId>
+            <version>${user-api.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>com.calm.common</groupId>
-                    <artifactId>calm-common</artifactId>
+                    <groupId>com.calm.core</groupId>
+                    <artifactId>calm-core</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>-->
+        <!--<dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-        </dependency>
+        </dependency>-->
+        <!--gateway-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
@@ -52,6 +60,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
                     <layers>
                         <enabled>true</enabled>
                     </layers>

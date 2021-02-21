@@ -37,12 +37,14 @@ management:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
   mapper-locations: classpath*:/mappers/*.xml
+
 #日志配置
 logging:
   config: classpath:logback-spring.xml
   level:
-    com.calm.provider.service: debug
+    com.calm.user.api.feign: debug
 #feign配置参考：http://c.biancheng.net/view/5362.html
 feign:
   client:

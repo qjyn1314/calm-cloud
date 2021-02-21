@@ -14,17 +14,18 @@
     <description>CalmAuth-授权服务</description>
 
     <properties>
-
+        <user-api.version>1.0.0</user-api.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.calm.provider</groupId>
-            <artifactId>calm-provider</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.calm.common</groupId>
             <artifactId>calm-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.calm.user.api</groupId>
+            <artifactId>user-api</artifactId>
+            <version>${user-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,17 +44,12 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
                     <layers>
                         <enabled>true</enabled>
                     </layers>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
