@@ -28,7 +28,7 @@ public class GlobHandleException {
     @ExceptionHandler(value = Exception.class)
     public JsonResult handleGlobleException(Exception e) {
         log.error("系统异常，请检查代码", e);
-        return JsonResult.fail(e.getMessage());
+        return JsonResult.fail("系统异常");
     }
 
     /**

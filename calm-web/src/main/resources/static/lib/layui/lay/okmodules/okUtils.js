@@ -55,7 +55,7 @@ layui.define(["layer"], function (exprots) {
        */
       isFrontendBackendSeparate: true,
       //登录接口
-      calmAuthLogin : baseUrl + "/user-api/login",
+      calmLogin : baseUrl + "/login",
       /**
        * 获取body的总宽度
        */
@@ -88,7 +88,7 @@ layui.define(["layer"], function (exprots) {
          var deferred = $.Deferred();
          var loadIndex;
          $.ajax({
-            url: okUtils.isFrontendBackendSeparate ? okUtils.baseUrl + url : url,
+            url: okUtils.isFrontendBackendSeparate ? baseUrl + url : url,
             type: type || "get",
             data: params || {},
             dataType: "json",
@@ -119,6 +119,9 @@ layui.define(["layer"], function (exprots) {
             }
          });
          return deferred.promise();
+      },
+      ajaxPost: function (url, params) {
+         return okUtils.ajax(url, "post", params, true);
       },
       /**
        * 主要用于针对表格批量操作操作之前的检查

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.http.server.RequestPath;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -27,10 +28,15 @@ public class ValidationFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         final ServerHttpRequest request = exchange.getRequest();
-        log.info("进入-ValidationFilter-请求的路径是：{}", exchange.getRequest().getPath());
-        ServerHttpRequest req = exchange.getRequest().mutate()
-                .header(ForwardAccessService.HEADER_KEY, ForwardAccessService.HEADER_VALUE).build();
-        return chain.filter(exchange.mutate().request(req.mutate().build()).build());
+        RequestPath path = exchange.getRequest().getPath();
+        boolean startsWithWeb = path.value().startsWith("/web");
+        if(!startsWithWeb){
+            log.info("进入-ValidationFilter-请求的路径是：{}", path);
+            ServerHttpRequest req = exchange.getRequest().mutate()
+                    .header(ForwardAccessService.HEADER_KEY, ForwardAccessService.HEADER_VALUE).build();
+            return chain.filter(exchange.mutate().request(req.mutate().build()).build());
+        }
+        return chain.filter(exchange);
     }
 
     @Override

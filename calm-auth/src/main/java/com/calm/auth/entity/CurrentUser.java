@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,25 +21,63 @@ import java.util.List;
  */
 public class CurrentUser implements UserDetails {
 
-    private String username;
-
+    /**
+     * 主键id
+     */
+    private Long userId;
+    /**
+     * 头像
+     */
+    private String avatar;
+    /**
+     * 账号-唯一标识
+     */
+    private String account;
+    /**
+     * 密码
+     */
     private String password;
+    /**
+     * md5密码盐
+     */
+    private String salt;
+    /**
+     * 名字
+     */
+    private String name;
+    /**
+     * 生日
+     */
+    private Date birthday;
+    /**
+     * 性别(字典)
+     */
+    private Integer sex;
+    /**
+     * 电子邮件
+     */
+    private String email;
+    /**
+     * 电话
+     */
+    private String phone;
+    /**
+     * 状态(字典)
+     */
+    private Integer status;
 
+    /**
+     * 是否已启用
+     */
     private Boolean enable;
-
-    public Boolean getEnable() {
-        return enable;
-    }
-
-    public void setEnable(Boolean enable) {
-        this.enable = enable;
-    }
-
+    /**
+     * 权限编码
+     */
     private List<String> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.createAuthorityList(String.join(",",this.roles));
+        return AuthorityUtils.createAuthorityList(String.join(",", this.roles));
     }
 
     @Override
@@ -48,7 +87,7 @@ public class CurrentUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.username;
+        return this.account;
     }
 
     @Override
@@ -71,9 +110,92 @@ public class CurrentUser implements UserDetails {
         return this.enable;
     }
 
+    public Boolean getEnable() {
+        return enable;
+    }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public void setPassword(String password) {
@@ -89,10 +211,19 @@ public class CurrentUser implements UserDetails {
     }
 
     public void preCurrentUser(SysUserVo userVo) {
-        this.username = userVo.getAccount();
+        this.userId = userVo.getUserId();
+        this.account = userVo.getAccount();
         this.password = userVo.getPassword();
+        this.avatar = userVo.getAvatar();
+        this.salt = userVo.getSalt();
+        this.name = userVo.getName();
+        this.birthday = userVo.getBirthday();
+        this.sex = userVo.getSex();
+        this.email = userVo.getEmail();
+        this.phone = userVo.getPhone();
+        this.status = userVo.getStatus();
         this.enable = UserStatus.THE_APPROVED.getCode().equals(userVo.getStatus());
-        this.roles = Arrays.asList("system","admin");
+        this.roles = Arrays.asList("system", "admin");
     }
 
 }

@@ -1,12 +1,18 @@
 package com.calm.common.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.calm.parent.base.JsonResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -134,6 +140,17 @@ public class RequestUtils {
             cookie.setPath("/");
             response.addCookie(cookie);
         }
+    }
+
+
+    public static void setResponse(HttpServletResponse response, JsonResult result) throws IOException {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        PrintWriter out = response.getWriter();
+        out.write(JSON.toJSONString(result));
+        out.flush();
+        out.close();
     }
 
 

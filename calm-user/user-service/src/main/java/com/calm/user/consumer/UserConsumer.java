@@ -29,8 +29,7 @@ public class UserConsumer {
     public String consumer(){
         String account = "qjyn1314@163.com";
         JsonResult<SysUserVo> jsonResult = userFeignService.queryByAccount(account);
-        SysUserVo data = jsonResult.getData();
-        return data.getAccount();
+        return jsonResult.toString();
     }
 
 

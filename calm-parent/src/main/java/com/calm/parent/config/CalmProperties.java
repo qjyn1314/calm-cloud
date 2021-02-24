@@ -31,6 +31,7 @@ public class CalmProperties {
     private static final String SERVER_PORT = "server.port";
     private static final String APPLICATION_NAME = "spring.application.name";
     public static final String SERVERNAME_PORT = "SERVERNAME_PORT";
+    public static final String WEB_SERVICE = "calm-web";
 
     @Autowired
     private Environment environment;
@@ -53,6 +54,10 @@ public class CalmProperties {
     @Nullable
     public static String getApplicationName() {
         return ENVIRONMENT.getProperty(APPLICATION_NAME);
+    }
+
+    public static Boolean isNotWebService() {
+        return !getApplicationName().equals(WEB_SERVICE);
     }
 
     public String getInterceptUrl() {

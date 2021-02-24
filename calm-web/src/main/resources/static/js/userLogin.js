@@ -26,6 +26,26 @@ layui.use(["okUtils"], function () {
         return check;
     });
 
+    $('#login_form_btn').on('click', function (event) {
+        if (event.keyCode === 13) {
+            login();
+        }
+        login();
+    });
+
+    function login() {
+        const username = $("#login_form input[name='username']").val();
+        const password = $("#login_form input[name='password']").val();
+        okUtils.ajaxPost(okUtils.calmLogin, {
+            "username": username,
+            "password": password
+        }, true).done(function (response) {
+            console.log(response);
+        }).fail(function (error) {
+            console.log(error)
+        });
+    }
+
     $('.validate-form .input100').each(function () {
         $(this).focus(function () {
             hideValidate(this);
@@ -46,13 +66,11 @@ layui.use(["okUtils"], function () {
 
     function showValidate(input) {
         var thisAlert = $(input).parent();
-
         $(thisAlert).addClass('alert-validate');
     }
 
     function hideValidate(input) {
         var thisAlert = $(input).parent();
-
         $(thisAlert).removeClass('alert-validate');
     }
 
