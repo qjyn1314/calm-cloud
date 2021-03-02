@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
  * <p>
  * explain:
  * 1、SpringCloud确保服务只能通过gateway转发访问，禁止直接调用接口访问
- *   参考： https://blog.csdn.net/Hpsyche/article/details/102926010
+ * 参考： https://blog.csdn.net/Hpsyche/article/details/102926010
  * </p>
  *
  * @author wangjunming
@@ -27,11 +27,9 @@ public class ValidationFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        final ServerHttpRequest request = exchange.getRequest();
         RequestPath path = exchange.getRequest().getPath();
         boolean startsWithWeb = path.value().startsWith("/web");
-        if(!startsWithWeb){
-            log.info("进入-ValidationFilter-请求的路径是：{}", path);
+        if (!startsWithWeb) {
             ServerHttpRequest req = exchange.getRequest().mutate()
                     .header(ForwardAccessService.HEADER_KEY, ForwardAccessService.HEADER_VALUE).build();
             return chain.filter(exchange.mutate().request(req.mutate().build()).build());

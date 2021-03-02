@@ -3,6 +3,7 @@ package com.calm.common.utils;
 import com.alibaba.fastjson.JSON;
 import com.calm.parent.base.JsonResult;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
 
 import javax.servlet.http.Cookie;
@@ -63,23 +64,25 @@ public class RequestUtils {
      * @author wangjunming
      * @since 2020/6/18 17:23
      */
-    public static HttpServletResponse setCookie(HttpServletResponse response, String name, String value, int time) {
+    public static void setCookie(HttpServletResponse response, String name, String value, int time,String domain,String path) {
         // new一个Cookie对象,键值对为参数
         Cookie cookie = new Cookie(name, value);
-        cookie.setDomain("zhichubao.com");
+        cookie.setDomain(domain);
         // tomcat下多应用共享
-        cookie.setPath("/");
+        cookie.setPath(path);
         // 如果cookie的值中含有中文时，需要对cookie进行编码，不然会产生乱码
-        try {
-            URLEncoder.encode(value, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            log.error("转换cookie值失败！", e);
+        if(StringUtils.isNotBlank(value)){
+            try {
+                value = URLEncoder.encode(value, "utf-8");
+            } catch (Exception e) {
+                log.error("转换cookie值失败！", e);
+            }
         }
+        cookie.setValue(value);
         //单位：分钟
         cookie.setMaxAge(time);
         // addCookie后，如果已经存在相同名字的cookie，则最新的覆盖旧的cookie
         response.addCookie(cookie);
-        return response;
     }
 
     /**

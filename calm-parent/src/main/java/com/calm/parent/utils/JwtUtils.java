@@ -1,14 +1,15 @@
 package com.calm.parent.utils;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.impl.DefaultClock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * <p>
@@ -25,7 +26,7 @@ public final class JwtUtils {
     /**
      * jwt密钥
      */
-    public static final String SECRET = "HuLun_Buir_20200323124748";
+    public static final String SECRET = "Calm_202103021739";
 
     /**
      * jwt过期时间-默认是24小时
@@ -36,6 +37,8 @@ public final class JwtUtils {
      * jwt签发者
      */
     public static final String ISSUSER = "Mr.Wang";
+
+    private static final Clock CLOCK = DefaultClock.INSTANCE;
 
     /**
      * 初始化jwt密钥和过期时间
@@ -148,7 +151,7 @@ public final class JwtUtils {
      * @author wangjunming
      * @since 2020/3/23 13:16
      */
-    private boolean parseToken(String token) {
+    public static boolean parseToken(String token) {
         boolean flag = false;
         try {
             Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
@@ -166,5 +169,29 @@ public final class JwtUtils {
         }
         return flag;
     }
+
+    /**
+     * token是否过期
+     *
+     * @param token jwt生成的Token值
+     * @return Boolean true-已过期；false-未过期
+     */
+    public static Boolean isTokenExpired(String token) {
+        return getClaimFromToken(token, Claims::getExpiration).before(CLOCK.now());
+    }
+
+    /**
+     * 获取Claims的信息
+     *
+     * @param token          jwt生成的Token值
+     * @param claimsResolver Token 解析出来的payload信息
+     * @param <T>            payload信息中所包含的字段
+     * @return T
+     */
+    public static <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = getClaimFromToken(token);
+        return claimsResolver.apply(claims);
+    }
+
 
 }

@@ -1,9 +1,10 @@
 package com.calm.auth.config;
 
+import com.calm.auth.CurrentSecurityUserUtils;
+import com.calm.auth.filter.JwtRequestFilter;
 import com.calm.auth.filter.JwtTokenFilter;
 import com.calm.auth.handle.*;
 import com.calm.auth.service.CalmUserService;
-import com.calm.auth.support.CalmAuth;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -99,15 +101,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 用户认证拦截器
+     * 自定义用户认证拦截器
      */
     @Bean
     public JwtTokenFilter jwtTokenFilter() throws Exception {
-        JwtTokenFilter jwtTokenFilter = new JwtTokenFilter(calmUserService(),passwordEncoder());
+        JwtTokenFilter jwtTokenFilter = new JwtTokenFilter(calmUserService(), passwordEncoder());
         jwtTokenFilter.setAuthenticationSuccessHandler(authSuccessHandler());
         jwtTokenFilter.setAuthenticationFailureHandler(authFailureHandler());
         jwtTokenFilter.setAuthenticationManager(authenticationManager());
         return jwtTokenFilter;
+    }
+
+    /**
+     * 自定义token认证拦截器，只要不是/login请求的则都需要在请求头上添加token
+     */
+    @Bean
+    public JwtRequestFilter jwtRequestFilter() {
+        return new JwtRequestFilter(calmUserService());
     }
 
     @Bean
@@ -146,6 +156,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] MATCHERS_PERMIT_ALL = {
             "/instances/**", "/instances", "/actuator/**", "/actuator/health", "/details",
             "/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs/**",
+            "/favicon.ico",
             "/login", "/"
     };
 
@@ -160,7 +171,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
         //配置退出登录
         http.logout()
-                .logoutUrl(CalmAuth.LOGOUT_URL)
+                .logoutUrl(CurrentSecurityUserUtils.LOGOUT_URL)
                 //退出登录的处理--不能与logoutSuccessUrl同时使用，如果同时配置，则优先使用logoutSuccessUrl的配置。此配置主要是将pc端的cookie中用户信息进行清除
                 .logoutSuccessHandler(authLogoutHandler())
                 .and()
@@ -177,6 +188,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(unAuthenticationHandler())
                 //未登录拦截
                 .authenticationEntryPoint(unAuthenticationEntryPoint());
+        //表示Spring Security永远不会创建一个session,也不会通过sessionID获取用户信息
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        //关于springsecurity中过滤器的执行顺序详细讲解
+        // 参考：1、https://www.cnblogs.com/summerday152/p/13635948.html
+        //      2、https://blog.csdn.net/qq_36882793/article/details/102869583
+        //在验证token之前进行验证
+        http.addFilterBefore(jwtRequestFilter(), JwtTokenFilter.class);
+        //在这里也就意味着，会先执行 jwtTokenFilter 再次执行 UsernamePasswordAuthenticationFilter
         http.addFilterAt(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         http.rememberMe();
     }

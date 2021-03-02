@@ -8,14 +8,11 @@ import com.calm.parent.base.JsonResult;
 import com.calm.parent.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -30,10 +27,13 @@ import java.util.Map;
 public class AuthSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        log.info("登录成功了---------进入登陆成功处理器！！！");
-        Object principal = authentication.getPrincipal();
-        SecurityContext context = SecurityContextHolder.getContext();
-        log.info("SecurityContext:{}",context);
-        RequestUtils.setResponse(response, JsonResult.successDataMsg(principal, "登陆成功"));
+        log.info("login success");
+        CurrentUser currentUser = (CurrentUser) authentication.getPrincipal();
+        //将用户信息转换成一个token
+        String userJson = JSONObject.toJSONString(currentUser);
+        Map hashMap = JSONObject.parseObject(userJson, Map.class);
+        String token = JwtUtils.generateToken(hashMap, CurrentSecurityUserUtils.SUBJECT, CurrentSecurityUserUtils.EXPIRE_SECS);
+        log.info("token:{}", token);
+        RequestUtils.setResponse(response, JsonResult.successDataMsg(token, "登陆成功"));
     }
 }

@@ -1,11 +1,12 @@
 /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
 var objOkTab = "";
-layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContextMenu", "okHoliday", "laydate"], function () {
+layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContextMenu", "okHoliday", "laydate","okCookie"], function () {
 	var okUtils = layui.okUtils;
 	var $ = layui.jquery;
 	var form = layui.form;
 	var layer = layui.layer;
 	var okLayer = layui.okLayer;
+	var okCookie = layui.okCookie;
 	var okHoliday = layui.okHoliday;
 	var okTab = layui.okTab({
 		// 菜单请求路径
@@ -341,7 +342,8 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 		okLayer.confirm("确定要退出吗？", function (index) {
 			okTab.removeTabStorage(function (res) {
 				okTab.removeTabStorage();
-				window.location = "pages/login.html";
+				$.cookie(okUtils.tokenKey, "",-1);
+				window.location.href = "/logout";
 			});
 		});
 	});
@@ -411,21 +413,8 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 
 		//退出登录
 		$("#lockQuit").click(function () {
-			// window.location.href = "./pages/login.html";
-			window.location.replace("./pages/login.html");  //替换当前页面
+			window.location.href = "/logout";
 		});
 	}
 
-	console.log("        __                         .___      .__        \n" +
-		"  ____ |  | __         _____     __| _/_____ |__| ____  \n" +
-		" /  _ \\|  |/ /  ______ \\__  \\   / __ |/     \\|  |/    \\ \n" +
-		"(  <_> )    <  /_____/  / __ \\_/ /_/ |  Y Y  \\  |   |  \\\n" +
-		" \\____/|__|_ \\         (____  /\\____ |__|_|  /__|___|  /\n" +
-		"            \\/              \\/      \\/     \\/        \\/\n" +
-		"" +
-		"版本：v2.0\n" +
-		"作者：bobi\n" +
-		"邮箱：bobi1234@foxmail.com\n" +
-		"企鹅：833539807\n" +
-		"描述：一个很赞的，扁平化风格的，响应式布局的后台管理模版，旨为后端程序员减压！");
 });

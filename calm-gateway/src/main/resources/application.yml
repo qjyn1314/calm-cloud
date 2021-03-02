@@ -11,8 +11,5 @@ spring:
           service-url: http://127.0.0.1:84
         period: 10000
         read-timeout: 5000
-
-  security:
-    user:
-      name: user
-      password: 123456
+  thymeleaf:
+    check-template: false

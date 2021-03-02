@@ -32,6 +32,7 @@ public class CalmProperties {
     private static final String APPLICATION_NAME = "spring.application.name";
     public static final String SERVERNAME_PORT = "SERVERNAME_PORT";
     public static final String WEB_SERVICE = "calm-web";
+    public static final String ADMIN_SERVICE = "calm-admin";
 
     @Autowired
     private Environment environment;
@@ -57,7 +58,11 @@ public class CalmProperties {
     }
 
     public static Boolean isNotWebService() {
-        return !getApplicationName().equals(WEB_SERVICE);
+        return !Objects.equals(getApplicationName(), WEB_SERVICE);
+    }
+
+    public static Boolean isAdminService() {
+        return Objects.equals(getApplicationName(), ADMIN_SERVICE);
     }
 
     public String getInterceptUrl() {

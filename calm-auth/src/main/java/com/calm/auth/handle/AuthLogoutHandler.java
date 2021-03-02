@@ -1,6 +1,6 @@
 package com.calm.auth.handle;
 
-import com.calm.auth.support.CalmAuth;
+import com.calm.auth.CurrentSecurityUserUtils;
 import com.calm.common.utils.RequestUtils;
 import com.calm.parent.base.JsonResult;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +23,7 @@ import java.io.IOException;
 public class AuthLogoutHandler implements LogoutSuccessHandler{
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        log.info("退出登录成功了---------进入退出登陆成功处理器！！！");
-//        AuthUserUtil.logoutHandle(request, response, authentication);
-//        response.sendRedirect(CalmAuth.LOGIN_URL);
-        RequestUtils.setResponse(response, JsonResult.fail("退出登录成功"));
+        log.info("logout success!");
+        response.sendRedirect(CurrentSecurityUserUtils.LOGIN_URL);
     }
 }

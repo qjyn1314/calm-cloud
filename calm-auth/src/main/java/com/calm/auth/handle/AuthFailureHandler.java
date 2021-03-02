@@ -25,7 +25,7 @@ import java.io.IOException;
 public class AuthFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-        log.info("【登录失败】" + exception.getMessage());
+        log.info("【login fail】" + exception.getMessage());
         RequestUtils.setResponse(response, JsonResult.fail(exception.getMessage()));
     }
 }

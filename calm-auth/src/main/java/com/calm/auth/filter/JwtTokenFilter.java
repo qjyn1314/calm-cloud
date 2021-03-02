@@ -1,8 +1,8 @@
 package com.calm.auth.filter;
 
+import com.calm.auth.CurrentSecurityUserUtils;
 import com.calm.auth.entity.CurrentUser;
 import com.calm.auth.service.CalmUserService;
-import com.calm.auth.support.CalmAuth;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -37,20 +36,26 @@ public class JwtTokenFilter extends UsernamePasswordAuthenticationFilter {
     private final PasswordEncoder passwordEncoder;
 
     public JwtTokenFilter(CalmUserService calmUserService, PasswordEncoder passwordEncoder) {
-        AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher(CalmAuth.LOGIN_URL, HttpMethod.POST.name());
+        AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher(CurrentSecurityUserUtils.FORM_LOGIN_URL, HttpMethod.POST.name());
         this.setRequiresAuthenticationRequestMatcher(antPathRequestMatcher);
         this.calmUserService = calmUserService;
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * 用户认证
+     */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        String contextPath = request.getRequestURI();
+        log.info("JwtTokenFilter--url：{}", contextPath);
         String username = request.getParameter("username");
-        log.info("当前正在登录的用户是：{}", username);
+        log.info("The user currently logging in is：{}", username);
         String password = request.getParameter("password");
         CurrentUser userDetails = calmUserService.loadUserByUsername(username);
         validateUserPassword(password, userDetails);
-        return new UsernamePasswordAuthenticationToken(username, password, userDetails.getAuthorities());
+        userDetails.setPassword(null);
+        return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }
 
     private void validateUserPassword(String password, CurrentUser userDetails) {

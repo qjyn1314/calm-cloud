@@ -2,6 +2,7 @@ package com.calm.auth.entity;
 
 import com.calm.user.api.enums.UserStatus;
 import com.calm.user.api.vo.SysUserVo;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ import java.util.List;
  * @author wangjunming
  * @since 2021/2/14 20:03
  */
+@ToString
 public class CurrentUser implements UserDetails {
 
     /**

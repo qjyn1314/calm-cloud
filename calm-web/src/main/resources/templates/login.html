@@ -2,9 +2,9 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Calm-login</title>
-<!--    <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon"/>-->
-    <link rel="stylesheet" type="text/css" href="../static/login/css/bootstrap.min.css">
+    <title>Calm</title>
+    <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../static/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../static/login/fonts/iconic/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" href="../static/login/css/util.css">
@@ -14,10 +14,11 @@
 
 <body>
 <div class="limiter">
-    <div class="container-login100" style="background-image: url('../static/login/images/login_bg.jpg');">
+<!--    <div class="container-login100" style="background-image: url('../static/login/images/login_bg.jpg');">-->
+    <div class="container-login100">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-                <form class="login100-form validate-form" id="login_form" >
+                <div class="login100-form" id="login_form" >
                     <span class="login100-form-title p-b-49">登录</span>
 
                     <div class="wrap-input100 validate-input m-b-23" data-validate="请输入用户名">
@@ -64,14 +65,49 @@
                     <div class="flex-col-c p-t-25">
                         <a href="javascript:" class="txt2">立即注册</a>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script src="../static/lib/layui/layui.js"></script>
-<script src="../static/js/userLogin.js"></script>
 </body>
+<script>
+    "use strict";
+    layui.use(["okUtils","okLayer","okCookie"], function () {
+        var okUtils = layui.okUtils;
+        var okCookie = layui.okCookie;
+        var okLayer = layui.okLayer;
+        var $ = layui.jquery;
+        okLoading.close();
 
+        function onKeyLogin(event) {
+            if (event.keyCode === 13) {
+                login();
+            }
+        }
+
+        $('#login_form_btn').on('click', function (event) {
+            if (event.keyCode === 13) {
+                login();
+            }
+            login();
+        });
+        function login() {
+            const username = $("#login_form input[name='username']").val();
+            const password = $("#login_form input[name='password']").val();
+            const params = {
+                "username": username,
+                "password": password
+            }
+            okUtils.ajax(okUtils.calmLogin, "post", params, true).done(function (response) {
+                let userToken = response.data;
+                $.cookie(okUtils.tokenKey, userToken)
+                window.location.href="/main";
+            });
+        }
+    });
+
+</script>
 </html>

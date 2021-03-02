@@ -30,7 +30,7 @@ public class UnAuthenticationEntryPoint implements AuthenticationEntryPoint{
      */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
-        RequestUtils.setResponse(response, JsonResult.fail("请登录"));
+        RequestUtils.setResponse(response, JsonResult.fail("请登录。"));
     }
 
 

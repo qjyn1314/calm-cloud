@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 通用返回结果
@@ -81,5 +83,12 @@ public class JsonResult<R> implements Serializable {
         return this;
     }
 
+    public Map<String, Object> toMap() {
+        Map<String, Object> maps = new HashMap<>(5);
+        maps.put("code", this.code);
+        maps.put("msg", this.msg);
+        maps.put("data", this.data);
+        return maps;
+    }
 
 }

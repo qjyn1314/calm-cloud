@@ -24,6 +24,7 @@
         <jasypt.version>3.0.3</jasypt.version>
         <hutool.version>5.5.8</hutool.version>
         <seata.version>1.4.0</seata.version>
+        <jwt.version>0.9.1</jwt.version>
         <!--此工程中的子工程-->
         <calm-parent.version>1.0.0</calm-parent.version>
         <calm-provider.version>1.0.0</calm-provider.version>
