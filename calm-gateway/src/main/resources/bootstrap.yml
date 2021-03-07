@@ -11,7 +11,7 @@
 # 添加配置时其DataID的公式：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension} ，
 #即：项目名称-当前环境.文件后缀
 server:
-  port: 80
+  port: 82
 spring:
   application:
     name: calm-gateway

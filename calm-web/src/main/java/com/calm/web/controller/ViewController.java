@@ -1,15 +1,15 @@
 package com.calm.web.controller;
 
-import cn.hutool.core.date.DateUtil;
-import com.alibaba.fastjson.JSONObject;
 import com.calm.auth.CurrentSecurityUserUtils;
+import com.calm.auth.entity.CurrentUser;
+import com.calm.parent.base.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <p>
@@ -48,10 +48,21 @@ public class ViewController {
         return request.getRequestURI().substring(1).replace(HTML_SUFFIX, "");
     }
 
+
+    /**
+     * 获取当前登录用户信息、权限
+     */
     @ResponseBody
-    @GetMapping("/authUser")
-    public String authUser(){
-        return DateUtil.now() + "-->" + JSONObject.toJSONString(CurrentSecurityUserUtils.authUser());
+    @GetMapping("/currentUser")
+    public JsonResult currentUser(){
+        CurrentUser currentUser = CurrentSecurityUserUtils.authUser().noPwd();
+        final ConcurrentHashMap<String,Object> map = new ConcurrentHashMap<>(8);
+        //当前登录用户信息
+        map.put("userInfo",currentUser);
+        //logo文案
+        map.put("logoText","Calm-Web");
+        //所属权限
+        return JsonResult.success(map);
     }
 
 }

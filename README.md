@@ -27,9 +27,7 @@ mybatis-plus
 ### 数据库驱动：
 mybatis-plus的dynamic-datasource
 
-
-
-
-
-
-
+calm-web:81
+calm-gateway:82
+user-service:83
+calm-admin:84

@@ -14,25 +14,25 @@
 
 <body>
 <div class="limiter">
-<!--    <div class="container-login100" style="background-image: url('../static/login/images/login_bg.jpg');">-->
-    <div class="container-login100">
+        <div class="container-login100" style="background-image: url('../static/login/images/login_bg.jpg');">
+<!--    <div class="container-login100">-->
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-                <div class="login100-form" id="login_form" >
+                <div class="login100-form" id="login_form">
                     <span class="login100-form-title p-b-49">登录</span>
+                    <form>
+                        <div class="wrap-input100 validate-input m-b-23" data-validate="请输入用户名">
+                            <span class="label-input100">用户名</span>
+                            <input class="input100" type="text" name="username" placeholder="请输入用户名" autocomplete="off">
+                            <span class="focus-input100" data-symbol="&#xf206;"></span>
+                        </div>
 
-                    <div class="wrap-input100 validate-input m-b-23" data-validate="请输入用户名">
-                        <span class="label-input100">用户名</span>
-                        <input class="input100" type="text" name="username" placeholder="请输入用户名" autocomplete="off">
-                        <span class="focus-input100" data-symbol="&#xf206;"></span>
-                    </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="请输入密码">
-                        <span class="label-input100">密码</span>
-                        <input class="input100" type="password" name="password" placeholder="请输入密码">
-                        <span class="focus-input100" data-symbol="&#xf190;"></span>
-                    </div>
-
+                        <div class="wrap-input100 validate-input" data-validate="请输入密码">
+                            <span class="label-input100">密码</span>
+                            <input class="input100" type="password" name="password" placeholder="请输入密码">
+                            <span class="focus-input100" data-symbol="&#xf190;"></span>
+                        </div>
+                    </form>
                     <div class="text-right p-t-8 p-b-31">
                         <a href="javascript:">忘记密码？</a>
                     </div>
@@ -75,25 +75,32 @@
 </body>
 <script>
     "use strict";
-    layui.use(["okUtils","okLayer","okCookie"], function () {
+    layui.use(["okUtils", "okLayer", "okCookie"], function () {
         var okUtils = layui.okUtils;
-        var okCookie = layui.okCookie;
-        var okLayer = layui.okLayer;
         var $ = layui.jquery;
         okLoading.close();
 
-        function onKeyLogin(event) {
-            if (event.keyCode === 13) {
+        /**
+         * 键盘的事件监听
+         */
+        $("body").on("keydown", function (event) {
+            event = event || window.event;
+            // 按 Enter
+            if (event && event.keyCode === 13) {
                 login();
             }
-        }
+        });
 
+        /**
+         * 点击登录按钮
+         */
         $('#login_form_btn').on('click', function (event) {
-            if (event.keyCode === 13) {
-                login();
-            }
             login();
         });
+
+        /**
+         * 请求登录接口
+         */
         function login() {
             const username = $("#login_form input[name='username']").val();
             const password = $("#login_form input[name='password']").val();
@@ -101,10 +108,10 @@
                 "username": username,
                 "password": password
             }
-            okUtils.ajax(okUtils.calmLogin, "post", params, true).done(function (response) {
+            okUtils.ajax(okUtils.login, "post", params, true).done(function (response) {
                 let userToken = response.data;
                 $.cookie(okUtils.tokenKey, userToken)
-                window.location.href="/main";
+                window.location.href = "/main";
             });
         }
     });

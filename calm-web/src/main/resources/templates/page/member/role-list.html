@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<title>角色列表</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="../../css/oksub.css">
-	<script type="text/javascript" src="../../lib/loading/okLoading.js"></script>
+	<link rel="stylesheet" href="../static/css/oksub.css">
+	<script type="text/javascript" src="../static/lib/loading/okLoading.js"></script>
 </head>
 <body>
 <div class="ok-body">
@@ -46,16 +46,19 @@
 			page: true,
 			toolbar: "#toolbarTpl",
 			size: "sm",
-			cols: [[
-				{type: "checkbox"},
-				{field: "id", title: "ID", sort: true, width: 200},
-				{field: "name", title: "角色名"},
-				{field: "remarks", title: "备注"},
-				{field: "createUsername", title: "创建者"},
-				{field: "status", title: "状态", templet: "#statusTpl"},
-				{field: "createTime", title: "创建时间", width: 150},
-				{title: "操作", width: 80, align: "center", templet: "#operationTpl"}
-			]],
+			cols:
+			[
+				[
+					{type: "checkbox"},
+					{field: "id", title: "ID", sort: true, width: 200},
+					{field: "name", title: "角色名"},
+					{field: "remarks", title: "备注"},
+					{field: "createUsername", title: "创建者"},
+					{field: "status", title: "状态", templet: "#statusTpl"},
+					{field: "createTime", title: "创建时间", width: 150},
+					{title: "操作", width: 80, align: "center", templet: "#operationTpl"}
+				]
+			],
 			done: function (res, curr, count) {
 				console.log(res, curr, count);
 			}

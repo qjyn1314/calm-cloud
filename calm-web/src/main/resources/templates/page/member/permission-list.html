@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<title>权限列表</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="../../css/oksub.css">
-	<script type="text/javascript" src="../../lib/loading/okLoading.js"></script>
+	<link rel="stylesheet" href="../../static/css/oksub.css">
+	<script type="text/javascript" src="../../static/lib/loading/okLoading.js"></script>
 </head>
 <body class="ok-body-scroll">
 <div class="ok-body">
@@ -30,7 +30,7 @@
 	</div>
 </div>
 <!--js逻辑-->
-<script src="../../lib/layui/layui.js"></script>
+<script src="../../static/lib/layui/layui.js"></script>
 <script>
 	layui.use(["element", "table", "laydate", "tree", "okUtils", "okMock"], function () {
 		let table = layui.table;
@@ -71,17 +71,20 @@
 				limit: 20,
 				page: true,
 				size: "sm",
-				cols: [[
-					{field: "id", title: "ID", width: 170, sort: true, fixed: "left"},
-					{field: "name", title: "权限名称", width: 100},
-					{field: "permit", title: "权限标识", width: 150},
-					{field: "url", title: "权限路径", width: 150},
-					{field: "parentName", title: "父菜单", width: 100},
-					{field: "type", title: "类型", width: 100, templet: "#typeTpl"},
-					{field: "createTime", title: "创建时间", width: 150},
-					{field: "updateTime", title: "创建时间", width: 150},
-					{title: "操作", width: 100, templet: "#operationTpl", align: "center", fixed: "right"}
-				]],
+				cols:
+				[
+					[
+						{field: "id", title: "ID", width: 170, sort: true, fixed: "left"},
+						{field: "name", title: "权限名称", width: 100},
+						{field: "permit", title: "权限标识", width: 150},
+						{field: "url", title: "权限路径", width: 150},
+						{field: "parentName", title: "父菜单", width: 100},
+						{field: "type", title: "类型", width: 100, templet: "#typeTpl"},
+						{field: "createTime", title: "创建时间", width: 150},
+						{field: "updateTime", title: "创建时间", width: 150},
+						{title: "操作", width: 100, templet: "#operationTpl", align: "center", fixed: "right"}
+					]
+				],
 				done: function (res, curr, count) {
 					console.info(res, curr, count);
 				}

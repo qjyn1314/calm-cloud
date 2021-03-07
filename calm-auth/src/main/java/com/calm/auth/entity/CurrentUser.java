@@ -228,4 +228,9 @@ public class CurrentUser implements UserDetails {
         this.roles = Arrays.asList("system", "admin");
     }
 
+    public CurrentUser noPwd() {
+        this.password = null;
+        this.salt = null;
+        return this;
+    }
 }

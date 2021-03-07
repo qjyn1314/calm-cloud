@@ -2,10 +2,8 @@
 <html>
 <head>
    <meta charset="utf-8">
-   <title>ok-admin v2.0 | 很赞的后台模版</title>
+   <title>控制台</title>
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-   <meta name="keywords" content="ok-admin v2.0,ok-admin网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
-   <meta name="description" content="ok-admin v2.0，顾名思义，很赞的后台模版，它是一款基于Layui框架的轻量级扁平化且完全免费开源的网站后台管理系统模板，适合中小型CMS后台系统。">
    <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon"/>
    <link rel="stylesheet" href="../static/css/okadmin.css">
    <link rel="stylesheet" href="../static/lib/loading/okLoading.css"/>
@@ -60,11 +58,11 @@
                <i class="layui-icon layui-icon-screen-full"></i>
             </a>
          </li>
-
+         <!--头部信息-->
          <li class="no-line layui-nav-item">
             <a href="javascript:">
-               <img src="../static/images/avatar.jpg" class="layui-nav-img">
-               bobi
+               <img class="layui-nav-img default-avatar-img">
+               <span class="userName"></span>
             </a>
             <dl id="userInfo" class="layui-nav-child">
                <dd><a lay-id="u-1" href="javascript:" data-url="/page/member/user.html">个人中心<span
@@ -92,21 +90,22 @@
    <!--左侧导航区域-->
    <div class="layui-side layui-side-menu okadmin-bg-20222A ok-left">
       <div class="layui-side-scroll okadmin-side">
-         <div class="okadmin-logo">ok-admin v2.0</div>
+         <div class="okadmin-logo"></div>
          <div class="user-photo">
             <a class="img" title="我的头像">
-               <img src="../static/images/avatar.jpg" class="userAvatar">
+               <img class="userAvatar default-avatar-img">
             </a>
-            <p>你好！<span class="userName">bobi</span>, 欢迎登录</p>
+            <p>你好！<span class="userName"></span>, 欢迎登录</p>
          </div>
          <!--左侧导航菜单-->
          <ul id="navBar" class="layui-nav okadmin-nav okadmin-bg-20222A layui-nav-tree">
-            <li class="layui-nav-item layui-this">
+            <!--<li class="layui-nav-item layui-this">
+               &lt;!&ndash;默认的左侧导航控制台所跳转的展示&ndash;&gt;
                <a href="javascript:" lay-id="1" data-url="/page/console.html">
                   <i is-close=false class="ok-icon">&#xe654;</i>
                   控制台
                </a>
-            </li>
+            </li>-->
          </ul>
       </div>
    </div>
@@ -130,14 +129,14 @@
                </li>
             </ul>
          </div>
-
+         <!--左侧导航栏中默认必须有的控制台按钮-->
          <ul id="tabTitle" class="layui-tab-title ok-tab-title not-scroll">
             <li class="layui-this" lay-id="1" tab="index">
                <i class="ok-icon">&#xe654;</i>
                <cite is-close=false>控制台</cite>
             </li>
          </ul>
-
+         <!--默认的在显示主区域所请求的路径-->
          <div id="tabContent" class="layui-tab-content ok-tab-content">
             <div class="layui-tab-item layui-show">
                <iframe src='/page/console.html' frameborder="0" scrolling="yes" width="100%"
@@ -149,9 +148,7 @@
 
    <!--底部信息-->
    <div class="layui-footer okadmin-text-center">
-      Copyright ©2018-©2020 ok-admin v2.0 All Rights Reserved
-      <button class="layui-btn layui-btn-danger layui-btn-xs donate">捐赠作者</button>
-      <button class="layui-btn layui-btn-danger layui-btn-xs communication">QQ群交流</button>
+      Copyright ©2015-©2021 calm-web
    </div>
 </div>
 

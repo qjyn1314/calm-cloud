@@ -143,9 +143,11 @@
                     }, 1000);
 
                     // 发送手机验证码
-                    okUtils.ajax("/sendCaptcha", "post", null, true).done(function (response) {
+                    okUtils.ajax("/sendCaptcha", "post", null, true)
+                    .done(function (response) {
                         okLayer.greenTickMsg(response.msg);
-                    }).fail(function (error) {
+                    })
+                    .fail(function (error) {
                         console.log(error)
                     });
                 } else {

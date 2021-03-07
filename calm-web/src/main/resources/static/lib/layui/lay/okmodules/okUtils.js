@@ -1,10 +1,9 @@
 "use strict";
-layui.define(["layer"], function (exprots) {
+layui.define(["layer","okCookie"], function (exprots) {
     /**
      * 服务器地址-gateway地址
      */
-    const baseUrl = "http://127.0.0.1";
-    console.log("服务器请求地址：" + baseUrl);
+    const baseUrl = "http://127.0.0.1:82";
     var $ = layui.jquery;
     var okUtils = {
         /**
@@ -16,7 +15,11 @@ layui.define(["layer"], function (exprots) {
          */
         tokenKey: "user_token",
         //登录接口
-        calmLogin: baseUrl + "/web/login",
+        login: baseUrl + "/web/login",
+        //获取当前登录用户信息
+        userInfo: baseUrl + "/web/currentUser",
+        //查询菜单列表
+
         /**
          * ajax()函数二次封装
          * @param url
@@ -34,6 +37,7 @@ layui.define(["layer"], function (exprots) {
                 data: params || {},
                 dataType: "json",
                 beforeSend: function (xhr) {
+                    //设置请求头信息
                     xhr.setRequestHeader(okUtils.tokenKey,$.cookie(okUtils.tokenKey));
                     if (load) {
                         loadIndex = layer.load(0, {shade: 0.3});

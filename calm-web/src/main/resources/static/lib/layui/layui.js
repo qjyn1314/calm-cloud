@@ -42,7 +42,6 @@ if (!Object.assign) {
         "okBarcode": "okmodules/okBarcode",
         "okNprogress": "okmodules/okNprogress",
         "okSweetAlert2": "okmodules/okSweetAlert2",
-        "okHoliday": "okmodules/okHoliday",
         "okLayx": "okmodules/okLayx",
         "okLoading": "../../okLoading",
     };

@@ -1,13 +1,28 @@
-/^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
+// /^http(s*):\/\//.test(location.href) || alert('请先部署再访问');
 var objOkTab = "";
-layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContextMenu", "okHoliday", "laydate","okCookie"], function () {
+layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContextMenu", "laydate","okCookie"], function () {
 	var okUtils = layui.okUtils;
 	var $ = layui.jquery;
 	var form = layui.form;
 	var layer = layui.layer;
 	var okLayer = layui.okLayer;
-	var okCookie = layui.okCookie;
-	var okHoliday = layui.okHoliday;
+	//获取当前用户信息
+	okUtils.ajax(okUtils.userInfo, "get", null, true)
+		.done(function (response) {
+			setUserMessage(response);
+		})
+		.fail(function (error) {
+
+		});
+	//将用户信息赋值到页面中
+	function setUserMessage(response) {
+		let data = response.data;
+		let user = data.userInfo;
+		$('.okadmin-logo').text(data.logoText);
+		let avatar = user.avatar==null ? "../static/images/avatar.jpg" : user.avatar;
+		$('.default-avatar-img').attr('src',avatar);
+		$('.userName').text(user.name);
+	}
 	var okTab = layui.okTab({
 		// 菜单请求路径
 		url: "../static/data/navs.json",
@@ -84,7 +99,7 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 			offset: 'r', //右边
 			time: 200000, //2秒后自动关闭
 			anim: -1,
-			content: "./pages/system/setting.html"
+			content: "/pages/system/setting.html"
 		});
 	});
 
@@ -252,18 +267,13 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 	/**
 	 * 系统公告
 	 */
-	$(document).on("click", "#notice", noticeFun);
-	!function () {
-		var notice = sessionStorage.getItem("notice");
-		if (notice != "true") {
-			noticeFun();
-		}
-	}();
-
+	$("body").on("click", "#notice", function () {
+		noticeFun();
+	})
 	function noticeFun() {
 		var srcWidth = okUtils.getBodyWidth();
 		layer.open({
-			type: 0, title: "系统公告", btn: "我知道啦", btnAlign: 'c', content: okHoliday.getContent(),
+			type: 0, title: "系统公告", btn: "我知道啦", btnAlign: 'c', content: "修改后的公告信息！",
 			yes: function (index) {
 				if (srcWidth > 800) {
 					layer.tips('公告跑到这里去啦', '#notice', {
@@ -271,7 +281,6 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 						time: 2000
 					});
 				}
-				sessionStorage.setItem("notice", "true");
 				layer.close(index);
 			},
 			cancel: function (index) {
@@ -286,52 +295,12 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 	}
 
 	/**
-	 * 捐赠作者
-	 */
-	$(".layui-footer button.donate").click(function () {
-		layer.tab({
-			area: ["330px", "350px"],
-			tab: [{
-				title: "支付宝",
-				content: "<img src='images/zfb.jpg' width='200' height='300' style='margin: 0 auto; display: block;'>"
-			}, {
-				title: "微信",
-				content: "<img src='images/wx.jpg' width='200' height='300' style='margin: 0 auto; display: block;'>"
-			}]
-		});
-	});
-
-	/**
-	 * QQ群交流
-	 */
-	$("body").on("click", ".layui-footer button.communication, #noticeQQ", function () {
-		layer.tab({
-			area: ["auto", "370px"],
-			tab: [{
-				title: "QQ群5", 
-				content: "<img src='images/qq5.png' width='200' height='300' style='margin: 0 auto; display: block;'/>"
-			},{
-				title: "QQ群4（已满）",
-				content: "<img src='images/qq4.png' width='200' height='300' style='margin: 0 auto; display: block;'/>"
-			}, {
-				title: "QQ群3（已满）",
-				content: "<img src='images/qq3.png' width='200' height='300' style='margin: 0 auto; display: block;'/>"
-			}, {
-				title: "QQ群2（已满）",
-				content: "<img src='images/qq2.png' width='200' height='300' style='margin: 0 auto; display: block;'/>"
-			}, {
-				title: "QQ群1（已满）",
-				content: "<img src='images/qq1.png' width='200' height='300' style='margin: 0 auto; display: block;'/>"
-			}]
-		});
-	});
-
-	/**
 	 * 弹窗皮肤
 	 */
 	$("#alertSkin").click(function () {
 		okLayer.open("皮肤动画", "pages/system/alertSkin.html", "50%", "45%", function (layero) {
 		}, function () {
+
 		});
 	});
 
@@ -413,6 +382,7 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 
 		//退出登录
 		$("#lockQuit").click(function () {
+			$.cookie(okUtils.tokenKey, "",-1);
 			window.location.href = "/logout";
 		});
 	}

@@ -40,14 +40,10 @@ public class ExceptionHandleController extends BasicErrorController {
     @Override
     @RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
-//        if(CalmProperties.isAdminService()){
-//            return super.error(request);
-//        }
-        //ErrorAttributeOptions.Include.STACK_TRACE 表示 会将 异常信息且包括堆栈跟踪属性 信息拿到
         Map<String, Object> body = getErrorAttributes(request, ErrorAttributeOptions.of(ErrorAttributeOptions.Include.STACK_TRACE));
         HttpStatus status = getStatus(request);
-        log.error("请求发生错误并返回的状态：{}", status);
-        log.error("返回的body中的信息是：{}", body);
+        log.warn("请求发生错误并返回的状态：{}", status);
+        log.warn("返回的body中的信息是：{}", body);
         String trace = null != body.get("trace") ? body.get("trace").toString() : "";
         if (StringUtils.isNotBlank(trace)) {
             status = HttpStatus.FORBIDDEN;
