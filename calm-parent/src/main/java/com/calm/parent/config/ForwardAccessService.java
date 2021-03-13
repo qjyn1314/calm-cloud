@@ -26,8 +26,8 @@ public class ForwardAccessService {
      * "/p/**" feign中服务间的调用路径请求头
      */
     private static final String[] IGNORING_MATCHERS = {
-            //服务中的请求路径 "/p/**",
-            "/login", "/",
+            //服务中的请求路径
+            "/login", "/","/p/**",
             //web服务中的静态资源
             "/css/**", "/error/**", "/static/**",
             "/font/**", "/icon/**", "/images/**", "/js/**", "/json/**", "/layui/**", "/favicon.ico",
