@@ -1,6 +1,5 @@
-package com.calm.auth;
+package com.calm.common.auth;
 
-import com.calm.auth.entity.CurrentUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -90,6 +89,9 @@ public class CurrentSecurityUserUtils {
      */
     public static boolean isLogin() {
         Authentication authentication = authentication();
+        if(null== authentication){
+            return false;
+        }
         Object principal = authentication.getPrincipal();
         if (ANONYMOUS_USER.equals(principal)) {
             return false;

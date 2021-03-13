@@ -17,8 +17,8 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.calm.provider</groupId>
-            <artifactId>calm-provider</artifactId>
+            <groupId>com.calm.parent</groupId>
+            <artifactId>calm-parent</artifactId>
         </dependency>
         <dependency>
             <groupId>com.calm.common</groupId>

@@ -1,22 +1,17 @@
 package com.calm.auth.service;
 
-import com.calm.auth.entity.CurrentUser;
+import com.calm.common.auth.CurrentUser;
 import com.calm.parent.base.JsonResult;
 import com.calm.parent.config.redis.RedisHelper;
 import com.calm.user.api.enums.UserStatus;
 import com.calm.user.api.feign.UserFeignService;
 import com.calm.user.api.vo.SysUserVo;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.SetOperations;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -40,9 +35,9 @@ public class CalmUserService implements UserDetailsService {
             throw new UsernameNotFoundException("用户名不存在。");
         }
         Object redisUser = redisHelper.getValue(RedisHelper.USER_KEY + account);
-        if(!Objects.isNull(redisUser) && redisUser instanceof SysUserVo){
-            CurrentUser currentUser =new CurrentUser();
-            currentUser.preCurrentUser((SysUserVo)redisUser);
+        if (!Objects.isNull(redisUser) && redisUser instanceof SysUserVo) {
+            CurrentUser currentUser = new CurrentUser();
+            preCurrentUser(currentUser, (SysUserVo) redisUser);
             return currentUser;
         }
         JsonResult<SysUserVo> jsonResult = userFeignService.queryByAccount(account);
@@ -50,9 +45,27 @@ public class CalmUserService implements UserDetailsService {
         if (null == user) {
             throw new UsernameNotFoundException("用户名不存在。");
         }
-        redisHelper.valuePut(RedisHelper.USER_KEY + account,user);
-        CurrentUser currentUser =new CurrentUser();
-        currentUser.preCurrentUser(user);
+        redisHelper.valuePut(RedisHelper.USER_KEY + account, user);
+        CurrentUser currentUser = new CurrentUser();
+        preCurrentUser(currentUser, user);
         return currentUser;
     }
+
+    public void preCurrentUser(CurrentUser currentUser, SysUserVo userVo) {
+        currentUser.setUserId(userVo.getUserId());
+        currentUser.setAccount(userVo.getAccount());
+        currentUser.setPassword(userVo.getPassword());
+        currentUser.setAvatar(userVo.getAvatar());
+        currentUser.setSalt(userVo.getSalt());
+        currentUser.setName(userVo.getName());
+        currentUser.setBirthday(userVo.getBirthday());
+        currentUser.setSex(userVo.getSex());
+        currentUser.setEmail(userVo.getEmail());
+        currentUser.setPhone(userVo.getPhone());
+        currentUser.setStatus(userVo.getStatus());
+        currentUser.setEnable(UserStatus.THE_APPROVED.getCode().equals(userVo.getStatus()));
+        currentUser.setRoles(Arrays.asList("system", "admin"));
+    }
+
+
 }

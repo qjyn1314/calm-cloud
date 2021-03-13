@@ -1,4 +1,4 @@
-package com.calm.web;
+package com.calm.auth;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -14,10 +14,10 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("com.calm")
 @EnableDiscoveryClient
 @EnableFeignClients("com.calm")
-public class CalmWebApplication {
+public class CalmAuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CalmWebApplication.class, args);
+        SpringApplication.run(CalmAuthApplication.class, args);
     }
 
 }

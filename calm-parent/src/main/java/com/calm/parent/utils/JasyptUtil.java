@@ -1,4 +1,4 @@
-package com.calm.core.util;
+package com.calm.parent.utils;
 
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEByteEncryptor;

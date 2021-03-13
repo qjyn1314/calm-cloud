@@ -1,4 +1,4 @@
-package com.calm.provider.config;
+package com.calm.parent.config;
 
 /**
  * <p>

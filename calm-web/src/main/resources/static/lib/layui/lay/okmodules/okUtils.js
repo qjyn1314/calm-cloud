@@ -15,7 +15,9 @@ layui.define(["layer","okCookie"], function (exprots) {
          */
         tokenKey: "user_token",
         //登录接口
-        login: baseUrl + "/web/login",
+        login: baseUrl + "/auth/login",
+        //退出登录接口
+        logout: baseUrl + "/auth/logout",
         //获取当前登录用户信息
         userInfo: baseUrl + "/web/currentUser",
         //查询菜单列表
@@ -39,6 +41,10 @@ layui.define(["layer","okCookie"], function (exprots) {
                 beforeSend: function (xhr) {
                     //设置请求头信息
                     xhr.setRequestHeader(okUtils.tokenKey,$.cookie(okUtils.tokenKey));
+                    // xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+                    // xhr.setRequestHeader("Access-Control-Allow-Credentials","true");
+                    // xhr.setRequestHeader("Access-Control-Allow-Methods","GET, PUT, POST, DELETE, OPTIONS");
+                    // xhr.setRequestHeader("Access-Control-Allow-Headers","Content-Type,*");
                     if (load) {
                         loadIndex = layer.load(0, {shade: 0.3});
                     }
@@ -65,51 +71,6 @@ layui.define(["layer","okCookie"], function (exprots) {
                 }
             });
             return deferred.promise();
-        },
-        /**
-         * 简单封装ajax，post请求
-         * @param url 发送请求的地址
-         * @param data 发送到服务器的数据，数组存储，如：{"date": new Date().getTime(), "state": 1}
-         * @param successfn 成功回调函数
-         * @param errorfn 失败回调函数
-         */
-        axsPost: function (url, data, successfn, errorfn) {
-            data = (data == null || data === "" || typeof (data) == "undefined") ? {"date": new Date().getTime()} : data;
-            $.ajax({
-                type: "post",
-                data: data,
-                url: url,
-                dataType: "json",
-                success: function (d) {
-                    successfn(d);
-                },
-                error: function (e) {
-                    errorfn(e);
-                }
-            });
-        },
-        /**
-         * ajax封装,get请求
-         * url 发送请求的地址
-         * data 发送到服务器的数据，数组存储，如：{"date": new Date().getTime(), "state": 1}
-         * dataType 预期服务器返回的数据类型，常用的如：xml、html、json、text
-         * successfn 成功回调函数
-         * errorfn 失败回调函数
-         */
-        axsGet: function (url, data, successfn, errorfn) {
-            data = (data == null || data === "" || typeof (data) == "undefined") ? {"date": new Date().getTime()} : data;
-            $.ajax({
-                type: "get",
-                data: data,
-                url: url,
-                dataType: "json",
-                success: function (d) {
-                    successfn(d);
-                },
-                error: function (e) {
-                    errorfn(e);
-                }
-            });
         },
         /**
          * 获取body的总宽度

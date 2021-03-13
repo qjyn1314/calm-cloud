@@ -57,8 +57,8 @@ public class CalmProperties {
         return ENVIRONMENT.getProperty(APPLICATION_NAME);
     }
 
-    public static Boolean isNotWebService() {
-        return !Objects.equals(getApplicationName(), WEB_SERVICE);
+    public static Boolean isWebService() {
+        return Objects.equals(getApplicationName(), WEB_SERVICE);
     }
 
     public static Boolean isAdminService() {

@@ -1,13 +1,13 @@
 package com.calm.web.controller;
 
-import com.calm.auth.CurrentSecurityUserUtils;
-import com.calm.auth.entity.CurrentUser;
+import com.calm.common.auth.CurrentSecurityUserUtils;
+import com.calm.common.auth.CurrentUser;
 import com.calm.parent.base.JsonResult;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -41,13 +41,12 @@ public class ViewController {
     }
 
     private final static String HTML_SUFFIX = ".html";
-    @Autowired
-    private HttpServletRequest request;
+    @Resource
+    private HttpServletRequest httpServletRequest;
 
     public String handleView() {
-        return request.getRequestURI().substring(1).replace(HTML_SUFFIX, "");
+        return httpServletRequest.getRequestURI().substring(1).replace(HTML_SUFFIX, "");
     }
-
 
     /**
      * 获取当前登录用户信息、权限

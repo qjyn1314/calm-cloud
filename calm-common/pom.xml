@@ -13,13 +13,14 @@
     <name>calm-common</name>
     <description>CalmCommon-undertow容器、拦截器、全局异常处理类</description>
     <properties>
-
+        <calm.user.version>1.0.0</calm.user.version>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.calm.provider</groupId>
-            <artifactId>calm-provider</artifactId>
+            <groupId>com.calm.parent</groupId>
+            <artifactId>calm-parent</artifactId>
         </dependency>
+        <!--web 容器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -33,6 +34,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+        <!--security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
         </dependency>
     </dependencies>
 

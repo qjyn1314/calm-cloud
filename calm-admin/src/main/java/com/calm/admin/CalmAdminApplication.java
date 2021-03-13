@@ -8,7 +8,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @RefreshScope
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @SpringBootApplication
 @ComponentScan("com.calm")
 @EnableDiscoveryClient
-@EnableFeignClients("com.calm.provider")
+@EnableFeignClients("com.calm")
 public class CalmAdminApplication {
 
     public static void main(String[] args) {

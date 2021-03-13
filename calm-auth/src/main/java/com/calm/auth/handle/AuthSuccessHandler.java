@@ -1,8 +1,8 @@
 package com.calm.auth.handle;
 
 import com.alibaba.fastjson.JSONObject;
-import com.calm.auth.CurrentSecurityUserUtils;
-import com.calm.auth.entity.CurrentUser;
+import com.calm.common.auth.CurrentSecurityUserUtils;
+import com.calm.common.auth.CurrentUser;
 import com.calm.common.utils.RequestUtils;
 import com.calm.parent.base.JsonResult;
 import com.calm.parent.utils.JwtUtils;

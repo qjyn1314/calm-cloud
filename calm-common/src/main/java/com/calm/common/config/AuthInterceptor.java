@@ -1,5 +1,7 @@
 package com.calm.common.config;
 
+import com.alibaba.fastjson.JSONObject;
+import com.calm.common.auth.CurrentUser;
 import com.calm.common.utils.RequestUtils;
 import com.calm.parent.base.JsonResult;
 import com.calm.parent.config.CalmProperties;
@@ -7,6 +9,9 @@ import com.calm.parent.config.ForwardAccessService;
 import com.calm.parent.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -31,12 +36,12 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        //如果是admin监控服务访问则放过请求，不需要验证请求头
+        //如果是admin监控服务，或是前端项目 访问则放过请求，不需要验证请求头
         if (CalmProperties.isAdminService()) {
             return true;
         }
-        //限制服务必须从网关进入，只有进入web服务不需要
-        if (CalmProperties.isNotWebService()) {
+        //限制服务必须从网关进入
+        if(!CalmProperties.isWebService()){
             String forwardAccessHeaderValue = request.getHeader(ForwardAccessService.HEADER_KEY);
             if (StringUtils.isBlank(forwardAccessHeaderValue) || !ForwardAccessService.HEADER_VALUE.equals(forwardAccessHeaderValue)) {
                 RequestUtils.setResponse(response, JsonResult.fail("网关异常，请确认请求路径。"));
@@ -76,6 +81,17 @@ public class AuthInterceptor implements HandlerInterceptor {
             RequestUtils.setResponse(response, JsonResult.fail("请登录。"));
             log.warn("请求头中的token已过期");
             return false;
+        }
+        SecurityContext context = SecurityContextHolder.getContext();
+        log.info("当前线程中的 SecurityContext：{}", context);
+        //如果当前的security中是null则进行赋值否则不进行重新赋值当前登录用户信息
+        if (null == context.getAuthentication()) {
+            //将当前登录用户的信息放入security中
+            String currentUserJson = JSONObject.toJSONString(JwtUtils.getClaimFromToken(token));
+            log.info("当前登录用户token信息是：{}",currentUserJson);
+            CurrentUser currentUser = JSONObject.parseObject(currentUserJson, CurrentUser.class);
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
+            context.setAuthentication(authentication);
         }
         return true;
     }

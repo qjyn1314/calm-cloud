@@ -1,8 +1,8 @@
 package com.calm.user.api.feign;
 
 import com.calm.parent.base.JsonResult;
-import com.calm.provider.config.FeignSupport;
-import com.calm.provider.config.GlobalFeignConfig;
+import com.calm.parent.config.FeignSupport;
+import com.calm.parent.config.GlobalFeignConfig;
 import com.calm.user.api.vo.SysUserVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.calm.provider.config;
+package com.calm.parent.config;
 
 import feign.Logger;
 import org.springframework.context.annotation.Bean;

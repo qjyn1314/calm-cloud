@@ -1,10 +1,10 @@
 package com.calm.auth.handle;
 
-import com.calm.auth.CurrentSecurityUserUtils;
 import com.calm.common.utils.RequestUtils;
 import com.calm.parent.base.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +24,7 @@ public class AuthLogoutHandler implements LogoutSuccessHandler{
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         log.info("logout success!");
-        response.sendRedirect(CurrentSecurityUserUtils.LOGIN_URL);
+        SecurityContextHolder.clearContext();
+        RequestUtils.setResponse(response, JsonResult.successDataMsg(Boolean.TRUE, "退出成功"));
     }
 }

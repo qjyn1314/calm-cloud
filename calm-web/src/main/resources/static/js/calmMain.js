@@ -311,8 +311,7 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 		okLayer.confirm("确定要退出吗？", function (index) {
 			okTab.removeTabStorage(function (res) {
 				okTab.removeTabStorage();
-				$.cookie(okUtils.tokenKey, "",-1);
-				window.location.href = "/logout";
+				logout();
 			});
 		});
 	});
@@ -382,8 +381,17 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 
 		//退出登录
 		$("#lockQuit").click(function () {
-			$.cookie(okUtils.tokenKey, "",-1);
-			window.location.href = "/logout";
+			logout();
+		});
+	}
+
+	function logout(){
+		okUtils.ajax(okUtils.logout,null,null,true).done(function (response) {
+			let logoutFlag = response.data;
+			if(logoutFlag){
+				$.cookie(okUtils.tokenKey, "",-1);
+				window.location.href = "/";
+			}
 		});
 	}
 

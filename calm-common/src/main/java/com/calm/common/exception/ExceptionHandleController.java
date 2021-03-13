@@ -1,7 +1,6 @@
 package com.calm.common.exception;
 
 import com.calm.parent.base.JsonResult;
-import com.calm.parent.config.CalmProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
@@ -49,6 +48,6 @@ public class ExceptionHandleController extends BasicErrorController {
             status = HttpStatus.FORBIDDEN;
             return new ResponseEntity<>(JsonResult.fail("系统异常，请稍后再试。").toMap(), status);
         }
-        return new ResponseEntity<>(body, status);
+        return super.error(request);
     }
 }

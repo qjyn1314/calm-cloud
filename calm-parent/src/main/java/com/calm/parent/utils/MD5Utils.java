@@ -1,4 +1,4 @@
-package com.calm.core.util;
+package com.calm.parent.utils;
 
 import java.security.MessageDigest;
 

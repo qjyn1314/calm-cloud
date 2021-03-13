@@ -23,16 +23,6 @@
             <groupId>com.calm.common</groupId>
             <artifactId>calm-common</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.calm.auth</groupId>
-            <artifactId>calm-auth</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.calm.core</groupId>
-                    <artifactId>calm-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <!--集成thymeleaf:参考：-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

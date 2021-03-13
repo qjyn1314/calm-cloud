@@ -1,10 +1,9 @@
 package com.calm.auth.config;
 
-import com.calm.auth.CurrentSecurityUserUtils;
-import com.calm.auth.filter.JwtRequestFilter;
 import com.calm.auth.filter.JwtTokenFilter;
 import com.calm.auth.handle.*;
 import com.calm.auth.service.CalmUserService;
+import com.calm.common.auth.CurrentSecurityUserUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -115,10 +114,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 自定义token认证拦截器，只要不是/login请求的则都需要在请求头上添加token
      */
-    @Bean
-    public JwtRequestFilter jwtRequestFilter() {
-        return new JwtRequestFilter(calmUserService());
-    }
+//    @Bean
+//    public JwtRequestFilter jwtRequestFilter() {
+//        return new JwtRequestFilter(calmUserService());
+//    }
 
     @Bean
     @Override
@@ -194,7 +193,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 参考：1、https://www.cnblogs.com/summerday152/p/13635948.html
         //      2、https://blog.csdn.net/qq_36882793/article/details/102869583
         //在验证token之前进行验证
-        http.addFilterBefore(jwtRequestFilter(), JwtTokenFilter.class);
+//        http.addFilterBefore(jwtRequestFilter(), JwtTokenFilter.class);
         //在这里也就意味着，会先执行 jwtTokenFilter 再次执行 UsernamePasswordAuthenticationFilter
         http.addFilterAt(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         http.rememberMe();

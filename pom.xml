@@ -40,13 +40,12 @@
     <!--为了在打包的时候可以使用父工程可直接对子工程进行打包-->
     <modules>
         <module>calm-parent</module>
-        <module>calm-provider</module>
         <module>calm-common</module>
-        <module>calm-core</module>
-        <module>calm-gateway</module>
         <module>calm-admin</module>
-        <module>calm-auth</module>
+        <module>calm-gateway</module>
+        <module>calm-core</module>
         <module>calm-user</module>
+        <module>calm-auth</module>
         <module>calm-web</module>
     </modules>
 
@@ -112,11 +111,6 @@
                 <groupId>com.calm.parent</groupId>
                 <artifactId>calm-parent</artifactId>
                 <version>${calm-parent.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.provider</groupId>
-                <artifactId>calm-provider</artifactId>
-                <version>${calm-provider.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.calm.common</groupId>

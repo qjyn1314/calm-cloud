@@ -3,7 +3,7 @@ package com.calm.core.datasource.config;
 import com.baomidou.dynamic.datasource.provider.AbstractJdbcDataSourceProvider;
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
 import com.calm.core.datasource.support.DataSourceConstants;
-import com.calm.core.util.JasyptUtil;
+import com.calm.parent.utils.JasyptUtil;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.ResultSet;

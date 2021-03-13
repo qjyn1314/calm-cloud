@@ -1,4 +1,4 @@
-package com.calm.core.rabbitstream;
+package com.calm.core.stream;
 
 import org.springframework.context.annotation.Configuration;
 

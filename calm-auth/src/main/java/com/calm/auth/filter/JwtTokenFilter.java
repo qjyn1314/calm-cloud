@@ -1,7 +1,7 @@
 package com.calm.auth.filter;
 
-import com.calm.auth.CurrentSecurityUserUtils;
-import com.calm.auth.entity.CurrentUser;
+import com.calm.common.auth.CurrentSecurityUserUtils;
+import com.calm.common.auth.CurrentUser;
 import com.calm.auth.service.CalmUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

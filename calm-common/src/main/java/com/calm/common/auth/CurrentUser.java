@@ -1,13 +1,10 @@
-package com.calm.auth.entity;
+package com.calm.common.auth;
 
-import com.calm.user.api.enums.UserStatus;
-import com.calm.user.api.vo.SysUserVo;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -212,21 +209,6 @@ public class CurrentUser implements UserDetails {
         this.roles = roles;
     }
 
-    public void preCurrentUser(SysUserVo userVo) {
-        this.userId = userVo.getUserId();
-        this.account = userVo.getAccount();
-        this.password = userVo.getPassword();
-        this.avatar = userVo.getAvatar();
-        this.salt = userVo.getSalt();
-        this.name = userVo.getName();
-        this.birthday = userVo.getBirthday();
-        this.sex = userVo.getSex();
-        this.email = userVo.getEmail();
-        this.phone = userVo.getPhone();
-        this.status = userVo.getStatus();
-        this.enable = UserStatus.THE_APPROVED.getCode().equals(userVo.getStatus());
-        this.roles = Arrays.asList("system", "admin");
-    }
 
     public CurrentUser noPwd() {
         this.password = null;

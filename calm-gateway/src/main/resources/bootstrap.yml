@@ -10,8 +10,6 @@
 # 启动项目之前必须先配置其配置文件
 # 添加配置时其DataID的公式：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension} ，
 #即：项目名称-当前环境.文件后缀
-server:
-  port: 82
 spring:
   application:
     name: calm-gateway
@@ -46,6 +44,10 @@ spring:
           uri: lb://calm-web
           predicates:
             - Path=/web/**
+        - id: calm-auth
+          uri: lb://calm-auth
+          predicates:
+            - Path=/auth/**
 management:
   endpoint:
     health:
