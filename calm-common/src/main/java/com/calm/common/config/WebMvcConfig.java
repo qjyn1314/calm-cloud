@@ -18,6 +18,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
     private AuthInterceptor authIntercept;
+
     /**
      * 拦截器的添加
      *
@@ -28,24 +29,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authIntercept).addPathPatterns("/**");
     }
-
-    /**
-     * 跨域支持
-     */
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        // 允许跨域访问的路径
-//        registry.addMapping("/**")
-//                // 允许跨域访问的源
-//                .allowedOrigins("*")
-//                // 允许请求方法
-//                .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
-//                // 预检间隔时间
-//                .maxAge(168000)
-//                // 允许头部设置
-//                .allowedHeaders("*")
-//                // 是否发送cookie
-//                .allowCredentials(true);
-//    }
 
 }

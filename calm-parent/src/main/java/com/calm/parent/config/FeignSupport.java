@@ -2,7 +2,7 @@ package com.calm.parent.config;
 
 /**
  * <p>
- * explain:
+ * explain: feign注解中的服务名称
  * </p>
  *
  * @author wangjunming

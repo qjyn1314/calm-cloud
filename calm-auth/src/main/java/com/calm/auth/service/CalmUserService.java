@@ -63,7 +63,7 @@ public class CalmUserService implements UserDetailsService {
         currentUser.setEmail(userVo.getEmail());
         currentUser.setPhone(userVo.getPhone());
         currentUser.setStatus(userVo.getStatus());
-        currentUser.setEnable(UserStatus.THE_APPROVED.getCode().equals(userVo.getStatus()));
+        currentUser.setEnabled(UserStatus.THE_APPROVED.getCode().equals(userVo.getStatus()));
         currentUser.setRoles(Arrays.asList("system", "admin"));
     }
 

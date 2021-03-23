@@ -1,10 +1,12 @@
 package com.calm.common.auth;
 
+import lombok.Data;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -17,8 +19,9 @@ import java.util.List;
  * @author wangjunming
  * @since 2021/2/14 20:03
  */
+@Data
 @ToString
-public class CurrentUser implements UserDetails {
+public class CurrentUser implements UserDetails, Serializable {
 
     /**
      * 主键id
@@ -68,7 +71,8 @@ public class CurrentUser implements UserDetails {
     /**
      * 是否已启用
      */
-    private Boolean enable;
+    private Boolean enabled;
+
     /**
      * 权限编码
      */
@@ -106,15 +110,7 @@ public class CurrentUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return this.enable;
-    }
-
-    public Boolean getEnable() {
-        return enable;
-    }
-
-    public void setEnable(Boolean enable) {
-        this.enable = enable;
+        return this.enabled;
     }
 
     public Long getUserId() {

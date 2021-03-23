@@ -1,10 +1,11 @@
 "use strict";
-layui.define(["layer","okCookie"], function (exprots) {
+layui.define(["layer","okCookie","table"], function (exprots) {
     /**
      * 服务器地址-gateway地址
      */
     const baseUrl = "http://127.0.0.1:82";
     var $ = layui.jquery;
+    var table = layui.table;
     var okUtils = {
         /**
          * 是否前后端分离
@@ -21,7 +22,43 @@ layui.define(["layer","okCookie"], function (exprots) {
         //获取当前登录用户信息
         userInfo: baseUrl + "/web/currentUser",
         //查询菜单列表
-
+        menuPage: baseUrl + "/user/api/v1/sysMenu/page",
+        /**
+         * 封装默认表格
+         *
+         * @param params
+         * @returns {*}
+         */
+        tableInit: function (params) {
+            const defaultSetting = {
+                page: true,
+                skin: 'line',
+                limit: 10,
+                limits: [10, 20, 50, 100],
+                text: "暂无数据",
+                autoSort: false,
+                size: "sm",
+                headers: {
+                    //设置请求头信息
+                    "user_token": $.cookie(okUtils.tokenKey),
+                },
+                request: {
+                    pageName: 'current',
+                    limitName: 'pageSize'
+                },
+                response: {
+                    statusCode: 0
+                },
+                parseData: function (res) {
+                    return {
+                        "code": res.code,
+                        "count": res.data.total,
+                        "data": res.data.records
+                    };
+                }
+            };
+            return table.render($.extend(defaultSetting, params));
+        },
         /**
          * ajax()函数二次封装
          * @param url
@@ -41,12 +78,8 @@ layui.define(["layer","okCookie"], function (exprots) {
                 beforeSend: function (xhr) {
                     //设置请求头信息
                     xhr.setRequestHeader(okUtils.tokenKey,$.cookie(okUtils.tokenKey));
-                    // xhr.setRequestHeader("Access-Control-Allow-Origin","*");
-                    // xhr.setRequestHeader("Access-Control-Allow-Credentials","true");
-                    // xhr.setRequestHeader("Access-Control-Allow-Methods","GET, PUT, POST, DELETE, OPTIONS");
-                    // xhr.setRequestHeader("Access-Control-Allow-Headers","Content-Type,*");
                     if (load) {
-                        loadIndex = layer.load(0, {shade: 0.3});
+                        loadIndex = layer.load(0, {shade: 0.2});
                     }
                 },
                 success: function (data) {

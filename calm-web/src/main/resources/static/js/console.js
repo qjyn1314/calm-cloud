@@ -1,5 +1,5 @@
 "use strict";
-layui.use(["okUtils", "table", "okCountUp", "okMock"], function () {
+layui.use(["okUtils", "table", "okCountUp", ], function () {
     var $ = layui.jquery;
     var countUp = layui.okCountUp;
     var okUtils = layui.okUtils;

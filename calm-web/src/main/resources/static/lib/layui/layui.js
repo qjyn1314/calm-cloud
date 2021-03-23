@@ -34,7 +34,6 @@ if (!Object.assign) {
         "okQrcode": "okmodules/okQrcode",
         "okAddlink": "okmodules/okAddlink",
         "okLayer": "okmodules/okLayer",
-        "okMock": "okmodules/okMock",
         "okContextMenu": "okmodules/okContextMenu",
         "okCookie": "okmodules/okCookie",
         "okMd5": "okmodules/okMd5",

@@ -19,9 +19,9 @@ import java.util.concurrent.TimeUnit;
 @Service("redisHelper")
 public class RedisHelperImpl<HK, T> implements RedisHelper<HK, T> {
 
-    // 在构造器中获取redisTemplate实例, key(not hashKey) 默认使用String类型
+    /**在构造器中获取redisTemplate实例, key(not hashKey) 默认使用String类型*/
     private final RedisTemplate<String, T> redisTemplate;
-    // 在构造器中通过redisTemplate的工厂方法实例化操作对象
+    /**在构造器中通过redisTemplate的工厂方法实例化操作对象*/
     private final HashOperations<String, HK, T> hashOperations;
     private final ListOperations<String, T> listOperations;
     private final ValueOperations<String, T> valueOperations;

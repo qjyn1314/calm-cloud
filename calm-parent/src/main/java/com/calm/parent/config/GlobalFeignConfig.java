@@ -1,9 +1,11 @@
 package com.calm.parent.config;
 
-import com.calm.parent.config.ForwardAccessService;
+import feign.Logger;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @author wangjunming
  * @since 2021/2/21 19:30
  */
+@Component
 @Configuration
 public class GlobalFeignConfig implements RequestInterceptor {
 
@@ -20,4 +23,16 @@ public class GlobalFeignConfig implements RequestInterceptor {
     public void apply(RequestTemplate request) {
         request.header(ForwardAccessService.HEADER_KEY,ForwardAccessService.HEADER_VALUE);
     }
+
+    /**
+     * 配置feign的增强打印日志
+     *
+     * @author wangjunming
+     * @since 2020/10/19 15:48
+     */
+    @Bean
+    Logger.Level feignLogger() {
+        return Logger.Level.FULL;
+    }
+
 }

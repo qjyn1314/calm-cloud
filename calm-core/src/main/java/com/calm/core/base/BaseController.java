@@ -1,7 +1,6 @@
 package com.calm.core.base;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +18,6 @@ import java.util.Map;
  * 60*60*60*24*7 周
  * 60*60*60*24*30 月
  */
-@CrossOrigin(origins = "*", maxAge = -1)
 public abstract class BaseController {
 
     /**

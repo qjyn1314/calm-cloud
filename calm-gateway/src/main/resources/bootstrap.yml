@@ -19,22 +19,21 @@ spring:
         # 配置文件的后缀
         file-extension: yml
     gateway:
+      # 跨域问题 参考：https://blog.csdn.net/qq_27384769/article/details/108375731
       globalcors:
         cors-configurations:
           '[/**]':
             allow-credentials: true
-            allowed-origins: "*"
-            allowed-headers: "*"
-            allowed-methods:
-              - OPTIONS
-              - GET
-              - POST
-            max-age: 3600
+            allowed-origins: '*'
+            allowed-methods: '*'
+            allowed-headers: '*'
       discovery:
         locator:
           enabled: true
+          lower-case-service-id: true
       default-filters:
         - StripPrefix=1
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
       routes:
         - id: calm-user
           uri: lb://calm-user

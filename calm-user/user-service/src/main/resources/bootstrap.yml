@@ -44,7 +44,7 @@ mybatis-plus:
 logging:
   config: classpath:logback-spring.xml
   level:
-    com.calm.user.api.feign: debug
+    'com.calm.user.api.feign': 'debug'
 #feign配置参考：http://c.biancheng.net/view/5362.html
 feign:
   client:

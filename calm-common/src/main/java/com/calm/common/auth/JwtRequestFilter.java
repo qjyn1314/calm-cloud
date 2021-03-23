@@ -13,6 +13,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 /**
  * <p>
@@ -27,9 +28,16 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String url = request.getRequestURI();
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+        log.info("HTTP_METHOD:--" + request.getMethod());
+        log.info("IP：--" + request.getRemoteAddr());
+        Enumeration<String> parameter = request.getParameterNames();
+        while (parameter.hasMoreElements()) {
+            String element = parameter.nextElement();
+            log.info("key:{" + element + "},value:{" + request.getParameter(element) + "}");
+        }
         String token = request.getHeader(CurrentSecurityUserUtils.TOKEN_NAME);
+        log.info("TOKEN：--" + token);
         if (StringUtils.isBlank(token)) {
             Cookie cookie = RequestUtils.getCookieByName(request, CurrentSecurityUserUtils.TOKEN_NAME);
             if (null != cookie) {
