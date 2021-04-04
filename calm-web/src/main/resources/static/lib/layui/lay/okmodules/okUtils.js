@@ -1,11 +1,13 @@
 "use strict";
-layui.define(["layer","okCookie","table"], function (exprots) {
+layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots) {
     /**
      * 服务器地址-gateway地址
      */
     const baseUrl = "http://127.0.0.1:82";
     var $ = layui.jquery;
     var table = layui.table;
+    let dtree = layui.dtree;
+    let layer = layui.layer;
     var okUtils = {
         /**
          * 是否前后端分离
@@ -23,6 +25,14 @@ layui.define(["layer","okCookie","table"], function (exprots) {
         userInfo: baseUrl + "/web/currentUser",
         //查询菜单列表
         menuPage: baseUrl + "/user/api/v1/sysMenu/page",
+        //查询菜单树
+        menuSaveTree: baseUrl + "/user/api/v1/sysMenu/formSelectTree",
+        //保存菜单
+        menuSave: baseUrl + "/user/api/v1/sysMenu/save",
+        //更新菜单
+        menuUpdate: baseUrl + "/user/api/v1/sysMenu/update",
+        //更新菜单
+        menuSelectMenuByCode: baseUrl + "/user/api/v1/sysMenu/selectMenuByCode",
         /**
          * 封装默认表格
          *
@@ -35,8 +45,8 @@ layui.define(["layer","okCookie","table"], function (exprots) {
                 skin: 'line',
                 limit: 10,
                 limits: [10, 20, 50, 100],
-                text: "暂无数据",
                 autoSort: false,
+                defaultToolbar: ["filter"],
                 size: "sm",
                 headers: {
                     //设置请求头信息
@@ -60,7 +70,41 @@ layui.define(["layer","okCookie","table"], function (exprots) {
             return table.render($.extend(defaultSetting, params));
         },
         /**
-         * ajax()函数二次封装
+         * 初始化在下拉选择框
+         * @param params
+         */
+        dtreeInitSelect: function (params) {
+            const defaultParams = {
+                width: "100%",
+                method: 'get',
+                headers: {
+                    //设置请求头信息
+                    "user_token": $.cookie(okUtils.tokenKey),
+                },
+                initLevel: 5,
+                select: true //指定下拉树模式
+            };
+            dtree.render($.extend(defaultParams, params))
+        },
+        /**
+         * 初始化在div盒子中的树
+         * @param params
+         */
+        dtreeInitDiv: function (params) {
+            const defaultParams = {
+                width: "100%",
+                method: 'get',
+                headers: {
+                    //设置请求头信息
+                    "user_token": $.cookie(okUtils.tokenKey),
+                },
+                initLevel: 5,
+                toolbar: true
+            };
+            dtree.render($.extend(defaultParams, params))
+        },
+        /**
+         * ajax()函数二次封装-传参为json，即：contentType: "application/json;charset=utf-8"
          * @param url
          * @param type
          * @param params
@@ -70,38 +114,84 @@ layui.define(["layer","okCookie","table"], function (exprots) {
         ajax: function (url, type, params, load) {
             var deferred = $.Deferred();
             var loadIndex;
+            //参考：https://www.runoob.com/jquery/ajax-ajax.html
             $.ajax({
                 url: url,
                 type: type || "get",
                 data: params || {},
                 dataType: "json",
+                //参考：https://www.runoob.com/http/http-content-type.html
+                contentType: "application/json;charset=utf-8",
                 beforeSend: function (xhr) {
                     //设置请求头信息
-                    xhr.setRequestHeader(okUtils.tokenKey,$.cookie(okUtils.tokenKey));
+                    xhr.setRequestHeader(okUtils.tokenKey, $.cookie(okUtils.tokenKey));
                     if (load) {
                         loadIndex = layer.load(0, {shade: 0.2});
                     }
                 },
                 success: function (data) {
                     if (data.code === 0) {
-                        // 业务正常
                         deferred.resolve(data)
                     } else {
-                        // 业务异常
-                        layer.msg(data.msg, {icon: 7, time: 2000});
-                        deferred.reject("okUtils.ajax warn: " + data.msg);
+                        deferred.reject(data);
                     }
+                },
+                error: function () {
+                    layer.close(loadIndex);
+                    layer.msg("服务器错误", {icon: 2, time: 2000});
+                    deferred.reject("服务器异常。");
                 },
                 complete: function () {
                     if (load) {
                         layer.close(loadIndex);
                     }
                 },
+            });
+            return deferred.promise();
+        },
+        /**
+         * ajax()函数二次封装-传参为form表单提交，即：contentType: "application/x-www-form-urlencoded;charset=utf-8"
+         * @param url
+         * @param type
+         * @param params
+         * @param load
+         * @returns {*|never|{always, promise, state, then}}
+         */
+        ajaxForm: function (url, type, params, load) {
+            var deferred = $.Deferred();
+            var loadIndex;
+            //参考：https://www.runoob.com/jquery/ajax-ajax.html
+            $.ajax({
+                url: url,
+                type: type || "get",
+                data: params || {},
+                dataType: "json",
+                //参考：https://www.runoob.com/http/http-content-type.html
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                beforeSend: function (xhr) {
+                    //设置请求头信息
+                    xhr.setRequestHeader(okUtils.tokenKey, $.cookie(okUtils.tokenKey));
+                    if (load) {
+                        loadIndex = layer.load(0, {shade: 0.2});
+                    }
+                },
+                success: function (data) {
+                    if (data.code === 0) {
+                        deferred.resolve(data)
+                    } else {
+                        deferred.reject(data);
+                    }
+                },
                 error: function () {
                     layer.close(loadIndex);
                     layer.msg("服务器错误", {icon: 2, time: 2000});
-                    deferred.reject("okUtils.ajax error: 服务器错误");
-                }
+                    deferred.reject("服务器异常。");
+                },
+                complete: function () {
+                    if (load) {
+                        layer.close(loadIndex);
+                    }
+                },
             });
             return deferred.promise();
         },

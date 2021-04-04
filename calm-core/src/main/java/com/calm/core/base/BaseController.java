@@ -36,4 +36,7 @@ public abstract class BaseController {
         return rspData;
     }
 
+    public final static Integer SAVE = 1;
+    public final static Integer UPDATE = 2;
+
 }

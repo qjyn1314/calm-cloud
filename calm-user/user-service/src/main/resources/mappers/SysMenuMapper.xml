@@ -10,14 +10,12 @@
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="icon" column="icon" jdbcType="VARCHAR"/>
         <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="menuType" column="menu_type" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="openFlag" column="open_flag" jdbcType="INTEGER"/>
+        <result property="systemType" column="system_type" jdbcType="INTEGER"/>
         <result property="sort" column="sort" jdbcType="INTEGER"/>
-        <result property="levels" column="levels" jdbcType="INTEGER"/>
-        <result property="menuFlag" column="menu_flag" jdbcType="BOOLEAN"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
-        <result property="status" column="status" jdbcType="VARCHAR"/>
-        <result property="newPageFlag" column="new_page_flag" jdbcType="VARCHAR"/>
-        <result property="openFlag" column="open_flag" jdbcType="VARCHAR"/>
-        <result property="systemType" column="system_type" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="createUser" column="create_user" jdbcType="INTEGER"/>
@@ -27,24 +25,38 @@
     <!--默认列表字段-->
     <sql id="column_default">
         menu_id
-        , code, pcode, name, icon, url, sort, levels, menu_flag, description, status, new_page_flag, open_flag, system_type, create_time, update_time, create_user, update_user
+        , code, pcode, name, icon, url, menu_type, status, open_flag, system_type, sort, description, create_time, update_time, create_user, update_user
     </sql>
+
     <select id="page" resultType="com.calm.user.api.vo.SysMenuVo">
         select
         <include refid="column_default"/>
         from sys_menu
         <where>
             <if test="qo.name != null and qo.name != ''">
-                and name like CONCAT('%', #{qo.name}, '%')
-            </if>
-            <if test="qo.code != null and qo.code != ''">
-                and code = #{qo.code}
-            </if>
-            <if test="qo.url != null and qo.url != ''">
-                and url like CONCAT('%', #{qo.url}, '%')
+                name like CONCAT(#{qo.name},'%') or code like CONCAT(#{qo.name},'%')
             </if>
         </where>
-        order by create_time desc
+    </select>
+
+    <resultMap id="MenuTreeVoMap" type="com.calm.user.api.vo.MenuTreeVo">
+        <result property="id" column="code" jdbcType="VARCHAR"/>
+        <result property="parentId" column="pcode" jdbcType="VARCHAR"/>
+        <result property="title" column="name" jdbcType="VARCHAR"/>
+        <association property="children" column="code" select="selectByCode"/>
+    </resultMap>
+
+    <select id="selectByCode" resultMap="MenuTreeVoMap">
+        select code, pcode, name
+        from sys_menu
+        where pcode = #{code}
+    </select>
+
+    <select id="selectMenuByCode" resultType="com.calm.user.api.vo.SysMenuVo">
+        select
+        <include refid="column_default"/>
+        from sys_menu
+        where code = #{code}
     </select>
 
 </mapper>

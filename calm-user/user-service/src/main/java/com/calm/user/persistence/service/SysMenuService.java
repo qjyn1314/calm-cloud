@@ -2,7 +2,10 @@ package com.calm.user.persistence.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.calm.user.api.dto.SysMenuDto;
+import com.calm.user.api.vo.MenuTreeVo;
 import com.calm.user.api.vo.SysMenuVo;
+
+import java.util.List;
 
 /**
  * 菜单表(SysMenu)表服务接口
@@ -21,5 +24,46 @@ public interface SysMenuService{
      * @return com.baomidou.mybatisplus.core.metadata.IPage<com.calm.user.api.vo.SysMenuVo>
      */
     IPage<SysMenuVo> page(SysMenuDto sysMenuDto);
+
+    /**
+     * 保存菜单信息
+     *
+     * @param sysMenuDto
+     * @author wangjunming
+     * @since 2021/3/25 10:53
+     * @return java.lang.Long
+     */
+    Long save(SysMenuDto sysMenuDto);
+
+    /**
+     * 查询树形结构的菜单
+     *
+     * @param sysMenuDto
+     * @author wangjunming
+     * @since 2021/3/25 11:51
+     * @return List<MenuTreeVo>
+     */
+    List<MenuTreeVo> formSelectTree(SysMenuDto sysMenuDto);
+
+    /**
+     * 通过菜单编码查询菜单信息
+     *
+     * @param code 菜单编码
+     * @author wangjunming
+     * @since 2021/3/30 17:54
+     * @return com.calm.user.api.vo.SysMenuVo
+     */
+    SysMenuVo selectMenuByCode(String code);
+
+
+    /**
+     * 更新菜单
+     *
+     * @param sysMenuDto
+     * @author wangjunming
+     * @since 2021/3/31 11:01
+     * @return java.lang.Long
+     */
+    Long update(SysMenuDto sysMenuDto);
 
 }

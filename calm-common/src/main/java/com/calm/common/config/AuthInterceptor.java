@@ -93,6 +93,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
             context.setAuthentication(authentication);
         }
+        log.info("当前线程中的--> SecurityContext：{}", context);
         return true;
     }
 

@@ -14,8 +14,8 @@
 
 <body>
 <div class="limiter">
-        <div class="container-login100" style="background-image: url('../static/login/images/login_bg.jpg');">
-<!--    <div class="container-login100">-->
+<!--        <div class="container-login100" style="background-image: url('../static/login/images/login_bg.jpg');">-->
+    <div class="container-login100">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                 <div class="login100-form" id="login_form">
@@ -78,6 +78,7 @@
     layui.use(["okUtils", "okLayer", "okCookie"], function () {
         var okUtils = layui.okUtils;
         var $ = layui.jquery;
+        var okLayer = layui.okLayer;
         okLoading.close();
 
         /**
@@ -108,10 +109,12 @@
                 "username": username,
                 "password": password
             }
-            okUtils.ajax(okUtils.login, "post", params, true).done(function (response) {
+            okUtils.ajaxForm(okUtils.login, "post", params, true).done(function (response) {
                 let userToken = response.data;
                 $.cookie(okUtils.tokenKey, userToken)
                 window.location.href = "/main";
+            }).fail(function (res) {
+                okLayer.redCryMsg(res.message);
             });
         }
     });

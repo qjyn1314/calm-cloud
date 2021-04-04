@@ -25,22 +25,18 @@ public class SysMenu implements Serializable {
     private String icon;
     /**url地址*/
     private String url;
+    /**菜单类型：1-菜单；2-目录*/
+    private Integer menuType;
+    /**菜单状态：1-启用；0-停用*/
+    private Integer status;
+    /**是否打开：1-是；0-否*/
+    private Integer openFlag;
+    /**系统分类：1-后台管理系统；2-前台管理系统*/
+    private Integer systemType;
     /**菜单排序号*/
     private Integer sort;
-    /**菜单层级*/
-    private Integer levels;
-    /**是否是菜单：1-是；0-否*/
-    private Boolean menuFlag;
     /**备注*/
     private String description;
-    /**菜单状态：1-启用；0-停用*/
-    private String status;
-    /**是否打开新页面的标识：1-是；0-否*/
-    private String newPageFlag;
-    /**是否打开：1-是；0-否*/
-    private String openFlag;
-    /**系统分类：1-后台管理系统；2-前台管理系统*/
-    private String systemType;
     /**创建时间*/
     private Date createTime;
     /**修改时间*/

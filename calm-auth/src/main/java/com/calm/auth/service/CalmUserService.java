@@ -6,6 +6,7 @@ import com.calm.parent.config.redis.RedisHelper;
 import com.calm.user.api.enums.UserStatus;
 import com.calm.user.api.feign.UserFeignService;
 import com.calm.user.api.vo.SysUserVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,6 +23,7 @@ import java.util.Objects;
  * @author wangjunming
  * @since 2021/2/16 17:37
  */
+@Slf4j
 public class CalmUserService implements UserDetailsService {
 
     @Resource
@@ -35,7 +37,8 @@ public class CalmUserService implements UserDetailsService {
             throw new UsernameNotFoundException("用户名不存在。");
         }
         Object redisUser = redisHelper.getValue(RedisHelper.USER_KEY + account);
-        if (!Objects.isNull(redisUser) && redisUser instanceof SysUserVo) {
+        if (Objects.nonNull(redisUser) && redisUser instanceof SysUserVo) {
+            log.info("Get users from Redis");
             CurrentUser currentUser = new CurrentUser();
             preCurrentUser(currentUser, (SysUserVo) redisUser);
             return currentUser;
@@ -45,6 +48,7 @@ public class CalmUserService implements UserDetailsService {
         if (null == user) {
             throw new UsernameNotFoundException("用户名不存在。");
         }
+        log.info("Get users from interface");
         redisHelper.valuePut(RedisHelper.USER_KEY + account, user);
         CurrentUser currentUser = new CurrentUser();
         preCurrentUser(currentUser, user);

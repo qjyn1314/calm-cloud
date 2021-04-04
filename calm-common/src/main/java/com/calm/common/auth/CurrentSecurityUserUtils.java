@@ -81,6 +81,7 @@ public class CurrentSecurityUserUtils {
      * 获取当前登录用户信息
      */
     public static CurrentUser authUser() {
+        log.info("当前登录用户信息是：{}", principal() instanceof UserDetails ? principal() : null);
         return principal() instanceof UserDetails ? (CurrentUser) principal() : null;
     }
 

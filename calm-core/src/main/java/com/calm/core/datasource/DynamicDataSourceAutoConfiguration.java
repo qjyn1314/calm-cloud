@@ -5,7 +5,6 @@ import com.baomidou.dynamic.datasource.provider.DynamicDataSourceProvider;
 import com.calm.core.datasource.config.DynamicDataSourceProperties;
 import com.calm.core.datasource.config.JdbcDynamicDataSourceProvider;
 import com.calm.core.datasource.config.LastParamDsProcessor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

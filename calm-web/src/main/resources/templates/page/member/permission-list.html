@@ -5,14 +5,16 @@
     <title>权限列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../../static/css/oksub.css">
+    <link rel="stylesheet" href="../../static/lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/lib/layui/css/dtree/dtree.css">
+    <link rel="stylesheet" href="../../static/lib/layui/css/dtree/font/dtreefont.css">
 </head>
 <body class="ok-body-scroll">
 <div class="ok-body">
     <!--模糊搜索区域-->
     <div class="layui-row">
         <div class="layui-form layui-col-md12 ok-search ok-menuPageSearch">
-            <input class="layui-input" placeholder="权限名称" name="name" autocomplete="off">
-            <input class="layui-input" placeholder="权限标识" name="code" autocomplete="off">
+            <input class="layui-input" placeholder="权限名称/编码" name="name" autocomplete="off">
             <input class="layui-input" placeholder="权限路径" name="url" autocomplete="off">
             <button class="layui-btn pageSearch">
                 <i class="layui-icon layui-icon-search"></i>
@@ -21,7 +23,9 @@
     </div>
     <div class="layui-row">
         <div class="layui-col-md3">
-            <div id="permissionTree">树形结构的菜单</div>
+            <div id="toolbarDiv" style="height: 650px;overflow: auto;">
+                <ul id="menuDtree" class="dtree" data-id="0" data-value="0"></ul>
+            </div>
         </div>
         <div class="layui-col-md9">
             <table class="layui-hide" id="permissionTable" lay-filter="tableFilter"></table>
@@ -31,70 +35,183 @@
 <!--js逻辑-->
 <script src="../../static/lib/layui/layui.js"></script>
 <script>
-    layui.use(["element", "table", "laydate", "tree", "jquery", "okUtils"], function () {
+    layui.use(["element", "table", "laydate", "form", "layer", "okLayer", "dtree", "jquery", "okUtils"], function () {
         let okUtils = layui.okUtils;
+        let table = layui.table;
+        let okLayer = layui.okLayer;
+        let layer = layui.layer;
         let $ = layui.jquery;
+        let dtree = layui.dtree;
+        let form = layui.form;
 
+        initDtree();
 
-        let menuPage = okUtils.tableInit({
+        //加载左侧的dtree菜单- http://www.wisdomelon.com/DTreeHelper/--scroll 配置
+       function initDtree(){
+            okUtils.dtreeInitDiv({
+                elem: "#menuDtree",
+                url: okUtils.menuSaveTree,
+                scroll: "#toolbarDiv",
+            });
+        }
+
+        //菜单列表展示
+        let menuPageTable = okUtils.tableInit({
             elem: '#permissionTable',
             title: "系统菜单",
             url: okUtils.menuPage,
-            // 开启表格头部工具栏区域，该参数支持四种类型 https://www.layui.com/doc/modules/table.html#skin
-            toolbar: true,
+            toolbar: "#toolbarTpl",
             cols: [
                 [
-                    {field: "id", title: "ID", width: 170, sort: true, fixed: "left"},
-                    {field: "name", title: "权限名称", width: 100},
-                    {field: "permit", title: "权限标识", width: 150},
+                    {field: "menuId", title: "ID", width: 60, fixed: "left"},
+                    {field: "name", title: "菜单名称", width: 100},
+                    {field: "code", title: "菜单编码", width: 100},
+                    {field: "pcode", title: "父级编码", width: 100},
                     {field: "url", title: "权限路径", width: 150},
-                    {field: "parentName", title: "父菜单", width: 100},
-                    {field: "type", title: "类型", width: 100, templet: "#typeTpl"},
-                    {field: "createTime", title: "创建时间", width: 150},
-                    {field: "updateTime", title: "创建时间", width: 150},
+                    {field: "menuType", title: "菜单类型", width: 80, templet: "#menuTypeTpl"},
+                    {field: "status", title: "菜单状态", width: 80, templet: "#statusTpl"},
+                    {field: "systemType", title: "系统分类", width: 120, templet: "#systemTypeTpl"},
+                    {field: "sort", title: "排序号", width: 90},
+                    {field: "createTime", title: "创建时间", width: 170},
+                    {field: "updateTime", title: "更新时间", width: 170},
                     {title: "操作", width: 100, templet: "#operationTpl", align: "center", fixed: "right"}
                 ]
             ],
             done: function (res, curr, count) {
-                // 数据渲染完的回调。你可以借此做一些其它的操作
-                console.info(res, curr, count);
             }
         });
 
-
         //搜索按钮的搜索事件
         $('.pageSearch').click(function () {
+            tableReload();
+        });
+
+        //重新加载列表
+        function tableReload() {
             let searchParam = {
                 "name": $(".ok-menuPageSearch input[name='name']").val(),
-                "code": $(".ok-menuPageSearch input[name='code']").val(),
                 "url": $(".ok-menuPageSearch input[name='url']").val(),
             };
-            menuPage.reload({
+            menuPageTable.reload({
                 where: searchParam,
                 page: {
                     //重新从第 1 页开始
                     curr: 1
                 }
             })
+        }
+
+        //表格的工具栏头部操作
+        table.on("toolbar(tableFilter)", function (obj) {
+            switch (obj.event) {
+                case "add":
+                    add();
+                    break;
+                case "batchDel":
+                    break;
+            }
         });
 
+        //点击了添加按钮
+        function add() {
+            okLayer.open("添加菜单", "permission-insert.html", "90%", "90%", null, function () {
+                menuPageTable.reload();
+            })
+        }
 
+        //点击行上的操作
+        table.on("tool(tableFilter)", function (obj) {
+            let data = obj.data;
+            switch (obj.event) {
+                case "edit":
+                    edit(data);
+                    break;
+                case "del":
+                    del(data.menuId);
+                    break;
+            }
+        });
 
+        //行编辑操作
+        function edit(data) {
+            if (data.pcode === '-1') {
+                okLayer.redCryMsg("顶级菜单不能编辑。");
+                return;
+            }
+            okLayer.open("修改菜单", "permission-update.html", "90%", "90%", function (layero, index) {
+                //参考：https://blog.csdn.net/qq_40634846/article/details/104720361
+                var body = layer.getChildFrame('body', index);
+                //根据code查询名称
+                okUtils.ajax(okUtils.menuSelectMenuByCode + "/" + data.pcode, "get", null, true).done(function (res) {
+                    body.find("#pcode_name").val(res.data.name);
+                });
+                //回显表单数据
+                body.find(".menuForm input[name='menuId']").val(data.menuId);
+                body.find(".menuForm input[name='pcode']").val(data.pcode);
+                body.find(".menuForm input[name='code']").val(data.code);
+                body.find(".menuForm input[name='name']").val(data.name);
+                body.find(".menuForm input[name='url']").val(data.url);
+                body.find(".menuForm input[name='icon']").val(data.icon);
+                body.find(".menuForm select[name='menuType']").val(data.menuType);
+                body.find(".menuForm select[name='status']").val(data.status);
+                body.find(".menuForm select[name='openFlag']").val(data.openFlag);
+                body.find(".menuForm select[name='systemType']").val(data.systemType);
+                body.find(".menuForm input[name='sort']").val(data.sort);
+                body.find(".menuForm input[name='description']").val(data.description);
+            }, function () {
+                menuPageTable.reload();
+                initDtree();
+            })
+        }
+
+        //行删除操作
+        function del(id) {
+            console.log(id)
+            okLayer.confirm("确定要删除吗？", function () {
+                okUtils.ajax("/user/deleteUser", "delete", {idsStr: id}, true).done(function (response) {
+                    console.log(response);
+                    okUtils.tableSuccessMsg(response.msg);
+                    menuPageTable.reload()
+                    initDtree();
+                }).fail(function (error) {
+                    console.log(error)
+                });
+            })
+        }
 
     });
+</script>
+<!-- 头工具栏模板 -->
+<script type="text/html" id="toolbarTpl">
+    <div class="layui-btn-container">
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-1"></i></div>
+    </div>
 </script>
 <!--行工具栏模板-->
 <script type="text/html" id="operationTpl">
     <a href="javascript:" title="编辑" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
     <a href="javascript:" title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
 </script>
-<script type="text/html" id="typeTpl">
-    {{#  if(d.type == 0){ }}
-    <span class="layui-btn layui-btn-normal layui-btn-xs">目录</span>
-    {{#  } else if(d.type == 1){ }}
-    <span class="layui-btn layui-btn-warm layui-btn-xs">菜单</span>
-    {{#  } else if(d.type == 2) { }}
-    <span class="layui-btn layui-btn-danger layui-btn-xs">按钮</span>
+<!--类型的文案转换-->
+<script type="text/html" id="menuTypeTpl">
+    {{#  if(d.menuType == 1){ }}
+    <span class="layui-btn layui-btn-normal layui-btn-xs">菜单</span>
+    {{#  } else if(d.menuType == 2) { }}
+    <span class="layui-btn layui-btn-danger layui-btn-xs">目录</span>
+    {{#  } }}
+</script>
+<script type="text/html" id="statusTpl">
+    {{#  if(d.status == 1){ }}
+    <span class="layui-btn layui-btn-normal layui-btn-xs">启用</span>
+    {{#  } else if(d.status == 0) { }}
+    <span class="layui-btn layui-btn-danger layui-btn-xs">停用</span>
+    {{#  } }}
+</script>
+<script type="text/html" id="systemTypeTpl">
+    {{#  if(d.systemType == 1){ }}
+    <span class="layui-btn layui-btn-normal layui-btn-xs">后台管理系统</span>
+    {{#  } else if(d.systemType == 2) { }}
+    <span class="layui-btn layui-btn-danger layui-btn-xs">前台管理系统</span>
     {{#  } }}
 </script>
 </body>

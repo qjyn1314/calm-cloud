@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "id": "console",
+      "title": "控制台",
+      "parentId": "0",
+      "children": []
+    }
+  ],
+  "status": {
+    "code": 200,
+    "message": "success"
+  }
+}
