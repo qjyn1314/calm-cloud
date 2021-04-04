@@ -1,5 +1,5 @@
 # calm-cloud
-###实践搭建springcloud的maven工程
+### 实践搭建springcloud的maven工程
 
 # 项目中的技术选型是：
 ### 服务注册中心、服务配置：
@@ -19,7 +19,7 @@ mybatis-plus
 
 ### 数据库驱动：
 mybatis-plus的dynamic-datasource
-###选用实践的版本：
+### 选用实践的版本：
 spring-boot 版本：2.3.8.RELEASE
 
 spring-cloud 版本：Hoxton.SR9
