@@ -99,14 +99,16 @@ public class SysMenuController extends BaseController {
         if (null == parentMenu) {
             throw new CalmException("请选择正确的父级菜单");
         }
+        //查询菜单编码信息
+        SysMenuVo childrenMenu = sysMenuService.selectMenuByCode(code);
         if (SAVE.equals(optionType)) {
-            //菜单编码中已存在此
-            if (StringUtils.isBlank(code)) {
-                throw new CalmException("已存在此菜单编码，请重新填写");
-            }
-            SysMenuVo childrenMenu = sysMenuService.selectMenuByCode(code);
             if (null != childrenMenu) {
-                throw new CalmException("已存在此菜单编码，请重新填写");
+                throw new CalmException("已存在此菜单编码，请重新填写。");
+            }
+        }
+        if (UPDATE.equals(optionType)) {
+            if (null == childrenMenu) {
+                throw new CalmException("不存在此菜单，请重新选择要编辑的菜单。");
             }
         }
     }
@@ -128,7 +130,7 @@ public class SysMenuController extends BaseController {
     }
 
     /**
-     * 更新菜单信息
+     * 获取菜单信息
      *
      * @param code 菜单编编码
      * @return com.calm.parent.base.JsonResult

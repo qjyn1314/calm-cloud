@@ -34,7 +34,11 @@
         from sys_menu
         <where>
             <if test="qo.name != null and qo.name != ''">
-                name like CONCAT(#{qo.name},'%') or code like CONCAT(#{qo.name},'%')
+                and name like CONCAT(#{qo.name}, '%')
+                    or code like CONCAT(#{qo.name}, '%')
+            </if>
+            <if test="qo.url != null and qo.url != ''">
+                and url = #{qo.url}
             </if>
         </where>
     </select>

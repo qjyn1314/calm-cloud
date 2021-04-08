@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +19,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author wangjunming
  * @since 2020-01-17 11:50
  */
+@Slf4j
+@Configuration
 //开启密文密码
 @EnableEncryptableProperties
-@Configuration
 //扫描项目中的mapper接口类
 @MapperScan(basePackages = {
         "com.calm.*.persistence.mapper",

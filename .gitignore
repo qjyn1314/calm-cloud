@@ -30,3 +30,4 @@ hs_err_pid*
 */src/main/resources/rebel.xml
 */src/main/java/rebel.xml
 */target/
+.gradle

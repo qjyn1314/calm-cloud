@@ -26,13 +26,21 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
         //查询菜单列表
         menuPage: baseUrl + "/user/api/v1/sysMenu/page",
         //查询菜单树
-        menuSaveTree: baseUrl + "/user/api/v1/sysMenu/formSelectTree",
+        menuTree: baseUrl + "/user/api/v1/sysMenu/formSelectTree",
         //保存菜单
         menuSave: baseUrl + "/user/api/v1/sysMenu/save",
         //更新菜单
         menuUpdate: baseUrl + "/user/api/v1/sysMenu/update",
         //更新菜单
         menuSelectMenuByCode: baseUrl + "/user/api/v1/sysMenu/selectMenuByCode",
+        //查询角色列表
+        rolePage: baseUrl + "/user/api/v1/sysRole/page",
+        //保存角色
+        roleSave: baseUrl + "/user/api/v1/sysRole/save",
+        //更新角色
+        roleUpdate: baseUrl + "/user/api/v1/sysRole/update",
+        //角色分配菜单
+        roleDistributionMenu: baseUrl + "/user/api/v1/sysRole/distributionMenu",
         /**
          * 封装默认表格
          *
@@ -74,16 +82,10 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
          * @param params
          */
         dtreeInitSelect: function (params) {
-            const defaultParams = {
-                width: "100%",
-                method: 'get',
-                headers: {
-                    //设置请求头信息
-                    "user_token": $.cookie(okUtils.tokenKey),
-                },
-                initLevel: 5,
-                select: true //指定下拉树模式
+            let defaultParams = {
+                select: true //下拉选择框中展示dtree树
             };
+            defaultParams = $.extend(okUtils.dtreeInitParams(), defaultParams);
             dtree.render($.extend(defaultParams, params))
         },
         /**
@@ -91,17 +93,29 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
          * @param params
          */
         dtreeInitDiv: function (params) {
-            const defaultParams = {
+            let defaultParams = {
+                toolbar: true //开启在盒子中展示dtree树
+            };
+            defaultParams = $.extend(okUtils.dtreeInitParams(), defaultParams);
+            dtree.render($.extend(defaultParams, params))
+        },
+        /**
+         * dtree树的默认样式参数
+         */
+        dtreeInitParams: function () {
+            return {
                 width: "100%",
                 method: 'get',
                 headers: {
                     //设置请求头信息
                     "user_token": $.cookie(okUtils.tokenKey),
                 },
+                type: "all",
+                line: true,
+                ficon: ["1", "-1"],
+                icon: "-1",
                 initLevel: 5,
-                toolbar: true
-            };
-            dtree.render($.extend(defaultParams, params))
+            }
         },
         /**
          * ajax()函数二次封装-传参为json，即：contentType: "application/json;charset=utf-8"

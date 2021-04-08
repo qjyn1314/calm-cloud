@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>权限列表</title>
+    <title>菜单列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../../static/css/oksub.css">
     <link rel="stylesheet" href="../../static/lib/layui/css/layui.css">
@@ -14,8 +14,8 @@
     <!--模糊搜索区域-->
     <div class="layui-row">
         <div class="layui-form layui-col-md12 ok-search ok-menuPageSearch">
-            <input class="layui-input" placeholder="权限名称/编码" name="name" autocomplete="off">
-            <input class="layui-input" placeholder="权限路径" name="url" autocomplete="off">
+            <input class="layui-input" placeholder="菜单名称/编码" name="name" autocomplete="off">
+            <input class="layui-input" placeholder="菜单路径" name="url" autocomplete="off">
             <button class="layui-btn pageSearch">
                 <i class="layui-icon layui-icon-search"></i>
             </button>
@@ -23,6 +23,7 @@
     </div>
     <div class="layui-row">
         <div class="layui-col-md3">
+            <label class="layui-form-label">菜单树：</label>
             <div id="toolbarDiv" style="height: 650px;overflow: auto;">
                 <ul id="menuDtree" class="dtree" data-id="0" data-value="0"></ul>
             </div>
@@ -41,8 +42,6 @@
         let okLayer = layui.okLayer;
         let layer = layui.layer;
         let $ = layui.jquery;
-        let dtree = layui.dtree;
-        let form = layui.form;
 
         initDtree();
 
@@ -50,7 +49,7 @@
        function initDtree(){
             okUtils.dtreeInitDiv({
                 elem: "#menuDtree",
-                url: okUtils.menuSaveTree,
+                url: okUtils.menuTree,
                 scroll: "#toolbarDiv",
             });
         }
@@ -65,15 +64,15 @@
                 [
                     {field: "menuId", title: "ID", width: 60, fixed: "left"},
                     {field: "name", title: "菜单名称", width: 100},
+                    {field: "description", title: "菜单说明", width: 180},
                     {field: "code", title: "菜单编码", width: 100},
                     {field: "pcode", title: "父级编码", width: 100},
-                    {field: "url", title: "权限路径", width: 150},
-                    {field: "menuType", title: "菜单类型", width: 80, templet: "#menuTypeTpl"},
-                    {field: "status", title: "菜单状态", width: 80, templet: "#statusTpl"},
+                    {field: "url", title: "菜单路径", width: 180},
                     {field: "systemType", title: "系统分类", width: 120, templet: "#systemTypeTpl"},
+                    {field: "status", title: "菜单状态", width: 80, templet: "#statusTpl"},
+                    {field: "menuType", title: "菜单类型", width: 80, templet: "#menuTypeTpl"},
                     {field: "sort", title: "排序号", width: 90},
                     {field: "createTime", title: "创建时间", width: 170},
-                    {field: "updateTime", title: "更新时间", width: 170},
                     {title: "操作", width: 100, templet: "#operationTpl", align: "center", fixed: "right"}
                 ]
             ],
@@ -116,6 +115,7 @@
         function add() {
             okLayer.open("添加菜单", "permission-insert.html", "90%", "90%", null, function () {
                 menuPageTable.reload();
+                initDtree();
             })
         }
 

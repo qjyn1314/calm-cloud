@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>分配菜单</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../static/css/oksub.css">
+    <link rel="stylesheet" href="../../static/lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/lib/layui/css/dtree/dtree.css">
+    <link rel="stylesheet" href="../../static/lib/layui/css/dtree/font/dtreefont.css">
+</head>
+<body>
+<div class="ok-body">
+    <div class="layui-row">
+        <div class="layui-col-md4">
+            <!--form表单-->
+            <div class="layui-form ok-form roleForm">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">角色名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" placeholder="角色名称" autocomplete="off" class="layui-input"
+                               readonly
+                               lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">角色编码</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="code" placeholder="角色备注" autocomplete="off" class="layui-input"
+                               lay-verify="required" readonly>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">角色描述</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="description" placeholder="角色描述" autocomplete="off" class="layui-input"
+                               readonly
+                               lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">原有菜单</label>
+                    <div class="layui-input-block">
+                        <textarea name="oldPermissionName" class="layui-textarea" readonly></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">新配菜单</label>
+                    <div class="layui-input-block">
+                        <textarea name="permissionName" placeholder="请选择右侧菜单" class="layui-textarea" readonly></textarea>
+                    </div>
+                    <input type="text" name="permissionCode" hidden="hidden" readonly >
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn roleSubmit">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md8">
+            <label class="layui-form-label">菜单树：</label>
+            <div class="layui-input-block">
+                <div id="toolbarDiv" style="height: 450px;overflow: auto;">
+                    <ul id="menuDtree" class="dtree menuDtree" data-id="0" data-value="-1" lay-filter="menuDtree">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--js逻辑-->
+<script src="../../static/lib/layui/layui.js"></script>
+<script>
+    layui.use(["element", "okLayer", "okUtils", "dtree"], function () {
+        let $ = layui.jquery;
+        let okLayer = layui.okLayer;
+        let okUtils = layui.okUtils;
+        var permissionCode = "";
+        okUtils.dtreeInitDiv({
+            elem: "#menuDtree",
+            url: okUtils.menuTree,
+            checkbar: true,
+            checkbarLoad: "node",
+            checkbarType: "all",
+            checkbarData: "choose",
+            checkbarFun: {
+                //复选框点击事件完毕后，返回该树关于复选框操作的全部信息。
+                chooseDone: function (checkbarNodesParam) {
+                    var permissionName = "";
+                    for(var i = 0; i<checkbarNodesParam.length;i++){
+                        let checkbarNodesParamElement = checkbarNodesParam[i];
+                        permissionName += checkbarNodesParamElement.context + '，';
+                        permissionCode += checkbarNodesParamElement.nodeId + ',';
+                    }
+                    permissionName = permissionName.substring(0,permissionName.length-1);
+                    permissionCode = permissionCode.substring(0,permissionCode.length-1);
+                    $(".roleForm textarea[name='permissionName']").val(permissionName);
+                     // permissionCode = JSON.stringify(permissionCode.split(","));
+                     permissionCode = permissionCode.split(",");
+                    // $(".roleForm input[name='permissionCode']").val(permissionCode);
+                    return checkbarNodesParam;
+                }
+            }
+        });
+
+        $(".roleSubmit").click(function () {
+            let roleForm = {
+                "name": $(".roleForm input[name='name']").val(),
+                "code": $(".roleForm input[name='code']").val(),
+                "description": $(".roleForm input[name='description']").val(),
+                "sort": $(".roleForm input[name='sort']").val(),
+                "permissionCode": permissionCode,
+            };
+            roleForm = JSON.stringify(roleForm);
+            okUtils.ajax(okUtils.roleDistributionMenu, "post", roleForm, true).done(function (response) {
+                okLayer.greenTickMsg("分配成功", function () {
+                    parent.layer.close(parent.layer.getFrameIndex(window.name));
+                });
+            }).fail(function (res) {
+                okLayer.redCryMsg(res.message);
+            });
+        });
+
+
+    })
+</script>
+</body>
+</html>

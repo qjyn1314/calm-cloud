@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calm.user.persistence.mapper.SysRoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.calm.user.api.entity.SysRole">
+        <!--@Table sys_role-->
+        <result property="roleId" column="role_id" jdbcType="INTEGER"/>
+        <result property="code" column="code" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="version" column="version" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="INTEGER"/>
+        <result property="updateUser" column="update_user" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--默认列表字段-->
+    <sql id="column_default">
+          role_id, code, name, description, sort, version, create_time, update_time, create_user, update_user
+    </sql>
+
+    <select id="page" resultType="com.calm.user.api.vo.SysRoleVo">
+        SELECT t1.role_id,t1.`code`,t1.`name`,t1.description,GROUP_CONCAT(t3.`code`) menuCodes,GROUP_CONCAT(t3.`name`) menuNames,t1.sort,t1.create_time
+        FROM sys_role t1
+                     LEFT JOIN sys_role_menu t2 ON t2.role_code = t1.`code`
+                     LEFT JOIN sys_menu t3 ON t3.`code` = t2.menu_code
+        <where>
+            <if test="qo.name != null and qo.name != '' ">
+                and t1.name like CONCAT(#{qo.name}, '%')
+                or t1.code like CONCAT(#{qo.name}, '%')
+            </if>
+        </where>
+        GROUP BY t1.`code` ORDER BY t1.role_id
+    </select>
+
+    <select id="selectByCode" resultType="com.calm.user.api.vo.SysRoleVo">
+        SELECT t1.role_id,t1.`code`,t1.`name`,t1.description,GROUP_CONCAT(t3.`code`) menuCodes,GROUP_CONCAT(t3.`name`) menuNames,t1.sort,t1.create_time
+        FROM sys_role t1
+                     LEFT JOIN sys_role_menu t2 ON t2.role_code = t1.`code`
+                     LEFT JOIN sys_menu t3 ON t3.`code` = t2.menu_code
+            where t1.code = #{code}
+        GROUP BY t2.role_code
+    </select>
+</mapper>

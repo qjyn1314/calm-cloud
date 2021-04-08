@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @RestControllerAdvice
 public class GlobRestHandleException {
+
     /**
      * 统一异常
      *
@@ -43,7 +44,7 @@ public class GlobRestHandleException {
     @ExceptionHandler(value = RuntimeException.class)
     public JsonResult handleGlobRuntimeException(RuntimeException e) {
         log.error("系统异常，请检查代码", e);
-        return JsonResult.fail("系统异常");
+        return JsonResult.fail("系统异常，请稍后重试。");
     }
 
     /**
@@ -57,7 +58,7 @@ public class GlobRestHandleException {
     @ExceptionHandler(value = ClientException.class)
     public JsonResult handleGlobRuntimeException(ClientException e) {
         log.error("系统异常，请检查代码", e);
-        return JsonResult.fail("网关异常");
+        return JsonResult.fail("网关异常，请稍后重试。");
     }
 
     /**
@@ -91,6 +92,12 @@ public class GlobRestHandleException {
         return JsonResult.fail(sb.toString());
     }
 
+
+    @ExceptionHandler(value = InterruptedException.class)
+    public JsonResult handleInterruptedException(InterruptedException e) {
+        log.error("关闭admin服务异常", e);
+        return JsonResult.fail("关闭admin服务异常，请稍后重试。");
+    }
 
 
 }

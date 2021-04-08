@@ -1,14 +1,91 @@
 {
-  "data": [
-    {
-      "id": "console",
-      "title": "控制台",
-      "parentId": "0",
-      "children": []
-    }
-  ],
   "status": {
     "code": 200,
-    "message": "success"
-  }
+    "message": "操作成功"
+  },
+  "data": [{
+    "id": "001",
+    "title": "湖南省",
+    "parentId": "-1",
+    "checkArr": [{
+      "type": "0",
+      "checked": "0"
+    }],
+    "children": [{
+      "id": "001001",
+      "title": "长沙市",
+      "parentId": "001",
+      "checkArr": [{
+        "type": "0",
+        "checked": "0"
+      }],
+      "children": [{
+        "id": "001001001",
+        "title": "雨花区",
+        "parentId": "001001",
+        "checkArr": [{
+          "type": "0",
+          "checked": "0"
+        }]
+      }]
+    },{
+      "id": "001001",
+      "title": "长沙市",
+      "parentId": "001",
+      "checkArr": [{
+        "type": "0",
+        "checked": "0"
+      }],
+      "children": [{
+        "id": "001001001",
+        "title": "雨花区",
+        "parentId": "001001",
+        "checkArr": [{
+          "type": "0",
+          "checked": "0"
+        }]
+      }]
+    },{
+      "id": "001001",
+      "title": "长沙市",
+      "parentId": "001",
+      "checkArr": [{
+        "type": "0",
+        "checked": "0"
+      }],
+      "children": [{
+        "id": "001001001",
+        "title": "雨花区",
+        "parentId": "001001",
+        "checkArr": [{
+          "type": "0",
+          "checked": "0"
+        }]
+      },{
+        "id": "001001001",
+        "title": "雨花区",
+        "parentId": "001001",
+        "checkArr": [{
+          "type": "0",
+          "checked": "0"
+        }]
+      },{
+        "id": "001001001",
+        "title": "雨花区",
+        "parentId": "001001",
+        "checkArr": [{
+          "type": "0",
+          "checked": "0"
+        }]
+      },{
+        "id": "001001001",
+        "title": "雨花区",
+        "parentId": "001001",
+        "checkArr": [{
+          "type": "0",
+          "checked": "0"
+        }]
+      }]
+    }]
+  }]
 }

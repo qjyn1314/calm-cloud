@@ -27,7 +27,7 @@
                 "spread": false
             },
             {
-                "title": "权限列表",
+                "title": "菜单列表",
                 "href": "page/member/permission-list.html",
                 "icon": "&#xe62e;",
                 "spread": false

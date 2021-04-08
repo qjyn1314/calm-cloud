@@ -25,18 +25,18 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">权限编码</label>
+            <label class="layui-form-label">菜单编码</label>
             <div class="layui-input-block">
                 <input type="text" hidden="hidden" name="pcode" readonly>
                 <input type="text" hidden="hidden" name="menuId" readonly>
-                <input type="text" name="code" placeholder="请输入权限编码" autocomplete="off" class="layui-input"
+                <input type="text" name="code" placeholder="请输入菜单编码" autocomplete="off" class="layui-input" readonly
                        lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">权限名</label>
+            <label class="layui-form-label">菜单名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" placeholder="请输入权限名" autocomplete="off" class="layui-input"
+                <input type="text" name="name" placeholder="请输入菜单名" autocomplete="off" class="layui-input"
                        lay-verify="required">
             </div>
         </div>
@@ -132,7 +132,7 @@
         //初始化dtree
         okUtils.dtreeInitSelect({
             elem: "#menuDtree",
-            url: okUtils.menuSaveTree,
+            url: okUtils.menuTree,
         })
         // 绑定节点点击
         dtree.on("node('menuDtree')", function (obj) {
@@ -156,7 +156,6 @@
                 "description": $(".menuForm input[name='description']").val(),
             }
             menuForm = JSON.stringify(menuForm);
-            console.log(menuForm);
             okUtils.ajax(okUtils.menuUpdate, "post", menuForm, true).done(function (response) {
                 okLayer.greenTickMsg("修改成功", function () {
                     parent.layer.close(parent.layer.getFrameIndex(window.name));

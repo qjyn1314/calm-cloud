@@ -1,158 +1,175 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>角色列表</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="../static/css/oksub.css">
-	<script type="text/javascript" src="../static/lib/loading/okLoading.js"></script>
+    <meta charset="UTF-8">
+    <title>角色列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../static/css/oksub.css">
+    <script type="text/javascript" src="../../static/lib/loading/okLoading.js"></script>
 </head>
 <body>
 <div class="ok-body">
-	<!--模糊搜索区域-->
-	<div class="layui-row">
-		<form class="layui-form layui-col-md12 ok-search">
-			<input class="layui-input" placeholder="开始日期" autocomplete="off" id="startTime" name="startTime">
-			<input class="layui-input" placeholder="截止日期" autocomplete="off" id="endTime" name="endTime">
-			<input class="layui-input" placeholder="角色名称" autocomplete="off" name="name">
-			<button class="layui-btn" lay-submit="" lay-filter="search">
-				<i class="layui-icon layui-icon-search"></i>
-			</button>
-		</form>
-	</div>
-	<!--数据表格-->
-	<table class="layui-hide" id="tableId" lay-filter="tableFilter"></table>
+    <!--模糊搜索区域-->
+    <div class="layui-row">
+        <div class="layui-form layui-col-md12 ok-search roleSearchForm">
+            <input class="layui-input" placeholder="角色名称/编码" autocomplete="off" name="name">
+            <button class="layui-btn pageSearch">
+                <i class="layui-icon layui-icon-search"></i>
+            </button>
+        </div>
+    </div>
+    <!--数据表格-->
+    <table class="layui-hide" id="roleTable" lay-filter="tableFilter"></table>
 </div>
 <!--js逻辑-->
-<script src="../../lib/layui/layui.js"></script>
+<script src="../../static/lib/layui/layui.js"></script>
 <script>
-	layui.use(["element", "table", "form", "laydate", "okLayer", "okUtils", ], function () {
-		let table = layui.table;
-		let form = layui.form;
-		let laydate = layui.laydate;
-		let okLayer = layui.okLayer;
-		let okUtils = layui.okUtils;
-		let okMock = layui.okMock;
+    layui.use(["element", "table", "form", "laydate", "layer", "okLayer", "okUtils",], function () {
+        let $ = layui.jquery;
+        let table = layui.table;
+        let okLayer = layui.okLayer;
+        let okUtils = layui.okUtils;
+        let layer = layui.layer;
+        okLoading.close();
+        let roleTable = okUtils.tableInit({
+            elem: '#roleTable',
+            title: "系统角色",
+            url: okUtils.rolePage,
+            toolbar: "#toolbarTpl",
+            cols: [
+                [
+                    {field: "roleId", title: "ID", width: 60, fixed: "left"},
+                    {field: "name", title: "角色名称", width: 150},
+                    {field: "code", title: "角色编码", width: 170},
+                    {field: "description", title: "角色描述", width: 180},
+                    {field: "menuCodes", title: "菜单编码", width: 250},
+                    {field: "menuNames", title: "菜单名称", width: 250},
+                    {field: "sort", title: "排序号", width: 90},
+                    {field: "createTime", title: "创建时间", width: 200},
+                    {title: "操作", width: 150, templet: "#operationTpl", align: "center", fixed: "right"}
+                ]
+            ],
+            done: function (res, curr, count) {
 
-		okLoading.close();
+            }
+        });
 
-		laydate.render({elem: "#startTime", type: "datetime"});
-		laydate.render({elem: "#endTime", type: "datetime"});
+        $('.pageSearch').click(function () {
+            let searchParam = {
+                "name": $(".roleSearchForm input[name='name']").val(),
+            };
+            roleTable.reload({where: searchParam, page: {curr: 1}});
+        });
 
-		let roleTable = table.render({
-			elem: "#tableId",
-			url: okMock.api.listRole,
-			limit: 10,
-			page: true,
-			toolbar: "#toolbarTpl",
-			size: "sm",
-			cols:
-			[
-				[
-					{type: "checkbox"},
-					{field: "id", title: "ID", sort: true, width: 200},
-					{field: "name", title: "角色名"},
-					{field: "remarks", title: "备注"},
-					{field: "createUsername", title: "创建者"},
-					{field: "status", title: "状态", templet: "#statusTpl"},
-					{field: "createTime", title: "创建时间", width: 150},
-					{title: "操作", width: 80, align: "center", templet: "#operationTpl"}
-				]
-			],
-			done: function (res, curr, count) {
-				console.log(res, curr, count);
-			}
-		});
+        table.on("toolbar(tableFilter)", function (obj) {
+            switch (obj.event) {
+                case "add":
+                    add();
+                    break;
+                case "batchDel":
+                    batchDel();
+                    break;
+            }
+        });
 
-		form.on("submit(search)", function (data) {
-			roleTable.reload({
-				where: data.field,
-				page: {curr: 1}
-			});
-			return false;
-		});
+        table.on("tool(tableFilter)", function (obj) {
+            let data = obj.data;
+            switch (obj.event) {
+                case "edit":
+                    edit(data);
+                    break;
+                case "del":
+                    del(data.id);
+                    break;
+                case "distribution":
+                    distribution(data);
+                    break;
+            }
+        });
 
-		table.on("toolbar(tableFilter)", function (obj) {
-			switch (obj.event) {
-				case "add":
-					add();
-					break;
-				case "batchDel":
-					batchDel();
-					break;
-			}
-		});
+        function add() {
+            okLayer.open("添加角色", "role-insert.html", "90%", "90%", null, function () {
+                roleTable.reload();
+            })
+        }
 
-		table.on("tool(tableFilter)", function (obj) {
-			let data = obj.data;
-			switch (obj.event) {
-				case "edit":
-					edit(data.id);
-					break;
-				case "del":
-					del(data.id);
-					break;
-			}
-		});
+        function batchDel() {
+            // okLayer.confirm("确定要批量删除吗？", function (index) {
+            //     layer.close(index);
+            //     let idsStr = okUtils.tableBatchCheck(table);
+            //     if (idsStr) {
+            //         okUtils.ajax("/role/deleteRole", "delete", {idsStr: idsStr}, true).done(function (response) {
+            //             okUtils.tableSuccessMsg(response.msg);
+            //         }).fail(function (error) {
+            //             console.log(error)
+            //         });
+            //     }
+            // });
+        }
 
-		function add() {
-			okLayer.open("添加角色", "role-insert.html", "90%", "90%", null, function () {
-				roleTable.reload();
-			})
-		}
+        function edit(data) {
+            console.log(data)
+            okLayer.open("修改角色", "role-update.html", "90%", "90%", function (layero, index) {
+                var body = layer.getChildFrame('body', index);
+                //回显表单数据
+                body.find(".roleForm input[name='roleId']").val(data.roleId);
+                body.find(".roleForm input[name='name']").val(data.name);
+                body.find(".roleForm input[name='code']").val(data.code);
+                body.find(".roleForm input[name='description']").val(data.description);
+                body.find(".roleForm input[name='sort']").val(data.sort);
+            },function () {
+                roleTable.reload();
+            })
+        }
 
-		function batchDel() {
-			okLayer.confirm("确定要批量删除吗？", function (index) {
-				layer.close(index);
-				let idsStr = okUtils.tableBatchCheck(table);
-				if (idsStr) {
-					okUtils.ajax("/role/deleteRole", "delete", {idsStr: idsStr}, true).done(function (response) {
-						okUtils.tableSuccessMsg(response.msg);
-					}).fail(function (error) {
-						console.log(error)
-					});
-				}
-			});
-		}
+        function distribution(data) {
+            console.log(data)
+            okLayer.open("分配菜单", "role-distribution.html", "90%", "90%", function (layero, index) {
+                var body = layer.getChildFrame('body', index);
+                //回显表单数据
+                body.find(".roleForm input[name='roleId']").val(data.roleId);
+                body.find(".roleForm input[name='name']").val(data.name);
+                body.find(".roleForm input[name='code']").val(data.code);
+                body.find(".roleForm input[name='description']").val(data.description);
+                body.find(".roleForm input[name='sort']").val(data.sort);
+                body.find(".roleForm textarea[name='oldPermissionName']").val(data.menuNames);
+            },function () {
+                roleTable.reload();
+            })
+        }
 
-		function edit(id) {
-			okLayer.open("编辑角色", "role-update.html?id=" + id, "90%", "90%", null, function () {
-				roleTable.reload();
-			})
-		}
-
-		function del(id) {
-			okLayer.confirm("确定要删除吗？", function () {
-				okUtils.ajax("/role/deleteRole", "delete", {idsStr: id}, true).done(function (response) {
-					okUtils.tableSuccessMsg(response.msg);
-				}).fail(function (error) {
-					console.log(error)
-				});
-			})
-		}
-	})
+        function del(id) {
+            okLayer.confirm("确定要删除吗？", function () {
+                okUtils.ajax("/role/deleteRole", "delete", {idsStr: id}, true).done(function (response) {
+                    okUtils.tableSuccessMsg(response.msg);
+                }).fail(function (error) {
+                    console.log(error)
+                });
+            })
+        }
+    })
 </script>
 <!-- 头工具栏模板 -->
 <script type="text/html" id="toolbarTpl">
-	<div class="layui-btn-container">
-		<div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-1"></i></div>
-		<div class="layui-inline" lay-event="batchDel"><i class="layui-icon layui-icon-delete"></i></div>
-	</div>
+    <div class="layui-btn-container">
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-1"></i></div>
+    </div>
 </script>
 <!-- 行工具栏模板 -->
 <script type="text/html" id="statusTpl">
-	{{#  if(d.status == 0){ }}
-	<span class="layui-btn layui-btn-normal layui-btn-xs">启用</span>
-	{{#  } else if(d.status == 1) { }}
-	<span class="layui-btn layui-btn-warm layui-btn-xs">停用</span>
-	{{#  } else if(d.status == 2) { }}
-	<span class="layui-btn layui-btn-danger layui-btn-xs">删除</span>
-	{{#  } }}
+    {{#  if(d.status == 0){ }}
+    <span class="layui-btn layui-btn-normal layui-btn-xs">启用</span>
+    {{#  } else if(d.status == 1) { }}
+    <span class="layui-btn layui-btn-warm layui-btn-xs">停用</span>
+    {{#  } else if(d.status == 2) { }}
+    <span class="layui-btn layui-btn-danger layui-btn-xs">删除</span>
+    {{#  } }}
 </script>
 
 <script type="text/html" id="operationTpl">
-	<a href="javascript:" title="编辑" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
-	<a href="javascript:" title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
+    <a href="javascript:" title="编辑" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
+    <a href="javascript:" title="分配" lay-event="distribution"><i class="layui-icon">&#xe630;</i></a>
+    <a href="javascript:" title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
 </script>
 </body>
 </html>

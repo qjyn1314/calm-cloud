@@ -16,22 +16,22 @@
         <div class="layui-form-item">
             <label class="layui-form-label">父级编码</label>
             <div class="layui-input-block">
-                <ul id="menuDtree" class="dtree menuDtree" data-id="0" data-value="0" lay-filter="menuDtree">
+                <ul id="menuDtree" class="dtree menuDtree" data-id="0" data-value="-1" lay-filter="menuDtree">
                 </ul>
                 <input type="text" id="pcode_id" name="pcode" hidden="hidden">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">权限编码</label>
+            <label class="layui-form-label">菜单编码</label>
             <div class="layui-input-block">
-                <input type="text" name="code" placeholder="请输入权限编码" autocomplete="off" class="layui-input"
+                <input type="text" name="code" placeholder="请输入菜单编码" autocomplete="off" class="layui-input"
                        lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">权限名</label>
+            <label class="layui-form-label">菜单名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" placeholder="请输入权限名" autocomplete="off" class="layui-input"
+                <input type="text" name="name" placeholder="请输入菜单名" autocomplete="off" class="layui-input"
                        lay-verify="required">
             </div>
         </div>
@@ -119,7 +119,7 @@
         //加载dtree--参考：  http://www.wisdomelon.com/DTreeHelper/
         okUtils.dtreeInitSelect({
             elem: "#menuDtree",
-            url: okUtils.menuSaveTree,
+            url: okUtils.menuTree,
         })
         // 绑定节点点击
         dtree.on("node('menuDtree')", function (obj) {
