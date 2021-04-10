@@ -20,7 +20,12 @@
         <dependency>
             <groupId>com.calm.user.api</groupId>
             <artifactId>user-api</artifactId>
-            <version>${calm.user.version}</version>
+            <version>${user-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.calm.sequence.api</groupId>
+            <artifactId>sequence-api</artifactId>
+            <version>${sequence-api.version}</version>
         </dependency>
     </dependencies>
 

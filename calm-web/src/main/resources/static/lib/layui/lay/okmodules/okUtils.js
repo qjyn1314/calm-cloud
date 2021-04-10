@@ -41,6 +41,11 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
         roleUpdate: baseUrl + "/user/api/v1/sysRole/update",
         //角色分配菜单
         roleDistributionMenu: baseUrl + "/user/api/v1/sysRole/distributionMenu",
+        //用户列表
+        userPage:  baseUrl + "/user/api/v1/sysUser/page",
+        //保存用户
+        userSave:  baseUrl + "/user/api/v1/sysUser/save",
+
         /**
          * 封装默认表格
          *
@@ -50,7 +55,7 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
         tableInit: function (params) {
             const defaultSetting = {
                 page: true,
-                skin: 'line',
+                skin: 'nob',
                 limit: 10,
                 limits: [10, 20, 50, 100],
                 autoSort: false,

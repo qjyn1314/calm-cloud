@@ -1,17 +1,22 @@
 server:
   port: 85
 spring:
+  boot:
+    admin:
+      client:
+        instance:
+          service-url: http://127.0.0.1:84
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/calm?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     password: E/v2nQHfRFE7LNQ192WzEO2Cl1w2hu/M
-#nacos
+  #nacos
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
       discovery:
         server-addr: 127.0.0.1:8848
-#redis
+  #redis
   redis:
     database: 1
     host: 127.0.0.1

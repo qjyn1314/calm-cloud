@@ -1,8 +1,12 @@
-server:
-  port: 83
 spring:
   application:
     name: calm-user
+  boot:
+    admin:
+      client:
+        connect-timeout: 5000
+        period: 10000
+        read-timeout: 5000
   cloud:
     nacos:
       config:

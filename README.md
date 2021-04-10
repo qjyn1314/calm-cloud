@@ -35,6 +35,9 @@ calm-admin:84
 
 calm-auth:85
 
+calm-sequence:86
+
+
 ### 工程的结构
 
 #### calm-parent  包括：swagger、redis、jasypt、email、jwt、nacos、openfeign、springboot-admin

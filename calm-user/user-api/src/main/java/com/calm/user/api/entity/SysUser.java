@@ -1,8 +1,9 @@
 package com.calm.user.api.entity;
 
-import java.util.Date;
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.util.Date;
 /**
  * 用户表(SysUser)实体类
  *
@@ -25,6 +26,10 @@ public class SysUser implements Serializable {
     */
     private String account;
     /**
+    * 用户编码
+    */
+    private String code;
+    /**
     * 密码
     */
     private String password;
@@ -41,7 +46,7 @@ public class SysUser implements Serializable {
     */
     private Date birthday;
     /**
-    * 性别(字典)
+    * 性别 UserSex
     */
     private Integer sex;
     /**
@@ -52,6 +57,10 @@ public class SysUser implements Serializable {
     * 电话
     */
     private String phone;
+    /**
+    * 备注
+    */
+    private String remarks;
     /**
     * 状态 UserStatus
     */

@@ -1,6 +1,5 @@
 package com.calm.user.api.enums;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,8 +17,8 @@ public enum UserStatus {
     TO_AUDIT(0,"待审核"),
     /**已审核*/
     THE_APPROVED(1,"已审核"),
-    /**已冻结*/
-    HAVE_BEEN_FROZEN(2,"已冻结"),
+    /**已停用*/
+    DISABLE(2,"已停用"),
 
         ;
     @Getter

@@ -1,5 +1,6 @@
 package com.calm.user.persistence.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.calm.common.auth.CurrentSecurityUserUtils;
 import com.calm.common.auth.CurrentUser;
 import com.calm.common.exception.CalmException;
@@ -35,7 +36,7 @@ public class SysMenuController extends BaseController {
     private SysMenuService sysMenuService;
 
     private void handleMenuDto(SysMenuDto sysMenuDto) {
-        Date date = new Date();
+        Date date = DateUtil.date();
         CurrentUser currentUser = CurrentSecurityUserUtils.authUser();
         sysMenuDto.setCreateTime(date);
         sysMenuDto.setUpdateTime(date);

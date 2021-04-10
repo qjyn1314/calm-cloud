@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calm.sequence.persistence.mapper.SysSequenceMapper">
+    <resultMap id="BaseResultMap" type="com.calm.sequence.api.entity.SysSequence">
+        <!--@Table sys_sequence-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="sequenceType" column="sequence_type" jdbcType="VARCHAR"/>
+        <result property="sequence" column="sequence" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="DATE"/>
+    </resultMap>
+
+    <!--默认列表字段-->
+    <sql id="column_default">
+        id,sequence_type,`sequence`,create_time
+    </sql>
+
+    <select id="selectSequenceByType" resultType="com.calm.sequence.api.vo.SysSequenceVo">
+        select <include refid="column_default"/> from sys_sequence where sequence_type = #{sequenceType}
+    </select>
+
+    <update id="updateSequenceByType">
+        update sys_sequence set `sequence` = #{sequence} where sequence_type = #{sequenceType}
+    </update>
+
+</mapper>

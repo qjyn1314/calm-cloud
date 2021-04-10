@@ -3,11 +3,3 @@ spring:
     active: dev
   main:
     allow-bean-definition-overriding: true
-  boot:
-    admin:
-      client:
-        connect-timeout: 5000
-        instance:
-          service-url: http://127.0.0.1:84
-        period: 10000
-        read-timeout: 5000

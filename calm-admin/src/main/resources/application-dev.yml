@@ -1,11 +1,20 @@
+server:
+  port: 84
 spring:
-#nacos
+  #admin监控
+  boot:
+    admin:
+      notify:
+        mail:
+          from: qjyn1314@163.com
+          to: qjyn1314@foxmail.com
+  #nacos
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
       discovery:
         server-addr: 127.0.0.1:8848
-#redis
+  #redis
   redis:
     database: 1
     host: 127.0.0.1

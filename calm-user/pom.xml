@@ -15,7 +15,8 @@
     <description>CalmUser-用户服务</description>
 
     <properties>
-        <calm.user.version>1.0.0</calm.user.version>
+        <user-api.version>1.0.0</user-api.version>
+        <sequence-api.version>1.0.0</sequence-api.version>
     </properties>
 
     <modules>

@@ -15,6 +15,10 @@ public interface FeignSupport {
      */
     String USER_SERVICE = "calm-user";
     /**
+     * 序列号服务
+     */
+    String SEQUENCE_SERVICE = "calm-sequence";
+    /**
      * 前端web服务
      */
     String WEB_SERVICE = "calm-web";

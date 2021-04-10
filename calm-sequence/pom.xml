@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.calm</groupId>
+        <artifactId>calm-cloud</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <groupId>com.calm.sequence</groupId>
+    <artifactId>calm-sequence</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>calm-sequence</name>
+    <description>Sequence-生成序列号</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <modules>
+        <module>sequence-api</module>
+        <module>sequence-service</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.calm.core</groupId>
+            <artifactId>calm-core</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <!--
+            打包参考：https://docs.spring.io/spring-boot/docs/2.3.8.RELEASE/maven-plugin/reference/html/#goals-repackage
+        -->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

@@ -1,6 +1,12 @@
 package com.calm.user.api.dto;
 
+import com.calm.parent.base.BaseDto;
+import com.calm.user.api.entity.SysUser;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,7 +18,8 @@ import java.util.Date;
  * @since 2021-02-15 17:04:36
  */
 @Data
-public class SysUserDto implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class SysUserDto extends BaseDto implements Serializable {
     private static final long serialVersionUID = 246857797913472694L;
     /**
     * 主键id
@@ -25,7 +32,13 @@ public class SysUserDto implements Serializable {
     /**
     * 账号-唯一标识
     */
+    @Email(message = "请输入正确的电子邮箱格式。")
+    @Length(min = 1,message = "账号不能为空。")
     private String account;
+    /**
+     * 用户编码
+     */
+    private String code;
     /**
     * 密码
     */
@@ -37,23 +50,31 @@ public class SysUserDto implements Serializable {
     /**
     * 名字
     */
+    @Length(max = 10, message = "姓名最大长度是10。")
     private String name;
     /**
     * 生日
     */
     private Date birthday;
     /**
-    * 性别(字典)
+    * 性别:0-女；1-男；2-未知
     */
     private Integer sex;
     /**
     * 电子邮件
     */
+    @Email(message = "电子邮箱格式不正确。")
     private String email;
     /**
     * 电话
     */
+    @Length(max = 11,message = "手机号最大长度为11。")
     private String phone;
+    /**
+     * 备注
+     */
+    @Length(max = 200, message = "备注最大长度为200。")
+    private String remarks;
     /**
     * 状态(字典)
     */
@@ -74,5 +95,16 @@ public class SysUserDto implements Serializable {
     * 更新人
     */
     private Long updateUser;
+
+    /**
+     * 角色编码
+     */
+    private String roleCode;
+
+    public SysUser getSysUser() {
+        SysUser sysUser = new SysUser();
+        BeanUtils.copyProperties(this, sysUser);
+        return sysUser;
+    }
 
 }

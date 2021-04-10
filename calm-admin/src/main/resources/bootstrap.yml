@@ -1,8 +1,11 @@
-server:
-  port: 84
 spring:
   application:
     name: calm-admin
+  boot:
+    admin:
+      ui:
+        brand: <img src="assets/img/icon-spring-boot-admin.svg"><span>Calm-Admin</span>
+        title: Calm-Admin
   cloud:
     nacos:
       config:
@@ -16,6 +19,16 @@ spring:
     servlet:
       content-type: 'text/html'
     enabled: true
+#admin监控
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 #密文密码配置
 jasypt:
   encryptor:

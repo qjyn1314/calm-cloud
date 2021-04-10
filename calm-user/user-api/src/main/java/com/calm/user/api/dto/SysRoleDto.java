@@ -16,9 +16,9 @@ import java.util.Date;
  * @author wangjunming
  * @since 2021-04-04 16:54:56
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class SysRoleDto  extends BaseDto implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class SysRoleDto extends BaseDto implements Serializable {
 
     /**主键id*/
     private Long roleId;

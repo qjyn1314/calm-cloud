@@ -13,6 +13,12 @@
 spring:
   application:
     name: calm-gateway
+  boot:
+    admin:
+      client:
+        connect-timeout: 5000
+        period: 10000
+        read-timeout: 5000
   cloud:
     nacos:
       config:
@@ -47,6 +53,8 @@ spring:
           uri: lb://calm-auth
           predicates:
             - Path=/auth/**
+  thymeleaf:
+    check-template: false
 management:
   endpoint:
     health:

@@ -1,5 +1,6 @@
 package com.calm.user.api.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -28,6 +29,10 @@ public class SysUserVo implements Serializable {
     */
     private String account;
     /**
+     * 用户编码
+     */
+    private String code;
+    /**
     * 密码
     */
     private String password;
@@ -42,6 +47,7 @@ public class SysUserVo implements Serializable {
     /**
     * 生日
     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date birthday;
     /**
     * 性别(字典)
@@ -56,13 +62,29 @@ public class SysUserVo implements Serializable {
     */
     private String phone;
     /**
-    * 状态(字典)
+     * 备注
+     */
+    private String remarks;
+    /**
+    * 状态
     */
     private Integer status;
-
     /**
      * 权限编码
      */
     private List<String> roles;
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+    /**
+     * 角色编码-逗号分隔
+     */
+    private String roleCode;
+    /**
+     * 角色名称-逗号分隔
+     */
+    private String roleName;
 
 }

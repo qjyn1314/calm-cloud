@@ -89,6 +89,7 @@
                 //复选框点击事件完毕后，返回该树关于复选框操作的全部信息。
                 chooseDone: function (checkbarNodesParam) {
                     var permissionName = "";
+                    permissionCode = "";
                     for(var i = 0; i<checkbarNodesParam.length;i++){
                         let checkbarNodesParamElement = checkbarNodesParam[i];
                         permissionName += checkbarNodesParamElement.context + '，';
@@ -97,9 +98,7 @@
                     permissionName = permissionName.substring(0,permissionName.length-1);
                     permissionCode = permissionCode.substring(0,permissionCode.length-1);
                     $(".roleForm textarea[name='permissionName']").val(permissionName);
-                     // permissionCode = JSON.stringify(permissionCode.split(","));
                      permissionCode = permissionCode.split(",");
-                    // $(".roleForm input[name='permissionCode']").val(permissionCode);
                     return checkbarNodesParam;
                 }
             }
