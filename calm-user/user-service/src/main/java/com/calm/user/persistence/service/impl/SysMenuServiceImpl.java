@@ -3,10 +3,9 @@ package com.calm.user.persistence.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.calm.common.exception.CalmException;
 import com.calm.user.api.dto.SysMenuDto;
 import com.calm.user.api.entity.SysMenu;
-import com.calm.user.api.vo.MenuTreeVo;
+import com.calm.user.api.vo.DTreeVo;
 import com.calm.user.api.vo.SysMenuVo;
 import com.calm.user.persistence.mapper.SysMenuMapper;
 import com.calm.user.persistence.service.SysMenuService;
@@ -68,7 +67,7 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @since 2021/3/25 11:51
      */
     @Override
-    public List<MenuTreeVo> formSelectTree(SysMenuDto sysMenuDto) {
+    public List<DTreeVo> formSelectTree(SysMenuDto sysMenuDto) {
         return mapper.selectByCode(sysMenuDto.getPcode());
     }
 
@@ -99,9 +98,6 @@ public class SysMenuServiceImpl implements SysMenuService {
         LambdaQueryWrapper<SysMenu> queryWrapper  = new LambdaQueryWrapper<>();
         queryWrapper.eq(SysMenu::getMenuId,sysMenuDto.getMenuId());
         SysMenu sysMenuOne = mapper.selectOne(queryWrapper);
-        if(null == sysMenuOne){
-            throw new CalmException("请选择需要求改的菜单");
-        }
         SysMenu sysMenu = sysMenuDto.getUpdateSysMenu();
         int update = mapper.update(sysMenu, queryWrapper);
         return sysMenuOne.getMenuId();

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.calm.user.api.dto.SysMenuDto;
 import com.calm.user.api.entity.SysMenu;
-import com.calm.user.api.vo.MenuTreeVo;
+import com.calm.user.api.vo.DTreeVo;
 import com.calm.user.api.vo.SysMenuVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -23,7 +23,7 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
     IPage<SysMenuVo> page(Page<SysMenuVo> page, @Param("qo") SysMenuDto sysMenuDto);
 
-    List<MenuTreeVo> selectByCode(@Param("code") String code);
+    List<DTreeVo> selectByCode(@Param("code") String code);
 
     SysMenuVo selectMenuByCode(@Param("code") String code);
 

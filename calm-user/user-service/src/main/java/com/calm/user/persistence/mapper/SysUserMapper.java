@@ -38,4 +38,14 @@ public interface SysUserMapper extends BaseMapper<SysUser>{
      */
     IPage<SysUserVo> page(Page<SysUserVo> page, @Param("qo") SysUserDto sysUserDto);
 
+    /**
+     * 通过参数查询唯一用户信息
+     *
+     * @param sysUserDto 前端传参
+     * @author wangjunming
+     * @since 2021/4/13 14:30
+     * @return com.calm.user.api.vo.SysUserVo
+     */
+    SysUserVo queryByParams(SysUserDto sysUserDto);
+
 }

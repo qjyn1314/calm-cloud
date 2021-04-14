@@ -43,7 +43,7 @@
         </where>
     </select>
 
-    <resultMap id="MenuTreeVoMap" type="com.calm.user.api.vo.MenuTreeVo">
+    <resultMap id="MenuTreeVoMap" type="com.calm.user.api.vo.DTreeVo">
         <result property="id" column="code" jdbcType="VARCHAR"/>
         <result property="parentId" column="pcode" jdbcType="VARCHAR"/>
         <result property="title" column="name" jdbcType="VARCHAR"/>

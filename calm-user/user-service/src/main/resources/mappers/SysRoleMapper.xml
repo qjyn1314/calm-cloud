@@ -43,4 +43,14 @@
             where t1.code = #{code}
         GROUP BY t2.role_code
     </select>
+
+    <resultMap id="RoleTreeVoMap" type="com.calm.user.api.vo.DTreeVo">
+        <result property="id" column="code" jdbcType="VARCHAR"/>
+        <result property="title" column="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="roleTree" resultMap="RoleTreeVoMap">
+        select code, name FROM sys_role
+    </select>
+
 </mapper>

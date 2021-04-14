@@ -53,6 +53,10 @@ spring:
           uri: lb://calm-auth
           predicates:
             - Path=/auth/**
+        - id: calm-sequence
+          uri: lb://calm-sequence
+          predicates:
+            - Path=/sequence/**
   thymeleaf:
     check-template: false
 management:

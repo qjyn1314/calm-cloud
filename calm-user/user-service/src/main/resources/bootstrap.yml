@@ -11,6 +11,10 @@ spring:
     nacos:
       config:
         file-extension: yml
+  # 前端传参的格式化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   datasource:
     druid:
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500

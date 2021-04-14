@@ -2,11 +2,13 @@ package com.calm.user.api.dto;
 
 import com.calm.parent.base.BaseDto;
 import com.calm.user.api.entity.SysUser;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.BeanUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -55,6 +57,7 @@ public class SysUserDto extends BaseDto implements Serializable {
     /**
     * 生日
     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date birthday;
     /**
     * 性别:0-女；1-男；2-未知
@@ -101,9 +104,22 @@ public class SysUserDto extends BaseDto implements Serializable {
      */
     private String roleCode;
 
+    /**
+     * 角色编码逗号分隔的字符串
+     */
+    private String[] roleCodes;
+
+    /**获取保存的用户信息*/
     public SysUser getSysUser() {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(this, sysUser);
+        return sysUser;
+    }
+
+    /**获取更新的用户信息*/
+    public SysUser getUpdateSysUser() {
+        SysUser sysUser = new SysUser();
+        BeanUtils.copyProperties(this, sysUser,"createTime","createUser");
         return sysUser;
     }
 

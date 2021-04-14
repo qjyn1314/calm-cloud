@@ -104,7 +104,7 @@ public class JsonResult<R> implements Serializable {
      * @since 2021/3/29 13:18
      * @return java.util.Map<java.lang.String,java.lang.Object>
      */
-    public Map<String, Object> toPermissionsTreeResult() {
+    public Map<String, Object> toDTreeResult() {
         Map<String, Object> maps = new HashMap<>(2);
         Map<String, Object> status = Maps.newHashMap();
         status.put("code", this.code == SUCCESS_0 ? SUCCESS_200 : FAIL_500);

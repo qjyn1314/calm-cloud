@@ -11,14 +11,14 @@ import java.util.List;
 
 /**
  * <p>
- * explain:
+ * explain: 菜单和角色的返回树结构
  * </p>
  *
  * @author wangjunming
  * @since 2021/3/25 11:50
  */
 @Data
-public class MenuTreeVo implements Serializable {
+public class DTreeVo implements Serializable {
     private static final ArrayList<HashMap<String, String>> CHECK_ARR_LIST = CollUtil.newArrayList();
     private static final HashMap<String, String> CHECK_ARR_MAP = CollUtil.newHashMap();
 
@@ -37,7 +37,7 @@ public class MenuTreeVo implements Serializable {
     /**复选框必填项用来返回前段展示复选框*/
     private String checkArr;
     /**其下的子级*/
-    List<MenuTreeVo> children;
+    List<DTreeVo> children;
 
     public String getCheckArr() {
         return JSONUtil.toJsonStr(CHECK_ARR_LIST);

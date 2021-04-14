@@ -2,7 +2,10 @@ package com.calm.user.persistence.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.calm.user.api.dto.SysRoleDto;
+import com.calm.user.api.vo.DTreeVo;
 import com.calm.user.api.vo.SysRoleVo;
+
+import java.util.List;
 
 /**
  * 角色表(SysRole)表服务接口
@@ -62,5 +65,15 @@ public interface SysRoleService{
      * @return java.lang.Long
      */
     Boolean distributionMenu(SysRoleDto sysRoleDto);
+
+    /**
+     * 获取树形结构的角色信息
+     *
+     * @param sysRoleDto 前端传参
+     * @author wangjunming
+     * @since 2021/4/14 12:07
+     * @return java.util.List<com.calm.user.api.vo.DTreeVo>
+     */
+    List<DTreeVo> roleTree(SysRoleDto sysRoleDto);
 
 }

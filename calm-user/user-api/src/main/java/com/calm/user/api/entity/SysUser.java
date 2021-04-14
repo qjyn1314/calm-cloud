@@ -1,5 +1,6 @@
 package com.calm.user.api.entity;
 
+import com.calm.common.auth.PasswordService;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -85,5 +86,13 @@ public class SysUser implements Serializable {
     * 乐观锁
     */
     private Integer version;
+
+    /**
+     * 密码为用户输入的密码加上盐值，进行加密后的字符串
+     */
+    public void initPassword() {
+        this.salt = PasswordService.getSalt();
+        this.password = PasswordService.encode(this.password + this.salt, this.salt);
+    }
 
 }

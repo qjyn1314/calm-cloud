@@ -42,9 +42,19 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
         //角色分配菜单
         roleDistributionMenu: baseUrl + "/user/api/v1/sysRole/distributionMenu",
         //用户列表
-        userPage:  baseUrl + "/user/api/v1/sysUser/page",
+        userPage: baseUrl + "/user/api/v1/sysUser/page",
         //保存用户
-        userSave:  baseUrl + "/user/api/v1/sysUser/save",
+        userSave: baseUrl + "/user/api/v1/sysUser/save",
+        //更新用户
+        userUpdate: baseUrl + "/user/api/v1/sysUser/update",
+        //审核通过
+        userAudit: baseUrl + "/user/api/v1/sysUser/audit",
+        //用户停用
+        userDisable: baseUrl + "/user/api/v1/sysUser/disable",
+        //角色树
+        roleTree: baseUrl + "/user/api/v1/sysRole/roleTree",
+        //用户分配角色
+        userDistributionRole: baseUrl + "/user/api/v1/sysUser/userDistributionRole",
 
         /**
          * 封装默认表格
@@ -266,7 +276,8 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
          * sessionStorage 二次封装
          */
         session: function (name, value) {
-            if (value) { /**设置*/
+            if (value) {
+                /**设置*/
                 if (typeof value == "object") {
                     sessionStorage.setItem(name, JSON.stringify(value));
                 } else {
@@ -281,7 +292,8 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 } catch (err) {
                     return val;
                 }
-            } else { /**清除*/
+            } else {
+                /**清除*/
                 return sessionStorage.removeItem(name);
             }
         },
@@ -289,7 +301,8 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
          * localStorage 二次封装
          */
         local: function (name, value) {
-            if (value) { /**设置*/
+            if (value) {
+                /**设置*/
                 if (typeof value == "object") {
                     localStorage.setItem(name, JSON.stringify(value));
                 } else {
@@ -304,7 +317,8 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 } catch (err) {
                     return val;
                 }
-            } else { /**清除*/
+            } else {
+                /**清除*/
                 return localStorage.removeItem(name);
             }
         },
@@ -337,7 +351,7 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
             for (var k in o)
                 if (new RegExp("(" + k + ")").test(fmt))
-                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
             return fmt;
         },
         number: {
@@ -356,10 +370,7 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
              */
             isNumberWith: function (num, begin, end) {
                 if (this.isNumber(num)) {
-                    if (num >= begin && num <= end) {
-                        return true;
-                    }
-                    return false;
+                    return num >= begin && num <= end;
                 }
             },
         },

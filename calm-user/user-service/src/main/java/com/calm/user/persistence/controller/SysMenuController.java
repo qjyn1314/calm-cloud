@@ -70,7 +70,7 @@ public class SysMenuController extends BaseController {
     @GetMapping("/formSelectTree")
     public Map<String, Object> formSelectTree(SysMenuDto sysMenuDto) {
         sysMenuDto.setPcode("-1");
-        return JsonResult.success(sysMenuService.formSelectTree(sysMenuDto)).toPermissionsTreeResult();
+        return JsonResult.success(sysMenuService.formSelectTree(sysMenuDto)).toDTreeResult();
     }
 
     /**

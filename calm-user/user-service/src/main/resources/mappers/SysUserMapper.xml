@@ -70,4 +70,16 @@
         </where>
         GROUP BY t1.`code` ORDER BY t1.create_time DESC
     </select>
+
+    <select id="queryByParams" resultType="com.calm.user.api.vo.SysUserVo">
+        select user_id, avatar, account, code, name, birthday, sex, email, phone, remarks,status, create_time, create_user, update_time, update_user, version from sys_user
+        <where>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+        </where>
+    </select>
 </mapper>

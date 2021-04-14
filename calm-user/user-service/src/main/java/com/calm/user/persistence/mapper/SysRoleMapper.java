@@ -5,9 +5,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.calm.user.api.dto.SysRoleDto;
 import com.calm.user.api.entity.SysRole;
+import com.calm.user.api.vo.DTreeVo;
 import com.calm.user.api.vo.SysRoleVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 角色表(SysRole)表数据库访问层
@@ -21,4 +24,7 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
     IPage<SysRoleVo> page(Page<SysRoleVo> page, @Param("qo") SysRoleDto sysRoleDto);
 
     SysRoleVo selectByCode(@Param("code") String code);
+
+    List<DTreeVo> roleTree(SysRoleDto sysRoleDto);
+
 }

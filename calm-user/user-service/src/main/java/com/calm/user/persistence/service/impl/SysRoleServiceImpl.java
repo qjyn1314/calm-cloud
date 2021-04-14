@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.calm.user.api.dto.SysRoleDto;
 import com.calm.user.api.entity.SysRole;
 import com.calm.user.api.entity.SysRoleMenu;
+import com.calm.user.api.vo.DTreeVo;
 import com.calm.user.api.vo.SysRoleVo;
 import com.calm.user.persistence.mapper.SysRoleMapper;
 import com.calm.user.persistence.service.SysRoleMenuService;
@@ -122,5 +123,18 @@ public class SysRoleServiceImpl implements SysRoleService {
         });
         //添加此角色新的菜单
         return roleMenuService.insertByList(roleMenuList);
+    }
+
+    /**
+     * 获取树形结构的角色信息
+     *
+     * @param sysRoleDto 前端传参
+     * @return java.util.List<com.calm.user.api.vo.DTreeVo>
+     * @author wangjunming
+     * @since 2021/4/14 12:07
+     */
+    @Override
+    public List<DTreeVo> roleTree(SysRoleDto sysRoleDto) {
+        return mapper.roleTree(sysRoleDto);
     }
 }

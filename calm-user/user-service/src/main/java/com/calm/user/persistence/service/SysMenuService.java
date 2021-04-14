@@ -2,7 +2,7 @@ package com.calm.user.persistence.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.calm.user.api.dto.SysMenuDto;
-import com.calm.user.api.vo.MenuTreeVo;
+import com.calm.user.api.vo.DTreeVo;
 import com.calm.user.api.vo.SysMenuVo;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public interface SysMenuService{
      * @since 2021/3/25 11:51
      * @return List<MenuTreeVo>
      */
-    List<MenuTreeVo> formSelectTree(SysMenuDto sysMenuDto);
+    List<DTreeVo> formSelectTree(SysMenuDto sysMenuDto);
 
     /**
      * 通过菜单编码查询菜单信息

@@ -41,7 +41,8 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">密码</label>
 			<div class="layui-input-block">
-				<input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input"
+				<input type="text" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input"
+					   onfocus="this.type='password'"
 					   lay-verify="required">
 			</div>
 		</div>
@@ -102,12 +103,10 @@
 				"birthday": $(".userForm input[name='birthday']").val(),
 				"status": $(".userForm input[name='status']").val(),
 				"sex": $(".userForm input[name='sex']").val(),
-				"remarks": $(".userForm input[name='remarks']").val(),
+				"remarks": $(".userForm textarea[name='remarks']").val(),
 			};
 			userForm = JSON.stringify(userForm);
-			console.log(userForm);
 			okUtils.ajax(okUtils.userSave, "post", userForm, true).done(function (response) {
-				console.log(response);
 				okLayer.greenTickMsg("添加成功", function () {
 					parent.layer.close(parent.layer.getFrameIndex(window.name));
 				});

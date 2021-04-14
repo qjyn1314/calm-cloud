@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * 角色表(SysRole)表控制层
@@ -117,6 +118,18 @@ public class SysRoleController extends BaseController {
         }
         Boolean flag = sysRoleService.distributionMenu(sysRoleDto);
         return JsonResult.success(flag);
+    }
+
+    /**
+     * 角色树
+     *
+     * @return com.calm.parent.base.JsonResult
+     * @author wangjunming
+     * @since 2021/4/7 19:27
+     */
+    @GetMapping("/roleTree")
+    public Map<String, Object> roleTree(SysRoleDto sysRoleDto) {
+        return JsonResult.success(sysRoleService.roleTree(sysRoleDto)).toDTreeResult();
     }
 
 }
