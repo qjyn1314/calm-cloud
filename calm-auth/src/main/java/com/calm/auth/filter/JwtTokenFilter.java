@@ -1,8 +1,13 @@
 package com.calm.auth.filter;
 
+import com.alibaba.fastjson.JSONObject;
+import com.calm.auth.service.CalmUserService;
 import com.calm.common.auth.CurrentSecurityUserUtils;
 import com.calm.common.auth.CurrentUser;
-import com.calm.auth.service.CalmUserService;
+import com.calm.parent.config.redis.RedisHelper;
+import com.calm.user.api.enums.UserStatus;
+import com.calm.user.api.exception.HaveBeenforzenException;
+import com.calm.user.api.exception.ToauditException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -17,6 +22,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 /**
  * <p>
@@ -34,6 +40,8 @@ public class JwtTokenFilter extends UsernamePasswordAuthenticationFilter {
     private final CalmUserService calmUserService;
     @Autowired
     private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private RedisHelper redisHelper;
 
     public JwtTokenFilter(CalmUserService calmUserService, PasswordEncoder passwordEncoder) {
         AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher(CurrentSecurityUserUtils.FORM_LOGIN_URL, HttpMethod.POST.name());
@@ -52,9 +60,20 @@ public class JwtTokenFilter extends UsernamePasswordAuthenticationFilter {
         String username = request.getParameter("username");
         log.info("The user currently logging in is：{}", username);
         String password = request.getParameter("password");
-        CurrentUser userDetails = calmUserService.loadUserByUsername(username);
+        //从缓存中获取
+        Object redisUser = redisHelper.getValue(RedisHelper.USER_KEY + username);
+        CurrentUser userDetails = null;
+        if (Objects.nonNull(redisUser) && redisUser instanceof CurrentUser) {
+            userDetails = (CurrentUser) redisUser;
+        }
+        if (null == userDetails) {
+            userDetails = calmUserService.loadUserByUsername(username);
+        }
         validateUserPassword(password, userDetails);
-        userDetails.setPassword(null);
+        //验证通过之后，放入缓存中，每次用户相关操作时，删除缓存中的用户信息
+        redisHelper.valuePut(RedisHelper.USER_KEY + username, userDetails);
+        userDetails.noPwd();
+        log.info("The login_success user is：{}", JSONObject.toJSONString(userDetails));
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }
 
@@ -64,6 +83,12 @@ public class JwtTokenFilter extends UsernamePasswordAuthenticationFilter {
         boolean matches = this.passwordEncoder.matches(password, userDetails.getPassword());
         if (!matches) {
             throw new AuthenticationServiceException("密码不正确。");
+        }
+        if (UserStatus.TO_AUDIT.getCode().equals(userDetails.getStatus())) {
+            throw new ToauditException("账号待审核，请联系管理员处理。");
+        }
+        if (UserStatus.DISABLE.getCode().equals(userDetails.getStatus())) {
+            throw new HaveBeenforzenException("账号已停用，请联系管理员处理。");
         }
     }
 

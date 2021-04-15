@@ -30,10 +30,15 @@
     </sql>
 
     <select id="queryByAccount" resultType="com.calm.user.api.vo.SysUserVo">
-        select <include refid="Base_All_column"/> from sys_user
+        SELECT GROUP_CONCAT(t3.`code`) roleCode,GROUP_CONCAT(t3.`name`) roleName, t1.user_id, t1.avatar, t1.account, t1.code,
+        t1.password,t1.salt, t1.name, t1.birthday, t1.sex, t1.email, t1.phone, t1.status, t1.remarks,t1.create_time, t1.create_user,
+        t1.update_time, t1.update_user, t1.version
+        FROM sys_user t1
+        LEFT JOIN sys_user_role t2 ON t2.user_code = t1.`code`
+        LEFT JOIN sys_role t3 ON t3.`code` = t2.role_code
         <where>
-            <if test="account != null and account != ''">
-              and account = #{account}
+            <if test="account != null and account != '' ">
+                and t1.account = #{account}
             </if>
         </where>
     </select>

@@ -70,10 +70,6 @@ public class SysUserVo implements Serializable {
     */
     private Integer status;
     /**
-     * 权限编码
-     */
-    private List<String> roles;
-    /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -4,12 +4,14 @@ package com.calm.user.persistence.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.calm.parent.config.redis.RedisHelper;
 import com.calm.sequence.api.enums.SequenceType;
 import com.calm.sequence.api.feign.SequenceFeignService;
 import com.calm.user.api.dto.SysUserDto;
 import com.calm.user.api.entity.SysUser;
 import com.calm.user.api.entity.SysUserRole;
 import com.calm.user.api.vo.SysUserVo;
+import com.calm.user.config.delredis.DelRedis;
 import com.calm.user.persistence.mapper.SysUserMapper;
 import com.calm.user.persistence.service.SysUserRoleService;
 import com.calm.user.persistence.service.SysUserService;
@@ -41,7 +43,7 @@ public class SysUserServiceImpl implements SysUserService {
 
 
     /**
-     * 通过账号查询用户信息，包含密码和盐值
+     * 通过账号查询用户信息，包含密码和盐值，角色编码，角色名称
      *
      * @param account
      * @author wangjunming
@@ -94,6 +96,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @since 2021/4/12 17:04
      */
     @Override
+    @DelRedis(RedisHelper.USER_DEL_KEY)
     @Transactional(rollbackFor = Exception.class)
     public Boolean update(SysUserDto sysUserDto) {
         SysUser sysUser = sysUserDto.getUpdateSysUser();
@@ -111,6 +114,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @since 2021/4/13 12:07
      */
     @Override
+    @DelRedis(RedisHelper.USER_DEL_KEY)
     @Transactional(rollbackFor = Exception.class)
     public Boolean updateStatus(SysUserDto sysUserDto) {
         SysUser sysUser = sysUserDto.getUpdateSysUser();
@@ -135,6 +139,21 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     /**
+     * 通过用户账号查询用户信息
+     *
+     * @param account 用户账号
+     * @return com.calm.user.api.vo.SysUserVo
+     * @author wangjunming
+     * @since 2021/4/13 14:27
+     */
+    @Override
+    public SysUserVo queryByAccountNps(String account) {
+        SysUserDto sysUserDto = new SysUserDto();
+        sysUserDto.setAccount(account);
+        return mapper.queryByParams(sysUserDto);
+    }
+
+    /**
      * 用户分配角色
      *
      * @param sysUserDto 前端传参
@@ -143,6 +162,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @since 2021/4/14 15:33
      */
     @Override
+    @DelRedis(RedisHelper.USER_DEL_KEY)
     @Transactional(rollbackFor = Exception.class)
     public Boolean userDistributionRole(SysUserDto sysUserDto) {
         //将原有关联的角色删除掉

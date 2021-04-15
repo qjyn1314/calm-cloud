@@ -31,11 +31,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         log.info("HTTP_METHOD:--" + request.getMethod());
         log.info("IP：--" + request.getRemoteAddr());
-        Enumeration<String> parameter = request.getParameterNames();
-        while (parameter.hasMoreElements()) {
-            String element = parameter.nextElement();
-            log.info("key:{" + element + "},value:{" + request.getParameter(element) + "}");
-        }
         String token = request.getHeader(CurrentSecurityUserUtils.TOKEN_NAME);
         log.info("TOKEN：--" + token);
         if (StringUtils.isBlank(token)) {

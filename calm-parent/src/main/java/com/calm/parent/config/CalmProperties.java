@@ -36,8 +36,6 @@ public class CalmProperties {
 
     @Autowired
     private Environment environment;
-    @Autowired
-    private HashOperations<String, String, Object> hashOperations;
     private static Environment ENVIRONMENT = null;
     private String interceptUrl;
     private String validationUrl;
@@ -45,7 +43,6 @@ public class CalmProperties {
     @PostConstruct
     public void init() {
         ENVIRONMENT = environment;
-        hashOperations.put(SERVERNAME_PORT, Objects.requireNonNull(getApplicationName()), Objects.requireNonNull(getPort()));
     }
 
     @Nullable

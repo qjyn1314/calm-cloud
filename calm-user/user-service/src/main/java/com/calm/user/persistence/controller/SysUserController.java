@@ -77,7 +77,7 @@ public class SysUserController extends BaseController {
         SysUserVo sysUserVo = null;
         if (SAVE.equals(optionType)) {
             String account = sysUserDto.getAccount();
-            sysUserVo = service.queryByAccount(account);
+            sysUserVo = service.queryByAccountNps(account);
             if (null != sysUserVo) {
                 throw new CalmException("该登录邮箱已存在。");
             }

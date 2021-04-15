@@ -1,11 +1,15 @@
 package com.calm.parent.config.redis;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @author wangjunming
  * @since 2021/3/1 13:43
  */
+@Slf4j
 @Service("redisHelper")
 public class RedisHelperImpl<HK, T> implements RedisHelper<HK, T> {
 
@@ -102,5 +107,31 @@ public class RedisHelperImpl<HK, T> implements RedisHelper<HK, T> {
         return redisTemplate.expire(key, timeout, timeUnit);
     }
 
+    /**
+     * 根据模糊的key或者根据具体的key，删除redis中的数据
+     *
+     * @param key:
+     * @author wangjunming
+     * @since 2020/11/27 22:15
+     */
+    @Override
+    public boolean deleteByKey(String key) {
+        if (StringUtils.isNotBlank(key)) {
+            try {
+                Set<String> keys = redisTemplate.keys(key);
+                log.info("redis中---查询出来的所匹配的key是：{}", keys);
+                if (!CollectionUtils.isEmpty(keys)) {
+                    return redisTemplate.delete(keys) > 0;
+                }
+                log.warn("redis中---并没有查询出key：{}，其对应的值", key);
+                return Boolean.TRUE;
+            } catch (Exception e) {
+                log.error("redis根据key：{}，删除失败，原因是：{}", key, e);
+                return Boolean.FALSE;
+            }
+        } else {
+            return Boolean.FALSE;
+        }
+    }
 
 }

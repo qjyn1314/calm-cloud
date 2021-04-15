@@ -8,6 +8,7 @@ import com.calm.user.api.feign.UserFeignService;
 import com.calm.user.api.vo.SysUserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -28,47 +29,25 @@ public class CalmUserService implements UserDetailsService {
 
     @Resource
     private UserFeignService userFeignService;
-    @Resource
-    private RedisHelper redisHelper;
 
     @Override
     public CurrentUser loadUserByUsername(String account) throws UsernameNotFoundException {
         if (StringUtils.isBlank(account)) {
             throw new UsernameNotFoundException("用户名不存在。");
         }
-        Object redisUser = redisHelper.getValue(RedisHelper.USER_KEY + account);
-        if (Objects.nonNull(redisUser) && redisUser instanceof SysUserVo) {
-            log.info("Get users from Redis");
-            CurrentUser currentUser = new CurrentUser();
-            preCurrentUser(currentUser, (SysUserVo) redisUser);
-            return currentUser;
-        }
-        JsonResult<SysUserVo> jsonResult = userFeignService.queryByAccount(account);
-        SysUserVo user = jsonResult.getData();
+        JsonResult<SysUserVo> result = userFeignService.queryByAccount(account);
+        SysUserVo user = result.getData();
         if (null == user) {
             throw new UsernameNotFoundException("用户名不存在。");
         }
-        log.info("Get users from interface");
-        redisHelper.valuePut(RedisHelper.USER_KEY + account, user);
         CurrentUser currentUser = new CurrentUser();
         preCurrentUser(currentUser, user);
         return currentUser;
     }
 
     public void preCurrentUser(CurrentUser currentUser, SysUserVo userVo) {
-        currentUser.setUserId(userVo.getUserId());
-        currentUser.setAccount(userVo.getAccount());
-        currentUser.setPassword(userVo.getPassword());
-        currentUser.setAvatar(userVo.getAvatar());
-        currentUser.setSalt(userVo.getSalt());
-        currentUser.setName(userVo.getName());
-        currentUser.setBirthday(userVo.getBirthday());
-        currentUser.setSex(userVo.getSex());
-        currentUser.setEmail(userVo.getEmail());
-        currentUser.setPhone(userVo.getPhone());
-        currentUser.setStatus(userVo.getStatus());
+        BeanUtils.copyProperties(userVo,currentUser);
         currentUser.setEnabled(UserStatus.THE_APPROVED.getCode().equals(userVo.getStatus()));
-        currentUser.setRoles(Arrays.asList("system", "admin"));
     }
 
 

@@ -15,6 +15,12 @@ import java.util.concurrent.TimeUnit;
 public interface RedisHelper<HK, T> {
 
     String USER_KEY = "user_key_";
+    /**
+     * 通配符  “*” 号
+     */
+    String ASTERISK = "*";
+
+    String USER_DEL_KEY = USER_KEY + ASTERISK;
 
     /**
      * Hash结构 添加元素 * @param key key * @param hashKey hashKey * @param domain 元素
@@ -85,4 +91,10 @@ public interface RedisHelper<HK, T> {
      */
     boolean expirse(String key, long timeout, TimeUnit timeUnit);
 
+    /**
+     * 根据模糊的key或者根据具体的key，删除redis中的数据
+     *
+     * @param key:
+     */
+    boolean deleteByKey(String key);
 }

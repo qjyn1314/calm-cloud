@@ -73,6 +73,16 @@ public interface SysUserService {
     SysUserVo queryByCode(String code);
 
     /**
+     * 通过用户登录账号查询用户信息，没有密码和盐值，没有角色信息
+     *
+     * @param account 用户登录账号
+     * @author wangjunming
+     * @since 2021/4/13 14:27
+     * @return com.calm.user.api.vo.SysUserVo
+     */
+    SysUserVo queryByAccountNps(String account);
+
+    /**
      * 用户分配角色
      *
      * @param sysUserDto 前端传参

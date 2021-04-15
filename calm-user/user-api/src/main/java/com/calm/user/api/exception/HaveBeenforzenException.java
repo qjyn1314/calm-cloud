@@ -2,7 +2,7 @@ package com.calm.user.api.exception;
 
 /**
  * <p>
- * explain: 用户已冻结异常
+ * explain: 用户已停用异常
  * </p>
  *
  * @author wangjunming

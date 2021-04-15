@@ -1,5 +1,6 @@
 package com.calm.common.auth;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,6 +37,10 @@ public class CurrentUser implements UserDetails, Serializable {
      */
     private String account;
     /**
+     * 用户编码
+     */
+    private String code;
+    /**
      * 密码
      */
     private String password;
@@ -50,6 +55,7 @@ public class CurrentUser implements UserDetails, Serializable {
     /**
      * 生日
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date birthday;
     /**
      * 性别(字典)
@@ -64,23 +70,29 @@ public class CurrentUser implements UserDetails, Serializable {
      */
     private String phone;
     /**
+     * 备注
+     */
+    private String remarks;
+    /**
      * 状态(字典)
      */
     private Integer status;
-
     /**
      * 是否已启用
      */
     private Boolean enabled;
-
     /**
-     * 权限编码
+     * 角色编码-逗号分隔
      */
-    private List<String> roles;
+    private String roleCode;
+    /**
+     * 角色名称-逗号分隔
+     */
+    private String roleName;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.createAuthorityList(String.join(",", this.roles));
+        return AuthorityUtils.createAuthorityList(String.join(",", this.roleCode));
     }
 
     @Override
@@ -196,15 +208,6 @@ public class CurrentUser implements UserDetails, Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
-
 
     public CurrentUser noPwd() {
         this.password = null;
