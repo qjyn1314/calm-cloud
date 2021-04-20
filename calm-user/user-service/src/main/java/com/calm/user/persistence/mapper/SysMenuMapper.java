@@ -3,6 +3,7 @@ package com.calm.user.persistence.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.calm.common.auth.MenuTree;
 import com.calm.user.api.dto.SysMenuDto;
 import com.calm.user.api.entity.SysMenu;
 import com.calm.user.api.vo.DTreeVo;
@@ -26,5 +27,7 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
     List<DTreeVo> selectByCode(@Param("code") String code);
 
     SysMenuVo selectMenuByCode(@Param("code") String code);
+
+    List<MenuTree> selectMenuTreeByRoleCodes(@Param("qo") SysMenuDto sysMenuDto);
 
 }

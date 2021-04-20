@@ -9,6 +9,7 @@ import com.calm.user.api.vo.SysUserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -32,15 +33,19 @@ public class CalmUserService implements UserDetailsService {
 
     @Override
     public CurrentUser loadUserByUsername(String account) throws UsernameNotFoundException {
+        return new CurrentUser();
+    }
+    
+    public CurrentUser loadUserByUsernameAndPassword(String account,String password) throws UsernameNotFoundException {
+        CurrentUser currentUser = loadUserByUsername(account);
         if (StringUtils.isBlank(account)) {
             throw new UsernameNotFoundException("用户名不存在。");
         }
-        JsonResult<SysUserVo> result = userFeignService.queryByAccount(account);
+        JsonResult<SysUserVo> result = userFeignService.validatePassword(account,password);
         SysUserVo user = result.getData();
-        if (null == user) {
-            throw new UsernameNotFoundException("用户名不存在。");
+        if(null == user){
+            throw new AuthenticationServiceException(result.getMessage());
         }
-        CurrentUser currentUser = new CurrentUser();
         preCurrentUser(currentUser, user);
         return currentUser;
     }

@@ -1,6 +1,7 @@
 package com.calm.user.persistence.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.calm.common.auth.MenuTree;
 import com.calm.user.api.dto.SysMenuDto;
 import com.calm.user.api.vo.DTreeVo;
 import com.calm.user.api.vo.SysMenuVo;
@@ -66,4 +67,14 @@ public interface SysMenuService{
      */
     Long update(SysMenuDto sysMenuDto);
 
+    /**
+     * 通过角色编码查询菜单树
+     * 
+     * @param roleCode 逗号分隔的角色编码
+     * @author wangjunming
+     * @since 2021/4/16 11:09
+     * @return java.util.List<com.calm.user.api.vo.MenuTree>
+     */
+    List<MenuTree> selectMenuTreeByRoleCodes(String roleCode);
+    
 }

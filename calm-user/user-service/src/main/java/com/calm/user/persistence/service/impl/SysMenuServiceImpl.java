@@ -3,17 +3,24 @@ package com.calm.user.persistence.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.calm.common.auth.MenuTree;
 import com.calm.user.api.dto.SysMenuDto;
 import com.calm.user.api.entity.SysMenu;
+import com.calm.user.api.enums.MenuStatus;
+import com.calm.user.api.enums.MenuSystemType;
 import com.calm.user.api.vo.DTreeVo;
 import com.calm.user.api.vo.SysMenuVo;
 import com.calm.user.persistence.mapper.SysMenuMapper;
 import com.calm.user.persistence.service.SysMenuService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 菜单表(SysMenu)表服务实现类
@@ -95,12 +102,44 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long update(SysMenuDto sysMenuDto) {
-        LambdaQueryWrapper<SysMenu> queryWrapper  = new LambdaQueryWrapper<>();
-        queryWrapper.eq(SysMenu::getMenuId,sysMenuDto.getMenuId());
+        LambdaQueryWrapper<SysMenu> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysMenu::getMenuId, sysMenuDto.getMenuId());
         SysMenu sysMenuOne = mapper.selectOne(queryWrapper);
         SysMenu sysMenu = sysMenuDto.getUpdateSysMenu();
         int update = mapper.update(sysMenu, queryWrapper);
         return sysMenuOne.getMenuId();
+    }
+
+    /**
+     * 通过角色编码查询已启用的后台系统菜单树
+     *
+     * @param roleCode 逗号分隔的角色编码
+     * @return java.util.List<com.calm.user.api.vo.MenuTree>
+     * @author wangjunming
+     * @since 2021/4/16 11:09
+     */
+    @Override
+    public List<MenuTree> selectMenuTreeByRoleCodes(String roleCode) {
+        if(StringUtils.isBlank(roleCode)){
+            return new ArrayList<>();
+        }
+        SysMenuDto sysMenuDto = new SysMenuDto();
+        sysMenuDto.setRoleCode(Arrays.asList(roleCode.split(",")));
+        sysMenuDto.setSystemType(MenuSystemType.BACKSTAGE.getCode());
+        sysMenuDto.setStatus(MenuStatus.ENABLE.getCode());
+        return selectMenuTreeByDto(sysMenuDto);
+    }
+
+    private List<MenuTree> selectMenuTreeByDto(SysMenuDto sysMenuDto) {
+        List<MenuTree> menuTrees = mapper.selectMenuTreeByRoleCodes(sysMenuDto);
+        List<MenuTree> finalMenuTrees = menuTrees;
+        menuTrees = menuTrees.stream().filter(item -> "0".equals(item.getPcode())).peek(item -> item.setChildren(getChildrens(item, finalMenuTrees))).collect(Collectors.toList());
+        return menuTrees;
+    }
+
+    private List<MenuTree> getChildrens(MenuTree root, List<MenuTree> allList) {
+        return allList.stream().filter(item -> item.getPcode().equals(root.getCode()))
+                .peek(item -> item.setChildren(getChildrens(item, allList))).collect(Collectors.toList());
     }
 
 }

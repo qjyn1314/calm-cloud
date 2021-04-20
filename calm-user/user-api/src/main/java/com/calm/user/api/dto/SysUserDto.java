@@ -46,6 +46,14 @@ public class SysUserDto extends BaseDto implements Serializable {
     */
     private String password;
     /**
+    * 新密码
+    */
+    private String changePassword;
+    /**
+    * 确认新密码
+    */
+    private String confirmPassword;
+    /**
     * md5密码盐
     */
     private String salt;

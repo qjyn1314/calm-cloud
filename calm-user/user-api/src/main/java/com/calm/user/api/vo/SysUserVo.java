@@ -1,5 +1,6 @@
 package com.calm.user.api.vo;
 
+import com.calm.common.auth.MenuTree;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -82,5 +83,13 @@ public class SysUserVo implements Serializable {
      * 角色名称-逗号分隔
      */
     private String roleName;
+
+    /** 菜单 */
+    private List<MenuTree> menuTree;
+
+    public void noPwd() {
+        this.password = null;
+        this.salt = null;
+    }
 
 }

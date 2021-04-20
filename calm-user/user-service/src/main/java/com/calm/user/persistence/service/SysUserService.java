@@ -14,14 +14,6 @@ import com.calm.user.api.vo.SysUserVo;
 public interface SysUserService {
 
     /**
-     * 通过账号查询用户信息
-     *
-     * @author wangjunming
-     * @since 2021/2/15 17:28
-     */
-    SysUserVo queryByAccount(String account);
-
-    /**
      * 用户分页列表
      *
      * @param sysUserDto 前端传参
@@ -63,7 +55,7 @@ public interface SysUserService {
 
 
     /**
-     * 通过用户编码查询用户信息
+     * 通过用户编码查询用户信息，用于更新操作中的数据查询
      *
      * @param code 用户编码
      * @author wangjunming
@@ -73,7 +65,7 @@ public interface SysUserService {
     SysUserVo queryByCode(String code);
 
     /**
-     * 通过用户登录账号查询用户信息，没有密码和盐值，没有角色信息
+     * 通过用户登录账号查询用户信息，没有密码和盐值，没有角色信息，用于效验是否已存在此邮箱
      *
      * @param account 用户登录账号
      * @author wangjunming
@@ -91,5 +83,38 @@ public interface SysUserService {
      * @return java.lang.Boolean
      */
     Boolean userDistributionRole(SysUserDto sysUserDto);
+
+    /**
+     * 授权服务调用，效验密码是否正确
+     *
+     * @param account 登录账号
+     * @param password 用户输入的密码
+     * @author wangjunming
+     * @since 2021/4/16 10:28
+     * @return com.calm.user.api.vo.SysUserVo
+     */
+    SysUserVo validatePassword(String account, String password);
+
+
+    /**
+     * 通过用户编码查询当前登录用户信息
+     *
+     * @param code 用户编码
+     * @author wangjunming
+     * @since 2021/4/17 21:38
+     * @return com.calm.user.api.vo.SysUserVo
+     */
+    SysUserVo selectByCode(String code);
+
+    /**
+     * 更新密码
+     *
+     * @param sysUserDto 前端传参
+     * @author wangjunming
+     * @since 2021/4/18 17:38
+     * @return java.lang.Boolean
+     */
+    Boolean changePwd(SysUserDto sysUserDto);
+
 
 }

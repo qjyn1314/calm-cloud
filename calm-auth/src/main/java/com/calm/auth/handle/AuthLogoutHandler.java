@@ -1,5 +1,6 @@
 package com.calm.auth.handle;
 
+import com.calm.common.auth.CurrentSecurityUserUtils;
 import com.calm.common.utils.RequestUtils;
 import com.calm.parent.base.JsonResult;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ public class AuthLogoutHandler implements LogoutSuccessHandler{
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         log.info("logout success!");
-        SecurityContextHolder.clearContext();
+        CurrentSecurityUserUtils.clearContext();
         RequestUtils.setResponse(response, JsonResult.successDataMsg(Boolean.TRUE, "退出成功"));
     }
 }

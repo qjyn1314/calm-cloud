@@ -3,6 +3,7 @@ package com.calm.parent.config;
 import feign.Logger;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author wangjunming
  * @since 2021/2/21 19:30
  */
-@Component
+@Slf4j
 @Configuration
 public class GlobalFeignConfig implements RequestInterceptor {
 
@@ -32,6 +33,7 @@ public class GlobalFeignConfig implements RequestInterceptor {
      */
     @Bean
     Logger.Level feignLogger() {
+        log.info("配置feign的增强打印日志....");
         return Logger.Level.FULL;
     }
 

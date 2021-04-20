@@ -60,19 +60,26 @@ public class JwtTokenFilter extends UsernamePasswordAuthenticationFilter {
         String username = request.getParameter("username");
         log.info("The user currently logging in is：{}", username);
         String password = request.getParameter("password");
+        String redisUserNameKey = RedisHelper.USER_KEY + username;
         //从缓存中获取
-        Object redisUser = redisHelper.getValue(RedisHelper.USER_KEY + username);
+        Object redisUser = redisHelper.getValue(redisUserNameKey);
         CurrentUser userDetails = null;
-        if (Objects.nonNull(redisUser) && redisUser instanceof CurrentUser) {
-            userDetails = (CurrentUser) redisUser;
+        if (Objects.nonNull(redisUser) && redisUser instanceof String) {
+            log.info("Get user from redis");
+            try {
+                userDetails = JSONObject.parseObject(redisUser.toString(),CurrentUser.class);
+            } catch (Exception e) {
+                log.error("从redis中获取当前登录用户解析失败，将从数据库中获取。--",e);
+                userDetails = null;
+                redisHelper.deleteByKey(redisUserNameKey);
+            }
         }
         if (null == userDetails) {
-            userDetails = calmUserService.loadUserByUsername(username);
+            log.info("Get user from interface");
+            userDetails = calmUserService.loadUserByUsernameAndPassword(username,password);
         }
-        validateUserPassword(password, userDetails);
         //验证通过之后，放入缓存中，每次用户相关操作时，删除缓存中的用户信息
-        redisHelper.valuePut(RedisHelper.USER_KEY + username, userDetails);
-        userDetails.noPwd();
+        redisHelper.valuePut(redisUserNameKey, JSONObject.toJSONString(userDetails));
         log.info("The login_success user is：{}", JSONObject.toJSONString(userDetails));
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }

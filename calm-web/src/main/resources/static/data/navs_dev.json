@@ -1,0 +1,68 @@
+[
+  {
+    "code": "console",
+    "pcode": "0",
+    "title": "控制台",
+    "href": "page/console.html",
+    "fontFamily": "ok-icon",
+    "icon": "&#xe654;",
+    "spread": true,
+    "isCheck": true,
+    "menuType": 1,
+    "status": 1,
+    "children": []
+  },
+  {
+    "code": "member",
+    "pcode": "0",
+    "title": "会员管理",
+    "href": "",
+    "fontFamily": "layui-icon",
+    "icon": "&#xe66f;",
+    "spread": false,
+    "isCheck": false,
+    "menuType": 1,
+    "status": 1,
+    "children": [
+      {
+        "code": "user",
+        "pcode": "member",
+        "title": "用户列表",
+        "href": "page/member/user-list.html",
+        "fontFamily": "layui-icon",
+        "icon": "&#xe62e;",
+        "spread": false,
+        "isCheck": false,
+        "menuType": 2,
+        "status": 1,
+        "children": []
+      },
+      {
+        "code": "role",
+        "pcode": "member",
+        "title": "角色列表",
+        "href": "page/member/role-list.html",
+        "fontFamily": "layui-icon",
+        "icon": "&#xe62e;",
+        "spread": false,
+        "isCheck": false,
+        "menuType": 2,
+        "status": 1,
+        "children": []
+      },
+      {
+        "code": "permission",
+        "pcode": "member",
+        "title": "菜单列表",
+        "href": "page/member/permission-list.html",
+        "fontFamily": "layui-icon",
+        "icon": "&#xe62e;",
+        "spread": false,
+        "isCheck": false,
+        "menuType": 2,
+        "status": 1,
+        "children": []
+      }
+    ]
+  }
+]

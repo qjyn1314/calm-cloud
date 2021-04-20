@@ -77,13 +77,27 @@
     </select>
 
     <select id="queryByParams" resultType="com.calm.user.api.vo.SysUserVo">
-        select user_id, avatar, account, code, name, birthday, sex, email, phone, remarks,status, create_time, create_user, update_time, update_user, version from sys_user
+        select user_id, avatar, account, code, name, birthday, sex, email, phone, remarks,status, create_time from sys_user
         <where>
             <if test="code != null and code != ''">
                 and code = #{code}
             </if>
             <if test="account != null and account != ''">
                 and account = #{account}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByCode" resultType="com.calm.user.api.vo.SysUserVo">
+        SELECT GROUP_CONCAT(t3.`code`) roleCode,GROUP_CONCAT(t3.`name`) roleName, t1.user_id, t1.avatar, t1.account, t1.code,
+        t1.name, t1.birthday, t1.sex, t1.email, t1.phone, t1.status, t1.remarks,t1.create_time, t1.create_user,
+        t1.update_time, t1.update_user
+        FROM sys_user t1
+        LEFT JOIN sys_user_role t2 ON t2.user_code = t1.`code`
+        LEFT JOIN sys_role t3 ON t3.`code` = t2.role_code
+        <where>
+            <if test="code != null and code != ''">
+                and t1.code = #{code}
             </if>
         </where>
     </select>

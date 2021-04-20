@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
@@ -36,6 +37,10 @@ public class CurrentUser implements UserDetails, Serializable {
      * 账号-唯一标识
      */
     private String account;
+    /**
+     * 名字
+     */
+    private String username;
     /**
      * 用户编码
      */
@@ -90,6 +95,33 @@ public class CurrentUser implements UserDetails, Serializable {
      */
     private String roleName;
 
+    /** 菜单 */
+    private List<MenuTree> menuTree;
+
+    /**
+     * 账户是否过期
+     */
+    private Boolean accountNonExpired = Boolean.FALSE;
+
+    /**
+     * 帐户是否锁定
+     */
+    private Boolean accountNonLocked = Boolean.FALSE;
+
+    /**
+     * 凭证是否过期
+     */
+    private Boolean credentialsNonExpired = Boolean.FALSE;
+
+    /**
+     * 权限集合
+     */
+    private List<SimpleGrantedAuthority> authorities;
+
+    public void setAuthorities(List<SimpleGrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return AuthorityUtils.createAuthorityList(String.join(",", this.roleCode));
@@ -105,19 +137,20 @@ public class CurrentUser implements UserDetails, Serializable {
         return this.account;
     }
 
+    /**账户是否过期*/
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return accountNonExpired;
     }
-
+    /**帐户是否锁定*/
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return accountNonLocked;
     }
-
+    /**凭证是否过期*/
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return credentialsNonExpired;
     }
 
     @Override
@@ -125,89 +158,6 @@ public class CurrentUser implements UserDetails, Serializable {
         return this.enabled;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public CurrentUser noPwd() {
         this.password = null;

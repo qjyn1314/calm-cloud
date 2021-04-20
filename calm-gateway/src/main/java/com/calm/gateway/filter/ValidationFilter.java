@@ -27,8 +27,8 @@ public class ValidationFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        RequestPath path = exchange.getRequest().getPath();
-        log.info("ValidationFilter-Path:{}", path);
+        final ServerHttpRequest request = exchange.getRequest();
+        log.info("Gateway Request Url --：{}", request.getURI());
         ServerHttpRequest req = exchange.getRequest().mutate()
                 .header(ForwardAccessService.HEADER_KEY, ForwardAccessService.HEADER_VALUE).build();
         return chain.filter(exchange.mutate().request(req.mutate().build()).build());

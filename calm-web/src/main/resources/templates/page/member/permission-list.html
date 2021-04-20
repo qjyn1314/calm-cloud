@@ -62,12 +62,12 @@
             toolbar: "#toolbarTpl",
             cols: [
                 [
-                    {field: "menuId", title: "ID", width: 60, fixed: "left"},
+                    {field: "code", title: "ID", width: 100, fixed: "left"},
+                    {field: "pcode", title: "父级编码", width: 100},
                     {field: "name", title: "菜单名称", width: 100},
                     {field: "description", title: "菜单说明", width: 180},
-                    {field: "code", title: "菜单编码", width: 100},
-                    {field: "pcode", title: "父级编码", width: 100},
                     {field: "url", title: "菜单路径", width: 180},
+                    {field: "fontFamily", title: "菜单样式", width: 180},
                     {field: "systemType", title: "系统分类", width: 120, templet: "#systemTypeTpl"},
                     {field: "status", title: "菜单状态", width: 80, templet: "#statusTpl"},
                     {field: "menuType", title: "菜单类型", width: 80, templet: "#menuTypeTpl"},

@@ -74,8 +74,7 @@
 
     //初始化表单
     function initForm(data) {
-        let jsonString = JSON.stringify(data);
-        initData = JSON.parse(jsonString);
+        initData = JSON.parse(JSON.stringify(data));
     }
 
     layui.use(["element", "form", "laydate", "okLayer", "okUtils"], function () {

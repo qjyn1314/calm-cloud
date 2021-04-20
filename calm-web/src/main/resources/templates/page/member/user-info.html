@@ -4,52 +4,98 @@
 	<meta charset="utf-8">
 	<title>基本资料</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="../../css/oksub.css">
-	<script type="text/javascript" src="../../lib/loading/okLoading.js"></script>
+	<link rel="stylesheet" href="../../static/css/oksub.css">
 </head>
-<body class="user-info">
-<form class="layui-form">
-	<div class="user_left">
+<body>
+<div class="ok-body">
+	<form class="layui-form userForm" lay-filter="userInfoFilter">
 		<div class="layui-form-item">
-			<label class="layui-form-label">用户名</label>
+			<label class="layui-form-label">登录邮箱</label>
 			<div class="layui-input-block">
-				<input type="text" value="智走" disabled class="layui-input layui-disabled">
+				<input type="text" name="account" placeholder="请输入登录邮箱" autocomplete="off" class="layui-input"
+					   lay-verify="required" readonly>
+			</div>
+			<input type="text" name="code" hidden="hidden" readonly>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">姓名</label>
+			<div class="layui-input-block">
+				<input type="text" name="name" placeholder="请输入姓名" autocomplete="off" class="layui-input"
+					   lay-verify="required">
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">出生年月</label>
+			<label class="layui-form-label">手机号码</label>
 			<div class="layui-input-block">
-				<input id="uDate" type="text" value="" placeholder="请输入出生年月" lay-verify="required"
-				       class="layui-input userBirthday">
+				<input type="text" name="phone" placeholder="请输入手机号码" autocomplete="off" class="layui-input"
+					   lay-verify="phone">
 			</div>
 		</div>
-		<div class="layui-form-item userAddress">
-			<label class="layui-form-label">家庭住址</label>
-			<div class="layui-input-inline">
-				<select name="province" lay-filter="province">
-					<option value="">请选择省</option>
-				</select>
-			</div>
-			<div class="layui-input-inline">
-				<select name="city" lay-filter="city" disabled>
-					<option value="">请选择市</option>
-				</select>
-			</div>
-			<div class="layui-input-inline">
-				<select name="area" lay-filter="area" disabled>
-					<option value="">请选择县/区</option>
-				</select>
+		<div class="layui-form-item">
+			<label class="layui-form-label">备用邮箱</label>
+			<div class="layui-input-block">
+				<input type="text" name="email" placeholder="请输入备用邮箱" autocomplete="off" class="layui-input"
+					   lay-verify="email">
 			</div>
 		</div>
-	</div>
-	<div class="layui-form-item" style="margin-left: 5%;">
-		<div class="layui-input-block">
-			<button class="layui-btn" lay-submit="" lay-filter="changeUser">立即提交</button>
-			<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		<div class="layui-form-item">
+			<label class="layui-form-label">出生日期</label>
+			<div class="layui-input-block">
+				<input type="text" name="birthday" placeholder="请选择出生日期 格式为yyyy-MM-dd HH:mm:ss" autocomplete="off"
+					   class="layui-input" id="birthday" readonly lay-verify="birthdayVerify">
+			</div>
 		</div>
-	</div>
-</form>
-<script type="text/javascript" src="../../lib/layui/layui.js"></script>
-<script type="text/javascript" src="user-info.js"></script>
+		<div class="layui-form-item">
+			<label class="layui-form-label">性别</label>
+			<div class="layui-input-block">
+				<input type="radio" name="sex" value="2" title="未知">
+				<input type="radio" name="sex" value="1" title="男">
+				<input type="radio" name="sex" value="0" title="女">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button type="button" class="layui-btn userSubmit">立即提交</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script src="../../static/lib/layui/layui.js"></script>
+<script>
+	layui.use(['form', 'layer', 'upload', 'laydate', 'okUtils', "okLayer"], function () {
+		var form = layui.form,upload = layui.upload,$ = layui.jquery,okLayer = layui.okLayer,laydate = layui.laydate;
+		var okUtils = layui.okUtils;
+		laydate.render({elem: "#birthday", type: "datetime"});
+		//获取当前用户信息
+		okUtils.ajax(okUtils.userInfo, "get", null, true).done(function (res) {
+			if(res.data.userInfo != null){
+				let initData = JSON.parse(JSON.stringify(res.data.userInfo));
+				form.val("userInfoFilter", initData);
+			}
+		}).fail(function (res) {
+			okLayer.redCryMsg(res.message);
+		});
+		//修改登录用户信息
+		$('.userSubmit').click(function () {
+			let userForm = {
+				"code": $(".userForm input[name='code']").val(),
+				"account": $(".userForm input[name='account']").val(),
+				"name": $(".userForm input[name='name']").val(),
+				"phone": $(".userForm input[name='phone']").val(),
+				"email": $(".userForm input[name='email']").val(),
+				"birthday": $(".userForm input[name='birthday']").val(),
+				"sex": $(".userForm input[name='sex']:checked").val(),
+				"remarks": $(".userForm textarea[name='remarks']").val(),
+			};
+			userForm = JSON.stringify(userForm);
+			okUtils.ajax(okUtils.userUpdate, "post", userForm, true).done(function (response) {
+				okLayer.greenLaughMsg("修改成功。");
+			}).fail(function (res) {
+				okLayer.redCryMsg(res.message);
+			});
+		});
+
+	});
+</script>
 </body>
 </html>

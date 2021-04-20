@@ -50,6 +50,13 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">菜单样式</label>
+            <div class="layui-input-block">
+                <input type="text" name="fontFamily" placeholder="请输入菜单样式" autocomplete="off" class="layui-input"
+                       lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">菜单类型</label>
             <div class="layui-input-block">
                 <select name="menuType">
@@ -134,6 +141,7 @@
                 "name": $(".menuForm input[name='name']").val(),
                 "url": $(".menuForm input[name='url']").val(),
                 "icon": $(".menuForm input[name='icon']").val(),
+                "fontFamily": $(".menuForm input[name='fontFamily']").val(),
                 "menuType": $(".menuForm select[name='menuType']").val(),
                 "status": $(".menuForm select[name='status']").val(),
                 "openFlag": $(".menuForm select[name='openFlag']").val(),

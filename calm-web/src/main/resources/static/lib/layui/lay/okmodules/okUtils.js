@@ -55,6 +55,8 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
         roleTree: baseUrl + "/user/api/v1/sysRole/roleTree",
         //用户分配角色
         userDistributionRole: baseUrl + "/user/api/v1/sysUser/userDistributionRole",
+        //用户修改密码
+        changeUserPwd: baseUrl + "/user/api/v1/sysUser/changePwd",
 
         /**
          * 封装默认表格

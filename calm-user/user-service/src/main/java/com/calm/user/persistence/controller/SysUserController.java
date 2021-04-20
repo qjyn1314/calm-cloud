@@ -175,4 +175,23 @@ public class SysUserController extends BaseController {
         return JsonResult.success(service.userDistributionRole(sysUserDto));
     }
 
+
+    /**
+     * 更新用户密码
+     *
+     * @param sysUserDto 前端传参
+     * @return com.calm.parent.base.JsonResult
+     * @author wangjunming
+     * @since 2021/4/9 15:09
+     */
+    @PostMapping("/changePwd")
+    public JsonResult changePwd(@RequestBody SysUserDto sysUserDto) {
+        handleUserDto(sysUserDto);
+        validateUserDto(sysUserDto, UPDATE);
+        if(!sysUserDto.getChangePassword().equals(sysUserDto.getConfirmPassword())){
+            throw new CalmException("两次输入的密码不一致，请重新输入。");
+        }
+        return JsonResult.success(service.changePwd(sysUserDto));
+    }
+
 }

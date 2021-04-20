@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 菜单表(SysMenu)表实体类
@@ -33,6 +34,8 @@ public class SysMenuDto extends BaseDto implements Serializable {
     private String name;
     /**菜单图标*/
     private String icon;
+    /**菜单样式*/
+    private String fontFamily;
     /**url地址*/
     private String url;
     /**菜单类型：1-菜单；2-目录*/
@@ -55,6 +58,8 @@ public class SysMenuDto extends BaseDto implements Serializable {
     private Long createUser;
     /**修改人*/
     private Long updateUser;
+    /**逗号分隔的角色编码*/
+    List<String> roleCode;
 
     /**传参转换*/
     public SysMenu getSysMenu() {

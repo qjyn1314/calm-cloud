@@ -3,6 +3,8 @@ package com.calm.common.exception;
 import com.calm.parent.base.JsonResult;
 import com.netflix.client.ClientException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -37,23 +39,23 @@ public class GlobRestHandleException {
      * 运行时异常处理
      *
      * @param e
+     * @return com.calm.parent.base.JsonResult
      * @author wangjunming
      * @since 2021/3/30 17:31
-     * @return com.calm.parent.base.JsonResult
      */
     @ExceptionHandler(value = RuntimeException.class)
     public JsonResult handleGlobRuntimeException(RuntimeException e) {
-        log.error("系统异常，请检查代码", e);
-        return JsonResult.fail("系统异常，请稍后重试。");
+        log.error("系统业务异常，请检查代码", e);
+        return JsonResult.fail("系统业务异常，请稍后重试。");
     }
 
     /**
      * 网管请求异常
      *
      * @param e
+     * @return com.calm.parent.base.JsonResult
      * @author wangjunming
      * @since 2021/3/30 17:31
-     * @return com.calm.parent.base.JsonResult
      */
     @ExceptionHandler(value = ClientException.class)
     public JsonResult handleGlobRuntimeException(ClientException e) {
@@ -77,9 +79,9 @@ public class GlobRestHandleException {
      * 传参异常，源自于 HibernateValidator
      *
      * @param e
+     * @return com.calm.parent.base.JsonResult
      * @author wangjunming
      * @since 2021/3/30 17:33
-     * @return com.calm.parent.base.JsonResult
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public JsonResult handleHulunBuirException(MethodArgumentNotValidException e) {
@@ -92,11 +94,16 @@ public class GlobRestHandleException {
         return JsonResult.fail(sb.toString());
     }
 
-
     @ExceptionHandler(value = InterruptedException.class)
     public JsonResult handleInterruptedException(InterruptedException e) {
         log.error("关闭admin服务异常", e);
         return JsonResult.fail("关闭admin服务异常，请稍后重试。");
+    }
+
+    @ExceptionHandler(value = AuthenticationServiceException.class)
+    public JsonResult handleAuthenticationServiceException(AuthenticationServiceException e) {
+        log.error("用户授权异常", e);
+        return JsonResult.fail(e.getMessage());
     }
 
 

@@ -16,11 +16,11 @@ import org.springframework.stereotype.Repository;
  * @since 2021-02-15 17:17:55
  */
 @Repository
-public interface SysUserMapper extends BaseMapper<SysUser>{
+public interface SysUserMapper extends BaseMapper<SysUser> {
 
 
     /**
-     * 通过账号查询用户信息
+     * 通过账号查询用户信息-包含密码和盐值
      *
      * @author wangjunming
      * @since 2021/2/15 17:33
@@ -30,11 +30,11 @@ public interface SysUserMapper extends BaseMapper<SysUser>{
     /**
      * 用户分页列表
      *
-     * @param page 分页信息
+     * @param page       分页信息
      * @param sysUserDto 前端传参
+     * @return com.baomidou.mybatisplus.core.metadata.IPage<com.calm.user.api.vo.SysUserVo>
      * @author wangjunming
      * @since 2021/4/8 14:22
-     * @return com.baomidou.mybatisplus.core.metadata.IPage<com.calm.user.api.vo.SysUserVo>
      */
     IPage<SysUserVo> page(Page<SysUserVo> page, @Param("qo") SysUserDto sysUserDto);
 
@@ -42,10 +42,20 @@ public interface SysUserMapper extends BaseMapper<SysUser>{
      * 通过参数查询唯一用户信息
      *
      * @param sysUserDto 前端传参
+     * @return com.calm.user.api.vo.SysUserVo
      * @author wangjunming
      * @since 2021/4/13 14:30
-     * @return com.calm.user.api.vo.SysUserVo
      */
     SysUserVo queryByParams(SysUserDto sysUserDto);
+
+    /**
+     * 通过用户编码查询当前登录用户的信息
+     *
+     * @param code 用户编码
+     * @return com.calm.user.api.vo.SysUserVo
+     * @author wangjunming
+     * @since 2021/4/17 21:41
+     */
+    SysUserVo selectByCode(@Param("code") String code);
 
 }

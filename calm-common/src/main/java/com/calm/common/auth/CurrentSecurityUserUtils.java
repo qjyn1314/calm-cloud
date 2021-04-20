@@ -1,5 +1,6 @@
 package com.calm.common.auth;
 
+import com.calm.common.exception.CalmException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -59,7 +60,14 @@ public class CurrentSecurityUserUtils {
     /**
      * 获取Security全局信息
      */
-    private static SecurityContext context() {
+    public static void clearContext() {
+        SecurityContextHolder.clearContext();
+    }
+
+    /**
+     * 获取Security全局信息
+     */
+    public static SecurityContext context() {
         return SecurityContextHolder.getContext();
     }
 
@@ -82,7 +90,11 @@ public class CurrentSecurityUserUtils {
      */
     public static CurrentUser authUser() {
         log.info("当前登录用户信息是：{}", principal() instanceof UserDetails ? principal() : null);
-        return principal() instanceof UserDetails ? (CurrentUser) principal() : null;
+        CurrentUser currentUser = principal() instanceof UserDetails ? (CurrentUser) principal() : null;
+        if (null == currentUser) {
+            throw new CalmException("登陆信息失效，请重新登录。");
+        }
+        return currentUser;
     }
 
     /**

@@ -23,6 +23,8 @@ public class SysMenu implements Serializable {
     private String name;
     /**菜单图标*/
     private String icon;
+    /**菜单样式*/
+    private String fontFamily;
     /**url地址*/
     private String url;
     /**菜单类型：1-菜单；2-目录*/

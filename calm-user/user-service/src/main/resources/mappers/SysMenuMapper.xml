@@ -9,6 +9,7 @@
         <result property="pcode" column="pcode" jdbcType="VARCHAR"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="fontFamily" column="font_family" jdbcType="VARCHAR"/>
         <result property="url" column="url" jdbcType="VARCHAR"/>
         <result property="menuType" column="menu_type" jdbcType="INTEGER"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
@@ -24,8 +25,7 @@
 
     <!--默认列表字段-->
     <sql id="column_default">
-        menu_id
-        , code, pcode, name, icon, url, menu_type, status, open_flag, system_type, sort, description, create_time, update_time, create_user, update_user
+        menu_id, code, pcode, name, icon, font_family, url, menu_type, status, open_flag, system_type, sort, description, create_time, update_time, create_user, update_user
     </sql>
 
     <select id="page" resultType="com.calm.user.api.vo.SysMenuVo">
@@ -63,4 +63,27 @@
         where code = #{code}
     </select>
 
+    <select id="selectMenuTreeByRoleCodes" resultType="com.calm.common.auth.MenuTree">
+        SELECT
+        DISTINCT t1.code, t1.pcode, t1.name AS title, t1.icon, t1.font_family, t1.url AS href, t1.menu_type, t1.status,
+        t1.open_flag AS spread,t1.open_flag AS isCheck, t1.system_type, t1.sort, t1.description
+        FROM sys_menu t1
+                 LEFT JOIN sys_role_menu t2 ON t1.`code` = t2.menu_code
+        <where>
+            t2.role_code IN
+            <foreach collection="qo.roleCode" index="index" item="roleCode" open="(" separator="," close=")">
+                #{roleCode}
+            </foreach>
+            <if test="qo.menuType != null">
+               and t1.menu_type = #{qo.menuType}
+            </if>
+            <if test="qo.status != null">
+               and t1.status = #{qo.status}
+            </if>
+            <if test="qo.systemType != null">
+               and t1.system_type = #{qo.systemType}
+            </if>
+        </where>
+        ORDER BY t1.sort;
+    </select>
 </mapper>

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * explain:对外提供服务
+ * explain:此为不需要验证的服务接口，可通过postman直接获取数据
  * </p>
  *
  * @author wangjunming
@@ -30,10 +30,9 @@ public class UserProvider {
      * @author wangjunming
      * @since 2021/2/24 14:25
      */
-    @PostMapping("/queryByAccount/{account}")
-    public JsonResult<Object> queryByAccount(@PathVariable String account) {
-        SysUserVo userVo = service.queryByAccount(account);
-        return JsonResult.success(userVo);
+    @PostMapping("/validatePassword/{account}/{password}")
+    public JsonResult<Object> validatePassword(@PathVariable String account,@PathVariable String password) {
+        return JsonResult.success(service.validatePassword(account,password));
     }
 
 }
