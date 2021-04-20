@@ -50,9 +50,11 @@ calm-sequence:86
 
 账号：qjyn1314@163.com
 
-密码：admin
+密码：123456
 
 部署sql：
+
+calm-core/src/main/resources/calm_deploy.sql
 
 calm-core/src/main/resources/init_datasource_conf.sql
 
