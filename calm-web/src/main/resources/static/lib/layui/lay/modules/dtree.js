@@ -2981,7 +2981,6 @@ layui.define(['jquery','layer','form'], function(exports) {
     	if(params && params.length > 0) {
     		for(var i=0; i<params.length; i++) { 
     			var param = params[i];
-    			console.log(param);
     			checkbarJsonArr["nodeId"].push(param["nodeId"]);
     			checkbarJsonArr["parentId"].push(param["parentId"]);
     			checkbarJsonArr["context"].push(param["context"]);
@@ -2997,7 +2996,6 @@ layui.define(['jquery','layer','form'], function(exports) {
     	}
     	
     	checkbarJsonArr = _this.getRequestParam(checkbarJsonArr);
-    	console.log(checkbarJsonArr);
     	return checkbarJsonArr;
     };
 

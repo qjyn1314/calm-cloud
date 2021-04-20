@@ -166,15 +166,12 @@
 
         //行删除操作
         function del(id) {
-            console.log(id)
             okLayer.confirm("确定要删除吗？", function () {
                 okUtils.ajax("/user/deleteUser", "delete", {idsStr: id}, true).done(function (response) {
-                    console.log(response);
                     okUtils.tableSuccessMsg(response.msg);
                     menuPageTable.reload()
                     initDtree();
                 }).fail(function (error) {
-                    console.log(error)
                 });
             })
         }

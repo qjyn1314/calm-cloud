@@ -36,9 +36,8 @@
             toolbar: "#toolbarTpl",
             cols: [
                 [
-                    {field: "roleId", title: "ID", width: 60, fixed: "left"},
+                    {field: "code", title: "角色编码", width: 170, fixed: "left"},
                     {field: "name", title: "角色名称", width: 150},
-                    {field: "code", title: "角色编码", width: 170},
                     {field: "description", title: "角色描述", width: 180},
                     {field: "menuCodes", title: "菜单编码", width: 250},
                     {field: "menuNames", title: "菜单名称", width: 250},
@@ -106,7 +105,6 @@
         }
 
         function edit(data) {
-            console.log(data)
             okLayer.open("修改角色", "role-update.html", "90%", "90%", function (layero, index) {
                 var body = layer.getChildFrame('body', index);
                 //回显表单数据
@@ -140,7 +138,6 @@
                 okUtils.ajax("/role/deleteRole", "delete", {idsStr: id}, true).done(function (response) {
                     okUtils.tableSuccessMsg(response.msg);
                 }).fail(function (error) {
-                    console.log(error)
                 });
             })
         }

@@ -12,7 +12,7 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
             setUserMessage(response);
         })
         .fail(function (res) {
-            okLayer.redCryMsg(res.message);
+
         });
 
     //将用户信息赋值到页面中
@@ -187,12 +187,10 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 
         // 按 Esc
         if (event && event.keyCode === 27) {
-            console.log("Esc");
             $("#fullScreen").children("i").eq(0).removeClass("layui-icon-screen-restore");
         }
         // 按 F11
         if (event && event.keyCode == 122) {
-            console.log("F11");
             $("#fullScreen").children("i").eq(0).addClass("layui-icon-screen-restore");
         }
     });
@@ -340,7 +338,6 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
 
         //提交密码
         form.on('submit(lockSubmit)', function (data) {
-            console.log(data);
             if (data.field.lock_password !== "123456") {
                 layer.msg("密码不正确", {
                     icon: 5,

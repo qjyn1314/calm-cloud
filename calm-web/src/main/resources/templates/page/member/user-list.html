@@ -162,10 +162,8 @@
                 let idsStr = okUtils.tableBatchCheck(table);
                 if (idsStr) {
                     okUtils.ajax("/user/normalUser", "put", {idsStr: idsStr}, true).done(function (response) {
-                        console.log(response);
                         okUtils.tableSuccessMsg(response.msg);
                     }).fail(function (error) {
-                        console.log(error)
                     });
                 }
             });

@@ -11,16 +11,16 @@
     <!--form表单-->
     <div class="layui-form layui-form-pane ok-form roleForm">
         <div class="layui-form-item">
-            <label class="layui-form-label">角色名称</label>
+            <label class="layui-form-label">角色编码</label>
             <div class="layui-input-block">
-                <input type="text" name="name" placeholder="角色名称" autocomplete="off" class="layui-input"
+                <input type="text" name="code" placeholder="角色编码" autocomplete="off" class="layui-input"
                        lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">角色编码</label>
+            <label class="layui-form-label">角色名称</label>
             <div class="layui-input-block">
-                <input type="text" name="code" placeholder="角色编码" autocomplete="off" class="layui-input"
+                <input type="text" name="name" placeholder="角色名称" autocomplete="off" class="layui-input"
                        lay-verify="required">
             </div>
         </div>
@@ -62,7 +62,6 @@
             };
             roleForm = JSON.stringify(roleForm);
             okUtils.ajax(okUtils.roleSave, "post", roleForm, true).done(function (response) {
-                console.log(response);
                 okLayer.greenTickMsg("添加成功", function () {
 					parent.layer.close(parent.layer.getFrameIndex(window.name));
                 });
