@@ -166,9 +166,9 @@
                 <version>${calm-gen.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.xuxueli</groupId>
-                <artifactId>xxl-job</artifactId>
-                <version>2.3.0</version>
+                <groupId>com.calm.xxl-job</groupId>
+                <artifactId>calm-xxl-job</artifactId>
+                <version>${calm-xxl-job.version}</version>
             </dependency>
 
             <!--导入了springboot、springcloud、springcloudalibaba-->
