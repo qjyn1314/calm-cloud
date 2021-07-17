@@ -1,8 +1,8 @@
-package ${package}.${moduleName}.mapper;
+package ${mapper};
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import ${package}.${moduleName}.entity.${className};
-import org.apache.ibatis.annotations.Mapper;
+import ${entity}.${className};
+import org.springframework.stereotype.Repository;
 
 /**
  * ${comments}
@@ -10,7 +10,8 @@ import org.apache.ibatis.annotations.Mapper;
  * @author ${author}
  * @date ${datetime}
  */
-@Mapper
+@Repository
 public interface ${className}Mapper extends BaseMapper<${className}> {
+
 
 }
