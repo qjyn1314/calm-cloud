@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -51,7 +52,7 @@ public class CodeGenUtils {
 	/**
 	 * 模板配置
 	 */
-	private List<String> getTemplates() {
+	private List<String> getTemplates(String specialTemplate) {
 		List<String> templates = new LinkedList<>();
 		templates.add("template/Entity.java.vm");
 		templates.add("template/Mapper.java.vm");
@@ -59,6 +60,13 @@ public class CodeGenUtils {
 		templates.add("template/Service.java.vm");
 		templates.add("template/ServiceImpl.java.vm");
 		templates.add("template/Controller.java.vm");
+		if (StrUtil.isNotBlank(specialTemplate)) {
+			templates = templates.stream().map(template -> {
+				template = template.replace("template/", "template/" + specialTemplate + "/");
+				return template;
+			}).collect(Collectors.toList());
+			return templates;
+		}
 		return templates;
 	}
 
@@ -164,7 +172,8 @@ public class CodeGenUtils {
 		VelocityInitializer.initVelocity();
 		VelocityContext context = new VelocityContext(map);
 		// 获取模板列表
-		List<String> templates = getTemplates();
+		String specialTemplate = genConfig.getSpecialTemplate();
+		List<String> templates = getTemplates(specialTemplate);
 		//将模板列表与路径匹配为map
 		Map<String, String> templatePathMap = handlePath(templates,genConfig);
 		Map<String, String> resultMap = new HashMap<>(8);

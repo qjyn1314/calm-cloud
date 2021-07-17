@@ -1,0 +1,14 @@
+package ${service};
+
+import ${entity}.${className};
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${className}Service {
+
+
+}

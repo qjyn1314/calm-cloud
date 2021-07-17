@@ -64,5 +64,10 @@ public class GenConfig implements Serializable {
 	 * Mapper XML包名
 	 */
 	private String xml = "mappers";
+	
+	/**
+	 * template 文件夹下其他的模板使用
+	 */
+	private String specialTemplate;
 
 }

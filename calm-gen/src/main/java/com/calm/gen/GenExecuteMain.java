@@ -43,8 +43,9 @@ public class GenExecuteMain {
 //        genConfig.setMapper("com.calm.user.persistence.mapper");
 //        genConfig.setXml("mappers");
         //生成的路径
-//        genConfig.setGenPath("F:\\IDEA_DIY\\code_calm");
-
+        genConfig.setGenPath("F:\\IDEA_DIY\\code_calm");
+        //使用特定的目录下的模板
+//        genConfig.setSpecialTemplate("zcb");
         log.info("生成代码的基本信息是....{}", JSON.toJSON(genConfig));
         GenService genService = new GenService();
         genService.genCode(genConfig);
