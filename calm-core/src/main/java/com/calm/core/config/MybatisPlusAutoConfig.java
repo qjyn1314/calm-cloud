@@ -58,4 +58,9 @@ public class MybatisPlusAutoConfig {
         return new PaginationInnerInterceptor();
     }
 
+
+    
+
+
+
 }

@@ -37,6 +37,10 @@ calm-auth:85
 
 calm-sequence:86
 
+calm-xxl-job:87
+
+calm-gen:88
+
 
 ### 工程的结构
 
@@ -47,6 +51,8 @@ calm-sequence:86
 #### calm-auth    认证服务
 #### calm-user    用户服务
 #### calm-web     web页面
+#### calm-xxl-job 分布式定时任务管理
+#### calm-gen     代码生成(main方法执行)
 
 账号：qjyn1314@163.com
 
