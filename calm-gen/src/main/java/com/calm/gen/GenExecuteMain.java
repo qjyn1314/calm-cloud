@@ -32,18 +32,18 @@ public class GenExecuteMain {
 
         genConfig.setTableName(tableName);
         //表备注
-        genConfig.setComments("");
+        genConfig.setComments("测试生成代码类");
         //表名前缀
         genConfig.setTablePrefix("");
         //包名-在模板中的import 使用此出配置的包名路径
-        genConfig.setEntity("com.calm.user.api.entity");
-        genConfig.setController("com.calm.user.persistence.controller");
-        genConfig.setService("com.calm.user.persistence.service");
-        genConfig.setServiceImpl("com.calm.user.persistence.service.impl");
-        genConfig.setMapper("com.calm.user.persistence.mapper");
-        genConfig.setXml("mappers");
+//        genConfig.setEntity("com.calm.user.api.entity");
+//        genConfig.setController("com.calm.user.persistence.controller");
+//        genConfig.setService("com.calm.user.persistence.service");
+//        genConfig.setServiceImpl("com.calm.user.persistence.service.impl");
+//        genConfig.setMapper("com.calm.user.persistence.mapper");
+//        genConfig.setXml("mappers");
         //生成的路径
-        genConfig.setGenPath("F:\\IDEA_DIY\\code_calm");
+//        genConfig.setGenPath("F:\\IDEA_DIY\\code_calm");
 
         log.info("生成代码的基本信息是....{}", JSON.toJSON(genConfig));
         GenService genService = new GenService();

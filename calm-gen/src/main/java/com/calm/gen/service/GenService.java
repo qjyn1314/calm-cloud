@@ -50,20 +50,29 @@ public class GenService {
         List<Map<String, String>> columns = genMapper.queryColumns(tableName);
         log.info("表的列信息是...{}", JSON.toJSON(columns));
         String genPath = genConfig.getGenPath();
-
+        if(StrUtil.isBlank(genPath)){
+            throw new CalmException("请确定生成文件所输出的文件夹");
+        }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
 
         CodeGenUtils.generatorCode(genConfig, table, columns, zip);
+        //创建文件夹
+        File file = new File(genPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         //压缩文件生成的路径
         genPath = genPath + File.separator + tableName + "_" + DateUtil.format(new Date(), DatePattern.PURE_DATETIME_MS_FORMAT) + ".zip";
+        String fileGenPath = genPath.replaceAll("\\\\","/");
+        log.info("生成的文件名...- file:///{}", fileGenPath);
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(genPath);
             byte[] data = outputStream.toByteArray();
             IoUtil.write(fileOutputStream, Boolean.TRUE, data);
-        } catch (IOException e) {
-            log.error("生成文件,", e);
+        } catch (Exception e) {
+            log.error("生成文件失败，请检查文件路径是否正确。", e);
         } finally {
             IoUtil.close(zip);
             IoUtil.close(fileOutputStream);

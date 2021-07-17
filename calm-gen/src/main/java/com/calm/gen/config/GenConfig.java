@@ -31,9 +31,9 @@ public class GenConfig implements Serializable {
 	private String comments;
 
 	/**
-	 * 生成的路径
+	 * 生成的路径-默认路径
 	 */
-	private String genPath;
+	private String genPath = "C:\\gen_code";
 
 	/**
 	 * 数据库连接信息
