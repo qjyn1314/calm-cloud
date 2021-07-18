@@ -24,7 +24,7 @@ public class SequenceUtil {
     public static final String dateTimeHourMinuteFormat = "yyyyMMddHHmmss";
 
     public static String getDate() {
-        return DateUtil.format(DateUtil.date(), DATE_FORMAT);
+        return DateUtil.format(DateUtil.date(), dateTimeHourFormat);
     }
 
     public static String getSequenceCodeByDate(Long sequence, Integer length) {

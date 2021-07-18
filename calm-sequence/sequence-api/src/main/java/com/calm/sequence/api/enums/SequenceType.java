@@ -16,6 +16,9 @@ public enum SequenceType {
     /**用户表编码*/
     USER("USER","用户表编码"),
 
+    /**定时任务编码*/
+    XXL_JOB("XXL_JOB","测试xxl-job定时任务管理器"),
+
         ;
     @Getter
     @Setter

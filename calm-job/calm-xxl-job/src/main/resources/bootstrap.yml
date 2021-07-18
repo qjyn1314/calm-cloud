@@ -96,7 +96,7 @@ jasypt:
 #mybatis-plus配置
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
   mapper-locations: classpath*:/mappers/*.xml
   #启动时是否检查 MyBatis XML 文件的存在，默认不检查
@@ -118,6 +118,7 @@ feign:
         connectTimeout: 50000
         readTimeout: 50000
 # 分布式定时任务的默认配置
+#  ---参考：https://www.xuxueli.com/xxl-job/
 xxl:
   job:
     logretentiondays: 30

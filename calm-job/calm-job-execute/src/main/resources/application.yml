@@ -3,3 +3,16 @@ spring:
     active: dev
   main:
     allow-bean-definition-overriding: true
+# 参考： https://www.xuxueli.com/xxl-job/
+xxl:
+  job:
+    accessToken: ''
+    admin:
+      addresses: http://127.0.0.1:10084/xxl-job-admin
+    executor:
+      address: ''
+      appname: 'calm-job-executor'
+      ip: ''
+      logpath: '/var/logs/calm-job-execute/jobHandle'
+      logretentiondays: 30
+      port: 9999
