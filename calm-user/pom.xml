@@ -25,10 +25,7 @@
     </modules>
 
     <dependencies>
-        <dependency>
-            <groupId>com.calm.core</groupId>
-            <artifactId>calm-core</artifactId>
-        </dependency>
+
     </dependencies>
 
     <build>

@@ -1,11 +1,11 @@
 server:
-  port: 82
+  port: 10082
 spring:
   boot:
     admin:
       client:
         instance:
-          service-url: http://127.0.0.1:84
+          service-url: http://127.0.0.1:10083
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848

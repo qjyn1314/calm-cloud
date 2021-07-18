@@ -1,5 +1,5 @@
 server:
-  port: 84
+  port: 10083
 spring:
   #admin监控
   boot:

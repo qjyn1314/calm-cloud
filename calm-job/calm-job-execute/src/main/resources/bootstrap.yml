@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: calm-job-execute
+  boot:
+    admin:
+      client:
+        connect-timeout: 5000
+        period: 10000
+        read-timeout: 5000
+  cloud:
+    nacos:
+      config:
+        file-extension: yml
+  # 前端传参的格式化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  mvc:
+    static-path-pattern: '/static/**'
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    prefix: 'classpath:/templates/'
+    servlet:
+      content-type: 'text/html'
+    enabled: true
+#密文密码配置
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    provider-name: SunJCE
+    password: MdQRVDiKXf4sS0lXp61SH5cvVdmn8FJw++ODKj0ojhY=
+    property:
+      prefix: 'ENC@['
+      suffix: ']'
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#日志配置
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    'com.calm.user.api.feign': 'debug'
+#feign配置参考：http://c.biancheng.net/view/5362.html
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 50000
+        readTimeout: 50000

@@ -21,6 +21,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.calm.core</groupId>
+            <artifactId>calm-core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.calm.sequence.api</groupId>
             <artifactId>sequence-api</artifactId>
             <version>${sequence-api.version}</version>

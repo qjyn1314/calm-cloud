@@ -25,21 +25,23 @@ spring-boot 版本：2.3.8.RELEASE
 spring-cloud 版本：Hoxton.SR9
 
 ### 工程的端口号
-calm-web:81
+calm-web:10081
 
-calm-gateway:82
+calm-gateway:10082
 
-user-service:83
+calm-admin:10083
 
-calm-admin:84
+calm-xxl-job:10084
 
-calm-auth:85
+calm-job-execute:10085
 
-calm-sequence:86
+calm-gen:10086
 
-calm-xxl-job:87
+calm-auth:10087
 
-calm-gen:88
+sequence-service:10088
+
+user-service:10089
 
 
 ### 工程的结构
@@ -52,6 +54,7 @@ calm-gen:88
 #### calm-user    用户服务
 #### calm-web     web页面
 #### calm-xxl-job 分布式定时任务管理
+#### calm-job-execute 分布式定时任务执行器
 #### calm-gen     代码生成(main方法执行)
 
 账号：qjyn1314@163.com

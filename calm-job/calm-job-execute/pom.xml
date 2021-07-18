@@ -18,6 +18,10 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>com.calm.common</groupId>
+            <artifactId>calm-common</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.calm.sequence.api</groupId>
             <artifactId>sequence-api</artifactId>
             <version>${sequence-api.version}</version>

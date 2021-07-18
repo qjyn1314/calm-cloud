@@ -1,15 +1,11 @@
 server:
-  port: 10081
+  port: 10085
 spring:
   boot:
     admin:
       client:
         instance:
           service-url: http://127.0.0.1:10083
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/calm?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: E/v2nQHfRFE7LNQ192WzEO2Cl1w2hu/M
   #nacos
   cloud:
     nacos:
