@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -36,16 +35,14 @@ import java.io.IOException;
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
 
-
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         //如果是admin监控服务，或是前端项目 访问则放过请求，不需要验证请求头
-        if (CalmProperties.isAdminService()) {
+        if (CalmProperties.isAdminService() || CalmProperties.isJobService()) {
             return true;
         }
         //限制服务必须从网关进入
-        if(!CalmProperties.isWebService()){
+        if (!CalmProperties.isWebService()) {
             String forwardAccessHeaderValue = request.getHeader(ForwardAccessService.HEADER_KEY);
             if (StringUtils.isBlank(forwardAccessHeaderValue) || !ForwardAccessService.HEADER_VALUE.equals(forwardAccessHeaderValue)) {
                 RequestUtils.setResponse(response, JsonResult.fail("网关异常，请确认请求路径。"));

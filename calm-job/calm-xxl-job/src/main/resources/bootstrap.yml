@@ -1,0 +1,130 @@
+spring:
+  application:
+    name: calm-xxl-job
+  cloud:
+    nacos:
+      config:
+        file-extension: yml
+  # 前端传参的格式化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    druid:
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      filter:
+        stat:
+          db-type: mysql
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 5
+        wall:
+          config:
+            delete-allow: true
+            drop-table-allow: false
+            multi-statement-allow: true
+          db-type: mysql
+          enabled: true
+      filters: stat,wall
+      initial-size: 5
+      max-active: 30
+      max-pool-prepared-statement-per-connection-size: 50
+      max-wait: 60000
+      min-evictable-idle-time-millis: 300000
+      min-idle: 5
+      pool-prepared-statements: true
+      stat-view-servlet:
+        allow: ''
+        enabled: true
+        login-password: admin
+        login-username: admin
+        reset-enable: false
+        url-pattern: /druid/*
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      use-global-data-source-stat: true
+      validation-query: SELECT 1 FROM DUAL
+      web-stat-filter:
+        enabled: true
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+        url-pattern: /*
+  mvc:
+    static-path-pattern: '/static/**'
+    servlet:
+      load-on-startup: 0
+  resources:
+    static-locations: 'classpath:/static/'
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    prefix: 'classpath:/templates/'
+    servlet:
+      content-type: 'text/html'
+    enabled: true
+  freemarker:
+    template-loader-path: 'classpath:/templates/'
+    suffix: '.ftl'
+    charset: 'UTF-8'
+    request-context-attribute: 'request'
+    settings:
+      number_format: '0.##########'
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    password: ENC@[cfuPii8t5DNspGG+5jyKxu4uQ/dBwHK04MIiMlqKOIZ+gB3V8A23Mg==]
+    port: 25
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    username: qjyn1314@163.com
+    from: qjyn1314@163.com
+#密文密码配置
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    provider-name: SunJCE
+    password: MdQRVDiKXf4sS0lXp61SH5cvVdmn8FJw++ODKj0ojhY=
+    property:
+      prefix: 'ENC@['
+      suffix: ']'
+#mybatis-plus配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:/mappers/*.xml
+  #启动时是否检查 MyBatis XML 文件的存在，默认不检查
+  check-config-location: true
+  #全局默认主键类型
+  global-config:
+    db-config:
+      id-type: auto
+#日志配置
+logging:
+  config: classpath:logback.xml
+  level:
+    'com.calm.user.api.feign': 'debug'
+#feign配置参考：http://c.biancheng.net/view/5362.html
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 50000
+        readTimeout: 50000
+# 分布式定时任务的默认配置
+xxl:
+  job:
+    logretentiondays: 30
+    accessToken: ''
+    i18n: 'zh_CN'
+    triggerpool:
+      fast:
+        max: 200
+      slow:
+        max: 200

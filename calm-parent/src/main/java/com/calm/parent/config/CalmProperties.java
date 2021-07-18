@@ -33,6 +33,7 @@ public class CalmProperties {
     public static final String SERVERNAME_PORT = "SERVERNAME_PORT";
     public static final String WEB_SERVICE = "calm-web";
     public static final String ADMIN_SERVICE = "calm-admin";
+    public static final String JOB_SERVICE = "calm-xxl-job";
 
     @Autowired
     private Environment environment;
@@ -60,6 +61,10 @@ public class CalmProperties {
 
     public static Boolean isAdminService() {
         return Objects.equals(getApplicationName(), ADMIN_SERVICE);
+    }
+
+    public static Boolean isJobService() {
+        return Objects.equals(getApplicationName(), JOB_SERVICE);
     }
 
     public String getInterceptUrl() {

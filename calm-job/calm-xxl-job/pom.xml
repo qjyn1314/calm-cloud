@@ -17,22 +17,6 @@
 	</properties>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>com.calm.core</groupId>
-			<artifactId>calm-core</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>de.codecentric</groupId>
-					<artifactId>spring-boot-admin-starter-client</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>de.codecentric</groupId>
-					<artifactId>spring-boot-admin-starter-server</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
 		<!-- freemarker-starter -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

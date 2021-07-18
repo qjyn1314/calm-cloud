@@ -1,14 +1,15 @@
 package com.calm.job.persistence.mapper;
 
 import com.calm.job.core.model.XxlJobUser;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
  * @author xuxueli 2019-05-04 16:44:59
  */
-@Mapper
+@Repository
 public interface XxlJobUserDao {
 
 	public List<XxlJobUser> pageList(@Param("offset") int offset,

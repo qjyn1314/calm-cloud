@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * @author xuxueli 2018-04-02 20:48:20
  */
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class JobWebMvcConfig implements WebMvcConfigurer {
 
     @Resource
     private PermissionInterceptor permissionInterceptor;

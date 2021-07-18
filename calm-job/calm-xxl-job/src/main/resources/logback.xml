@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false" scan="true" scanPeriod="1 seconds">
-
+    <property name="log.path" value="/var/logs/calm-xxl-job/calm-xxl-job.log"/>
     <contextName>logback</contextName>
-    <property name="log.path" value="/data/applogs/xxl-job/xxl-job-admin.log"/>
-
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>

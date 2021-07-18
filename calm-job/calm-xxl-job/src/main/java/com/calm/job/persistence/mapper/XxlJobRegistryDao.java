@@ -1,8 +1,8 @@
 package com.calm.job.persistence.mapper;
 
 import com.calm.job.core.model.XxlJobRegistry;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by xuxueli on 16/9/30.
  */
-@Mapper
+@Repository
 public interface XxlJobRegistryDao {
 
     public List<Integer> findDead(@Param("timeout") int timeout,

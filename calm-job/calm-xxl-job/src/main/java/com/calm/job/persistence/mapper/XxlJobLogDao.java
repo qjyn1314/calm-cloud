@@ -1,8 +1,8 @@
 package com.calm.job.persistence.mapper;
 
 import com.calm.job.core.model.XxlJobLog;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.Map;
  * job log
  * @author xuxueli 2016-1-12 18:03:06
  */
-@Mapper
+@Repository
 public interface XxlJobLogDao {
 
 	// exist jobId not use jobGroup, not exist use jobGroup

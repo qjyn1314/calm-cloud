@@ -1,8 +1,8 @@
 package com.calm.job.persistence.mapper;
 
 import com.calm.job.core.model.XxlJobLogGlue;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * job log for glue
  * @author xuxueli 2016-5-19 18:04:56
  */
-@Mapper
+@Repository
 public interface XxlJobLogGlueDao {
 	
 	public int save(XxlJobLogGlue xxlJobLogGlue);
