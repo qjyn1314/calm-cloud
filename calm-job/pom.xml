@@ -7,19 +7,19 @@
         <artifactId>calm-cloud</artifactId>
         <version>1.0.0</version>
     </parent>
-    <groupId>com.calm.sequence</groupId>
-    <artifactId>calm-sequence</artifactId>
+    <groupId>com.calm.job</groupId>
+    <artifactId>calm-job</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>calm-sequence</name>
-    <description>Sequence-生成序列号</description>
+    <name>calm-job</name>
+    <description>CalmJob-分布式定时任务</description>
     <properties>
-
+        <sequence-api.version>1.0.0</sequence-api.version>
     </properties>
 
     <modules>
-        <module>sequence-api</module>
-        <module>sequence-service</module>
+        <module>calm-job-execute</module>
+        <module>calm-xxl-job</module>
     </modules>
 
     <dependencies>
@@ -59,6 +59,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

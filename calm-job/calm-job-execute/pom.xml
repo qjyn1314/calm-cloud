@@ -3,29 +3,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.calm</groupId>
-        <artifactId>calm-cloud</artifactId>
+        <groupId>com.calm.job</groupId>
+        <artifactId>calm-job</artifactId>
         <version>1.0.0</version>
     </parent>
-    <groupId>com.calm.sequence</groupId>
-    <artifactId>calm-sequence</artifactId>
+    <groupId>com.calm.execute</groupId>
+    <artifactId>calm-job-execute</artifactId>
     <version>1.0.0</version>
-    <packaging>pom</packaging>
-    <name>calm-sequence</name>
-    <description>Sequence-生成序列号</description>
+    <packaging>jar</packaging>
+    <name>calm-job-execute</name>
+    <description>分布式定时任务-执行任务工程</description>
     <properties>
 
     </properties>
-
-    <modules>
-        <module>sequence-api</module>
-        <module>sequence-service</module>
-    </modules>
-
     <dependencies>
         <dependency>
-            <groupId>com.calm.core</groupId>
-            <artifactId>calm-core</artifactId>
+            <groupId>com.calm.sequence.api</groupId>
+            <artifactId>sequence-api</artifactId>
+            <version>${sequence-api.version}</version>
         </dependency>
     </dependencies>
 

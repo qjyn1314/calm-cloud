@@ -39,7 +39,7 @@
         <calm-sequence.version>1.0.0</calm-sequence.version>
         <calm-web.version>1.0.0</calm-web.version>
         <calm-gen.version>1.0.0</calm-gen.version>
-        <calm-xxl-job.version>1.0.0</calm-xxl-job.version>
+        <calm-job.version>1.0.0</calm-job.version>
     </properties>
 
     <!--为了在打包的时候可以使用父工程可直接对子工程进行打包-->
@@ -54,7 +54,7 @@
         <module>calm-sequence</module>
         <module>calm-web</module>
         <module>calm-gen</module>
-        <module>calm-xxl-job</module>
+        <module>calm-job</module>
     </modules>
 
     <dependencies>
@@ -166,9 +166,9 @@
                 <version>${calm-gen.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.calm.xxl-job</groupId>
-                <artifactId>calm-xxl-job</artifactId>
-                <version>${calm-xxl-job.version}</version>
+                <groupId>com.calm.job</groupId>
+                <artifactId>calm-job</artifactId>
+                <version>${calm-job.version}</version>
             </dependency>
 
             <!--导入了springboot、springcloud、springcloudalibaba-->
