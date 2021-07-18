@@ -6,8 +6,8 @@
 		<artifactId>calm-job</artifactId>
 		<version>1.0.0</version>
 	</parent>
-	<groupId>com.calm.xxl-job</groupId>
-	<artifactId>calm-xxl-job</artifactId>
+	<groupId>com.calm.job.admin</groupId>
+	<artifactId>calm-job-admin</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<properties>

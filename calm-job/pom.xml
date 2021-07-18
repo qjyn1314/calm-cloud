@@ -20,7 +20,7 @@
 
     <modules>
         <module>calm-job-execute</module>
-        <module>calm-xxl-job</module>
+        <module>calm-job-admin</module>
     </modules>
 
     <dependencies>

@@ -15,10 +15,10 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("com.calm")
 @EnableDiscoveryClient
 @EnableFeignClients("com.calm")
-public class CalmXxlJobApplication {
+public class CalmJobAdminApplication {
 
 	public static void main(String[] args) {
-        SpringApplication.run(CalmXxlJobApplication.class, args);
+        SpringApplication.run(CalmJobAdminApplication.class, args);
 	}
 
 }
