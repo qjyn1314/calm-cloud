@@ -53,7 +53,7 @@ user-service:10089
 #### calm-auth    认证服务
 #### calm-user    用户服务
 #### calm-web     web页面
-#### calm-xxl-job 分布式定时任务管理
+#### calm-job-admin   分布式定时任务管理
 #### calm-job-execute 分布式定时任务执行器
 #### calm-gen     代码生成(main方法执行)
 
@@ -68,3 +68,5 @@ calm-core/src/main/resources/calm_deploy.sql
 calm-core/src/main/resources/init_datasource_conf.sql
 
 calm-core/src/main/resources/init_sys_user.sql
+
+calm-core/src/main/resources/tables_calm_job.sql
