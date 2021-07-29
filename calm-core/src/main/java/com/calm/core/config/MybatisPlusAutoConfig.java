@@ -1,7 +1,7 @@
 package com.calm.core.config;
 
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +40,8 @@ public class MybatisPlusAutoConfig {
     @Bean
     public MybatisPlusInterceptor plusInterceptor() {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
-        //乐观锁
-        mybatisPlusInterceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+        //悲观锁
+        mybatisPlusInterceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
         //分页配置
         mybatisPlusInterceptor.addInnerInterceptor(paginationInnerInterceptor());
         return mybatisPlusInterceptor;

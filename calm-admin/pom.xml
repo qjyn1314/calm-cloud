@@ -17,10 +17,6 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.calm.parent</groupId>
-            <artifactId>calm-parent</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.calm.common</groupId>
             <artifactId>calm-common</artifactId>
         </dependency>

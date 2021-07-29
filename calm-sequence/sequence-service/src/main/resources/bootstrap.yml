@@ -52,6 +52,8 @@ spring:
         enabled: true
         exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
         url-pattern: /*
+      default-transaction-isolation: 1
+      default-auto-commit: false
   mvc:
     static-path-pattern: '/static/**'
   thymeleaf:

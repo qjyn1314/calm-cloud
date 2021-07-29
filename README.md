@@ -43,6 +43,8 @@ sequence-service:10088
 
 user-service:10089
 
+flowable-service:10090
+
 
 ### 工程的结构
 

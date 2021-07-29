@@ -28,7 +28,6 @@ management:
     web:
       exposure:
         include: "*"
-
 #密文密码配置
 jasypt:
   encryptor:

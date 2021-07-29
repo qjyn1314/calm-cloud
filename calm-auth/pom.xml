@@ -30,12 +30,6 @@
             <groupId>com.calm.user.api</groupId>
             <artifactId>user-api</artifactId>
             <version>${user-api.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.calm.core</groupId>
-                    <artifactId>calm-core</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 

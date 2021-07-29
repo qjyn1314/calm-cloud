@@ -7,50 +7,24 @@
         <artifactId>calm-cloud</artifactId>
         <version>1.0.0</version>
     </parent>
-    <groupId>com.calm.core</groupId>
-    <artifactId>calm-core</artifactId>
-    <version>1.0.0</version>
-    <name>calm-core</name>
-    <description>CalmCore-数据库、mybatis-plus、springCloudStream</description>
-
+    <groupId>com.calm.flowable</groupId>
+    <artifactId>calm-flowable</artifactId>
+    <version>${calm-flowable.version}</version>
+    <packaging>pom</packaging>
+    <name>calm-flowable</name>
+    <description>Flowable 工作流</description>
     <properties>
-
+        <flowable-api.version>1.0.0</flowable-api.version>
+        <flowable-spring.version>6.6.0</flowable-spring.version>
     </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>com.calm.common</groupId>
-            <artifactId>calm-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid-spring-boot.version}</version>
-        </dependency>
-        <!--mybatis-plus动态数据源-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-            <version>${dynamic-datasource.version}</version>
-        </dependency>
-        <!--mybatis-plus-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus.version}</version>
-        </dependency>
-        <!--分布式事务seata解决方案-->
-        <!--
-        <dependency>
-            <groupId>io.seata</groupId>
-            <artifactId>seata-spring-boot-starter</artifactId>
-        </dependency>
-        -->
+
     </dependencies>
+
+    <modules>
+        <module>flowable-api</module>
+        <module>flowable-service</module>
+    </modules>
 
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -82,6 +56,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

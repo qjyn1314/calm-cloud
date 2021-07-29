@@ -1,6 +1,12 @@
 spring:
   application:
-    name: calm-xxl-job
+    name: calm-flowable
+  boot:
+    admin:
+      client:
+        connect-timeout: 5000
+        period: 10000
+        read-timeout: 5000
   cloud:
     nacos:
       config:
@@ -54,10 +60,6 @@ spring:
       default-auto-commit: false
   mvc:
     static-path-pattern: '/static/**'
-    servlet:
-      load-on-startup: 0
-  resources:
-    static-locations: 'classpath:/static/'
   thymeleaf:
     cache: false
     encoding: UTF-8
@@ -65,27 +67,6 @@ spring:
     servlet:
       content-type: 'text/html'
     enabled: true
-  freemarker:
-    template-loader-path: 'classpath:/templates/'
-    suffix: '.ftl'
-    charset: 'UTF-8'
-    request-context-attribute: 'request'
-    settings:
-      number_format: '0.##########'
-  mail:
-    default-encoding: UTF-8
-    host: smtp.163.com
-    username: qjyn1314@163.com
-    password: ENC@[cfuPii8t5DNspGG+5jyKxu4uQ/dBwHK04MIiMlqKOIZ+gB3V8A23Mg==]
-    from: qjyn1314@163.com
-    port: 25
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: true
 #密文密码配置
 jasypt:
   encryptor:
@@ -95,10 +76,18 @@ jasypt:
     property:
       prefix: 'ENC@['
       suffix: ']'
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 #mybatis-plus配置
 mybatis-plus:
   configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
   mapper-locations: classpath*:/mappers/*.xml
   #启动时是否检查 MyBatis XML 文件的存在，默认不检查
@@ -109,7 +98,7 @@ mybatis-plus:
       id-type: auto
 #日志配置
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
   level:
     'com.calm.user.api.feign': 'debug'
 #feign配置参考：http://c.biancheng.net/view/5362.html
@@ -119,15 +108,3 @@ feign:
       feignName:
         connectTimeout: 50000
         readTimeout: 50000
-# 分布式定时任务的默认配置
-#  ---参考：https://www.xuxueli.com/xxl-job/
-xxl:
-  job:
-    logretentiondays: 30
-    accessToken: ''
-    i18n: 'zh_CN'
-    triggerpool:
-      fast:
-        max: 200
-      slow:
-        max: 200
