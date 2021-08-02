@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 本地MYSQL数据库-123456
+ Source Server         : 本地MYSQL数据库-
  Source Server Type    : MySQL
  Source Server Version : 50717
  Source Host           : 127.0.0.1:3306

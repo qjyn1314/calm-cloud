@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.calm.flowable.api</groupId>
     <artifactId>flowable-api</artifactId>
-    <version>${flowable-api.version}</version>
+    <version>1.0.0</version>
     <description>Flowable 对外暴露的接口</description>
 
     <properties>
