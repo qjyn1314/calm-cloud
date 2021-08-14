@@ -8,6 +8,9 @@ spring:
         mail:
           from: qjyn1314@163.com
           to: qjyn1314@foxmail.com
+      client:
+        instance:
+          prefer-ip: true
   #nacos
   cloud:
     nacos:
@@ -30,7 +33,8 @@ spring:
   mail:
     default-encoding: UTF-8
     host: smtp.163.com
-    password: ENC@[cfuPii8t5DNspGG+5jyKxu4uQ/dBwHK04MIiMlqKOIZ+gB3V8A23Mg==]
+    username: qjyn1314@163.com
+    password: ENC@[nM+/DFGNERlrYjduKijMdnPA2e8VpP/4Ws97IfuNk28XoR2oyRWVZA==]
     port: 25
     properties:
       mail:
@@ -39,4 +43,3 @@ spring:
           starttls:
             enable: true
             required: true
-    username: qjyn1314@163.com

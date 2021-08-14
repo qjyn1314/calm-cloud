@@ -1,6 +1,7 @@
 package com.calm.common.auth;
 
 import com.calm.common.exception.CalmException;
+import com.calm.parent.config.ForwardAccessService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -25,7 +26,7 @@ public class CurrentSecurityUserUtils {
     /**token的主题*/
     public static final String SUBJECT = "calm_security_subject";
     /**header token key*/
-    public static final String TOKEN_NAME = "user_token";
+    public static final String TOKEN_NAME = ForwardAccessService.TOKEN_NAME;
     /**24小时*/
     public static final Integer EXPIRE_SECS = 24;
     /**过期秒数*/
@@ -41,7 +42,7 @@ public class CurrentSecurityUserUtils {
     /**登陆成功跳转的路径*/
     public static final String LOGIN_SUCCESS_URL = "/main";
     /**cookie设置的domain*/
-    public static final String COOKIE_DOMAIN = "com";
+    public static final String COOKIE_DOMAIN = "clam.com";
     /**cookie设置的path*/
     public static final String COOKIE_PATH = "/";
 

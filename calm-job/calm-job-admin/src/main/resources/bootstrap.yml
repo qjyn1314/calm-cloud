@@ -1,6 +1,12 @@
 spring:
   application:
     name: calm-xxl-job
+  boot:
+    admin:
+      client:
+        connect-timeout: 5000
+        period: 10000
+        read-timeout: 5000
   cloud:
     nacos:
       config:
@@ -76,7 +82,7 @@ spring:
     default-encoding: UTF-8
     host: smtp.163.com
     username: qjyn1314@163.com
-    password: ENC@[cfuPii8t5DNspGG+5jyKxu4uQ/dBwHK04MIiMlqKOIZ+gB3V8A23Mg==]
+    password: ENC@[nM+/DFGNERlrYjduKijMdnPA2e8VpP/4Ws97IfuNk28XoR2oyRWVZA==]
     from: qjyn1314@163.com
     port: 25
     properties:
@@ -95,10 +101,18 @@ jasypt:
     property:
       prefix: 'ENC@['
       suffix: ']'
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 #mybatis-plus配置
 mybatis-plus:
   configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
   mapper-locations: classpath*:/mappers/*.xml
   #启动时是否检查 MyBatis XML 文件的存在，默认不检查

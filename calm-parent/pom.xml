@@ -30,13 +30,11 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
         </dependency>
         <!--访问地址：ip:port/swagger-ui/index.html-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
-            <version>${swagger.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>swagger-annotations</artifactId>
@@ -52,18 +50,15 @@
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>1.5.21</version>
         </dependency>
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-models</artifactId>
-            <version>1.5.21</version>
         </dependency>
         <!--访问地址：ip:port/doc.html-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
-            <version>3.0.3</version>
         </dependency>
         <!--springboot整合redis-->
         <dependency>
@@ -83,7 +78,6 @@
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>${jasypt.version}</version>
         </dependency>
         <!--整合email-->
         <dependency>
@@ -94,7 +88,6 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>${jwt.version}</version>
         </dependency>
         <!--nacos-start-->
         <!--服务注册中心-->

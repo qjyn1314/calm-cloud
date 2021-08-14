@@ -15,7 +15,6 @@ import java.util.Map;
  * @author wangjunming
  * @since 2021/7/17 15:43
  */
-@Mapper
 public interface GenMapper {
 
     /**

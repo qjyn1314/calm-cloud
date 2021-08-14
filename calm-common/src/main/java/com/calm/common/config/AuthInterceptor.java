@@ -52,10 +52,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         //url是否需要验证
         String url = request.getRequestURI();
         log.info("request url is ：{}", url);
-        //如果是不需要登录用户访问，则放过请求
-        if (ForwardAccessService.validateUrl(url)) {
-            return true;
-        }
         //获取token
         String token = request.getHeader(ForwardAccessService.TOKEN_NAME);
         if (StringUtils.isBlank(token)) {
@@ -63,6 +59,13 @@ public class AuthInterceptor implements HandlerInterceptor {
             Cookie cookie = RequestUtils.getCookieByName(request, ForwardAccessService.TOKEN_NAME);
             if (null != cookie) {
                 token = cookie.getValue();
+            }
+        }
+        //如果token为空则是否是正确的请求路径
+        if (StringUtils.isBlank(token)) {
+            //如果是不需要登录用户访问，则放过请求
+            if (ForwardAccessService.validateUrl(url)) {
+                return true;
             }
         }
         //需要验证token

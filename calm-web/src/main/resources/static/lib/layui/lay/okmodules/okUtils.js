@@ -1,9 +1,9 @@
 "use strict";
 layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots) {
     /**
-     * 服务器地址-gateway地址
+     * 服务器地址-gateway地址 nginx代理 http://127.0.0.1:10082;
      */
-    const baseUrl = "http://127.0.0.1:82";
+    const baseUrl = "http://gateway-dev.calm.com";
     var $ = layui.jquery;
     var table = layui.table;
     let dtree = layui.dtree;
@@ -14,9 +14,21 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
          */
         isFrontendBackendSeparate: true,
         /**
-         * 用户token存入、请求的key
+         * 获取用户token的key
          */
         tokenKey: "user_token",
+        /**
+         * cookie过期时间
+         */
+        cookieExpires: 1,
+        /**
+         * cookie跨域所支持的域名
+         */
+        cookieDomain: "calm.com",
+        /**
+         * cookie所属的路径
+         */
+        cookiePath: "/",
         //登录接口
         login: baseUrl + "/auth/login",
         //退出登录接口
@@ -153,6 +165,12 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 dataType: "json",
                 //参考：https://www.runoob.com/http/http-content-type.html
                 contentType: "application/json;charset=utf-8",
+                headers: {
+                    //参考：https://www.cnblogs.com/cdwp8/p/5157377.html
+                    // https://blog.csdn.net/xutongbao/article/details/82834963
+                    //设置请求头信息
+                    "user_token": $.cookie(okUtils.tokenKey),
+                },
                 beforeSend: function (xhr) {
                     //设置请求头信息
                     xhr.setRequestHeader(okUtils.tokenKey, $.cookie(okUtils.tokenKey));
@@ -199,6 +217,10 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 dataType: "json",
                 //参考：https://www.runoob.com/http/http-content-type.html
                 contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                headers: {
+                    //设置请求头信息
+                    "user_token": $.cookie(okUtils.tokenKey),
+                },
                 beforeSend: function (xhr) {
                     //设置请求头信息
                     xhr.setRequestHeader(okUtils.tokenKey, $.cookie(okUtils.tokenKey));

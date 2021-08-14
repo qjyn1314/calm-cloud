@@ -70,7 +70,6 @@ public class JwtTokenFilter extends UsernamePasswordAuthenticationFilter {
                 userDetails = JSONObject.parseObject(redisUser.toString(),CurrentUser.class);
             } catch (Exception e) {
                 log.error("从redis中获取当前登录用户解析失败，将从数据库中获取。--",e);
-                userDetails = null;
                 redisHelper.deleteByKey(redisUserNameKey);
             }
         }

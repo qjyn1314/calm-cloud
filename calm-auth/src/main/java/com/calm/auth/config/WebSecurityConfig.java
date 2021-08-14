@@ -188,7 +188,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //未登录拦截
                 .authenticationEntryPoint(unAuthenticationEntryPoint());
         //表示Spring Security永远不会创建一个session,也不会通过sessionID获取用户信息
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         //关于springsecurity中过滤器的执行顺序详细讲解
         // 参考：1、https://www.cnblogs.com/summerday152/p/13635948.html
         //      2、https://blog.csdn.net/qq_36882793/article/details/102869583
@@ -196,7 +196,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.addFilterBefore(jwtRequestFilter(), JwtTokenFilter.class);
         //在这里也就意味着，会先执行 jwtTokenFilter 再次执行 UsernamePasswordAuthenticationFilter
         http.addFilterAt(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.rememberMe();
+        http.rememberMe()
+                .alwaysRemember(Boolean.TRUE)
+                //cookie的过期秒数
+                .tokenValiditySeconds(CurrentSecurityUserUtils.EXPIRE_SECS_COOKIE)
+                //form表单中的记住我input框的name属性值
+                .rememberMeCookieName(CurrentSecurityUserUtils.TOKEN_NAME)
+                //需要配置跨域的域名
+                .rememberMeCookieName(CurrentSecurityUserUtils.COOKIE_DOMAIN)
+                //参考：https://blog.csdn.net/lizhiqiang1217/article/details/90268205
+//                .useSecureCookie(true)
+                //参考：https://blog.csdn.net/Jokeronee/article/details/106646876
+//                .tokenRepository()
+                //配置用户service，用于在关闭浏览器再次打开时，使用此service型数据库中根据名称查询用户数据，
+                .userDetailsService(calmUserService())
+        ;
     }
 
 

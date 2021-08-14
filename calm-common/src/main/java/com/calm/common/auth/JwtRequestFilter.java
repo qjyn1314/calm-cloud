@@ -13,7 +13,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
 
 /**
  * <p>
@@ -32,13 +31,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         log.info("HTTP_METHOD:--" + request.getMethod());
         log.info("IP：--" + request.getRemoteAddr());
         String token = request.getHeader(CurrentSecurityUserUtils.TOKEN_NAME);
-        log.info("TOKEN：--" + token);
         if (StringUtils.isBlank(token)) {
             Cookie cookie = RequestUtils.getCookieByName(request, CurrentSecurityUserUtils.TOKEN_NAME);
             if (null != cookie) {
                 token = cookie.getValue();
             }
         }
+        log.info("TOKEN：" + token);
         //验证token并将token验证成功的信息写入security的上下环境中
         if (StringUtils.isBlank(token)) {
             SecurityContextHolder.clearContext();

@@ -15,7 +15,6 @@
     <description>CalmJob-分布式定时任务</description>
     <properties>
         <sequence-api.version>1.0.0</sequence-api.version>
-        <xxl-job-core.version>2.3.0</xxl-job-core.version>
     </properties>
 
     <modules>
@@ -28,7 +27,6 @@
         <dependency>
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-job-core</artifactId>
-            <version>${xxl-job-core.version}</version>
         </dependency>
     </dependencies>
 

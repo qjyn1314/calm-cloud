@@ -110,13 +110,21 @@
                 "password": password
             }
             okUtils.ajaxForm(okUtils.login, "post", params, true).done(function (response) {
-                let userToken = response.data;
-                $.cookie(okUtils.tokenKey, userToken)
+                let user_token = response.data;
+                let user_token_key = okUtils.tokenKey;
+                //参考：https://www.cnblogs.com/hellofangfang/p/9626797.html
+                loginAfterSetCookie(user_token_key,user_token);
+                okLayer.greenLaughMsg("登陆成功。")
                 window.location.href = "/main";
             }).fail(function (res) {
                 okLayer.redCryMsg(res.message);
             });
         }
+
+        function loginAfterSetCookie(key,val){
+            $.cookie(key,val,{expires:okUtils.cookieExpires,domain:okUtils.cookieDomain,path:okUtils.cookiePath})
+        }
+
     });
 
 </script>

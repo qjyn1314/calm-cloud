@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.Map;
 @Data
 @ToString
 @AllArgsConstructor
+@Accessors(chain = true)
 @ApiModel(description = "通用返回值对象")
 public class JsonResult<R> implements Serializable {
 
@@ -38,19 +40,19 @@ public class JsonResult<R> implements Serializable {
     public JsonResult() {
     }
 
-    private static <R> JsonResult<R> defaultSuccess() {
+    private static <R> JsonResult defaultSuccess() {
         return new JsonResult<R>().setCode(SUCCESS_0);
     }
 
-    public static JsonResult<Object> success() {
+    public static  <R> JsonResult success() {
         return defaultSuccess().setMessage("success");
     }
 
-    public static <R> JsonResult<Object> success(R data) {
+    public static <R> JsonResult<R> success(R data) {
         return success().setData(data);
     }
 
-    public static JsonResult<Object> successMsg(String msg) {
+    public static  <R> JsonResult<R> successMsg(String msg) {
         return defaultSuccess().setMessage(msg);
     }
 

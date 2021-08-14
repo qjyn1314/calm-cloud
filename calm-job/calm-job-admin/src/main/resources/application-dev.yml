@@ -3,6 +3,11 @@ server:
   servlet:
     context-path: /xxl-job-admin
 spring:
+  boot:
+    admin:
+      client:
+        instance:
+          service-url: http://127.0.0.1:10083
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/calm-job?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
@@ -13,6 +18,13 @@ spring:
       server-addr: 127.0.0.1:8848
       discovery:
         server-addr: 127.0.0.1:8848
+        metadata:
+          management:
+            # 参考：https://blog.csdn.net/weixin_41767181/article/details/106075472
+            context-path: ${server.servlet.context-path}/actuator
+      config:
+        # 参考：https://blog.csdn.net/weixin_41767181/article/details/106075472
+        context-path: ${server.servlet.context-path}/actuator
   #redis
   redis:
     database: 1

@@ -20,10 +20,10 @@
 			<groupId>com.calm.core</groupId>
 			<artifactId>calm-core</artifactId>
 			<exclusions>
-				<exclusion>
+				<!--<exclusion>
 					<groupId>de.codecentric</groupId>
 					<artifactId>spring-boot-admin-starter-client</artifactId>
-				</exclusion>
+				</exclusion>-->
 				<exclusion>
 					<groupId>de.codecentric</groupId>
 					<artifactId>spring-boot-admin-starter-server</artifactId>

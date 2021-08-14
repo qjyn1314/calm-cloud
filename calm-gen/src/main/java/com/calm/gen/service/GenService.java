@@ -8,17 +8,15 @@ import com.alibaba.fastjson.JSON;
 import com.calm.common.exception.CalmException;
 import com.calm.gen.config.DbMessageInfo;
 import com.calm.gen.config.GenConfig;
-import com.calm.gen.config.MybatisGenConfig;
+import com.calm.gen.config.SqlSessionService;
 import com.calm.gen.mapper.GenMapper;
 import com.calm.gen.util.CodeGenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,14 +34,12 @@ import java.util.zip.ZipOutputStream;
 public class GenService {
 
     public void genCode(GenConfig genConfig) {
-        DbMessageInfo dbMessageInfo = genConfig.getDbMessageInfo();
         String tableName = genConfig.getTableName();
         if(StrUtil.isBlank(tableName)){
             throw new CalmException("请使用正确的表名。");
         }
-        MybatisGenConfig mybatisGenConfig = new MybatisGenConfig(dbMessageInfo);
-        SqlSessionFactory sqlSessionFactory = mybatisGenConfig.initMybatisSqlSessionFactory(GenMapper.class);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+        DbMessageInfo dbMessageInfo = genConfig.getDbMessageInfo();
+        SqlSession sqlSession = SqlSessionService.me().handleSession(dbMessageInfo, GenMapper.class);
         GenMapper genMapper = sqlSession.getMapper(GenMapper.class);
         Map<String, String> table = genMapper.queryTable(tableName);
         log.info("表信息是...{}", JSON.toJSON(table));
