@@ -39,6 +39,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
         log.info("token:{}", token);
         request.setAttribute(CurrentSecurityUserUtils.TOKEN_NAME,token);
         response.setHeader(CurrentSecurityUserUtils.TOKEN_NAME,token);
+        RequestUtils.setCookie(response,CurrentSecurityUserUtils.TOKEN_NAME,token,CurrentSecurityUserUtils.EXPIRE_SECS_COOKIE,CurrentSecurityUserUtils.COOKIE_DOMAIN,CurrentSecurityUserUtils.COOKIE_PATH);
         RequestUtils.setResponse(response, JsonResult.successDataMsg(token, "登陆成功"));
     }
 }
