@@ -74,11 +74,10 @@
 <script src="../static/lib/layui/layui.js"></script>
 </body>
 <script>
-    "use strict";
     layui.use(["okUtils", "okLayer", "okCookie"], function () {
-        var okUtils = layui.okUtils;
-        var $ = layui.jquery;
-        var okLayer = layui.okLayer;
+        let okUtils = layui.okUtils;
+        let $ = layui.jquery;
+        let okLayer = layui.okLayer;
         okLoading.close();
 
         /**
@@ -110,8 +109,9 @@
                 "password": password
             }
             okUtils.ajaxForm(okUtils.login, "post", params, true).done(function (response) {
-                let user_token = response.data;
                 let user_token_key = okUtils.tokenKey;
+                let user_token = response.data;
+                okUtils.local(user_token_key,user_token);
                 //参考：https://www.cnblogs.com/hellofangfang/p/9626797.html
                 loginAfterSetCookie(user_token_key,user_token);
                 okLayer.greenLaughMsg("登陆成功。")

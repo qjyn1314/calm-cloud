@@ -188,7 +188,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //未登录拦截
                 .authenticationEntryPoint(unAuthenticationEntryPoint());
         //表示Spring Security永远不会创建一个session,也不会通过sessionID获取用户信息
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER);
         //关于springsecurity中过滤器的执行顺序详细讲解
         // 参考：1、https://www.cnblogs.com/summerday152/p/13635948.html
         //      2、https://blog.csdn.net/qq_36882793/article/details/102869583

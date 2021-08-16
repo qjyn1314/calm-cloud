@@ -1,4 +1,4 @@
-package com.calm.gateway.filter;
+package com.calm.common.config;
 
 import com.calm.parent.config.ForwardAccessService;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 public class CorsFilterConfig {
 
     @Bean
-    public WebFilter corsFilter() {
+    public WebFilter webFilter() {
         return (ServerWebExchange ctx, WebFilterChain chain) -> {
             ServerHttpRequest request = ctx.getRequest();
             if (CorsUtils.isCorsRequest(request)) {

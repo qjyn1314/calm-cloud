@@ -24,11 +24,11 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
         /**
          * cookie跨域所支持的域名
          */
-        cookieDomain: "calm.com",
+        cookieDomain: 'calm.com',
         /**
          * cookie所属的路径
          */
-        cookiePath: "/",
+        cookiePath: '/',
         //登录接口
         login: baseUrl + "/auth/login",
         //退出登录接口
@@ -69,7 +69,14 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
         userDistributionRole: baseUrl + "/user/api/v1/sysUser/userDistributionRole",
         //用户修改密码
         changeUserPwd: baseUrl + "/user/api/v1/sysUser/changePwd",
-
+        setHeader: function setHeader() {
+            return {
+                //参考：https://www.cnblogs.com/cdwp8/p/5157377.html
+                // https://blog.csdn.net/xutongbao/article/details/82834963
+                //设置请求头信息
+                "user_token": okUtils.local(okUtils.tokenKey),
+            }
+        },
         /**
          * 封装默认表格
          *
@@ -85,10 +92,7 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 autoSort: false,
                 defaultToolbar: ["filter"],
                 size: "sm",
-                headers: {
-                    //设置请求头信息
-                    "user_token": $.cookie(okUtils.tokenKey),
-                },
+                headers: okUtils.setHeader(),
                 request: {
                     pageName: 'current',
                     limitName: 'pageSize'
@@ -135,10 +139,7 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
             return {
                 width: "100%",
                 method: 'get',
-                headers: {
-                    //设置请求头信息
-                    "user_token": $.cookie(okUtils.tokenKey),
-                },
+                headers: okUtils.setHeader(),
                 type: "all",
                 line: true,
                 ficon: ["1", "-1"],
@@ -165,15 +166,13 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 dataType: "json",
                 //参考：https://www.runoob.com/http/http-content-type.html
                 contentType: "application/json;charset=utf-8",
-                headers: {
-                    //参考：https://www.cnblogs.com/cdwp8/p/5157377.html
-                    // https://blog.csdn.net/xutongbao/article/details/82834963
-                    //设置请求头信息
-                    "user_token": $.cookie(okUtils.tokenKey),
+                headers: okUtils.setHeader(),
+                xhrFields: {
+                    withCredentials: true
                 },
                 beforeSend: function (xhr) {
                     //设置请求头信息
-                    xhr.setRequestHeader(okUtils.tokenKey, $.cookie(okUtils.tokenKey));
+                    xhr.setRequestHeader(okUtils.tokenKey, okUtils.local(okUtils.tokenKey));
                     if (load) {
                         loadIndex = layer.load(0, {shade: 0.2});
                     }
@@ -217,17 +216,17 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 dataType: "json",
                 //参考：https://www.runoob.com/http/http-content-type.html
                 contentType: "application/x-www-form-urlencoded;charset=utf-8",
-                headers: {
-                    //设置请求头信息
-                    "user_token": $.cookie(okUtils.tokenKey),
+                headers: okUtils.setHeader(),
+                xhrFields: {
+                    withCredentials: true
                 },
-                beforeSend: function (xhr) {
-                    //设置请求头信息
-                    xhr.setRequestHeader(okUtils.tokenKey, $.cookie(okUtils.tokenKey));
-                    if (load) {
-                        loadIndex = layer.load(0, {shade: 0.2});
-                    }
-                },
+                // beforeSend: function (xhr) {
+                //     //设置请求头信息
+                //     xhr.setRequestHeader(okUtils.tokenKey, okUtils.local(okUtils.tokenKey));
+                //     if (load) {
+                //         loadIndex = layer.load(0, {shade: 0.2});
+                //     }
+                // },
                 success: function (data) {
                     if (data.code === 0) {
                         deferred.resolve(data)
@@ -253,20 +252,6 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
          */
         getBodyWidth: function () {
             return document.body.scrollWidth;
-        },
-        /**
-         * 主要用于对ECharts视图自动适应宽度
-         */
-        echartsResize: function (element) {
-            var element = element || [];
-            window.addEventListener("resize", function () {
-                var isResize = localStorage.getItem("isResize");
-                // if (isResize == "false") {
-                for (let i = 0; i < element.length; i++) {
-                    element[i].resize();
-                }
-                // }
-            });
         },
         /**
          * 主要用于针对表格批量操作操作之前的检查
@@ -332,7 +317,7 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 } else {
                     localStorage.setItem(name, value);
                 }
-            } else if (null !== value) {
+            } else if (null !== name) {
                 /**获取*/
                 let val = localStorage.getItem(name);
                 try {

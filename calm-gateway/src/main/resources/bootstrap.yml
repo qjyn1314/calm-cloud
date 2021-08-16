@@ -33,6 +33,7 @@ spring:
             allowed-origins: '*'
             allowed-methods: '*'
             allowed-headers: '*'
+            max-age: 36000
       discovery:
         locator:
           enabled: true

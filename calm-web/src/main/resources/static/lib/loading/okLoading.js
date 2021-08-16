@@ -1,6 +1,6 @@
 var ok_load_options = {
     time: 1000,
-    content: "ok-admin..."
+    content: "......"
 };
 !function (content, options) {
     var load_config = localStorage.getItem("okConfig") || window.okConfig || {};
