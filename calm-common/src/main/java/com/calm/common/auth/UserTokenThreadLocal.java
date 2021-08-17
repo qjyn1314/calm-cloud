@@ -26,7 +26,6 @@ public class UserTokenThreadLocal {
      * 设置当前用户jwt-Token
      */
     public static void setCurrentUserToken(String userToken) {
-        log.info("设置jwt-Token：" + userToken);
         USER_TOKEN_CONTEXT_HOLDER.set(userToken);
     }
 
@@ -34,7 +33,6 @@ public class UserTokenThreadLocal {
      * 清除当前的线程的usertoken
      */
     public static void clearCurrentUserToken() {
-        log.info("清除jwt-Token....");
         USER_TOKEN_CONTEXT_HOLDER.remove();
     }
 

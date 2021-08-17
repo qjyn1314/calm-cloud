@@ -3,6 +3,7 @@ package com.calm.user.provider;
 import com.calm.parent.base.JsonResult;
 import com.calm.user.api.vo.SysUserVo;
 import com.calm.user.persistence.service.SysUserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,7 @@ public class UserProvider {
      * @author wangjunming
      * @since 2021/2/24 14:25
      */
+    @ApiOperation("获取当前登录用户信息")
     @PostMapping("/validatePassword/{account}/{password}")
     public JsonResult<Object> validatePassword(@PathVariable String account,@PathVariable String password) {
         return JsonResult.success(service.validatePassword(account,password));

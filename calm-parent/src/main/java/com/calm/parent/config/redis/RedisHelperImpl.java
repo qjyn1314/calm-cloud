@@ -93,6 +93,11 @@ public class RedisHelperImpl<HK, T> implements RedisHelper<HK, T> {
     }
 
     @Override
+    public void valuePut(String key, T domain,Integer expireDate) {
+        valueOperations.set(key, domain,expireDate,TimeUnit.MINUTES);
+    }
+
+    @Override
     public T getValue(String key) {
         return valueOperations.get(key);
     }

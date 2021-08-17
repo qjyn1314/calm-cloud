@@ -1,5 +1,6 @@
 package com.calm.parent.config;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.Arrays;
@@ -16,7 +17,7 @@ public class ForwardAccessService {
 
     public static String HEADER_KEY = "Calm_GateWay_Header_key";
     public static String HEADER_VALUE = "Calm_GateWay_Header_value";
-    public static String TOKEN_NAME = "user_token";
+    public static String TOKEN_NAME = HttpHeaders.AUTHORIZATION;
     private static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
 
     /**

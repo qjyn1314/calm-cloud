@@ -3,6 +3,7 @@ package com.calm.user.provider;
 import com.calm.parent.base.JsonResult;
 import com.calm.user.api.vo.SysUserVo;
 import com.calm.user.persistence.service.SysUserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,7 @@ public class UserFeignProvider {
      * @author wangjunming
      * @since 2021/2/24 14:25
      */
+    @ApiOperation("获取当前登录用户信息,角色和权限")
     @PostMapping("/selectByCode/{code}")
     public JsonResult<Object> selectByCode(@PathVariable String code) {
         SysUserVo userVo = service.selectByCode(code);

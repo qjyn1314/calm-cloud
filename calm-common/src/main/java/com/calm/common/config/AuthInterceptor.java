@@ -51,11 +51,9 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
         //url是否需要验证
         String url = request.getRequestURI();
-        log.info("request url is ：{}", url);
         //获取token
         String token = request.getHeader(ForwardAccessService.TOKEN_NAME);
         if (StringUtils.isBlank(token)) {
-            log.info("cookie中获取用户token");
             Cookie cookie = RequestUtils.getCookieByName(request, ForwardAccessService.TOKEN_NAME);
             if (null != cookie) {
                 token = cookie.getValue();
@@ -94,7 +92,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         CurrentUser currentUser = JSONObject.parseObject(currentUserJson, CurrentUser.class);
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
         context.setAuthentication(authentication);
-        log.info("当前线程中的--> SecurityContext：{}", context);
         return true;
     }
 

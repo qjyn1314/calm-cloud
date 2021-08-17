@@ -28,22 +28,24 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("HTTP_METHOD:--" + request.getMethod());
-        log.info("IP：--" + request.getRemoteAddr());
+        log.info("URL：--{}" , request.getRequestURI());
+        log.info("HTTP_METHOD:--{}", request.getMethod());
+        log.info("IP：--{}" , request.getRemoteAddr());
         String token = request.getHeader(CurrentSecurityUserUtils.TOKEN_NAME);
         if (StringUtils.isBlank(token)) {
+            log.info("cookie get Authorization");
             Cookie cookie = RequestUtils.getCookieByName(request, CurrentSecurityUserUtils.TOKEN_NAME);
             if (null != cookie) {
                 token = cookie.getValue();
             }
         }
-        log.info("TOKEN：" + token);
+        log.info("TOKEN____{}" , token);
         //验证token并将token验证成功的信息写入security的上下环境中
         if (StringUtils.isBlank(token)) {
             SecurityContextHolder.clearContext();
         }
         chain.doFilter(request, response);
-//        UserTokenThreadLocal.clearCurrentUserToken();
+        UserTokenThreadLocal.clearCurrentUserToken();
     }
 
 }

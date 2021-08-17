@@ -24,9 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //开启密文密码
 @EnableEncryptableProperties
 //扫描项目中的mapper接口类
-@MapperScan(basePackages = {
-        "com.calm.*.persistence.mapper",
-}, annotationClass = Repository.class)
+@MapperScan(basePackages = "com.calm.*.persistence.mapper", annotationClass = Repository.class)
 //开启数据库事物
 @EnableTransactionManagement
 public class MybatisPlusAutoConfig {

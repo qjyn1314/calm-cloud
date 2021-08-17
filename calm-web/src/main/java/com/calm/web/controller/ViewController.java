@@ -1,5 +1,7 @@
 package com.calm.web.controller;
 
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.calm.common.auth.CurrentSecurityUserUtils;
 import com.calm.common.auth.CurrentUser;
@@ -68,7 +70,9 @@ public class ViewController {
     @GetMapping("/currentUser")
     public JsonResult currentUser(){
         Map<String,Object> map = new HashMap<>(2);
-        String code = CurrentSecurityUserUtils.authUser().getCode();
+        CurrentUser currentUser = CurrentSecurityUserUtils.authUser();
+        String code =  currentUser.getCode();
+        Assert.isTrue(StrUtil.isNotBlank(code),"当前登录用户编码为空。");
         SysUserVo sysUserVo = webConsumer.selectUserByCode(code);
         //当前登录用户信息
         map.put("userInfo",null != sysUserVo ? sysUserVo : new SysUserVo());

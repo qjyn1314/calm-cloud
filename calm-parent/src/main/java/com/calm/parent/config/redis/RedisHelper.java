@@ -69,6 +69,15 @@ public interface RedisHelper<HK, T> {
     void valuePut(String key, T domain);
 
     /**
+     * 对象的实体类
+     *
+     * @param key
+     * @param domain
+     * @param expireDate 过期时间，单位：分钟
+     */
+    void valuePut(String key, T domain,Integer expireDate);
+
+    /**
      * 获取对象实体类
      *
      * @param key

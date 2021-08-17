@@ -111,7 +111,7 @@
             okUtils.ajaxForm(okUtils.login, "post", params, true).done(function (response) {
                 let user_token_key = okUtils.tokenKey;
                 let user_token = response.data;
-                okUtils.local(user_token_key,user_token);
+                // okUtils.local(user_token_key,user_token);
                 //参考：https://www.cnblogs.com/hellofangfang/p/9626797.html
                 loginAfterSetCookie(user_token_key,user_token);
                 okLayer.greenLaughMsg("登陆成功。")

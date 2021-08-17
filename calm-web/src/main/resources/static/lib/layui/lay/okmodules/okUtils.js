@@ -16,7 +16,7 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
         /**
          * 获取用户token的key
          */
-        tokenKey: "user_token",
+        tokenKey: "Authorization",
         /**
          * cookie过期时间
          */
@@ -73,8 +73,9 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
             return {
                 //参考：https://www.cnblogs.com/cdwp8/p/5157377.html
                 // https://blog.csdn.net/xutongbao/article/details/82834963
+                // https://www.jb51.net/article/182545.htm
                 //设置请求头信息
-                "user_token": okUtils.local(okUtils.tokenKey),
+                "Authorization": $.cookie(okUtils.tokenKey),
             }
         },
         /**
@@ -170,13 +171,6 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 xhrFields: {
                     withCredentials: true
                 },
-                beforeSend: function (xhr) {
-                    //设置请求头信息
-                    xhr.setRequestHeader(okUtils.tokenKey, okUtils.local(okUtils.tokenKey));
-                    if (load) {
-                        loadIndex = layer.load(0, {shade: 0.2});
-                    }
-                },
                 success: function (data) {
                     if (data.code === 0) {
                         deferred.resolve(data)
@@ -220,13 +214,6 @@ layui.define(["layer", "okCookie", "table", "dtree", "layer"], function (exprots
                 xhrFields: {
                     withCredentials: true
                 },
-                // beforeSend: function (xhr) {
-                //     //设置请求头信息
-                //     xhr.setRequestHeader(okUtils.tokenKey, okUtils.local(okUtils.tokenKey));
-                //     if (load) {
-                //         loadIndex = layer.load(0, {shade: 0.2});
-                //     }
-                // },
                 success: function (data) {
                     if (data.code === 0) {
                         deferred.resolve(data)

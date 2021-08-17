@@ -77,9 +77,10 @@ public class JwtTokenFilter extends UsernamePasswordAuthenticationFilter {
             log.info("Get user from interface");
             userDetails = calmUserService.loadUserByUsernameAndPassword(username,password);
         }
-        //验证通过之后，放入缓存中，每次用户相关操作时，删除缓存中的用户信息
-        redisHelper.valuePut(redisUserNameKey, JSONObject.toJSONString(userDetails));
-        log.info("The login_success user is：{}", JSONObject.toJSONString(userDetails));
+        //验证通过之后，放入缓存中，过期时间为 3 分钟
+        String userJson = JSONObject.toJSONString(userDetails);
+        redisHelper.valuePut(redisUserNameKey, userJson,3);
+        log.info("The login_success user message is：{}", userJson);
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }
 
