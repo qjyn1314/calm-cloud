@@ -200,7 +200,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //在验证token之前进行验证
 //        http.addFilterBefore(jwtRequestFilter(), JwtTokenFilter.class);
         //在这里也就意味着，会先执行 jwtTokenFilter 再次执行 UsernamePasswordAuthenticationFilter
-        http.addFilterAt(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         http.rememberMe()
                 .alwaysRemember(Boolean.TRUE)
                 //cookie的过期秒数
