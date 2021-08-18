@@ -184,7 +184,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //跨域
                 .and().cors()
                 //参考：https://blog.csdn.net/qq1049545450/article/details/83822937
-                .configurationSource(corsConfigSource())
+//                .configurationSource(corsConfigSource())
                 //禁用跨站csrf攻击防御
                 .and().csrf().disable();
         http.exceptionHandling()
@@ -225,7 +225,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         //同源配置，*表示任何请求都视为同源，若需指定ip和端口可以改为如“localhost：8080”，多个以“，”分隔；
-        corsConfiguration.addAllowedOrigin("*");
+        corsConfiguration.addAllowedOrigin(CurrentSecurityUserUtils.COOKIE_DOMAIN);
         //header，允许哪些header，本案中使用的是token，此处可将*替换为token；
         corsConfiguration.addAllowedHeader("*");
         //允许的请求方法，PSOT、GET等

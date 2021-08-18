@@ -1,6 +1,7 @@
 package com.calm.common.auth;
 
 import com.calm.common.utils.RequestUtils;
+import com.calm.parent.config.ForwardAccessService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +32,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         log.info("URL：--{}" , request.getRequestURI());
         log.info("HTTP_METHOD:--{}", request.getMethod());
         log.info("IP：--{}" , request.getRemoteAddr());
+        String header = request.getHeader(ForwardAccessService.HEADER_KEY);
+        log.info("Calm_GateWay_Header_key：--{}" , header);
         String token = request.getHeader(CurrentSecurityUserUtils.TOKEN_NAME);
         if (StringUtils.isBlank(token)) {
             log.info("cookie get Authorization");
