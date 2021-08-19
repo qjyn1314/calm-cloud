@@ -3,7 +3,12 @@ package com.calm.gen.excel;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.hutool.core.collection.ListUtil;
 import com.calm.common.utils.ResponseUtils;
+import com.calm.gen.config.DbMessageInfo;
+import com.calm.gen.config.SqlSessionService;
+import com.calm.gen.mapper.ExcelSetMapper;
 import io.undertow.servlet.spec.HttpServletResponseImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +17,18 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
 
+/**
+ * EasyPoi-官网：
+ * http://doc.wupaas.com/docs/easypoi/easypoi-1c0u8jachdq52
+ * 相关博客：
+ * https://blog.csdn.net/dengfengan/article/details/97940840
+ * 表格的背景色：
+ * https://blog.csdn.net/m0_37626813/article/details/78305920
+ * 设置单元格批注：
+ * https://www.cnblogs.com/zhjh256/p/10927707.html
+ * @author wangjunming@zhichubao.com 2021/8/19 14:58
+ */
+@Slf4j
 public class ExcelStartTest {
 
 
@@ -20,17 +37,24 @@ public class ExcelStartTest {
 //        dbMessageInfo.setUrl("jdbc:mysql://127.0.0.1:3306/study?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC");
 //        SqlSession sqlSession = SqlSessionService.me().handleSession(dbMessageInfo, ExcelSetMapper.class);
 //        ExcelSetMapper mapper = sqlSession.getMapper(ExcelSetMapper.class);
+
         //此表格的配置信息
         List<ExcelSet> settings = initExcelSetting();
-        //查询出来的数据
-        List<ExcelModel> dataList = initData();
-        ExportParams exportParams = new ExportParams();
-//        Workbook book = ExcelStartUtil.exportBySettingAndEmptyData(exportParams,settings,dataList);
         Workbook book = ExcelStartUtil.exportBySettingAndEmptyData("测试导出带批注",settings);
         FileOutputStream fos = new FileOutputStream("D:\\workspace\\project_excel\\test_excel.xlsx");
+        assert book != null;
         book.write(fos);
         fos.close();
+        log.info("success......");
 
+        ExportParams exportParams = new ExportParams();
+        List<ExcelModel> excelModels = initData();
+        Workbook sheets = ExcelStartUtil.exportBySettingAndEmptyData(exportParams, settings, excelModels);
+        FileOutputStream expoFos = new FileOutputStream("D:\\workspace\\project_excel\\test_export_excel.xlsx");
+        sheets.write(expoFos);
+        expoFos.close();
+
+        log.info("success......");
     }
 
     private static List<ExcelModel> initData() {

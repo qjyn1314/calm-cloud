@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * <p>
- * explain: 读取excel返回的值信息
+ * explain: 导入excel返回的值信息
  * </p>
  *
  * @author wangjunming@zhichubao.com  2021/8/5 12:09
@@ -18,7 +18,7 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Accessors(chain = true)
-public class ExcelExportVO<T> {
+public class ExcelImportVO<T> {
 
     /** 附件总记录数 */
     private Integer sumCount;
@@ -30,10 +30,20 @@ public class ExcelExportVO<T> {
     private Integer failCount;
     /** 失败记录数据 */
     private List<T> failList;
-    /** 错误行数集合 */
-    private List<Integer> errorLineNumbers;
-    /** 错误的excel文件路径*/
-    private String failFilePath;
+    /** excel导入的错误信息 */
+    private List<ExcelRes> errorRes;
 
+    @Data
+    @EqualsAndHashCode
+    @NoArgsConstructor
+    @Accessors(chain = true)
+    static class ExcelRes {
+        /**错误的行数*/
+        private Integer lineNumber;
+        /**错误的标题*/
+        private String title;
+        /**错误信息*/
+        private String errorMsg;
+    }
 
 }

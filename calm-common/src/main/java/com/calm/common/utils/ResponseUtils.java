@@ -9,6 +9,8 @@ import org.springframework.http.HttpHeaders;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j
@@ -58,6 +60,13 @@ public class ResponseUtils {
      */
     public static void download(HttpServletResponse response, String fileName, String contentType, byte[] bytes) {
         Assert.notNull(bytes, "DATA_NOT_EXISTS");
+        try {
+            //针对ie、FireFox、Chrome  需要进行编码的转换
+            fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            log.error("转换文件名失败。", e);
+            throw new CalmException("转换文件名失败");
+        }
         try (BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream())) {
             response.reset();
             response.setHeader(HttpHeaders.CONTENT_DISPOSITION,

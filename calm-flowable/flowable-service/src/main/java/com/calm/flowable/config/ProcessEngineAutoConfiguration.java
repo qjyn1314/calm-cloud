@@ -1,6 +1,5 @@
 package com.calm.flowable.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import org.flowable.spring.SpringProcessEngineConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
