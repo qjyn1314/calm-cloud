@@ -1,5 +1,6 @@
 package com.calm.gen.excel;
 
+import com.alibaba.excel.EasyExcel;
 import com.calm.common.utils.ResponseUtils;
 import com.calm.gen.mapper.ExcelSetMapper;
 import com.calm.parent.base.JsonResult;
@@ -19,7 +20,11 @@ import java.util.List;
 /**
  * <p>
  * explain:
- * 使用easyexcel 进行导入导出
+ * 使用easyexcel 导入
+ * 使用easypoi模板 导出
+ * 下载模板：
+ * 下载项目中的文件模板
+ * 在使用easypoi的模板导出空数据，即下载模板
  * <p>
  * 官方文档：
  * https://www.yuque.com/easyexcel/doc/easyexcel
@@ -51,19 +56,14 @@ public class ExcelController {
     }
     @ApiOperation("导入")
     @PostMapping("/import")
-    public JsonResult<ExcelImportVO<ExcelModel>> excelImport(@RequestParam("file") MultipartFile file) {
-        ExcelImportVO<ExcelModel> exportVO = new ExcelImportVO<>();
-
-
-
-
-
-
-
-
-
-
-
+    public JsonResult<ExcelImportVO<ExcelModelByEasyExcel>> excelImport(@RequestParam("file") MultipartFile file) {
+        ExcelImportVO<ExcelModelByEasyExcel> exportVO = new ExcelImportVO<>();
+        try {
+            EasyExcel.read(file.getInputStream(), ExcelModelByEasyExcel.class, new ExcelModelByEasyExcelListener(exportVO)).sheet().headRowNumber(0).doRead();
+        } catch (Exception e) {
+            log.error("读取excel失败。", e);
+            return JsonResult.fail("读取excel失败");
+        }
         return JsonResult.success(exportVO);
     }
 

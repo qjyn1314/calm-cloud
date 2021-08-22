@@ -14,6 +14,13 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * 参考：
+ * https://puhaiyang.blog.csdn.net/article/details/79845248
+ *
+ *
+ * @author wangjunming@zhichubao.com 2021/8/21 12:51
+ */
 @Slf4j
 @RefreshScope
 @SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class,proxyBeanMethods = false)
@@ -25,20 +32,5 @@ public class FlowableServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(FlowableServiceApplication.class, args);
     }
-
-//    @Bean
-//    public CommandLineRunner init(final RepositoryService repositoryService,
-//                                  final RuntimeService runtimeService,
-//                                  final TaskService taskService) {
-//
-//        return strings -> {
-//            System.out.println("Number of process definitions : "
-//                    + repositoryService.createProcessDefinitionQuery().count());
-//            System.out.println("Number of tasks : " + taskService.createTaskQuery().count());
-//            runtimeService.startProcessInstanceByKey("oneTaskProcess");
-//            System.out.println("Number of tasks after process start: "
-//                    + taskService.createTaskQuery().count());
-//        };
-//    }
 
 }

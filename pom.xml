@@ -30,6 +30,7 @@
         <velocity.version>1.7</velocity.version>
         <xxl-job-core.version>2.3.0</xxl-job-core.version>
         <easypoi.version>4.4.0</easypoi.version>
+        <easyexcel.version>2.2.10</easyexcel.version>
         <!--此工程中的子工程-->
         <calm-parent.version>1.0.0</calm-parent.version>
         <calm-provider.version>1.0.0</calm-provider.version>
@@ -261,6 +262,11 @@
                 <groupId>cn.afterturn</groupId>
                 <artifactId>easypoi-spring-boot-starter</artifactId>
                 <version>${easypoi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
             </dependency>
             <!--导入了springboot、springcloud、springcloudalibaba-->
             <dependency>

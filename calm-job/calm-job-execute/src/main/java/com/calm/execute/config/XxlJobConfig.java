@@ -5,6 +5,7 @@ import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import com.xxl.job.core.handler.IJobHandler;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +24,7 @@ import java.util.List;
 @Slf4j
 @Order(99)
 @Configuration
-public class XxlJobConfig {
+public class XxlJobConfig implements InitializingBean {
 
     @Value("${xxl.job.admin.addresses}")
     private String adminAddresses;
@@ -71,14 +72,10 @@ public class XxlJobConfig {
     private List<IJobHandler> jobHandlerList;
 
     /**
-     *
      * 手动将执行器注册到定时任务管理容器中
-     *
-     * @author wangjunming
-     * @since 2021/7/18 20:54
      */
-    @PostConstruct
-    public void getHandlers() {
+    @Override
+    public void afterPropertiesSet() throws Exception {
         for (IJobHandler jobHandler : jobHandlerList) {
             log.info("所需要处理的定时任务执行器是：{}", jobHandler);
             String name = jobHandler.getClass().getName();
