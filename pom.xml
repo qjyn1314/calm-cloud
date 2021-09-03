@@ -60,7 +60,6 @@
         <module>calm-web</module>
         <module>calm-gen</module>
         <module>calm-job</module>
-        <module>calm-flowable</module>
     </modules>
 
     <dependencies>
@@ -175,11 +174,6 @@
                 <groupId>com.calm.job</groupId>
                 <artifactId>calm-job</artifactId>
                 <version>${calm-job.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.flowable</groupId>
-                <artifactId>calm-flowable</artifactId>
-                <version>${calm-flowable.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.velocity</groupId>
