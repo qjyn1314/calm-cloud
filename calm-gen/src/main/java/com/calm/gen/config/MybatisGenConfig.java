@@ -42,7 +42,7 @@ public class MybatisGenConfig {
     }
 
     @SafeVarargs
-    public final <T> SqlSessionFactory initMybatisSqlSessionFactory(Class<T>... classList){
+    public final <T> SqlSessionFactory initMybatisSqlSessionFactory(Class<T>... classList) {
         DataSource dataSource = genDataSource();
         TransactionFactory transactionFactory = new JdbcTransactionFactory();
         Environment environment = new Environment("development", transactionFactory, dataSource);
@@ -52,7 +52,6 @@ public class MybatisGenConfig {
         }
         return new SqlSessionFactoryBuilder().build(configuration);
     }
-
 
 
 }
