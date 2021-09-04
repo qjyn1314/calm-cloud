@@ -46,7 +46,7 @@ public final class GenExecute {
         //生成的路径
         genConfig.setGenPath("D:\\gen_code");
         //使用特定的目录下的模板
-        genConfig.setSpecialTemplate("zcb_saas");
+        genConfig.setSpecialTemplate("zcb");
         genConfig.setAuthor("wangjunming@zhichubao.com");
         log.info("生成代码的基本信息是....{}", JSON.toJSON(genConfig));
         GenService genService = new GenService();

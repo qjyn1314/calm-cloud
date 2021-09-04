@@ -1,18 +1,17 @@
 package com.calm.gen.util;
 
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.core.util.StrUtil;
 import com.calm.common.exception.CalmException;
-import com.calm.gen.config.ColumnEntity;
 import com.calm.gen.config.GenConfig;
-import com.calm.gen.config.TableEntity;
-import com.google.common.collect.Maps;
+import com.calm.gen.mapper.entity.ColumnEntity;
+import com.calm.gen.mapper.entity.TableEntity;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -21,12 +20,19 @@ import org.apache.commons.lang.WordUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.springframework.util.ResourceUtils;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -40,121 +46,120 @@ public class CodeGenUtils {
 
     private final String ENTITY_JAVA_VM = "Entity.java.vm";
 
-    private final String MAPPER_JAVA_VM = "Mapper.java.vm";
-
-    private final String SERVICE_JAVA_VM = "Service.java.vm";
-
-    private final String SERVICE_IMPL_JAVA_VM = "ServiceImpl.java.vm";
-
-    private final String REPOSITORY_JAVA_VM = "Repository.java.vm";
-
-    private final String REPOSITORY_IMPL_JAVA_VM = "RepositoryImpl.java.vm";
-
-    private final String CONTROLLER_JAVA_VM = "Controller.java.vm";
-
     private final String MAPPER_XML_VM = "Mapper.xml.vm";
+
+    private final String MAPPER_XML_SUFFIX = MAPPER_XML_VM.substring(0, MAPPER_XML_VM.lastIndexOf("." ) + 1);
+
+    private final String JAVA_SUFFIX = ".java";
+
+    private final String DEFAULT_TEMPLATE_PATH = File.separator + "template" + File.separator;
+
+    private static String FINAL_CLASS_PATH_TEMPLATE_PATH = "";
 
     /**
      * 模板配置
      */
     private List<String> getTemplates(String specialTemplate) {
-        List<String> templates = new LinkedList<>();
-        templates.add("template/Entity.java.vm");
-        templates.add("template/Mapper.java.vm");
-        templates.add("template/Mapper.xml.vm");
-        templates.add("template/Service.java.vm");
-        templates.add("template/ServiceImpl.java.vm");
-        templates.add("template/Repository.java.vm");
-        templates.add("template/RepositoryImpl.java.vm");
-        templates.add("template/Controller.java.vm");
-        if (StrUtil.isNotBlank(specialTemplate)) {
-            templates = templates.stream().map(template -> {
-                template = template.replace("template/", "template/" + specialTemplate + "/");
-                return template;
-            }).collect(Collectors.toList());
-            return templates;
+        String classPathTemplatePath = CharSequenceUtil.isNotBlank(specialTemplate) ? DEFAULT_TEMPLATE_PATH + specialTemplate + File.separator : DEFAULT_TEMPLATE_PATH;
+        FINAL_CLASS_PATH_TEMPLATE_PATH = classPathTemplatePath;
+        String path = null;
+        try {
+            path = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX).getPath();
+        } catch (FileNotFoundException e) {
+            log.error("读取文件失败。", e);
         }
-        return templates;
+        classPathTemplatePath = path + classPathTemplatePath;
+        File file = new File(classPathTemplatePath);
+        Assert.notNull(file, "读取文件目录失败。" );
+        File[] files = file.listFiles();
+        Assert.notNull(files, "读取文件目录失败。" );
+        return Arrays.stream(files).filter(File::isFile).map(File::getAbsolutePath)
+                .map(templatePath -> FINAL_CLASS_PATH_TEMPLATE_PATH + templatePath.substring(templatePath.lastIndexOf("\\" ) + 1))
+                .collect(Collectors.toList());
     }
 
     /**
      * 生成代码
      */
     @SneakyThrows
-    public Map<String, String> generatorCode(GenConfig genConfig, Map<String, String> table,
-                                             List<Map<String, String>> columns, ZipOutputStream zip) {
+    public Map<String, String> generatorCode(GenConfig genConfig, Map<String, Object> table,
+                                             List<Map<String, Object>> columns, ZipOutputStream zip) {
         // 配置信息-数据库字段与java的的对应关系信息
         Configuration config = getConfig();
-        boolean hasBigDecimal = false;
         // 表信息
         TableEntity tableEntity = new TableEntity();
-        tableEntity.setTableName(table.get("tableName"));
+        BeanUtils.populate(tableEntity, table);
         if (CharSequenceUtil.isNotBlank(genConfig.getComments())) {
             tableEntity.setComments(genConfig.getComments());
-        } else {
-            tableEntity.setComments(table.get("tableComment"));
         }
-        String tablePrefix = genConfig.getTablePrefix();
-        // 表名转换成Java类名
-        String className = tableToJava(tableEntity.getTableName(), tablePrefix);
+        String className = tableToJava(tableEntity.getTableName(), genConfig.getTablePrefix());
         log.info("生成的Java类名...{}", className);
-        tableEntity.setCaseClassName(className);
-        tableEntity.setLowerClassName(StringUtils.uncapitalize(className));
+        tableEntity.setClassName(className);
+        tableEntity.setLowerClassname(StringUtils.uncapitalize(className));
+        tableEntity.setPathName(className.toLowerCase());
         // 列信息
         List<ColumnEntity> columnList = new ArrayList<>();
-        for (Map<String, String> column : columns) {
+        int priCount = 1;
+        for (Map<String, Object> column : columns) {
             ColumnEntity columnEntity = new ColumnEntity();
-            columnEntity.setColumnName(column.get("columnName"));
-            columnEntity.setDataType(column.get("dataType"));
-            columnEntity.setComments(column.get("columnComment"));
-            columnEntity.setExtra(column.get("extra"));
-            columnEntity.setNullable("NO".equals(column.get("isNullable")));
-            columnEntity.setColumnType(column.get("columnType"));
-            columnEntity.setHidden(Boolean.FALSE);
+            BeanUtils.populate(columnEntity, column);
             // 列名转换成Java属性名
             String attrName = columnToJava(columnEntity.getColumnName());
             columnEntity.setCaseAttrName(attrName);
             columnEntity.setLowerAttrName(StringUtils.uncapitalize(attrName));
+            columnEntity.setCapitalAttrName(columnEntity.getColumnName().toUpperCase());
             // 列的数据类型，转换成Java类型
-            String attrType = config.getString(columnEntity.getDataType(), "unknowType");
-            columnEntity.setAttrType(attrType);
-            if (!hasBigDecimal && "BigDecimal".equals(attrType)) {
-                hasBigDecimal = true;
-            }
+            columnEntity.setAttrType(config.getString(columnEntity.getDataType(), "unknowType" ));
             // 是否主键
-            if ("PRI".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null) {
+            if (priCount == 1 && "PRI".equalsIgnoreCase((String) column.get("columnKey" )) && tableEntity.getPk() == null) {
                 tableEntity.setPk(columnEntity);
+                ++priCount;
             }
             columnList.add(columnEntity);
         }
         tableEntity.setColumns(columnList);
-
         // 没主键，则第一个字段为主键
         if (tableEntity.getPk() == null) {
             tableEntity.setPk(tableEntity.getColumns().get(0));
         }
-        // 封装模板数据
-        Map<String, Object> map = new HashMap<>(16);
-        map.put("tableName", tableEntity.getTableName());
-        map.put("pk", tableEntity.getPk());
-        map.put("className", tableEntity.getCaseClassName());
-        map.put("classname", tableEntity.getLowerClassName());
-        map.put("pathName", tableEntity.getLowerClassName().toLowerCase());
-        map.put("columns", tableEntity.getColumns());
-        map.put("hasBigDecimal", hasBigDecimal);
-        map.put("datetime", DateUtil.now());
-        map.put("entity", genConfig.getEntity());
-        map.put("controller", genConfig.getController());
-        map.put("service", genConfig.getService());
-        map.put("serviceImpl", genConfig.getServiceImpl());
-        map.put("repository", genConfig.getRepository());
-        map.put("repositoryImpl", genConfig.getRepositoryImpl());
-        map.put("mapper", genConfig.getMapper());
-        map.put("comments", tableEntity.getComments());
-        map.put("author", genConfig.getAuthor());
-
+        // 封装模板中的数据
+        Map<String, Object> map;
+        map = transBean2Map(tableEntity);
+        //类名全小写
+        map.put("classname", tableEntity.getLowerClassname().toLowerCase());
+        map.putAll(transBean2Map(genConfig));
         // 渲染数据
         return renderData(genConfig, zip, tableEntity, map);
+    }
+
+    /**
+     * Bean --> Map 1: 利用Introspector和PropertyDescriptor 将Bean --> Map
+     * 参考：https://blog.csdn.net/cuidiwhere/article/details/8130434
+     *
+     * @author wangjunming
+     */
+    public static Map<String, Object> transBean2Map(Object obj) {
+        if (obj == null) {
+            return null;
+        }
+        Map<String, Object> map = new HashMap<>();
+        try {
+            BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
+            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+            for (PropertyDescriptor property : propertyDescriptors) {
+                String key = property.getName();
+                // 过滤class属性
+                if (!"class".equals(key)) {
+                    // 得到property对应的getter方法
+                    Method getter = property.getReadMethod();
+                    Object value = getter.invoke(obj);
+                    map.put(key, value);
+                }
+            }
+        } catch (Exception e) {
+            log.error("转换错误--", e);
+        }
+        return map;
     }
 
     /**
@@ -171,20 +176,21 @@ public class CodeGenUtils {
         // 设置velocity资源加载器
         VelocityInitializer.initVelocity();
         VelocityContext context = new VelocityContext(map);
-        // 获取模板列表
+        // 特殊的模板文件夹
         String specialTemplate = genConfig.getSpecialTemplate();
+        // 读取模板路径
         List<String> templates = getTemplates(specialTemplate);
         //将模板列表与路径匹配为map
-        Map<String, String> templatePathMap = handlePath(templates, genConfig);
+        Map<String, String> templatePathMap = templates.stream().map(CodeGenUtils::getTemplatePathKey).collect(Collectors.toMap(Function.identity(), template -> String.valueOf(map.get(template))));
         Map<String, String> resultMap = new HashMap<>(8);
         for (String template : templates) {
             // 渲染模板
             StringWriter sw = new StringWriter();
             Template tpl = Velocity.getTemplate(template, CharsetUtil.UTF_8);
             tpl.merge(context, sw);
-            String path = templatePathMap.get(template);
+            String path = templatePathMap.get(getTemplatePathKey(template));
             // 添加到zip
-            String fileName = getFileName(template, path, tableEntity.getCaseClassName());
+            String fileName = getFileName(template, path, tableEntity.getClassName());
             if (zip != null) {
                 zip.putNextEntry(new ZipEntry(Objects.requireNonNull(fileName)));
                 IoUtil.write(zip, StandardCharsets.UTF_8, false, sw.toString());
@@ -196,42 +202,18 @@ public class CodeGenUtils {
         return resultMap;
     }
 
-    private static Map<String, String> handlePath(List<String> templates, GenConfig genConfig) {
-        Map<String, String> pathMap = Maps.newHashMap();
-        for (String template : templates) {
-            if (template.contains(ENTITY_JAVA_VM)) {
-                pathMap.put(template, genConfig.getEntity());
-            }
-            if (template.contains(MAPPER_JAVA_VM)) {
-                pathMap.put(template, genConfig.getMapper());
-            }
-            if (template.contains(SERVICE_JAVA_VM)) {
-                pathMap.put(template, genConfig.getService());
-            }
-            if (template.contains(SERVICE_IMPL_JAVA_VM)) {
-                pathMap.put(template, genConfig.getServiceImpl());
-            }
-            if (template.contains(REPOSITORY_JAVA_VM)) {
-                pathMap.put(template, genConfig.getRepository());
-            }
-            if (template.contains(REPOSITORY_IMPL_JAVA_VM)) {
-                pathMap.put(template, genConfig.getRepositoryImpl());
-            }
-            if (template.contains(CONTROLLER_JAVA_VM)) {
-                pathMap.put(template, genConfig.getController());
-            }
-            if (template.contains(MAPPER_XML_VM)) {
-                pathMap.put(template, genConfig.getXml());
-            }
+    public static String getTemplatePathKey(String str) {
+        if ((FINAL_CLASS_PATH_TEMPLATE_PATH + MAPPER_XML_VM).equals(str)) {
+            return "xml";
         }
-        return pathMap;
+        return StringUtils.uncapitalize(str.substring(FINAL_CLASS_PATH_TEMPLATE_PATH.length(), str.lastIndexOf(JAVA_SUFFIX)));
     }
 
     /**
      * 列名转换成Java属性名
      */
     public String columnToJava(String columnName) {
-        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
+        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "" );
     }
 
     /**
@@ -239,7 +221,7 @@ public class CodeGenUtils {
      */
     private String tableToJava(String tableName, String tablePrefix) {
         if (StringUtils.isNotBlank(tablePrefix)) {
-            tableName = tableName.replaceFirst(tablePrefix, "");
+            tableName = tableName.replaceFirst(tablePrefix, "" );
         }
         return columnToJava(tableName);
     }
@@ -249,9 +231,9 @@ public class CodeGenUtils {
      */
     private Configuration getConfig() {
         try {
-            return new PropertiesConfiguration("generator.properties");
+            return new PropertiesConfiguration("generator.properties" );
         } catch (ConfigurationException e) {
-            throw new CalmException("获取配置文件失败");
+            throw new CalmException("获取配置文件失败" );
         }
     }
 
@@ -259,45 +241,16 @@ public class CodeGenUtils {
      * 获取文件名
      */
     private String getFileName(String template, String path, String className) {
-        String packagePath = "src" + File.separator + "main"
-                + File.separator + "java" + File.separator + path;
-
+        String packagePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + path;
         packagePath = packagePath.replace(".", File.separator);
-
         if (template.contains(ENTITY_JAVA_VM)) {
             return packagePath + File.separator + className + ".java";
         }
-
-        if (template.contains(MAPPER_JAVA_VM)) {
-            return packagePath + File.separator + className + "Mapper.java";
-        }
-
-        if (template.contains(SERVICE_JAVA_VM)) {
-            return packagePath + File.separator + className + "Service.java";
-        }
-
-        if (template.contains(SERVICE_IMPL_JAVA_VM)) {
-            return packagePath + File.separator + className + "ServiceImpl.java";
-        }
-
-        if (template.contains(REPOSITORY_JAVA_VM)) {
-            return packagePath + File.separator + className + "Repository.java";
-        }
-
-        if (template.contains(REPOSITORY_IMPL_JAVA_VM)) {
-            return packagePath + File.separator + className + "RepositoryImpl.java";
-        }
-
-        if (template.contains(CONTROLLER_JAVA_VM)) {
-            return packagePath + File.separator + className + "Controller.java";
-        }
-
         if (template.contains(MAPPER_XML_VM)) {
             return "src" + File.separator + "main" + File.separator
-                    + "resources" + File.separator + path + File.separator + className + "Mapper.xml";
+                    + "resources" + File.separator + path + File.separator + className + MAPPER_XML_SUFFIX;
         }
-
-        return null;
+        return packagePath + File.separator + className + template.substring(FINAL_CLASS_PATH_TEMPLATE_PATH.length(), template.lastIndexOf(JAVA_SUFFIX)) + JAVA_SUFFIX;
     }
 
 }

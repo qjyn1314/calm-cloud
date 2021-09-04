@@ -41,10 +41,10 @@ public class GenService {
         DbMessageInfo dbMessageInfo = genConfig.getDbMessageInfo();
         SqlSession sqlSession = SqlSessionService.me().handleSession(dbMessageInfo, GenMapper.class);
         GenMapper genMapper = sqlSession.getMapper(GenMapper.class);
-        Map<String, String> table = genMapper.queryTable(tableName);
+        Map<String, Object> table = genMapper.queryTable(tableName);
         Assert.notNull(table,"未查找到表信息。");
         log.info("表信息是...{}", JSON.toJSON(table));
-        List<Map<String, String>> columns = genMapper.queryColumns(tableName);
+        List<Map<String, Object>> columns = genMapper.queryColumns(tableName);
         log.info("表的列信息是...{}", JSON.toJSON(columns));
         String genPath = genConfig.getGenPath();
         Assert.isFalse(CharSequenceUtil.isBlank(genPath),"请确定生成文件所输出的文件夹。");

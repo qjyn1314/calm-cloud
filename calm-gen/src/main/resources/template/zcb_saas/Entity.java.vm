@@ -13,9 +13,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
-#if(${hasBigDecimal})
+
 import java.math.BigDecimal;
-#end
 import java.time.LocalDateTime;
 
 /**
@@ -27,10 +26,15 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Accessors(chain = true)
-@ApiModel("${tableName}")
+@ApiModel("${comments}")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @TableName("${tableName}")
 public class ${className} extends AuditDomain {
+
+#foreach ($column in $columns)
+    public static final String FIELD_$column.capitalAttrName = "$column.lowerAttrName";
+#end
+
 
 #foreach ($column in $columns)
    /**

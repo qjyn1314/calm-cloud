@@ -1,4 +1,4 @@
-package com.calm.gen.config;
+package com.calm.gen.mapper.entity;
 
 import lombok.Data;
 
@@ -34,6 +34,11 @@ public class ColumnEntity {
     private String lowerAttrName;
 
     /**
+     * 大写的属性名
+     */
+    private String capitalAttrName;
+
+    /**
      * 属性类型
      */
     private String attrType;
@@ -47,15 +52,5 @@ public class ColumnEntity {
      * 字段类型
      */
     private String columnType;
-
-    /**
-     * 是否可以为空
-     */
-    private Boolean nullable;
-
-    /**
-     * 是否隐藏
-     */
-    private Boolean hidden;
 
 }

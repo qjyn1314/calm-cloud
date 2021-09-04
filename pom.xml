@@ -25,6 +25,7 @@
         <knife4j.version>3.0.3</knife4j.version>
         <jasypt.version>3.0.3</jasypt.version>
         <hutool.version>5.5.8</hutool.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <seata.version>1.4.0</seata.version>
         <jwt.version>0.9.1</jwt.version>
         <velocity.version>1.7</velocity.version>
@@ -207,6 +208,11 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
             </dependency>
             <!--访问地址：ip:port/swagger-ui/index.html-->
             <dependency>

@@ -4,14 +4,13 @@
 <mapper namespace="${mapper}.${className}Mapper">
 
   <resultMap id="${classname}Map" type="${entity}.${className}">
-    #foreach($column in $columns)
-      #if($column.lowerAttrName==$pk.lowerAttrName)
-        <id column="${pk.columnName}" property="${pk.lowerAttrName}"/>
-      #else
+#foreach($column in $columns)
+#if($column.lowerAttrName==$pk.lowerAttrName)
+    <id column="${pk.columnName}" property="${pk.lowerAttrName}"/>
+#else
     <result column="${column.columnName}" property="${column.lowerAttrName}"/>
-      #end
-    #end
-
+#end
+#end
   </resultMap>
 
 

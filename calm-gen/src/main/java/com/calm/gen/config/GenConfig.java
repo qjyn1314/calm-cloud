@@ -1,5 +1,6 @@
 package com.calm.gen.config;
 
+import cn.hutool.core.date.DateUtil;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public class GenConfig implements Serializable {
     /**
      * 表前缀
      */
-    private String tablePrefix = "table_";
+    private String tablePrefix;
 
     /**
      * 表名称
@@ -77,5 +78,10 @@ public class GenConfig implements Serializable {
      * template 文件夹下其他的模板使用
      */
     private String specialTemplate;
+
+    /**
+     * 创建时间
+     */
+    private String datetime = DateUtil.now();
 
 }
