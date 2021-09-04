@@ -54,36 +54,14 @@ public class CodeGenUtils {
 
     private final String DEFAULT_TEMPLATE_PATH = File.separator + "template" + File.separator;
 
-    private static String FINAL_CLASS_PATH_TEMPLATE_PATH = "";
-
-    /**
-     * 模板配置
-     */
-    private List<String> getTemplates(String specialTemplate) {
-        String classPathTemplatePath = CharSequenceUtil.isNotBlank(specialTemplate) ? DEFAULT_TEMPLATE_PATH + specialTemplate + File.separator : DEFAULT_TEMPLATE_PATH;
-        FINAL_CLASS_PATH_TEMPLATE_PATH = classPathTemplatePath;
-        String path = null;
-        try {
-            path = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX).getPath();
-        } catch (FileNotFoundException e) {
-            log.error("读取文件失败。", e);
-        }
-        classPathTemplatePath = path + classPathTemplatePath;
-        File file = new File(classPathTemplatePath);
-        Assert.notNull(file, "读取文件目录失败。" );
-        File[] files = file.listFiles();
-        Assert.notNull(files, "读取文件目录失败。" );
-        return Arrays.stream(files).filter(File::isFile).map(File::getAbsolutePath)
-                .map(templatePath -> FINAL_CLASS_PATH_TEMPLATE_PATH + templatePath.substring(templatePath.lastIndexOf("\\" ) + 1))
-                .collect(Collectors.toList());
-    }
+    private String finalClassPathTemplatePath = "";
 
     /**
      * 生成代码
      */
     @SneakyThrows
-    public Map<String, String> generatorCode(GenConfig genConfig, Map<String, Object> table,
-                                             List<Map<String, Object>> columns, ZipOutputStream zip) {
+    public void generatorCode(GenConfig genConfig, Map<String, Object> table,
+                              List<Map<String, Object>> columns, ZipOutputStream zip) {
         // 配置信息-数据库字段与java的的对应关系信息
         Configuration config = getConfig();
         // 表信息
@@ -129,7 +107,35 @@ public class CodeGenUtils {
         map.put("classname", tableEntity.getLowerClassname().toLowerCase());
         map.putAll(transBean2Map(genConfig));
         // 渲染数据
-        return renderData(genConfig, zip, tableEntity, map);
+        renderData(genConfig, zip, tableEntity, map);
+    }
+
+    /**
+     * 列名转换成Java属性名
+     */
+    public String columnToJava(String columnName) {
+        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "" );
+    }
+
+    /**
+     * 表名转换成Java类名
+     */
+    private String tableToJava(String tableName, String tablePrefix) {
+        if (StringUtils.isNotBlank(tablePrefix)) {
+            tableName = tableName.replaceFirst(tablePrefix, "" );
+        }
+        return columnToJava(tableName);
+    }
+
+    /**
+     * 获取配置信息
+     */
+    private Configuration getConfig() {
+        try {
+            return new PropertiesConfiguration("generator.properties" );
+        } catch (ConfigurationException e) {
+            throw new CalmException("获取配置文件失败" );
+        }
     }
 
     /**
@@ -168,11 +174,9 @@ public class CodeGenUtils {
      * @param zip         流 （为空，直接返回Map）
      * @param tableEntity 表基本信息
      * @param map         模板参数
-     * @return map key-filename value-contents
-     * @throws IOException
      */
-    private Map<String, String> renderData(GenConfig genConfig, ZipOutputStream zip,
-                                           TableEntity tableEntity, Map<String, Object> map) throws IOException {
+    private void renderData(GenConfig genConfig, ZipOutputStream zip,
+                            TableEntity tableEntity, Map<String, Object> map) throws IOException {
         // 设置velocity资源加载器
         VelocityInitializer.initVelocity();
         VelocityContext context = new VelocityContext(map);
@@ -182,7 +186,6 @@ public class CodeGenUtils {
         List<String> templates = getTemplates(specialTemplate);
         //将模板列表与路径匹配为map
         Map<String, String> templatePathMap = templates.stream().map(CodeGenUtils::getTemplatePathKey).collect(Collectors.toMap(Function.identity(), template -> String.valueOf(map.get(template))));
-        Map<String, String> resultMap = new HashMap<>(8);
         for (String template : templates) {
             // 渲染模板
             StringWriter sw = new StringWriter();
@@ -197,44 +200,39 @@ public class CodeGenUtils {
                 IoUtil.close(sw);
                 zip.closeEntry();
             }
-            resultMap.put(template, sw.toString());
         }
-        return resultMap;
     }
 
+    /**
+     * 模板配置
+     */
+    private List<String> getTemplates(String specialTemplate) {
+        String classPathTemplatePath = CharSequenceUtil.isNotBlank(specialTemplate) ? DEFAULT_TEMPLATE_PATH + specialTemplate + File.separator : DEFAULT_TEMPLATE_PATH;
+        finalClassPathTemplatePath = classPathTemplatePath;
+        String path = null;
+        try {
+            path = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX).getPath();
+        } catch (FileNotFoundException e) {
+            log.error("读取文件失败。", e);
+        }
+        classPathTemplatePath = path + classPathTemplatePath;
+        File file = new File(classPathTemplatePath);
+        Assert.notNull(file, "读取文件目录失败。" );
+        File[] files = file.listFiles();
+        Assert.notNull(files, "读取文件目录失败。" );
+        return Arrays.stream(files).filter(File::isFile).map(File::getAbsolutePath)
+                .map(templatePath -> finalClassPathTemplatePath + templatePath.substring(templatePath.lastIndexOf("\\" ) + 1))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 转换为 模板 key
+     */
     public static String getTemplatePathKey(String str) {
-        if ((FINAL_CLASS_PATH_TEMPLATE_PATH + MAPPER_XML_VM).equals(str)) {
+        if ((finalClassPathTemplatePath + MAPPER_XML_VM).equals(str)) {
             return "xml";
         }
-        return StringUtils.uncapitalize(str.substring(FINAL_CLASS_PATH_TEMPLATE_PATH.length(), str.lastIndexOf(JAVA_SUFFIX)));
-    }
-
-    /**
-     * 列名转换成Java属性名
-     */
-    public String columnToJava(String columnName) {
-        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "" );
-    }
-
-    /**
-     * 表名转换成Java类名
-     */
-    private String tableToJava(String tableName, String tablePrefix) {
-        if (StringUtils.isNotBlank(tablePrefix)) {
-            tableName = tableName.replaceFirst(tablePrefix, "" );
-        }
-        return columnToJava(tableName);
-    }
-
-    /**
-     * 获取配置信息
-     */
-    private Configuration getConfig() {
-        try {
-            return new PropertiesConfiguration("generator.properties" );
-        } catch (ConfigurationException e) {
-            throw new CalmException("获取配置文件失败" );
-        }
+        return StringUtils.uncapitalize(str.substring(finalClassPathTemplatePath.length(), str.lastIndexOf(JAVA_SUFFIX)));
     }
 
     /**
@@ -250,7 +248,7 @@ public class CodeGenUtils {
             return "src" + File.separator + "main" + File.separator
                     + "resources" + File.separator + path + File.separator + className + MAPPER_XML_SUFFIX;
         }
-        return packagePath + File.separator + className + template.substring(FINAL_CLASS_PATH_TEMPLATE_PATH.length(), template.lastIndexOf(JAVA_SUFFIX)) + JAVA_SUFFIX;
+        return packagePath + File.separator + className + template.substring(finalClassPathTemplatePath.length(), template.lastIndexOf(JAVA_SUFFIX)) + JAVA_SUFFIX;
     }
 
 }
