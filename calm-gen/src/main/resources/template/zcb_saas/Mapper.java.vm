@@ -1,0 +1,14 @@
+package ${mapper};
+
+import ${entity}.${className};
+import com.zhichubao.mybatis.mapper.BaseMapper;
+
+/**
+ * ${comments} 持久
+ *
+ * @author ${author} ${datetime}
+ */
+public interface ${className}Mapper extends BaseMapper<${className}> {
+
+
+}

@@ -1,0 +1,14 @@
+package ${repository};
+
+import com.zhichubao.mybatis.repository.BaseRepository;
+import ${entity}.${className};
+
+/**
+ * ${comments} 资源库
+ *
+ * @author ${author} ${datetime}
+ */
+public interface ${className}Repository extends BaseRepository<${className}>  {
+
+
+}

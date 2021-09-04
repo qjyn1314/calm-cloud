@@ -57,6 +57,14 @@ public class GenConfig implements Serializable {
      */
     private String serviceImpl = "service.impl";
     /**
+     * Repository包名
+     */
+    private String repository = "repository";
+    /**
+     * Repository Impl包名
+     */
+    private String repositoryImpl = "repository.impl";
+    /**
      * Mapper包名
      */
     private String mapper = "mapper";

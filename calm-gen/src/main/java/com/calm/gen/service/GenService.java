@@ -3,6 +3,8 @@ package com.calm.gen.service;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.calm.common.exception.CalmException;
@@ -35,23 +37,19 @@ public class GenService {
 
     public void genCode(GenConfig genConfig) {
         String tableName = genConfig.getTableName();
-        if(StrUtil.isBlank(tableName)){
-            throw new CalmException("请使用正确的表名。");
-        }
+        Assert.isFalse(CharSequenceUtil.isBlank(tableName),"请使用正确的表名。");
         DbMessageInfo dbMessageInfo = genConfig.getDbMessageInfo();
         SqlSession sqlSession = SqlSessionService.me().handleSession(dbMessageInfo, GenMapper.class);
         GenMapper genMapper = sqlSession.getMapper(GenMapper.class);
         Map<String, String> table = genMapper.queryTable(tableName);
+        Assert.notNull(table,"未查找到表信息。");
         log.info("表信息是...{}", JSON.toJSON(table));
         List<Map<String, String>> columns = genMapper.queryColumns(tableName);
         log.info("表的列信息是...{}", JSON.toJSON(columns));
         String genPath = genConfig.getGenPath();
-        if(StrUtil.isBlank(genPath)){
-            throw new CalmException("请确定生成文件所输出的文件夹");
-        }
+        Assert.isFalse(CharSequenceUtil.isBlank(genPath),"请确定生成文件所输出的文件夹。");
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
-
         CodeGenUtils.generatorCode(genConfig, table, columns, zip);
         //创建文件夹
         File file = new File(genPath);

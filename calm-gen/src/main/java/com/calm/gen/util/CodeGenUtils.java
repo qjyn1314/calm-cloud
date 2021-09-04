@@ -2,6 +2,7 @@ package com.calm.gen.util;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.StrUtil;
 import com.calm.common.exception.CalmException;
@@ -45,6 +46,10 @@ public class CodeGenUtils {
 
     private final String SERVICE_IMPL_JAVA_VM = "ServiceImpl.java.vm";
 
+    private final String REPOSITORY_JAVA_VM = "Repository.java.vm";
+
+    private final String REPOSITORY_IMPL_JAVA_VM = "RepositoryImpl.java.vm";
+
     private final String CONTROLLER_JAVA_VM = "Controller.java.vm";
 
     private final String MAPPER_XML_VM = "Mapper.xml.vm";
@@ -59,6 +64,8 @@ public class CodeGenUtils {
         templates.add("template/Mapper.xml.vm");
         templates.add("template/Service.java.vm");
         templates.add("template/ServiceImpl.java.vm");
+        templates.add("template/Repository.java.vm");
+        templates.add("template/RepositoryImpl.java.vm");
         templates.add("template/Controller.java.vm");
         if (StrUtil.isNotBlank(specialTemplate)) {
             templates = templates.stream().map(template -> {
@@ -76,27 +83,23 @@ public class CodeGenUtils {
     @SneakyThrows
     public Map<String, String> generatorCode(GenConfig genConfig, Map<String, String> table,
                                              List<Map<String, String>> columns, ZipOutputStream zip) {
-        // 配置信息
+        // 配置信息-数据库字段与java的的对应关系信息
         Configuration config = getConfig();
         boolean hasBigDecimal = false;
         // 表信息
         TableEntity tableEntity = new TableEntity();
         tableEntity.setTableName(table.get("tableName"));
-
-        if (StrUtil.isNotBlank(genConfig.getComments())) {
+        if (CharSequenceUtil.isNotBlank(genConfig.getComments())) {
             tableEntity.setComments(genConfig.getComments());
         } else {
             tableEntity.setComments(table.get("tableComment"));
         }
-
         String tablePrefix = genConfig.getTablePrefix();
-
         // 表名转换成Java类名
         String className = tableToJava(tableEntity.getTableName(), tablePrefix);
         log.info("生成的Java类名...{}", className);
         tableEntity.setCaseClassName(className);
         tableEntity.setLowerClassName(StringUtils.uncapitalize(className));
-
         // 列信息
         List<ColumnEntity> columnList = new ArrayList<>();
         for (Map<String, String> column : columns) {
@@ -112,7 +115,6 @@ public class CodeGenUtils {
             String attrName = columnToJava(columnEntity.getColumnName());
             columnEntity.setCaseAttrName(attrName);
             columnEntity.setLowerAttrName(StringUtils.uncapitalize(attrName));
-
             // 列的数据类型，转换成Java类型
             String attrType = config.getString(columnEntity.getDataType(), "unknowType");
             columnEntity.setAttrType(attrType);
@@ -123,7 +125,6 @@ public class CodeGenUtils {
             if ("PRI".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null) {
                 tableEntity.setPk(columnEntity);
             }
-
             columnList.add(columnEntity);
         }
         tableEntity.setColumns(columnList);
@@ -142,15 +143,14 @@ public class CodeGenUtils {
         map.put("columns", tableEntity.getColumns());
         map.put("hasBigDecimal", hasBigDecimal);
         map.put("datetime", DateUtil.now());
-
         map.put("entity", genConfig.getEntity());
         map.put("controller", genConfig.getController());
         map.put("service", genConfig.getService());
         map.put("serviceImpl", genConfig.getServiceImpl());
+        map.put("repository", genConfig.getRepository());
+        map.put("repositoryImpl", genConfig.getRepositoryImpl());
         map.put("mapper", genConfig.getMapper());
-
         map.put("comments", tableEntity.getComments());
-
         map.put("author", genConfig.getAuthor());
 
         // 渲染数据
@@ -210,6 +210,12 @@ public class CodeGenUtils {
             }
             if (template.contains(SERVICE_IMPL_JAVA_VM)) {
                 pathMap.put(template, genConfig.getServiceImpl());
+            }
+            if (template.contains(REPOSITORY_JAVA_VM)) {
+                pathMap.put(template, genConfig.getRepository());
+            }
+            if (template.contains(REPOSITORY_IMPL_JAVA_VM)) {
+                pathMap.put(template, genConfig.getRepositoryImpl());
             }
             if (template.contains(CONTROLLER_JAVA_VM)) {
                 pathMap.put(template, genConfig.getController());
@@ -272,6 +278,14 @@ public class CodeGenUtils {
 
         if (template.contains(SERVICE_IMPL_JAVA_VM)) {
             return packagePath + File.separator + className + "ServiceImpl.java";
+        }
+
+        if (template.contains(REPOSITORY_JAVA_VM)) {
+            return packagePath + File.separator + className + "Repository.java";
+        }
+
+        if (template.contains(REPOSITORY_IMPL_JAVA_VM)) {
+            return packagePath + File.separator + className + "RepositoryImpl.java";
         }
 
         if (template.contains(CONTROLLER_JAVA_VM)) {

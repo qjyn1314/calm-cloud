@@ -1,0 +1,59 @@
+package ${entity};
+
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.zhichubao.common.consts.BaseConsts;
+import com.zhichubao.mybatis.entity.AuditDomain;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+import java.time.LocalDateTime;
+
+/**
+ * ${comments}
+ *
+ * @author ${author} ${datetime}
+ */
+@Setter
+@Getter
+@NoArgsConstructor
+@Accessors(chain = true)
+@ApiModel("${tableName}")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@TableName("${tableName}")
+public class ${className} extends AuditDomain {
+
+#foreach ($column in $columns)
+   /**
+    * $column.comments
+    */
+#if($column.columnName == $pk.columnName)
+    @ApiModelProperty("${tableName}主键")
+    @TableId
+#else
+    @ApiModelProperty("$column.comments")
+#end
+#if($column.attrType == 'LocalDateTime')
+    @JsonFormat(pattern = BaseConsts.DatetimePattern.DATETIME)
+    @DateTimeFormat(pattern = BaseConsts.DatetimePattern.DATETIME)
+#end
+    private $column.attrType $column.lowerAttrName;
+#end
+
+    public interface Save {}
+
+    public interface Update {}
+
+    public interface EnableOrDisable {}
+
+
+}

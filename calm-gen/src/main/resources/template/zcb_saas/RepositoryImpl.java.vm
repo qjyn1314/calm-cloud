@@ -1,0 +1,24 @@
+package ${serviceImpl};
+
+import ${entity}.${className};
+import ${mapper}.${className}Mapper;
+import ${repository}.${className}Repository;
+import com.zhichubao.mybatis.repository.impl.BaseRepositoryImpl;
+import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * ${comments} 资源库实现
+ *
+ * @author ${author} ${datetime}
+ */
+@Repository
+public class ${className}RepositoryImpl extends BaseRepositoryImpl<${className}> implements ${className}Repository {
+
+    @Autowired
+    private ${className}Mapper mapper;
+
+
+
+}
