@@ -1,10 +1,17 @@
 package ${serviceImpl};
 
+import cn.hutool.core.lang.Assert;
 import ${entity}.${className};
 import ${service}.${className}Service;
 import ${repository}.${className}Repository;
+import com.zhichubao.common.consts.BaseConsts;
+import com.zhichubao.mybatis.utils.Wraps;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * ${comments} 应用服务实现
@@ -15,8 +22,62 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ${className}ServiceImpl implements ${className}Service {
 
     @Autowired
-    private ${className}Repository repository;
+    private ${className}Repository ${classname}Repository;
 
 
+    /**
+     * 创建
+     *
+     * @author ${author} ${datetime}
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void create(${className} ${classname}) {
+        ${classname}Repository.validate${className}(${classname}, null);
+        ${classname}Repository.insertSelective(${classname});
+    }
+
+    /**
+     * 更新
+     *
+     * @author ${author} ${datetime}
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void update(${className} ${classname}) {
+        ${classname}Repository.validate${className}(${classname}, ${classname}.get${pk.caseAttrName}());
+        ${classname}Repository.updateByIdSelective(${classname});
+    }
+
+    /**
+     * 删除固定值集
+     *
+     * @author ${author} ${datetime}
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Long tenantId, List<${pk.attrType}> ${pk.lowerAttrName}) {
+        for (${pk.attrType} valueId : ${pk.lowerAttrName}) {
+            ${className} ${classname} = ${classname}Repository.selectOne(Wraps.by(new ${className}().setTenantId(tenantId).set${pk.caseAttrName}(valueId)));
+            Assert.notNull(${classname}, BaseConsts.ErrorCode.DATA_NOT_EXISTS);
+            ${classname}Repository.deleteById(valueId);
+        }
+    }
+
+    /**
+     * 启用/禁用
+     *
+     * @author ${author} ${datetime}
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void enableOrDisable(Long tenantId,List<${className}> ${classname}List, Boolean enable) {
+        for (${className} value : ${classname}List) {
+            ${pk.attrType} ${pk.lowerAttrName} = value.get${pk.caseAttrName}();
+            ${className} ${classname} = ${classname}Repository.selectOne(Wraps.by(new ${className}().setTenantId(tenantId).set${pk.caseAttrName}(${pk.lowerAttrName})));
+            Assert.notNull(${classname}, BaseConsts.ErrorCode.DATA_NOT_EXISTS);
+            ${classname}Repository.updateEnabled(${classname}, enable, null);
+        }
+    }
 
 }

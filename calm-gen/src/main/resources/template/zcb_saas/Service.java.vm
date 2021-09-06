@@ -2,12 +2,42 @@ package ${service};
 
 import ${entity}.${className};
 
+import java.util.List;
+
 /**
  * ${comments} 应用服务
  *
  * @author ${author} ${datetime}
  */
 public interface ${className}Service {
+
+    /**
+     * 创建
+     *
+     * @author ${author} ${datetime}
+     */
+    void create(${className} ${classname});
+
+    /**
+     * 更新
+     *
+     * @author ${author} ${datetime}
+     */
+    void update(${className} ${classname});
+
+    /**
+     * 删除
+     *
+     * @author ${author} ${datetime}
+     */
+    void delete(Long tenantId,List<${pk.attrType}> ${pk.lowerAttrName});
+
+    /**
+     * 启用/禁用
+     *
+     * @author ${author} ${datetime}
+     */
+    void enableOrDisable(Long tenantId,List<${className}> ${classname}List, Boolean enable);
 
 
 }

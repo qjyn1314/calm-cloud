@@ -1,5 +1,7 @@
 package ${repository};
 
+import com.github.pagehelper.PageInfo;
+import com.zhichubao.mybatis.page.PageRequest;
 import com.zhichubao.mybatis.repository.BaseRepository;
 import ${entity}.${className};
 
@@ -10,5 +12,26 @@ import ${entity}.${className};
  */
 public interface ${className}Repository extends BaseRepository<${className}>  {
 
+    /**
+     * 分页查询
+     *
+     * @author ${author} ${datetime}
+     */
+    PageInfo<${className}> page(PageRequest pageRequest, ${className} ${classname});
+
+
+    /**
+     * 验证
+     *
+     * @author ${author} ${datetime}
+     */
+    void validate${className}(${className} ${classname},${pk.attrType} ${pk.lowerAttrName});
+
+    /**
+     * 启用/禁用
+     *
+     * @author ${author} ${datetime}
+     */
+    void updateEnabled(${className} ${classname}, Boolean flag, Long versionNum);
 
 }

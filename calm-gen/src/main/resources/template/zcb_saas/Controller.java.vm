@@ -1,12 +1,25 @@
 package ${controller};
 
+import com.github.pagehelper.PageInfo;
+import com.zhichubao.core.advice.BaseController;
+import com.zhichubao.core.advice.Result;
+import com.zhichubao.core.advice.Results;
+import com.zhichubao.core.security.anno.Permission;
 import ${entity}.${className};
 import ${service}.${className}Service;
 import ${repository}.${className}Repository;
+import com.zhichubao.iam.infra.config.SwaggerTagConfig;
+import com.zhichubao.mybatis.page.PageRequest;
+import com.zhichubao.mybatis.page.Sort;
+import com.zhichubao.mybatis.utils.Wraps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 /**
  * ${comments} API
@@ -15,14 +28,78 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController("${pathName}Controller.v1")
 @RequiredArgsConstructor
-@RequestMapping("/v1/${pathName}" )
-@Api(tags = "${className}_MANAGENT" )
-public class ${className}Controller {
+@RequestMapping("/v1/{tenantId}/${pathName}" )
+@Api(tags = SwaggerTagConfig.${className}_MANAGENT )
+public class ${className}Controller extends BaseController {
 
     private final ${className}Service ${classname}Service;
 
     private final ${className}Repository ${classname}Repository;
 
+    @ApiOperation("创建${comments}")
+    @Permission
+    @PostMapping
+    public ResponseEntity<Result<Void>> create(@PathVariable Long tenantId, @RequestBody ${className} ${classname}) {
+        ${classname}.setTenantId(tenantId);
+        this.validate(${classname}, ${className}.Save.class);
+        ${classname}Service.create(${classname});
+        return Results.ok();
+    }
+
+    @ApiOperation("${comments}列表")
+    @Permission
+    @GetMapping
+    public ResponseEntity<Result<PageInfo<${className}>>> page(@PathVariable Long tenantId,${className} ${classname},
+                                                          @ApiIgnore @Sort(value = ${className}.FIELD_CREATED_TIME, asc = false)
+                                                                  PageRequest pageRequest) {
+        ${classname}.setTenantId(tenantId);
+        return Results.ok(${classname}Repository.page(pageRequest, ${classname}));
+    }
+
+    @ApiOperation("${comments}详情")
+    @Permission
+    @GetMapping("/{${pk.lowerAttrName}}")
+    public ResponseEntity<Result<${className}>> detail(@PathVariable Long tenantId, @PathVariable ${pk.attrType} ${pk.lowerAttrName}) {
+        ${className} ${classname} = ${classname}Repository.selectOne(Wraps.by(new ${className}().setTenantId(tenantId).set${pk.caseAttrName}(${pk.lowerAttrName})));
+        return Results.ok(${classname});
+    }
+
+    @ApiOperation("修改${comments}")
+    @Permission
+    @PutMapping("/{${pk.lowerAttrName}}")
+    public ResponseEntity<Result<Void>> update(@PathVariable Long tenantId, @PathVariable ${pk.attrType} ${pk.lowerAttrName}, @RequestBody ${className} ${classname}) {
+        ${classname}.setTenantId(tenantId);
+        ${classname}.set${pk.caseAttrName}(${pk.lowerAttrName});
+        this.validate(${classname}, ${className}.Update.class);
+        ${classname}Service.update(${classname});
+        return Results.ok();
+    }
+
+    @ApiOperation("删除${comments}")
+    @Permission
+    @DeleteMapping
+    public ResponseEntity<Result<Void>> delete(@PathVariable Long tenantId, @RequestBody List<${pk.attrType}> ${pk.lowerAttrName}) {
+        ${classname}Service.delete(tenantId,${pk.lowerAttrName});
+        return Results.ok();
+    }
+
+    @ApiOperation("启用${comments}")
+    @Permission
+    @PostMapping("/enabled")
+    public ResponseEntity<Result<Void>> enable(@PathVariable Long tenantId, @RequestBody List<${className}> ${classname}) {
+        this.validate(${classname}, ${className}.EnableOrDisable.class);
+        ${classname}Service.enableOrDisable(tenantId,${classname}, true);
+        return Results.ok();
+    }
+
+    @ApiOperation("停用${comments}")
+    @Permission
+    @PostMapping("/disabled")
+    public ResponseEntity<Result<Void>> disable(@PathVariable Long tenantId, @RequestBody List<${className}> ${classname}) {
+        this.validate(${classname}, ${className}.EnableOrDisable.class);
+        ${classname}Service.enableOrDisable(tenantId,${classname}, false);
+        return Results.ok();
+    }
 
 
 }

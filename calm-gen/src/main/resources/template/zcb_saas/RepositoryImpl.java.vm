@@ -1,11 +1,16 @@
 package ${serviceImpl};
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.github.pagehelper.PageInfo;
+import com.zhichubao.common.consts.BaseConsts;
 import ${entity}.${className};
-import ${mapper}.${className}Mapper;
 import ${repository}.${className}Repository;
+import ${mapper}.${className}Mapper;
+import com.zhichubao.mybatis.page.PageRequest;
 import com.zhichubao.mybatis.repository.impl.BaseRepositoryImpl;
-import org.springframework.stereotype.Repository;
+import com.zhichubao.mybatis.utils.Wraps;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -17,8 +22,37 @@ import org.springframework.transaction.annotation.Transactional;
 public class ${className}RepositoryImpl extends BaseRepositoryImpl<${className}> implements ${className}Repository {
 
     @Autowired
-    private ${className}Mapper mapper;
+    private ${className}Mapper ${classname}Mapper;
 
+    /**
+     * 分页查询
+     *
+     * @author ${author} ${datetime}
+     */
+    @Override
+    public PageInfo<${className}> page(PageRequest pageRequest, ${className} ${classname}) {
+        LambdaQueryWrapper<${className}> queryPageWrapper = Wraps.by(new ${className}().setTenantId(${classname}.getTenantId()));
+        return this.pageAndSort(pageRequest, queryPageWrapper);
+    }
+
+    /**
+     * 验证值
+     *
+     * @author ${author} ${datetime}
+     */
+    @Override
+    public void validate${className}(${className} ${classname},${pk.attrType} ${pk.lowerAttrName}) {
+
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateEnabled(${className} ${classname}, Boolean flag, Long versionNum) {
+        Assert.notNull(${classname}, BaseConsts.ErrorCode.DATA_NOT_EXISTS);
+        ${classname}.setEnabledFlag(flag);
+        ${classname}.setVersionNum(versionNum);
+        this.updateByIdOptional(${classname}, ${className}.FIELD_ENABLED_FLAG);
+    }
 
 
 }
