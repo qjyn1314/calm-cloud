@@ -8,7 +8,6 @@ import com.zhichubao.core.security.anno.Permission;
 import ${entity}.${className};
 import ${service}.${className}Service;
 import ${repository}.${className}Repository;
-import com.zhichubao.iam.infra.config.SwaggerTagConfig;
 import com.zhichubao.mybatis.page.PageRequest;
 import com.zhichubao.mybatis.page.Sort;
 import com.zhichubao.mybatis.utils.Wraps;
@@ -29,7 +28,7 @@ import java.util.List;
 @RestController("${pathName}Controller.v1")
 @RequiredArgsConstructor
 @RequestMapping("/v1/{tenantId}/${pathName}" )
-@Api(tags = SwaggerTagConfig.${className}_MANAGENT )
+@Api(tags = SwaggerTagConfig.${className}_MANAGER )
 public class ${className}Controller extends BaseController {
 
     private final ${className}Service ${classname}Service;

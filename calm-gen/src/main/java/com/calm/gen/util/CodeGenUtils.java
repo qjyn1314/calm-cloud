@@ -48,7 +48,7 @@ public class CodeGenUtils {
 
     private final String MAPPER_XML_VM = "Mapper.xml.vm";
 
-    private final String MAPPER_XML_SUFFIX = MAPPER_XML_VM.substring(0, MAPPER_XML_VM.lastIndexOf("." ) + 1);
+    private final String MAPPER_XML_SUFFIX = MAPPER_XML_VM.substring(0, MAPPER_XML_VM.lastIndexOf("." ));
 
     private final String JAVA_SUFFIX = ".java";
 
@@ -102,10 +102,10 @@ public class CodeGenUtils {
         }
         // 封装模板中的数据
         Map<String, Object> map;
-        map = transBean2Map(tableEntity);
+        map = transBean2Map(genConfig);
         //类名全小写
         map.put("classname", tableEntity.getLowerClassname().toLowerCase());
-        map.putAll(transBean2Map(genConfig));
+        map.putAll(transBean2Map(tableEntity));
         // 渲染数据
         renderData(genConfig, zip, tableEntity, map);
     }

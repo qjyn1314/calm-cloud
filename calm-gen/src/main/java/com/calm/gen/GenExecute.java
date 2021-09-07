@@ -26,23 +26,22 @@ public final class GenExecute {
         GenConfig genConfig = new GenConfig();
         genConfig.setDbMessageInfo(dbMessageInfo);
         //需要生成代码的表名
-        String tableName = "gen_datasource_conf";
-
+        String tableName = "zemd_org";
         log.info("生成代码的表名是....{}", tableName);
         genConfig.setTableName(tableName);
-        //表备注
-        genConfig.setComments("数据源表");
+        //自定义表备注
+//        genConfig.setComments("业务组织架构");
         //表名前缀
-        genConfig.setTablePrefix("gen_");
+        genConfig.setTablePrefix("zemd_");
         //包名-在模板中的import 使用此出配置的包名路径
-        genConfig.setEntity("com.zhichubao.iam.domain.entity");
-        genConfig.setController("com.zhichubao.iam.api.controller.site.v1");
-        genConfig.setRepository("com.zhichubao.iam.domain.repository");
-        genConfig.setRepositoryImpl("com.zhichubao.iam.domain.repository.impl");
-        genConfig.setService("com.zhichubao.iam.app.service");
-        genConfig.setServiceImpl("com.zhichubao.iam.app.service.impl");
-        genConfig.setMapper("com.zhichubao.iam.infra.mapper");
+        genConfig.setEntity("com.zhichubao.emd.domain.entity");
         genConfig.setXml("mapper");
+        genConfig.setMapper("com.zhichubao.emd.infra.mapper");
+        genConfig.setRepository("com.zhichubao.emd.domain.repository");
+        genConfig.setRepositoryImpl("com.zhichubao.emd.domain.repository.impl");
+        genConfig.setService("com.zhichubao.emd.app.service");
+        genConfig.setServiceImpl("com.zhichubao.emd.app.service.impl");
+        genConfig.setController("com.zhichubao.emd.api.controller.v1");
         //生成的路径
         genConfig.setGenPath("D:\\gen_code");
         //使用特定的目录下的模板
