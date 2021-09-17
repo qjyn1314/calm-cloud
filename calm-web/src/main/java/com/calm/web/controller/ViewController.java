@@ -2,8 +2,7 @@ package com.calm.web.controller;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSONObject;
-import com.calm.common.auth.CurrentSecurityUserUtils;
+import com.calm.common.auth.AuthUserDetail;
 import com.calm.common.auth.CurrentUser;
 import com.calm.common.auth.MenuTree;
 import com.calm.parent.base.JsonResult;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <p>
@@ -36,7 +34,7 @@ public class ViewController {
 
     @GetMapping({"/"})
     public String index() {
-        boolean notLogin = CurrentSecurityUserUtils.isNotLogin();
+        boolean notLogin = AuthUserDetail.isNotLogin();
         if (notLogin) {
             return "login";
         }
@@ -45,7 +43,7 @@ public class ViewController {
 
     @GetMapping({"/page/**.html", "/page/*/**.html", "/main",})
     public String initView() {
-        boolean notLogin = CurrentSecurityUserUtils.isNotLogin();
+        boolean notLogin = AuthUserDetail.isNotLogin();
         if (notLogin) {
             return "login";
         }
@@ -70,7 +68,7 @@ public class ViewController {
     @GetMapping("/currentUser")
     public JsonResult currentUser(){
         Map<String,Object> map = new HashMap<>(2);
-        CurrentUser currentUser = CurrentSecurityUserUtils.authUser();
+        CurrentUser currentUser = AuthUserDetail.authUser();
         String code =  currentUser.getCode();
         Assert.isTrue(StrUtil.isNotBlank(code),"当前登录用户编码为空。");
         SysUserVo sysUserVo = webConsumer.selectUserByCode(code);
@@ -87,7 +85,7 @@ public class ViewController {
     @ResponseBody
     @GetMapping("/currentUserPermission")
     public List<MenuTree> currentUserPermission(){
-        String code = CurrentSecurityUserUtils.authUser().getCode();
+        String code = AuthUserDetail.authUser().getCode();
         return webConsumer.selectUserByCode(code).getMenuTree();
     }
 

@@ -27,11 +27,11 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
         final ServerHttpRequest request = exchange.getRequest();
         String authorization = request.getHeaders().getFirst(ForwardAccessService.TOKEN_NAME);
         log.info("Authorization--{}", authorization);
-        ServerHttpRequest req = exchange.getRequest().mutate()
-                //设置用户的token
-                .header(ForwardAccessService.TOKEN_NAME, authorization)
+        //设置用户的token
+        ServerWebExchange tokenExchange = exchange.mutate()
+                .request(request.mutate().header(ForwardAccessService.TOKEN_NAME, authorization).build())
                 .build();
-        return chain.filter(exchange.mutate().request(req).build());
+        return chain.filter(tokenExchange);
     }
 
     @Override

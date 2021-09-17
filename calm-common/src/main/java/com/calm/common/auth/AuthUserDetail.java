@@ -22,7 +22,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Slf4j
 @Configuration
-public class CurrentSecurityUserUtils {
+public class AuthUserDetail {
+
+    private AuthUserDetail() {
+    }
 
     /**token的主题*/
     public static final String SUBJECT = "calm_security_subject";
@@ -91,8 +94,8 @@ public class CurrentSecurityUserUtils {
      * 获取当前登录用户信息
      */
     public static CurrentUser authUser() {
-        CurrentUser currentUser = principal() instanceof UserDetails ? (CurrentUser) principal() : null;
-        Assert.isTrue(currentUser != null,"登陆信息失效，请重新登录。");
+        CurrentUser currentUser = (CurrentUser) principal();
+        Assert.notNull(currentUser,"登陆信息失效，请重新登录。");
         log.info("当前登录用户信息是：{}--{}", currentUser.getAccount(),currentUser.getCode());
         return currentUser;
     }

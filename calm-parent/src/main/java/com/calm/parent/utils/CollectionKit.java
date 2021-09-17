@@ -1,6 +1,4 @@
-package com.calm.gen.util;
-
-import com.calm.common.exception.CalmException;
+package com.calm.parent.utils;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -820,7 +818,7 @@ public class CollectionKit {
                     case "double":
                         return Arrays.toString((double[]) obj);
                     default:
-                        throw new CalmException(e.toString());
+                        return null;
                 }
             }
         }

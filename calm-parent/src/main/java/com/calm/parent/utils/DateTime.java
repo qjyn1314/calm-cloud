@@ -1,4 +1,4 @@
-package com.calm.gen.util;
+package com.calm.parent.utils;
 
 import java.util.Date;
 

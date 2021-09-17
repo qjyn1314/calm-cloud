@@ -34,10 +34,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         log.info("IP：--{}" , request.getRemoteAddr());
         String header = request.getHeader(ForwardAccessService.HEADER_KEY);
         log.info("Calm_GateWay_Header_key：--{}" , header);
-        String token = request.getHeader(CurrentSecurityUserUtils.TOKEN_NAME);
+        String token = request.getHeader(AuthUserDetail.TOKEN_NAME);
         if (StringUtils.isBlank(token)) {
-            log.info("cookie get Authorization");
-            Cookie cookie = RequestUtils.getCookieByName(request, CurrentSecurityUserUtils.TOKEN_NAME);
+            log.info("Web Project Cookie get Authorization");
+            Cookie cookie = RequestUtils.getCookieByName(request, AuthUserDetail.TOKEN_NAME);
             if (null != cookie) {
                 token = cookie.getValue();
             }

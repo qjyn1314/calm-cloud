@@ -26,7 +26,7 @@ import java.util.Objects;
  * @since 2021/2/16 17:37
  */
 @Slf4j
-public class CalmUserService implements UserDetailsService {
+public class CalmUserServiceImpl implements UserDetailsService {
 
     @Resource
     private UserFeignService userFeignService;

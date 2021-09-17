@@ -1,7 +1,7 @@
 package com.calm.common.config;
 
 import com.alibaba.fastjson.JSONObject;
-import com.calm.common.auth.CurrentSecurityUserUtils;
+import com.calm.common.auth.AuthUserDetail;
 import com.calm.common.auth.CurrentUser;
 import com.calm.common.auth.UserTokenThreadLocal;
 import com.calm.common.utils.RequestUtils;
@@ -86,7 +86,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             log.warn("请求头中的token已过期");
             return false;
         }
-        SecurityContext context = CurrentSecurityUserUtils.context();
+        SecurityContext context = AuthUserDetail.context();
         //必须从token中获取出当前登录用户的信息，并发情况下此security中的用户信息是不同的
         String currentUserJson = JSONObject.toJSONString(JwtUtils.getClaimFromToken(token));
         CurrentUser currentUser = JSONObject.parseObject(currentUserJson, CurrentUser.class);

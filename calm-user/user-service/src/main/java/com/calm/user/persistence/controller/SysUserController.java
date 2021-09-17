@@ -1,7 +1,7 @@
 package com.calm.user.persistence.controller;
 
 import cn.hutool.core.date.DateUtil;
-import com.calm.common.auth.CurrentSecurityUserUtils;
+import com.calm.common.auth.AuthUserDetail;
 import com.calm.common.auth.CurrentUser;
 import com.calm.common.exception.CalmException;
 import com.calm.core.base.BaseController;
@@ -35,7 +35,7 @@ public class SysUserController extends BaseController {
     private SysUserService service;
 
     private void handleUserDto(SysUserDto sysUserDto) {
-        CurrentUser currentUser = CurrentSecurityUserUtils.authUser();
+        CurrentUser currentUser = AuthUserDetail.authUser();
         Date date = DateUtil.date();
         sysUserDto.setCreateTime(date);
         sysUserDto.setUpdateTime(date);

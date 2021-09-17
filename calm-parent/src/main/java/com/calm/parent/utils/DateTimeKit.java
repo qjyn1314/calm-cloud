@@ -1,7 +1,4 @@
-package com.calm.gen.util;
-
-
-import com.calm.common.exception.CalmException;
+package com.calm.parent.utils;
 
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -571,7 +568,7 @@ public class DateTimeKit {
         try {
             return new DateTime(simpleDateFormat.parse(dateStr));
         } catch (Exception e) {
-            throw new CalmException(StrKit.format("Parse [{}] with format [{}] error!", dateStr, simpleDateFormat.toPattern()));
+            return null;
         }
     }
 
@@ -645,10 +642,9 @@ public class DateTimeKit {
                 return parse(dateStr, NORM_DATETIME_MS_PATTERN);
             }
         } catch (Exception e) {
-            throw new CalmException(StrKit.format("Parse [{}] with format normal error!", dateStr));
         }
         // 没有更多匹配的时间格式
-        throw new CalmException(StrKit.format(" [{}] format is not fit for date pattern!", dateStr));
+        return null;
     }
     // ------------------------------------ Parse end ----------------------------------------------
 

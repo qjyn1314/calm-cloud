@@ -2,8 +2,8 @@ package com.calm.auth.config;
 
 import com.calm.auth.filter.JwtTokenFilter;
 import com.calm.auth.handle.*;
-import com.calm.auth.service.CalmUserService;
-import com.calm.common.auth.CurrentSecurityUserUtils;
+import com.calm.auth.service.CalmUserServiceImpl;
+import com.calm.common.auth.AuthUserDetail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -90,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 密码处理类
      */
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -98,8 +97,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * security中的用户信息
      */
     @Bean
-    public CalmUserService calmUserService() {
-        return new CalmUserService();
+    public CalmUserServiceImpl calmUserService() {
+        return new CalmUserServiceImpl();
     }
 
     /**
@@ -133,8 +132,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
-        manager
-                .userDetailsService(calmUserService())
+        manager.userDetailsService(calmUserService())
                 .passwordEncoder(passwordEncoder());
     }
 
@@ -173,7 +171,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
         //配置退出登录
         http.logout()
-                .logoutUrl(CurrentSecurityUserUtils.LOGOUT_URL)
+                .logoutUrl(AuthUserDetail.LOGOUT_URL)
                 //退出登录的处理--不能与logoutSuccessUrl同时使用，如果同时配置，则优先使用logoutSuccessUrl的配置。此配置主要是将pc端的cookie中用户信息进行清除
                 .logoutSuccessHandler(authLogoutHandler())
                 .and()
@@ -204,11 +202,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.rememberMe()
                 .alwaysRemember(Boolean.TRUE)
                 //cookie的过期秒数
-                .tokenValiditySeconds(CurrentSecurityUserUtils.EXPIRE_SECS_COOKIE)
+                .tokenValiditySeconds(AuthUserDetail.EXPIRE_SECS_COOKIE)
                 //form表单中的记住我input框的name属性值
-                .rememberMeCookieName(CurrentSecurityUserUtils.TOKEN_NAME)
+                .rememberMeCookieName(AuthUserDetail.TOKEN_NAME)
                 //需要配置跨域的域名
-                .rememberMeCookieName(CurrentSecurityUserUtils.COOKIE_DOMAIN)
+                .rememberMeCookieName(AuthUserDetail.COOKIE_DOMAIN)
                 //参考：https://blog.csdn.net/lizhiqiang1217/article/details/90268205
 //                .useSecureCookie(true)
                 //参考：https://blog.csdn.net/Jokeronee/article/details/106646876
@@ -225,7 +223,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         //同源配置，*表示任何请求都视为同源，若需指定ip和端口可以改为如“localhost：8080”，多个以“，”分隔；
-        corsConfiguration.addAllowedOrigin(CurrentSecurityUserUtils.COOKIE_DOMAIN);
+        corsConfiguration.addAllowedOrigin(AuthUserDetail.COOKIE_DOMAIN);
         //header，允许哪些header，本案中使用的是token，此处可将*替换为token；
         corsConfiguration.addAllowedHeader("*");
         //允许的请求方法，PSOT、GET等

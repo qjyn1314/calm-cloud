@@ -1,6 +1,5 @@
-package com.calm.gen.util;
+package com.calm.parent.utils;
 
-import com.calm.common.exception.CalmException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +17,7 @@ public class FieldUtil {
 
     public static void setValue(final Field field, final Object object, final String newValue) throws IllegalAccessException {
         if (object == null || field == null) {
-            throw new CalmException("目标对象与字段不能为空！");
+            return;
         }
         if (!field.isAccessible()) {
             field.setAccessible(true);
