@@ -24,9 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class AuthUserDetail {
 
-    private AuthUserDetail() {
-    }
-
     /**token的主题*/
     public static final String SUBJECT = "calm_security_subject";
     /**header token key*/
