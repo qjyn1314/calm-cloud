@@ -1,6 +1,8 @@
 package com.calm.admin.controller;
 
+import com.netflix.client.config.IClientConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +20,7 @@ import java.util.concurrent.ExecutionException;
  */
 @Slf4j
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/test")
 public class TestController {
 
     @PostMapping("/threadServiceSayHello")
@@ -26,6 +28,11 @@ public class TestController {
         final CompletableFuture<String> completableFuture = sayHelloAndReturn(username);
         final String re = completableFuture.get();
         log.info("re:{}", re);
+        try {
+            Thread.sleep(20000);
+        } catch (Exception e) {
+            log.error("shuimianchaoshi......",e);
+        }
         return re;
     }
 

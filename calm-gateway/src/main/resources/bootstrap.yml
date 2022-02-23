@@ -46,6 +46,10 @@ spring:
           uri: lb://calm-user
           predicates:
             - Path=/user/**
+        - id: calm-admin
+          uri: lb://calm-admin
+          predicates:
+            - Path=/admin/**
         - id: calm-web
           uri: lb://calm-web
           predicates:

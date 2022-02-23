@@ -95,7 +95,7 @@ public final class JasyptUtil {
 //        encryptPwd = "MdQRVDiKXf4sS0lXp61SH5cvVdmn8FJw++ODKj0ojhY=";
         System.out.println("配置文件中jasypt.encryptor.password所配置的加密字符串是：" + ENCRYPT_PWD);
         //真实密码
-        final String password = "123456";
+        final String password = "DWNWEAQBXPRQRELS";
         // 加密,打印出来的就是ENC(密码)的密码
         final String pwd = encryptPwd(ENCRYPT_PWD, password);
         System.out.println("配置文件中需要ENC(密码)配置的密码是：" + pwd);

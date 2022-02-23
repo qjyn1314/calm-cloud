@@ -33,6 +33,7 @@
         <easypoi.version>4.4.0</easypoi.version>
         <easyexcel.version>2.2.10</easyexcel.version>
         <redisson-spring-boot.version>3.16.3</redisson-spring-boot.version>
+        <okhttp.version>3.14.9</okhttp.version>
         <!--此工程中的子工程-->
         <calm-parent.version>1.0.0</calm-parent.version>
         <calm-provider.version>1.0.0</calm-provider.version>
@@ -314,6 +315,12 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson-spring-boot.version}</version>
+            </dependency>
+            <!-- okhttp -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

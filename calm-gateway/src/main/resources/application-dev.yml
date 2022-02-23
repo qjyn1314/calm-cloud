@@ -28,4 +28,12 @@ spring:
     password:
     port: 6379
     timeout: 50000
-
+# ribbon-ConnectTimeout: https://www.cnblogs.com/luas/p/12089578.html
+ribbon:
+  http:
+    client:
+      enabled: true
+  MaxConnectionsPerHost: 500
+  MaxTotalConnections: 500
+  ConnectTimeout: 500
+  ReadTimeout: 500

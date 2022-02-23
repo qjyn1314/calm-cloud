@@ -31,6 +31,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--高并发系统则选用 ：
+        https://blog.csdn.net/weixin_49456013/article/details/110877262
+        https://blog.csdn.net/qq_39865635/article/details/90375762
+        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>

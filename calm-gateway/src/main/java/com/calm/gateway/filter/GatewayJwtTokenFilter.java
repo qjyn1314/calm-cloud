@@ -20,13 +20,13 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 @Component
-public class JwtTokenFilter implements GlobalFilter, Ordered {
+public class GatewayJwtTokenFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         final ServerHttpRequest request = exchange.getRequest();
         String authorization = request.getHeaders().getFirst(ForwardAccessService.TOKEN_NAME);
-        log.info("Authorization--{}", authorization);
+        log.info("GateWay Authorization--{}", authorization);
         //设置用户的token
         ServerWebExchange tokenExchange = exchange.mutate()
                 .request(request.mutate().header(ForwardAccessService.TOKEN_NAME, authorization).build())
