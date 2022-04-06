@@ -1,4 +1,4 @@
-package com.calm.parent.config.redis;
+package com.calm.redis.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -20,9 +20,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @author wangjunming
  * @since 2020/12/30 21:40
  */
-@Configuration
 public class RedisAutoConfig {
-
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {

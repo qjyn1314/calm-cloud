@@ -1,5 +1,6 @@
-package com.calm.parent.config.redis;
+package com.calm.redis.service.impl;
 
+import com.calm.redis.service.RedisHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import java.util.concurrent.TimeUnit;
  * @since 2021/3/1 13:43
  */
 @Slf4j
-@Service("redisHelper")
 public class RedisHelperImpl<HK, T> implements RedisHelper<HK, T> {
 
     /**在构造器中获取redisTemplate实例, key(not hashKey) 默认使用String类型*/

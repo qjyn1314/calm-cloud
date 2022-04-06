@@ -1,4 +1,4 @@
-package com.calm.common.redission;
+package com.calm.redis.redission;
 
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;

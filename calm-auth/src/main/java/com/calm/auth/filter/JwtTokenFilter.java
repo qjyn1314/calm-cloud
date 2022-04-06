@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2020/9/21 13:11
  */
 @Slf4j
-@Component
 public class JwtTokenFilter extends UsernamePasswordAuthenticationFilter {
 
     @Autowired

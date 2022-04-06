@@ -22,6 +22,10 @@
             <artifactId>calm-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.calm</groupId>
+            <artifactId>calm-redis-start</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.calm.user.api</groupId>
             <artifactId>user-api</artifactId>
             <version>${user-api.version}</version>

@@ -1,6 +1,6 @@
-package com.calm.user.config.delredis;
+package com.calm.redis.delredis;
 
-import com.calm.parent.config.redis.RedisHelper;
+import com.calm.redis.service.RedisHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -24,6 +24,7 @@ public class DelRedisAspect {
 
     /**
      * 定义后置通知，在方法执行完成后，将redis中的数据进行删除
+     *
      * @author wangjunming
      * @since 2020/12/18 16:31
      */

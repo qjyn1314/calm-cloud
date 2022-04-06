@@ -1,6 +1,6 @@
-package com.calm.common.redission.impl;
+package com.calm.redis.redission.impl;
 
-import com.calm.common.redission.DistributedLocker;
+import com.calm.redis.redission.DistributedLocker;
 import org.redisson.api.RCountDownLatch;
 import org.redisson.api.RLock;
 import org.redisson.api.RSemaphore;
@@ -34,14 +34,14 @@ public class RedisDistributedLocker implements DistributedLocker {
         lock.lock(leaseTime, TimeUnit.SECONDS);
         return lock;
     }
-    
+
     @Override
     public RLock lock(String lockKey, TimeUnit unit ,int timeout) {
         RLock lock = redissonClient.getLock(lockKey);
         lock.lock(timeout, unit);
         return lock;
     }
-    
+
     @Override
     public boolean tryLock(String lockKey, TimeUnit unit, int waitTime, int leaseTime) {
         RLock lock = redissonClient.getLock(lockKey);
@@ -51,13 +51,13 @@ public class RedisDistributedLocker implements DistributedLocker {
             return false;
         }
     }
-    
+
     @Override
     public void unlock(String lockKey) {
         RLock lock = redissonClient.getLock(lockKey);
         lock.unlock();
     }
-    
+
     @Override
     public void unlock(RLock lock) {
         lock.unlock();

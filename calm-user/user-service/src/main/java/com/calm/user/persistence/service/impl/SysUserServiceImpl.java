@@ -7,7 +7,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.calm.common.auth.MenuTree;
 import com.calm.common.auth.PasswordService;
 import com.calm.common.exception.CalmException;
-import com.calm.parent.config.redis.RedisHelper;
+import com.calm.redis.delredis.DelRedis;
+import com.calm.redis.service.RedisHelper;
 import com.calm.sequence.api.enums.SequenceType;
 import com.calm.sequence.api.feign.SequenceFeignService;
 import com.calm.user.api.dto.SysUserDto;
@@ -17,7 +18,6 @@ import com.calm.user.api.enums.UserStatus;
 import com.calm.user.api.exception.HaveBeenforzenException;
 import com.calm.user.api.exception.ToauditException;
 import com.calm.user.api.vo.SysUserVo;
-import com.calm.user.config.delredis.DelRedis;
 import com.calm.user.persistence.mapper.SysUserMapper;
 import com.calm.user.persistence.service.SysMenuService;
 import com.calm.user.persistence.service.SysUserRoleService;
@@ -80,7 +80,7 @@ public class SysUserServiceImpl implements SysUserService {
     public Long save(SysUserDto sysUserDto) {
         SysUser sysUser = sysUserDto.getSysUser();
         String sequenceNum = sequenceFeignService.getSequenceNum(SequenceType.USER.getCode(), -1);
-        if(StringUtils.isBlank(sequenceNum)){
+        if (StringUtils.isBlank(sequenceNum)) {
             throw new CalmException("用户编号需要启动“序列号服务”");
         }
         sysUser.setCode(sequenceNum);
@@ -171,7 +171,7 @@ public class SysUserServiceImpl implements SysUserService {
         String code = sysUserDto.getCode();
         userRoleService.deleteByUserCode(code);
         //增加新的角色信息
-        List<SysUserRole> userRoleList = Arrays.stream(sysUserDto.getRoleCodes()).map(roleCode ->{
+        List<SysUserRole> userRoleList = Arrays.stream(sysUserDto.getRoleCodes()).map(roleCode -> {
             SysUserRole userRole = new SysUserRole();
             userRole.setUserCode(code);
             userRole.setRoleCode(roleCode);
@@ -195,7 +195,7 @@ public class SysUserServiceImpl implements SysUserService {
         if (null == sysUserVo) {
             throw new UsernameNotFoundException("用户名不存在。");
         }
-        PasswordService.validatePassword(password,sysUserVo.getSalt(),sysUserVo.getPassword());
+        PasswordService.validatePassword(password, sysUserVo.getSalt(), sysUserVo.getPassword());
         if (UserStatus.TO_AUDIT.getCode().equals(sysUserVo.getStatus())) {
             throw new ToauditException("账号待审核，请联系管理员处理。");
         }
@@ -218,7 +218,7 @@ public class SysUserServiceImpl implements SysUserService {
      */
     @Override
     public SysUserVo selectByCode(String code) {
-        SysUserVo sysUserVo =  mapper.selectByCode(code);
+        SysUserVo sysUserVo = mapper.selectByCode(code);
         List<MenuTree> menuTrees = menuService.selectMenuTreeByRoleCodes(sysUserVo.getRoleCode());
         sysUserVo.setMenuTree(menuTrees);
         return sysUserVo;
@@ -237,7 +237,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Transactional(rollbackFor = Exception.class)
     public Boolean changePwd(SysUserDto sysUserDto) {
         SysUserVo sysUserVo = mapper.queryByAccount(sysUserDto.getAccount());
-        PasswordService.validatePassword(sysUserDto.getPassword(),sysUserVo.getSalt(),sysUserVo.getPassword());
+        PasswordService.validatePassword(sysUserDto.getPassword(), sysUserVo.getSalt(), sysUserVo.getPassword());
         String salt = PasswordService.getSalt();
         String confirmPassword = PasswordService.encode(sysUserDto.getConfirmPassword() + salt, salt);
         SysUser sysUser = sysUserDto.getUpdateSysUser();

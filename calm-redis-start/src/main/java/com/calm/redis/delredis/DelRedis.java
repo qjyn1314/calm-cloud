@@ -1,4 +1,4 @@
-package com.calm.user.config.delredis;
+package com.calm.redis.delredis;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

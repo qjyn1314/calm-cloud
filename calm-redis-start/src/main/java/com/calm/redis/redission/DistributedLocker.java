@@ -1,4 +1,4 @@
-package com.calm.common.redission;
+package com.calm.redis.redission;
 
 import org.redisson.api.RCountDownLatch;
 import org.redisson.api.RLock;

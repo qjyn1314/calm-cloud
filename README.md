@@ -61,7 +61,7 @@ flowable-service:10090
 
 账号：qjyn1314@163.com
 
-密码：123456
+密码：admin
 
 部署sql：
 

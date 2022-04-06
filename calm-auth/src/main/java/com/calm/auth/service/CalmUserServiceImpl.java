@@ -2,7 +2,6 @@ package com.calm.auth.service;
 
 import com.calm.common.auth.CurrentUser;
 import com.calm.parent.base.JsonResult;
-import com.calm.parent.config.redis.RedisHelper;
 import com.calm.user.api.enums.UserStatus;
 import com.calm.user.api.feign.UserFeignService;
 import com.calm.user.api.vo.SysUserVo;
@@ -14,8 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * <p>
@@ -35,15 +32,15 @@ public class CalmUserServiceImpl implements UserDetailsService {
     public CurrentUser loadUserByUsername(String account) throws UsernameNotFoundException {
         return new CurrentUser();
     }
-    
-    public CurrentUser loadUserByUsernameAndPassword(String account,String password) throws UsernameNotFoundException {
+
+    public CurrentUser loadUserByUsernameAndPassword(String account, String password) throws UsernameNotFoundException {
         CurrentUser currentUser = loadUserByUsername(account);
         if (StringUtils.isBlank(account)) {
             throw new UsernameNotFoundException("用户名不存在。");
         }
-        JsonResult<SysUserVo> result = userFeignService.validatePassword(account,password);
+        JsonResult<SysUserVo> result = userFeignService.validatePassword(account, password);
         SysUserVo user = result.getData();
-        if(null == user){
+        if (null == user) {
             throw new AuthenticationServiceException(result.getMessage());
         }
         preCurrentUser(currentUser, user);
@@ -51,7 +48,7 @@ public class CalmUserServiceImpl implements UserDetailsService {
     }
 
     public void preCurrentUser(CurrentUser currentUser, SysUserVo userVo) {
-        BeanUtils.copyProperties(userVo,currentUser);
+        BeanUtils.copyProperties(userVo, currentUser);
         currentUser.setEnabled(UserStatus.THE_APPROVED.getCode().equals(userVo.getStatus()));
     }
 
