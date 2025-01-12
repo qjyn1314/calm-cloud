@@ -13,65 +13,51 @@
 spring:
   application:
     name: calm-gateway
-  boot:
-    admin:
-      client:
-        connect-timeout: 5000
-        period: 10000
-        read-timeout: 5000
   cloud:
     nacos:
       config:
-        # 配置文件的后缀
         file-extension: yml
     gateway:
-      # 跨域问题 参考：https://blog.csdn.net/qq_27384769/article/details/108375731
       globalcors:
-        cors-configurations:
+        corsConfigurations:
           '[/**]':
-            allow-credentials: true
-            allowed-origins: '*'
-            allowed-methods: '*'
-            allowed-headers: '*'
-            max-age: 36000
+            allowedOriginPatterns: '*'
+            allowedMethods: '*'
+            allowedHeaders: '*'
+            allowCredentials: true
+            max-age: 3600
+      default-filters:
+        - DedupeResponseHeader=Vary Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true
-      default-filters:
-        - StripPrefix=1
-        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
       routes:
+        - id: calm-gateway
+          uri: lb://calm-gateway
+          predicates:
+            - Path=/calm-gateway/**
         - id: calm-user
           uri: lb://calm-user
           predicates:
-            - Path=/user/**
+            - Path=/calm-user/**
         - id: calm-admin
           uri: lb://calm-admin
           predicates:
-            - Path=/admin/**
+            - Path=/calm-admin/**
         - id: calm-web
           uri: lb://calm-web
           predicates:
-            - Path=/web/**
+            - Path=/calm-web/**
         - id: calm-auth
           uri: lb://calm-auth
           predicates:
-            - Path=/auth/**
+            - Path=/calm-auth/**
         - id: calm-sequence
           uri: lb://calm-sequence
           predicates:
-            - Path=/sequence/**
+            - Path=/calm-sequence/**
   thymeleaf:
     check-template: false
-management:
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      exposure:
-        include: "*"
 # 日志配置
 logging:
   config: classpath:logback-spring.xml
@@ -79,9 +65,7 @@ logging:
     com.calm.user.api.feign: debug
 
 #feign配置参考：http://c.biancheng.net/view/5362.html
-feign:
-  client:
-    config:
-      feignName:
-        connectTimeout: 50000
-        readTimeout: 50000
+# 聚合swagger文档
+knife4j:
+  gateway:
+    enable: true

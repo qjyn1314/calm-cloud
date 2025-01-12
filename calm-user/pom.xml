@@ -5,18 +5,17 @@
     <parent>
         <groupId>com.calm</groupId>
         <artifactId>calm-cloud</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
-    <groupId>com.calm.user</groupId>
+
     <artifactId>calm-user</artifactId>
-    <version>1.0.0</version>
+
     <packaging>pom</packaging>
-    <name>calm-user</name>
+
     <description>CalmUser-用户服务</description>
 
     <properties>
-        <user-api.version>1.0.0</user-api.version>
-        <sequence-api.version>1.0.0</sequence-api.version>
+
     </properties>
 
     <modules>
@@ -30,33 +29,6 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
-        <!--
-            打包参考：https://docs.spring.io/spring-boot/docs/2.3.8.RELEASE/maven-plugin/reference/html/#goals-repackage
-        -->
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <configuration>
-                    <fork>true</fork>
-                    <addResources>true</addResources>
-                    <layers>
-                        <enabled>true</enabled>
-                    </layers>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
 
 

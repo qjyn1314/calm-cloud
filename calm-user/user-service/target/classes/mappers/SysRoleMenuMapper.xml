@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calm.user.persistence.mapper.SysRoleMenuMapper">
+    <resultMap id="BaseResultMap" type="com.calm.user.api.entity.SysRoleMenu">
+        <!--@Table sys_role_menu-->
+        <result property="relationId" column="relation_id" jdbcType="INTEGER"/>
+        <result property="menuCode" column="menu_code" jdbcType="VARCHAR"/>
+        <result property="roleCode" column="role_code" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--默认列表字段-->
+    <sql id="column_default">
+        relation_id, role_code, menu_code
+    </sql>
+
+    <insert id="insertByList">
+        insert into sys_role_menu(role_code, menu_code) values
+        <foreach collection="roleMenuList" item="roleMenu" index="index" separator=",">
+            (#{roleMenu.roleCode}, #{roleMenu.menuCode})
+        </foreach>
+    </insert>
+
+
+</mapper>

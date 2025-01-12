@@ -2,96 +2,63 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.calm</groupId>
     <artifactId>calm-cloud</artifactId>
-    <version>1.0.0</version>
-    <name>calm-cloud</name>
+    <version>${revision}</version>
+
     <packaging>pom</packaging>
-    <description>Calm-springboot、springCloud、springCloudAlibaba、mybatis-plus</description>
+    <description>Calm-Springboot、SpringCloud、SpringCloudAlibaba、Mybatis-plus、Openfeign</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <!--当前工程中的所有模块，版本统一进行控制-->
+        <revision>4.0.0</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-boot.version>2.3.8.RELEASE</spring-boot.version>
-        <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
-        <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
-        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
-        <slf4j-api.version>1.2.73</slf4j-api.version>
-        <fastjson.version>1.2.73</fastjson.version>
-        <mybatis-plus.version>3.4.0</mybatis-plus.version>
-        <dynamic-datasource.version>3.3.1</dynamic-datasource.version>
-        <druid-spring-boot.version>1.2.5</druid-spring-boot.version>
-        <swagger.version>3.0.0</swagger.version>
-        <knife4j.version>3.0.3</knife4j.version>
-        <jasypt.version>3.0.3</jasypt.version>
-        <hutool.version>5.5.8</hutool.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
-        <seata.version>1.4.0</seata.version>
-        <jwt.version>0.9.1</jwt.version>
-        <velocity.version>1.7</velocity.version>
-        <xxl-job-core.version>2.3.0</xxl-job-core.version>
-        <easypoi.version>4.4.0</easypoi.version>
-        <easyexcel.version>2.2.10</easyexcel.version>
-        <redisson-spring-boot.version>3.16.3</redisson-spring-boot.version>
-        <okhttp.version>3.14.9</okhttp.version>
-        <!--此工程中的子工程-->
-        <calm-parent.version>1.0.0</calm-parent.version>
-        <calm-provider.version>1.0.0</calm-provider.version>
-        <calm-common.version>1.0.0</calm-common.version>
-        <calm-core.version>1.0.0</calm-core.version>
-        <calm-admin.version>1.0.0</calm-admin.version>
-        <calm-gateway.version>1.0.0</calm-gateway.version>
-        <calm-auth.version>1.0.0</calm-auth.version>
-        <calm-user.version>1.0.0</calm-user.version>
-        <calm-sequence.version>1.0.0</calm-sequence.version>
-        <calm-web.version>1.0.0</calm-web.version>
-        <calm-gen.version>1.0.0</calm-gen.version>
-        <calm-job.version>1.0.0</calm-job.version>
-        <calm-redis-start.version>1.0.0</calm-redis-start.version>
-        <calm-flowable.version>1.0.0</calm-flowable.version>
-  </properties>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>21</java.version>
+
+        <spring-boot.version>3.2.12</spring-boot.version>
+        <spring-cloud.version>2023.0.5</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
+
+        <openfeign.version>4.2.0</openfeign.version>
+
+        <knife4j.version>4.5.0</knife4j.version>
+
+        <mybatis-plus.version>3.5.9</mybatis-plus.version>
+        <pagehelper.version>2.1.0</pagehelper.version>
+        <dynamic-datasource.version>4.3.1</dynamic-datasource.version>
+        <druid-spring-boot.version>1.2.24</druid-spring-boot.version>
+        <mysql.version>9.1.0</mysql.version>
+
+        <slf4j-api.version>2.0.0</slf4j-api.version>
+
+        <jasypt.version>3.0.5</jasypt.version>
+        <hutool.version>5.8.35</hutool.version>
+        <velocity.version>2.4.1</velocity.version>
+
+    </properties>
 
     <!--聚合-为了在打包的时候可以使用父工程可直接对子工程进行打包-->
     <modules>
-        <module>calm-parent</module>
-        <module>calm-common</module>
-        <module>calm-admin</module>
+        <module>calm-common-bom</module>
         <module>calm-gateway</module>
-        <module>calm-core</module>
-        <module>calm-user</module>
-        <module>calm-auth</module>
         <module>calm-sequence</module>
+        <module>calm-user</module>
         <module>calm-web</module>
-        <module>calm-gen</module>
-        <module>calm-job</module>
-        <module>calm-redis-start</module>
     </modules>
 
+    <!--项目中最基本的依赖导入-->
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.36</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <version>${slf4j-api.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -99,19 +66,29 @@
             <version>${hutool.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 
@@ -126,135 +103,60 @@
         <dependencies>
             <!--此工程中的子工程-->
             <dependency>
-                <groupId>com.calm.parent</groupId>
-                <artifactId>calm-parent</artifactId>
-                <version>${calm-parent.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.common</groupId>
-                <artifactId>calm-common</artifactId>
-                <version>${calm-common.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.core</groupId>
-                <artifactId>calm-core</artifactId>
-                <version>${calm-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.admin</groupId>
-                <artifactId>calm-admin</artifactId>
-                <version>${calm-admin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.gateway</groupId>
-                <artifactId>calm-gateway</artifactId>
-                <version>${calm-gateway.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.auth</groupId>
-                <artifactId>calm-auth</artifactId>
-                <version>${calm-auth.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.user</groupId>
-                <artifactId>calm-user</artifactId>
-                <version>${calm-user.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.sequence</groupId>
-                <artifactId>calm-sequence</artifactId>
-                <version>${calm-sequence.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.web</groupId>
-                <artifactId>calm-web</artifactId>
-                <version>${calm-web.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.gen</groupId>
-                <artifactId>calm-gen</artifactId>
-                <version>${calm-gen.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.calm.job</groupId>
-                <artifactId>calm-job</artifactId>
-                <version>${calm-job.version}</version>
+                <groupId>com.calm</groupId>
+                <artifactId>calm-common-utils</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.calm</groupId>
-                <artifactId>calm-redis-start</artifactId>
-                <version>${calm-redis-start.version}</version>
+                <artifactId>calm-common-nacos</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity</artifactId>
-                <version>${velocity.version}</version>
+                <groupId>com.calm</groupId>
+                <artifactId>calm-common-core</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid-spring-boot.version}</version>
-            </dependency>
-            <!--mybatis-plus动态数据源-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-                <version>${dynamic-datasource.version}</version>
-            </dependency>
-            <!--mybatis-plus-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
+                <groupId>com.calm</groupId>
+                <artifactId>calm-gateway</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.xuxueli</groupId>
-                <artifactId>xxl-job-core</artifactId>
-                <version>${xxl-job-core.version}</version>
-            </dependency>
-            <!--httpClient的引入-end-->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
+                <groupId>com.calm</groupId>
+                <artifactId>calm-user</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>commons-beanutils</groupId>
-                <artifactId>commons-beanutils</artifactId>
-                <version>${commons-beanutils.version}</version>
-            </dependency>
-            <!--访问地址：ip:port/swagger-ui/index.html-->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>${swagger.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>swagger-annotations</artifactId>
-                        <groupId>io.swagger</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>swagger-models</artifactId>
-                        <groupId>io.swagger</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <!--  解决 Illegal DefaultValue null for parameter type integer    异常  -->
-            <dependency>
-                <groupId>io.swagger</groupId>
-                <artifactId>swagger-annotations</artifactId>
-                <version>1.5.21</version>
+                <groupId>com.calm</groupId>
+                <artifactId>calm-sequence</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>io.swagger</groupId>
-                <artifactId>swagger-models</artifactId>
-                <version>1.5.21</version>
+                <groupId>com.calm</groupId>
+                <artifactId>calm-web</artifactId>
+                <version>${revision}</version>
             </dependency>
-            <!--访问地址：ip:port/doc.html-->
+            <dependency>
+                <groupId>com.calm</groupId>
+                <artifactId>calm-job</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!--swagger-start-->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <artifactId>knife4j-dependencies</artifactId>
                 <version>${knife4j.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--swagger-end-->
+            <!--代码模板-->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
             <!--密文密码-->
             <dependency>
@@ -262,20 +164,38 @@
                 <artifactId>jasypt-spring-boot-starter</artifactId>
                 <version>${jasypt.version}</version>
             </dependency>
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>${jwt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.afterturn</groupId>
-                <artifactId>easypoi-spring-boot-starter</artifactId>
-                <version>${easypoi.version}</version>
-            </dependency>
+            <!--连接数据库-->
             <dependency>
                 <groupId>com.alibaba</groupId>
-                <artifactId>easyexcel</artifactId>
-                <version>${easyexcel.version}</version>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!--mybatis-plus动态数据源-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+                <version>${dynamic-datasource.version}</version>
+            </dependency>
+            <!--openfeign-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${openfeign.version}</version>
             </dependency>
             <!--导入了springboot、springcloud、springcloudalibaba-->
             <dependency>
@@ -300,61 +220,119 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--spring-boot-admin
-                参考：https://codecentric.github.io/spring-boot-admin/2.3.1/#getting-started
-            -->
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-dependencies</artifactId>
-                <version>${spring-boot-admin.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!--
-            <dependency>
-                <groupId>io.seata</groupId>
-                <artifactId>seata-spring-boot-starter</artifactId>
-                <version>${seata.version}</version>
-            </dependency>
-            -->
-            <!-- okhttp -->
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
 
     <build>
         <finalName>${project.artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
         <pluginManagement>
-            <!--
-           打包参考：https://docs.spring.io/spring-boot/docs/2.3.8.RELEASE/maven-plugin/reference/html/#goals-repackage
-            -->
             <plugins>
+                <!--maven-compiler-plugin插件可以指定项目源码的jdk版本，编译后的jdk版本，以及编码。-->
+                <!-- 参考: https://blog.csdn.net/liupeifeng3514/article/details/80236077 -->
                 <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring-boot.version}</version>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
                     <configuration>
-                        <fork>true</fork>
-                        <addResources>true</addResources>
-                        <layers>
-                            <enabled>true</enabled>
-                        </layers>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <testSource>${java.version}</testSource>
+                        <testTarget>${java.version}</testTarget>
+                        <encoding>UTF-8</encoding>
+                        <compilerArgs>
+                            <compilerArg>
+                                -parameters
+                            </compilerArg>
+                        </compilerArgs>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
                     <configuration>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
+                        <encoding>UTF-8</encoding>
                     </configuration>
+                </plugin>
+                <!--maven-source-plugin 这个插件专门负责将项目源文件打成包的-->
+                <!--参考: https://blog.csdn.net/liaowenxiong/article/details/124879376 -->
+                <!--提供项目自动将源码打包并发布的功能, maven会自动将source install到repository -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.3.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <!-- 执行生命周期阶段 verify 时会调用该插件的目标 jar-no-fork，该目标会将 jar 文件安装到本地的 Maven 仓库中。 -->
+                            <phase>verify</phase>
+                            <goals>
+                                <!--在生命周期后执行绑定的source插件的goals -->
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.4.2</version>
+                    <configuration>
+                        <archive>
+                            <!-- 生成的jar中，包含pom.xml和pom.properties这两个文件 -->
+                            <addMavenDescriptor>true</addMavenDescriptor>
+                            <!-- 生成MANIFEST.MF的设置 -->
+                            <manifest>
+                                <!--这个属性特别关键，如果没有这个属性，有时候我们引用的包maven库
+                                下面可能会有多个包，并且只有一个是正确的，其余的可能是带时间戳的，
+                                此时会在classpath下面把那个带时间戳的给添加上去，
+                                然后我们 在依赖打包的时候，打的是正确的，所以两头会对不上，报错。 -->
+                                <useUniqueVersions>false</useUniqueVersions>
+                                <!-- 为依赖包添加路径, 这些路径会写在MANIFEST文件的Class-Path下 -->
+                                <addClasspath>true</addClasspath>
+                                <!-- 这个jar所依赖的jar包添加classPath的时候的前缀，如果这个jar本身
+                                和依赖包在同一级目录，则不需要添加 -->
+                                <classpathPrefix>lib/</classpathPrefix>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <!--springboot启动类的jar包-->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <!--
+                    配置参考：
+                    https://blog.csdn.net/tian830937/article/details/119525273
+                    -->
+                    <configuration>
+                        <addResources>true</addResources>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>

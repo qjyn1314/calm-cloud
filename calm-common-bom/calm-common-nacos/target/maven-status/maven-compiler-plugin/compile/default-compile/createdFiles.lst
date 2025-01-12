@@ -1,0 +1,4 @@
+com\calm\common\nacos\feign\FeignAuthInterceptor.class
+com\calm\common\nacos\feign\FeignSupport.class
+com\calm\common\nacos\feign\ForwardAccessService.class
+com\calm\common\nacos\feign\GlobalFeignConfig.class

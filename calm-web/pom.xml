@@ -5,74 +5,41 @@
     <parent>
         <groupId>com.calm</groupId>
         <artifactId>calm-cloud</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
-    <groupId>com.calm.web</groupId>
+
     <artifactId>calm-web</artifactId>
-    <version>1.0.0</version>
-    <name>calm-web</name>
+
     <description>CalmWeb-layui前端页面、跳转页面配置</description>
 
     <properties>
-        <user-api.version>1.0.0</user-api.version>
+
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.calm.common</groupId>
-            <artifactId>calm-common</artifactId>
-        </dependency>
-        <!--集成thymeleaf:参考：-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <!-- html无需严格校验-->
-        <dependency>
-            <groupId>net.sourceforge.nekohtml</groupId>
-            <artifactId>nekohtml</artifactId>
+            <groupId>com.calm</groupId>
+            <artifactId>calm-common-nacos</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.calm.user.api</groupId>
+            <groupId>com.calm</groupId>
             <artifactId>user-api</artifactId>
-            <version>${user-api.version}</version>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 
+
     <build>
         <finalName>${project.artifactId}</finalName>
-        <!--
-            打包参考：https://docs.spring.io/spring-boot/docs/2.3.8.RELEASE/maven-plugin/reference/html/#goals-repackage
-        -->
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
+            <!--springboot启动类的jar包-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <configuration>
-                    <fork>true</fork>
-                    <addResources>true</addResources>
-                    <layers>
-                        <enabled>true</enabled>
-                    </layers>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>

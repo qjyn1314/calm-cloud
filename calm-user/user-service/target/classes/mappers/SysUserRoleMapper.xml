@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calm.user.persistence.mapper.SysUserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.calm.user.api.entity.SysUserRole">
+        <!--@Table sys_user_role-->
+        <result property="urId" column="ur_id" jdbcType="INTEGER"/>
+        <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
+        <result property="roleCode" column="role_code" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--默认列表字段-->
+    <sql id="column_default">
+        ur_id, user_code, role_code
+    </sql>
+
+    <insert id="insertByList">
+        insert into sys_user_role(user_code, role_code) values
+        <foreach collection="userRoleList" item="userRole" index="index" separator=",">
+            (#{userRole.userCode}, #{userRole.roleCode})
+        </foreach>
+    </insert>
+
+
+</mapper>

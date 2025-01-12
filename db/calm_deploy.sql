@@ -1,8 +1,6 @@
 /*
  Date: 15/08/2021 14:41:38
 */
-
-DROP DATABASE IF EXISTS `calm`;
 CREATE DATABASE `calm` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `calm`;
 

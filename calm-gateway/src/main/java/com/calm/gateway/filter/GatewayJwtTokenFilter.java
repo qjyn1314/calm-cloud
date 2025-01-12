@@ -1,6 +1,6 @@
 package com.calm.gateway.filter;
 
-import com.calm.parent.config.ForwardAccessService;
+import com.calm.common.nacos.feign.ForwardAccessService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
