@@ -19,12 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.calm</groupId>
-            <artifactId>calm-common-nacos</artifactId>
-        </dependency>
-        <!--web 容器-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>calm-common-web</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>

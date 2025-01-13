@@ -114,6 +114,11 @@
             </dependency>
             <dependency>
                 <groupId>com.calm</groupId>
+                <artifactId>calm-common-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.calm</groupId>
                 <artifactId>calm-common-core</artifactId>
                 <version>${revision}</version>
             </dependency>

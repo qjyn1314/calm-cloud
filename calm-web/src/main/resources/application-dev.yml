@@ -5,4 +5,6 @@ spring:
     nacos:
       server-addr: 127.0.0.1:12848
       discovery:
-        server-addr: 127.0.0.1:12848
+        server-addr: ${spring.cloud.nacos.server-addr}
+      config:
+        server-addr: ${spring.cloud.nacos.server-addr}

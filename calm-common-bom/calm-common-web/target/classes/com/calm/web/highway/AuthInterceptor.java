@@ -1,4 +1,4 @@
-package com.calm.core.highway;
+package com.calm.web.highway;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

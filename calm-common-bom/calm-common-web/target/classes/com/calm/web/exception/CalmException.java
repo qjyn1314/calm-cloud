@@ -1,4 +1,4 @@
-package com.calm.core.exception;
+package com.calm.web.exception;
 
 /**
  * <p>

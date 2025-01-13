@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.calm</groupId>
-            <artifactId>calm-common-nacos</artifactId>
+            <artifactId>calm-common-web</artifactId>
         </dependency>
         <dependency>
             <groupId>com.calm</groupId>

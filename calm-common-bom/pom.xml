@@ -17,6 +17,7 @@
         <module>calm-common-utils</module>
         <module>calm-common-nacos</module>
         <module>calm-common-core</module>
+        <module>calm-common-web</module>
     </modules>
 
     <description>

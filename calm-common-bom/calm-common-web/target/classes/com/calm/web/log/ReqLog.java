@@ -1,4 +1,4 @@
-package com.calm.core.log;
+package com.calm.web.log;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

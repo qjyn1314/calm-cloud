@@ -1,4 +1,4 @@
-package com.calm.core.exception;
+package com.calm.web.exception;
 
 import com.calm.parent.base.JsonResult;
 import lombok.extern.slf4j.Slf4j;

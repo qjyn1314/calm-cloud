@@ -1,4 +1,4 @@
-package com.calm.core.log;
+package com.calm.web.log;
 
 import cn.hutool.json.JSONUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +24,7 @@ public class RequestLogAspect {
     /**
      * 定义切入点，切入点为com.example.aop下的所有函数com.example.jack.controller
      */
-    @Pointcut("@annotation(com.calm.core.log.ReqLog)")
+    @Pointcut("@annotation(com.calm.web.log.ReqLog)")
     public void webLog() {
     }
 
