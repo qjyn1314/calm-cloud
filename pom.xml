@@ -46,6 +46,7 @@
         <module>calm-sequence</module>
         <module>calm-user</module>
         <module>calm-web</module>
+        <module>calm-exec-job</module>
     </modules>
 
     <!--项目中最基本的依赖导入-->
@@ -144,7 +145,7 @@
             </dependency>
             <dependency>
                 <groupId>com.calm</groupId>
-                <artifactId>calm-job</artifactId>
+                <artifactId>calm-job-exec</artifactId>
                 <version>${revision}</version>
             </dependency>
 

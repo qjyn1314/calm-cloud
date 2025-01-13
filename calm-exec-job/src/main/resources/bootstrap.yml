@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: calm-job-exec
+  cloud:
+    nacos:
+      config:
+        file-extension: yml
+#日志配置
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.calm.provider.service: debug
+#feign配置参考：http://c.biancheng.net/view/5362.html
+

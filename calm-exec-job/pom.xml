@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.calm</groupId>
+        <artifactId>calm-cloud</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>calm-exec-job</artifactId>
+
+    <properties>
+
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.calm</groupId>
+            <artifactId>calm-common-web</artifactId>
+        </dependency>
+        <!-- xxl-job-core -->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.calm</groupId>
+            <artifactId>sequence-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+
+</project>
