@@ -34,6 +34,8 @@ public class UrlFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
 
+        com.calm.common.auth.UserTokenThreadLocal.clearCurrentUserToken();
+
         log.warn("过滤器请求执行完成-请求的URL->{}", request.getServletPath());
 
     }
