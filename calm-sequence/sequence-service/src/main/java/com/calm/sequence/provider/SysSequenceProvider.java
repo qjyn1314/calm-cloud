@@ -1,7 +1,7 @@
 package com.calm.sequence.provider;
 
-import com.calm.core.exception.CalmException;
-import com.calm.core.log.ReqLog;
+import com.calm.web.exception.CalmException;
+import com.calm.web.log.ReqLog;
 import com.calm.sequence.persistence.service.SysSequenceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,6 +1,0 @@
-com\calm\sequence\api\feign\SequenceFeignService.class
-com\calm\sequence\api\enums\SequenceType.class
-com\calm\sequence\api\entity\SysSequence.class
-com\calm\sequence\api\utils\SequenceUtil.class
-com\calm\sequence\api\dto\SysSequenceDto.class
-com\calm\sequence\api\vo\SysSequenceVo.class

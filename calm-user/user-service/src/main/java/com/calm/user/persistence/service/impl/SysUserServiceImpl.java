@@ -4,7 +4,7 @@ package com.calm.user.persistence.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.calm.core.exception.CalmException;
+import com.calm.web.exception.CalmException;
 import com.calm.sequence.api.enums.SequenceType;
 import com.calm.sequence.api.feign.SequenceFeignService;
 import com.calm.user.api.dto.SysUserDto;

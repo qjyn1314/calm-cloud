@@ -1,9 +1,0 @@
-server:
-  port: 10089
-spring:
-  #nacos
-  cloud:
-    nacos:
-      server-addr: 127.0.0.1:12848
-      discovery:
-        server-addr: 127.0.0.1:12848

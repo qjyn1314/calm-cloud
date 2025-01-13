@@ -1,6 +1,0 @@
-com\calm\sequence\SequenceServiceApplication.class
-com\calm\sequence\persistence\service\SysSequenceService.class
-com\calm\sequence\persistence\controller\SysSequenceController.class
-com\calm\sequence\persistence\service\impl\SysSequenceServiceImpl.class
-com\calm\sequence\provider\SysSequenceProvider.class
-com\calm\sequence\persistence\mapper\SysSequenceMapper.class

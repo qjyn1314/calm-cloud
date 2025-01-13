@@ -1,7 +1,7 @@
 package com.calm.user.controller;
 
 import cn.hutool.core.date.DateUtil;
-import com.calm.core.log.ReqLog;
+import com.calm.web.log.ReqLog;
 import com.calm.parent.base.JsonResult;
 import com.calm.user.consumer.UserConsumer;
 import io.swagger.v3.oas.annotations.Operation;

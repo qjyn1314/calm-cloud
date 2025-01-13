@@ -1,7 +1,7 @@
 package com.calm.user.persistence.controller;
 
 import com.calm.core.base.BaseController;
-import com.calm.core.exception.CalmException;
+import com.calm.web.exception.CalmException;
 import com.calm.parent.base.JsonResult;
 import com.calm.user.api.dto.SysRoleDto;
 import com.calm.user.api.vo.SysRoleVo;

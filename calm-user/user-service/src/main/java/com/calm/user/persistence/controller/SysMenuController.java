@@ -2,7 +2,7 @@ package com.calm.user.persistence.controller;
 
 import cn.hutool.core.date.DateUtil;
 import com.calm.core.base.BaseController;
-import com.calm.core.exception.CalmException;
+import com.calm.web.exception.CalmException;
 import com.calm.parent.base.JsonResult;
 import com.calm.user.api.dto.SysMenuDto;
 import com.calm.user.api.vo.SysMenuVo;
